@@ -9,7 +9,8 @@
       "Bash(python:*)",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_snapshot",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(mv:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
