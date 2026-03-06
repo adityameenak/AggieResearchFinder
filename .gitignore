@@ -3,3 +3,5 @@ ui/dist
 node_modules
 dist
 .env
+crawler/.cache
+.playwright-mcp/
