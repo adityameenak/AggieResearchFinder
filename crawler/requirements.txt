@@ -1,0 +1,9 @@
+# Python 3.10+ required
+# Install with:  pip install -r requirements.txt
+# Then run:      playwright install chromium
+
+playwright>=1.42.0
+beautifulsoup4>=4.12.0
+
+# Optional – faster HTML parsing (drop-in for html.parser)
+# lxml>=5.0.0

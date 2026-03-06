@@ -1,0 +1,68 @@
+import { Link, useLocation } from 'react-router-dom'
+import { useApp } from '../AppContext'
+
+export default function NavBar() {
+  const { saved } = useApp()
+  const { pathname } = useLocation()
+
+  function linkCls(path) {
+    const active =
+      pathname === path ||
+      (path === '/search' &&
+        (pathname === '/search' || pathname.startsWith('/prof')))
+    return [
+      'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
+      active
+        ? 'text-maroon-700'
+        : 'text-stone-500 hover:text-stone-900',
+    ].join(' ')
+  }
+
+  return (
+    <nav className="relative bg-cream-50/95 backdrop-blur-sm border-b border-cream-300 sticky top-0 z-50">
+      {/* Maroon top accent */}
+      <div className="absolute inset-x-0 top-0 h-[2.5px] bg-maroon-700 pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[54px] flex items-center justify-between">
+        {/* Brand */}
+        <Link to="/" className="flex items-baseline gap-0.5 select-none group">
+          <span className="font-display italic text-maroon-700 text-[20px] font-bold
+                           leading-none group-hover:text-maroon-600 transition-colors">
+            TAMU
+          </span>
+          <span className="font-sans font-semibold text-stone-800 text-[14px]
+                           tracking-tight group-hover:text-stone-900 transition-colors">
+            ResearchFinder
+          </span>
+        </Link>
+
+        {/* Links */}
+        <div className="flex items-center gap-0.5">
+          <Link to="/"      className={linkCls('/')}>Home</Link>
+          <Link to="/search" className={linkCls('/search')}>Search</Link>
+          <Link to="/saved"  className={linkCls('/saved')}>
+            Saved
+            {saved.length > 0 && (
+              <span className="ml-1.5 inline-flex items-center justify-center
+                               w-[18px] h-[18px] rounded-full bg-maroon-700
+                               text-cream-50 text-[10px] font-bold leading-none">
+                {saved.length > 9 ? '9+' : saved.length}
+              </span>
+            )}
+          </Link>
+          <Link to="/about" className={linkCls('/about')}>About</Link>
+
+          {/* CTA */}
+          <Link
+            to="/search"
+            className="ml-3 px-4 py-1.5 bg-maroon-700 text-cream-100 text-[13px]
+                       font-semibold rounded-lg hover:bg-maroon-600 transition-colors
+                       shadow-sm shadow-maroon-900/20"
+          >
+            Search →
+          </Link>
+        </div>
+      </div>
+    </nav>
+  )
+}

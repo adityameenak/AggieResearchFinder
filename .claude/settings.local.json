@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/Users/adity/OneDrive/ResearchFinder/ui && npm install 2>&)",
+      "Bash(cd /c/Users/adity/OneDrive/ResearchFinder/crawler && pip install -r requirements.txt 2>&1)",
+      "Bash(playwright install:*)",
+      "Bash(cd /c/Users/adity/OneDrive/ResearchFinder/crawler && python crawl.py 2>&1)",
+      "Bash(wmic process:*)",
+      "Bash(python:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "Bash(npm run:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "playwright",
+    "mozichem-eos",
+    "mozichem-flash",
+    "strands-agents"
+  ]
+}

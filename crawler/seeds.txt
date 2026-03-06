@@ -1,0 +1,33 @@
+# TAMU Engineering Department Directory Seeds
+# One URL per line. Lines starting with # are ignored.
+# Add more department directories here to expand the dataset.
+
+# Chemical Engineering
+https://engineering.tamu.edu/chemical/profiles/index.html#Faculty
+
+# Civil & Environmental Engineering
+https://engineering.tamu.edu/civil/profiles/index.html#Faculty
+
+# Computer Science & Engineering
+https://engineering.tamu.edu/cse/profiles/index.html#Faculty
+
+# Electrical & Computer Engineering
+https://engineering.tamu.edu/electrical/profiles/index.html#Faculty
+
+# Industrial & Systems Engineering
+https://engineering.tamu.edu/industrial/profiles/index.html#Faculty
+
+# Materials Science & Engineering
+https://engineering.tamu.edu/materials/profiles/index.html#Faculty
+
+# Mechanical Engineering
+https://engineering.tamu.edu/mechanical/profiles/index.html#Faculty
+
+# Nuclear Engineering
+https://engineering.tamu.edu/nuclear/profiles/index.html#Faculty
+
+# Ocean Engineering
+https://engineering.tamu.edu/ocean/profiles/index.html#Faculty
+
+# Petroleum Engineering
+https://engineering.tamu.edu/petroleum/profiles/index.html#Faculty

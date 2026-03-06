@@ -1,0 +1,5 @@
+ui/node_modules
+ui/dist
+node_modules
+dist
+.env
