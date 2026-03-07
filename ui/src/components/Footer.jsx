@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 
 const NAV = [
-  { to: '/',       label: 'Home' },
-  { to: '/search', label: 'Search Faculty' },
-  { to: '/saved',  label: 'Saved Professors' },
-  { to: '/about',  label: 'About' },
+  { to: '/',         label: 'Home' },
+  { to: '/search',   label: 'Search Faculty' },
+  { to: '/discover', label: 'Discover Matches' },
+  { to: '/saved',    label: 'Saved Professors' },
+  { to: '/about',    label: 'About' },
 ]
 
 export default function Footer() {
@@ -30,7 +31,8 @@ export default function Footer() {
             </Link>
             <p className="text-xs text-stone-500 leading-relaxed max-w-[220px]">
               Helping Texas A&amp;M students discover engineering research
-              opportunities across all departments, in one place.
+              opportunities across all departments, powered by AI matching
+              and personalized outreach drafting.
             </p>
           </div>
 
@@ -63,8 +65,9 @@ export default function Footer() {
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
               Faculty profiles sourced from the Texas A&amp;M College of
-              Engineering public directory. This tool is not affiliated with
-              or endorsed by Texas A&amp;M University. Data may be incomplete.
+              Engineering public directory. AI matching and email drafts
+              are generated automatically — always review before sending.
+              Not affiliated with or endorsed by Texas A&amp;M University.
             </p>
           </div>
         </div>

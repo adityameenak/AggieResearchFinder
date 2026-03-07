@@ -62,18 +62,18 @@ function CompassSVG() {
 const FEATURES = [
   {
     num: '01',
-    title: 'Enter Your Interests',
-    body: 'Type keywords — machine learning, battery materials, structural health, anything that captures your curiosity. The more specific, the better the match.',
+    title: 'Upload Your Resume',
+    body: 'Drop in your PDF or DOCX resume. We extract your background, skills, coursework, and research experience automatically.',
   },
   {
     num: '02',
-    title: 'Discover Matching Faculty',
-    body: "Results are instantly ranked by relevance, with your search terms highlighted directly in each professor's research summary so you see exactly why they matched.",
+    title: 'Enter Your Interests',
+    body: 'Tell us what excites you — semiconductors, computational biology, carbon capture, anything. Your interests drive the ranking, not just what\'s already on your resume.',
   },
   {
     num: '03',
-    title: 'Connect Directly',
-    body: "Jump to a professor's faculty page, lab website, or email in one click — no more navigating separate department directories.",
+    title: 'Get Matched & Reach Out',
+    body: 'Receive a ranked list of professors with fit explanations. Then generate a personalized outreach email draft with one click.',
   },
 ]
 
@@ -161,7 +161,7 @@ export default function Home() {
             {/* CTAs */}
             <div className="hero-animate-4 flex flex-col sm:flex-row gap-3">
               <Link
-                to="/search"
+                to="/discover"
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5
                            bg-maroon-700 text-cream-100 rounded-xl font-semibold text-sm
                            hover:bg-maroon-600 transition-all duration-200
@@ -169,20 +169,20 @@ export default function Home() {
                            hover:shadow-xl hover:shadow-maroon-950/30
                            hover:-translate-y-0.5 active:translate-y-0"
               >
-                Start Searching
+                Find My Research Match
                 <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 flex-shrink-0">
                   <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                 </svg>
               </Link>
-              <a
-                href="#how-it-works"
+              <Link
+                to="/search"
                 className="inline-flex items-center justify-center px-8 py-3.5
                            border border-stone-300 text-stone-700 rounded-xl
                            font-semibold text-sm hover:border-stone-400
                            hover:bg-cream-200 transition-all duration-200"
               >
-                How it works
-              </a>
+                Browse Faculty
+              </Link>
             </div>
           </div>
         </div>
@@ -276,12 +276,12 @@ export default function Home() {
           <Reveal from="bottom" delay={300}>
             <div className="text-center mt-12">
               <Link
-                to="/search"
+                to="/discover"
                 className="inline-flex items-center gap-2 px-7 py-3 bg-maroon-700
                            text-cream-100 rounded-xl font-semibold text-sm
                            hover:bg-maroon-600 transition-colors shadow-sm"
               >
-                Try it now →
+                Get matched now →
               </Link>
             </div>
           </Reveal>
@@ -405,14 +405,14 @@ export default function Home() {
               Texas A&amp;M Engineering. No account. No forms. Just results.
             </p>
             <Link
-              to="/search"
+              to="/discover"
               className="inline-flex items-center gap-2.5 px-9 py-4 bg-cream-100
                          text-maroon-800 rounded-xl font-bold text-sm
                          hover:bg-cream-50 transition-all duration-200
                          shadow-lg shadow-maroon-950/40
                          hover:-translate-y-0.5 active:translate-y-0"
             >
-              Search Faculty
+              Find My Research Match
               <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
                 <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
               </svg>

@@ -5,11 +5,10 @@ export default function NavBar() {
   const { saved } = useApp()
   const { pathname } = useLocation()
 
-  function linkCls(path) {
-    const active =
-      pathname === path ||
-      (path === '/search' &&
-        (pathname === '/search' || pathname.startsWith('/prof')))
+  function linkCls(path, exact = false) {
+    const active = exact
+      ? pathname === path
+      : pathname === path || pathname.startsWith(path + '/')
     return [
       'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
       active
@@ -17,6 +16,11 @@ export default function NavBar() {
         : 'text-stone-500 hover:text-stone-900',
     ].join(' ')
   }
+
+  const searchActive =
+    pathname === '/search' || pathname.startsWith('/prof')
+  const discoverActive =
+    pathname === '/discover' || pathname === '/match'
 
   return (
     <nav className="relative bg-cream-50/95 backdrop-blur-sm border-b border-cream-300 sticky top-0 z-50">
@@ -38,9 +42,26 @@ export default function NavBar() {
 
         {/* Links */}
         <div className="flex items-center gap-0.5">
-          <Link to="/"      className={linkCls('/')}>Home</Link>
-          <Link to="/search" className={linkCls('/search')}>Search</Link>
-          <Link to="/saved"  className={linkCls('/saved')}>
+          <Link to="/" className={linkCls('/', true)}>Home</Link>
+          <Link
+            to="/search"
+            className={[
+              'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
+              searchActive ? 'text-maroon-700' : 'text-stone-500 hover:text-stone-900',
+            ].join(' ')}
+          >
+            Search
+          </Link>
+          <Link
+            to="/discover"
+            className={[
+              'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
+              discoverActive ? 'text-maroon-700' : 'text-stone-500 hover:text-stone-900',
+            ].join(' ')}
+          >
+            Discover
+          </Link>
+          <Link to="/saved" className={linkCls('/saved')}>
             Saved
             {saved.length > 0 && (
               <span className="ml-1.5 inline-flex items-center justify-center
@@ -54,12 +75,12 @@ export default function NavBar() {
 
           {/* CTA */}
           <Link
-            to="/search"
+            to="/discover"
             className="ml-3 px-4 py-1.5 bg-maroon-700 text-cream-100 text-[13px]
                        font-semibold rounded-lg hover:bg-maroon-600 transition-colors
                        shadow-sm shadow-maroon-900/20"
           >
-            Search →
+            Get Matched →
           </Link>
         </div>
       </div>

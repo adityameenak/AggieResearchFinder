@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { deptLabel } from '../utils/search'
+import EmailModal from '../components/EmailModal'
 
 /* ── Dept badge ───────────────────────────────────────────── */
 const DEPT_STYLES = {
@@ -26,7 +28,6 @@ function DeptBadge({ dept }) {
   )
 }
 
-/* ── External link icon ───────────────────────────────────── */
 function ExtIcon() {
   return (
     <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5 opacity-50 flex-shrink-0">
@@ -36,7 +37,6 @@ function ExtIcon() {
   )
 }
 
-/* ── Save button icons ────────────────────────────────────── */
 function BookmarkIcon({ filled }) {
   return filled ? (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -53,14 +53,19 @@ function BookmarkIcon({ filled }) {
 
 /* ── Page ─────────────────────────────────────────────────── */
 export default function ProfDetail() {
-  const { id }                     = useParams()
+  const { id }                           = useParams()
   const { faculty, toggleSave, isSaved } = useApp()
-  const navigate                   = useNavigate()
+  const navigate                         = useNavigate()
+  const [emailOpen, setEmailOpen]        = useState(false)
 
   const prof  = faculty.find(f => f.id === id)
   const saved = prof ? isSaved(prof.id) : false
 
-  /* Not found */
+  // Read session from localStorage (set by Discover flow)
+  const session = (() => {
+    try { return JSON.parse(localStorage.getItem('tamu_session') || 'null') } catch { return null }
+  })()
+
   if (!prof) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-24 text-center">
@@ -94,164 +99,205 @@ export default function ProfDetail() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
 
-      {/* Back */}
-      <button
-        onClick={() => navigate(-1)}
-        className="inline-flex items-center gap-1.5 text-sm text-stone-500
-                   hover:text-stone-800 transition-colors mb-7"
-      >
-        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-          <path fillRule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z" clipRule="evenodd" />
-        </svg>
-        Back
-      </button>
+        {/* Back */}
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-1.5 text-sm text-stone-500
+                     hover:text-stone-800 transition-colors mb-7"
+        >
+          <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+            <path fillRule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z" clipRule="evenodd" />
+          </svg>
+          Back
+        </button>
 
-      {/* Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        {/* ── Main column ─────────────────────────────────── */}
-        <div className="lg:col-span-2 space-y-5">
+          {/* ── Main column ─────────────────────────────────── */}
+          <div className="lg:col-span-2 space-y-5">
 
-          {/* Profile header card */}
-          <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
-            <div className="flex items-start justify-between gap-4 mb-5">
-              <div className="min-w-0">
+            {/* Profile header */}
+            <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
+              <div className="flex items-start justify-between gap-4 mb-5">
                 <DeptBadge dept={prof.department} />
+                <button
+                  onClick={() => toggleSave(prof.id)}
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-2
+                              rounded-xl border text-sm font-medium transition-colors ${
+                                saved
+                                  ? 'bg-maroon-50 border-maroon-300 text-maroon-700 hover:bg-maroon-100'
+                                  : 'border-cream-400 text-stone-500 hover:border-maroon-300 hover:text-maroon-700'
+                              }`}
+                >
+                  <BookmarkIcon filled={saved} />
+                  {saved ? 'Saved' : 'Save'}
+                </button>
               </div>
-              <button
-                onClick={() => toggleSave(prof.id)}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-2
-                            rounded-xl border text-sm font-medium transition-colors ${
-                              saved
-                                ? 'bg-maroon-50 border-maroon-300 text-maroon-700 hover:bg-maroon-100'
-                                : 'border-cream-400 text-stone-500 hover:border-maroon-300 hover:text-maroon-700'
-                            }`}
-              >
-                <BookmarkIcon filled={saved} />
-                {saved ? 'Saved' : 'Save'}
-              </button>
+
+              <h1 className="font-display font-bold text-stone-900 tracking-tight
+                             leading-tight mb-2 text-3xl sm:text-4xl">
+                {prof.name}
+              </h1>
+              {prof.title && (
+                <p className="text-[15px] text-stone-500 leading-snug">{prof.title}</p>
+              )}
             </div>
 
-            <h1 className="font-display font-bold text-stone-900 tracking-tight
-                           leading-tight mb-2 text-3xl sm:text-4xl">
-              {prof.name}
-            </h1>
-            {prof.title && (
-              <p className="text-[15px] text-stone-500 leading-snug">{prof.title}</p>
+            {/* Research summary */}
+            {prof.research_summary ? (
+              <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
+                <div className="text-[11px] font-semibold text-stone-400 uppercase
+                                tracking-[0.14em] mb-5">
+                  Research Summary
+                </div>
+                <p className="text-[15px] text-stone-700 leading-[1.75] whitespace-pre-line">
+                  {prof.research_summary}
+                </p>
+              </div>
+            ) : (
+              <div className="bg-cream-100 rounded-2xl border border-cream-300 p-8 text-center">
+                <p className="text-sm text-stone-400 italic">
+                  No research summary available for this professor.
+                </p>
+              </div>
             )}
           </div>
 
-          {/* Research summary */}
-          {prof.research_summary ? (
-            <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
+          {/* ── Sidebar ─────────────────────────────────────── */}
+          <div className="space-y-4">
+
+            {/* Draft email CTA */}
+            <div className="bg-maroon-700 rounded-2xl p-5">
+              <div className="text-[11px] font-semibold text-maroon-300 uppercase
+                              tracking-[0.14em] mb-2">
+                Outreach
+              </div>
+              <p className="text-xs text-maroon-200 leading-relaxed mb-4">
+                Generate a personalized email draft to Prof.{' '}
+                {prof.name.split(' ').pop()} tailored to your background and interests.
+              </p>
+              <button
+                onClick={() => setEmailOpen(true)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5
+                           bg-cream-100 text-maroon-800 text-sm font-semibold
+                           rounded-xl hover:bg-cream-50 transition-colors"
+              >
+                Draft Outreach Email
+                <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
+                  <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 5.193v7.057c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.193l-5.412 3.608a1.5 1.5 0 0 1-1.676 0L1.5 5.193Zm13-1.676-6.263 4.175a.25.25 0 0 1-.274 0L1.5 3.517v-.267a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v.267Z" />
+                </svg>
+              </button>
+              {!session && (
+                <p className="text-[10px] text-maroon-400 mt-2 text-center leading-relaxed">
+                  <Link to="/discover" className="underline underline-offset-2 hover:text-maroon-300">
+                    Upload your resume
+                  </Link>{' '}
+                  for a personalized draft.
+                </p>
+              )}
+            </div>
+
+            {/* Links */}
+            <div className="bg-cream-50 rounded-2xl border border-cream-300 p-5">
               <div className="text-[11px] font-semibold text-stone-400 uppercase
-                              tracking-[0.14em] mb-5">
-                Research Summary
+                              tracking-[0.14em] mb-4">
+                Links
               </div>
-              <p className="text-[15px] text-stone-700 leading-[1.75] whitespace-pre-line">
-                {prof.research_summary}
-              </p>
-            </div>
-          ) : (
-            <div className="bg-cream-100 rounded-2xl border border-cream-300 p-8 text-center">
-              <p className="text-sm text-stone-400 italic">
-                No research summary available for this professor.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* ── Sidebar ─────────────────────────────────────── */}
-        <div className="space-y-4">
-
-          {/* Links */}
-          <div className="bg-cream-50 rounded-2xl border border-cream-300 p-5">
-            <div className="text-[11px] font-semibold text-stone-400 uppercase
-                            tracking-[0.14em] mb-4">
-              Links
-            </div>
-            <div className="space-y-2.5">
-              {prof.profile_url && (
-                <a
-                  href={prof.profile_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between w-full px-4 py-2.5
-                             rounded-xl bg-maroon-700 text-cream-100 text-sm
-                             font-medium hover:bg-maroon-600 transition-colors"
-                >
-                  Faculty Profile
-                  <ExtIcon />
-                </a>
-              )}
-              {prof.lab_website && (
-                <a
-                  href={prof.lab_website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between w-full px-4 py-2.5
-                             rounded-xl border border-cream-400 text-stone-700 text-sm
-                             font-medium hover:border-maroon-400 hover:text-maroon-700
-                             hover:bg-maroon-50 transition-colors"
-                >
-                  Lab Website
-                  <ExtIcon />
-                </a>
-              )}
-              {prof.email && (
-                <a
-                  href={`mailto:${prof.email}`}
-                  className="flex items-center justify-between w-full px-4 py-2.5
-                             rounded-xl border border-cream-400 text-stone-700 text-sm
-                             font-medium hover:border-stone-300 hover:bg-cream-200
-                             transition-colors"
-                >
-                  Send Email
-                  <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5 opacity-50">
-                    <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 5.193v7.057c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.193l-5.412 3.608a1.5 1.5 0 0 1-1.676 0L1.5 5.193Zm13-1.676-6.263 4.175a.25.25 0 0 1-.274 0L1.5 3.517v-.267a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v.267Z" />
-                  </svg>
-                </a>
-              )}
-            </div>
-          </div>
-
-          {/* Details */}
-          <div className="bg-cream-50 rounded-2xl border border-cream-300 p-5">
-            <div className="text-[11px] font-semibold text-stone-400 uppercase
-                            tracking-[0.14em] mb-4">
-              Details
-            </div>
-            <dl className="space-y-3">
-              <div>
-                <dt className="text-xs text-stone-400 mb-0.5">Department</dt>
-                <dd className="text-sm text-stone-800 font-medium">
-                  {deptLabel(prof.department)}
-                </dd>
+              <div className="space-y-2.5">
+                {prof.profile_url && (
+                  <a
+                    href={prof.profile_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between w-full px-4 py-2.5
+                               rounded-xl bg-maroon-700 text-cream-100 text-sm
+                               font-medium hover:bg-maroon-600 transition-colors"
+                  >
+                    Faculty Profile
+                    <ExtIcon />
+                  </a>
+                )}
+                {prof.lab_website && (
+                  <a
+                    href={prof.lab_website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between w-full px-4 py-2.5
+                               rounded-xl border border-cream-400 text-stone-700 text-sm
+                               font-medium hover:border-maroon-400 hover:text-maroon-700
+                               hover:bg-maroon-50 transition-colors"
+                  >
+                    Lab Website
+                    <ExtIcon />
+                  </a>
+                )}
+                {prof.email && (
+                  <a
+                    href={`mailto:${prof.email}`}
+                    className="flex items-center justify-between w-full px-4 py-2.5
+                               rounded-xl border border-cream-400 text-stone-700 text-sm
+                               font-medium hover:border-stone-300 hover:bg-cream-200
+                               transition-colors"
+                  >
+                    Send Email
+                    <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5 opacity-50">
+                      <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 5.193v7.057c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.193l-5.412 3.608a1.5 1.5 0 0 1-1.676 0L1.5 5.193Zm13-1.676-6.263 4.175a.25.25 0 0 1-.274 0L1.5 3.517v-.267a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v.267Z" />
+                    </svg>
+                  </a>
+                )}
               </div>
-              {prof.email && (
+            </div>
+
+            {/* Details */}
+            <div className="bg-cream-50 rounded-2xl border border-cream-300 p-5">
+              <div className="text-[11px] font-semibold text-stone-400 uppercase
+                              tracking-[0.14em] mb-4">
+                Details
+              </div>
+              <dl className="space-y-3">
                 <div>
-                  <dt className="text-xs text-stone-400 mb-0.5">Email</dt>
-                  <dd className="text-sm text-stone-800 font-mono break-all">
-                    {prof.email}
+                  <dt className="text-xs text-stone-400 mb-0.5">Department</dt>
+                  <dd className="text-sm text-stone-800 font-medium">
+                    {deptLabel(prof.department)}
                   </dd>
                 </div>
-              )}
-            </dl>
-          </div>
+                {prof.email && (
+                  <div>
+                    <dt className="text-xs text-stone-400 mb-0.5">Email</dt>
+                    <dd className="text-sm text-stone-800 font-mono break-all">
+                      {prof.email}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+            </div>
 
-          <Link
-            to="/search"
-            className="flex items-center justify-center gap-1.5 w-full py-2.5
-                       rounded-xl border border-cream-300 text-sm text-stone-500
-                       hover:bg-cream-200 hover:text-stone-700 transition-colors
-                       font-medium"
-          >
-            ← Back to search
-          </Link>
+            <Link
+              to="/search"
+              className="flex items-center justify-center gap-1.5 w-full py-2.5
+                         rounded-xl border border-cream-300 text-sm text-stone-500
+                         hover:bg-cream-200 hover:text-stone-700 transition-colors
+                         font-medium"
+            >
+              ← Back to search
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Email modal */}
+      {emailOpen && (
+        <EmailModal
+          prof={prof}
+          sessionId={session?.session_id ?? null}
+          interests={session?.interests ?? ''}
+          onClose={() => setEmailOpen(false)}
+        />
+      )}
+    </>
   )
 }
