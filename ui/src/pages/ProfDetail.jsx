@@ -293,8 +293,7 @@ export default function ProfDetail() {
       {emailOpen && (
         <EmailModal
           prof={prof}
-          sessionId={session?.session_id ?? null}
-          interests={session?.interests ?? ''}
+          session={session}
           onClose={() => setEmailOpen(false)}
         />
       )}

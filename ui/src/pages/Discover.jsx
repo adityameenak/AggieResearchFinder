@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { apiUpload } from '../utils/api'
 
 const INTEREST_CHIPS = [
   'machine learning', 'battery materials', 'semiconductors',
@@ -10,12 +9,21 @@ const INTEREST_CHIPS = [
 ]
 
 const STEPS = [
-  'Uploading resume…',
+  'Reading file…',
   'Extracting text…',
-  'Parsing with AI…',
-  'Matching faculty…',
-  'Almost ready…',
+  'Parsing resume…',
+  'Ready!',
 ]
+
+/* ── File → base64 helper ──────────────────────────────────── */
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload  = () => resolve(reader.result.split(',')[1])
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
 
 /* ── Upload zone ───────────────────────────────────────────── */
 function UploadZone({ file, onFile }) {
@@ -54,7 +62,6 @@ function UploadZone({ file, onFile }) {
 
       {file ? (
         <>
-          {/* File chosen */}
           <div className="w-12 h-12 rounded-full bg-maroon-100 border border-maroon-200
                           flex items-center justify-center mb-3">
             <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-maroon-700">
@@ -63,14 +70,11 @@ function UploadZone({ file, onFile }) {
             </svg>
           </div>
           <p className="font-semibold text-stone-800 text-sm mb-0.5">{file.name}</p>
-          <p className="text-xs text-stone-400 mb-3">
-            {(file.size / 1024).toFixed(0)} KB
-          </p>
+          <p className="text-xs text-stone-400 mb-3">{(file.size / 1024).toFixed(0)} KB</p>
           <button
             type="button"
             onClick={e => { e.stopPropagation(); onFile(null) }}
-            className="text-xs text-maroon-700 hover:text-maroon-600 font-medium
-                       underline underline-offset-2"
+            className="text-xs text-maroon-700 hover:text-maroon-600 font-medium underline underline-offset-2"
           >
             Remove file
           </button>
@@ -84,9 +88,7 @@ function UploadZone({ file, onFile }) {
               <path d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
             </svg>
           </div>
-          <p className="font-semibold text-stone-800 text-sm mb-1">
-            Drop your resume here
-          </p>
+          <p className="font-semibold text-stone-800 text-sm mb-1">Drop your resume here</p>
           <p className="text-xs text-stone-500 mb-2">or click to browse</p>
           <p className="text-[11px] text-stone-400">PDF or DOCX · max 10 MB</p>
         </>
@@ -105,12 +107,9 @@ function ProcessingOverlay({ step }) {
       <p className="font-semibold text-stone-800 text-sm mb-1">{STEPS[step] ?? 'Processing…'}</p>
       <div className="flex gap-1 mt-3">
         {STEPS.map((_, i) => (
-          <span
-            key={i}
-            className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-              i <= step ? 'bg-maroon-700' : 'bg-cream-400'
-            }`}
-          />
+          <span key={i} className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+            i <= step ? 'bg-maroon-700' : 'bg-cream-400'
+          }`} />
         ))}
       </div>
     </div>
@@ -127,45 +126,45 @@ export default function Discover() {
   const [error,     setError]     = useState(null)
 
   function appendChip(chip) {
-    setInterests(prev => {
-      const trimmed = prev.trim()
-      return trimmed ? `${trimmed}, ${chip}` : chip
-    })
+    setInterests(prev => prev.trim() ? `${prev.trim()}, ${chip}` : chip)
   }
 
   const handleSubmit = useCallback(async e => {
     e?.preventDefault()
-    if (!file) { setError('Please upload your resume first.'); return }
+    if (!file)             { setError('Please upload your resume first.'); return }
     if (!interests.trim()) { setError('Please enter at least one research interest.'); return }
 
     setError(null)
     setLoading(true)
 
     try {
-      // Step 1 — upload
       setStep(0)
-      const form = new FormData()
-      form.append('file', file)
-      form.append('interests', interests.trim())
+      const data = await fileToBase64(file)
 
       setStep(1)
-      const uploadRes = await apiUpload('/resume/upload', form)
-      const { session_id, parsed_profile } = uploadRes
+      const res = await fetch('/api/parse', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: file.name, data, interests: interests.trim() }),
+      })
+
+      setStep(2)
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err.error || `Server error ${res.status}`)
+      }
+      const { parsed_profile } = await res.json()
 
       setStep(3)
-      // Match results are computed on the Match page via POST /api/match
-      // Store session in localStorage so Match page can access it
       localStorage.setItem('tamu_session', JSON.stringify({
-        session_id,
         parsed_profile,
         interests: interests.trim(),
         filename: file.name,
       }))
 
-      setStep(4)
       navigate('/match')
     } catch (err) {
-      setError(err.message || 'Something went wrong. Is the backend running?')
+      setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
     }
   }, [file, interests, navigate])
@@ -190,8 +189,8 @@ export default function Discover() {
           </h1>
           <p className="text-[15px] text-stone-600 leading-relaxed max-w-lg">
             Upload your resume and tell us what excites you. We'll match you with
-            TAMU faculty whose work aligns with where you want to go — not just where
-            you've been.
+            TAMU faculty whose work aligns with where you want to go — not just
+            where you've been.
           </p>
         </div>
 
@@ -201,7 +200,6 @@ export default function Discover() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
 
-            {/* Upload zone */}
             <div>
               <label className="block text-[11px] font-semibold text-stone-400
                                  uppercase tracking-[0.12em] mb-2">
@@ -210,13 +208,10 @@ export default function Discover() {
               <UploadZone file={file} onFile={setFile} />
             </div>
 
-            {/* Interests */}
             <div>
-              <label
-                htmlFor="interests"
-                className="block text-[11px] font-semibold text-stone-400
-                           uppercase tracking-[0.12em] mb-2"
-              >
+              <label htmlFor="interests"
+                     className="block text-[11px] font-semibold text-stone-400
+                                uppercase tracking-[0.12em] mb-2">
                 02 — Research interests
               </label>
               <textarea
@@ -232,36 +227,26 @@ export default function Discover() {
                            transition-colors duration-200"
               />
               <p className="text-[11px] text-stone-400 mt-1.5">
-                Describe what you want to explore — even if it's different from your
-                current major or past experience.
+                Describe what you want to explore — even if it's new territory for you.
               </p>
-
-              {/* Quick chips */}
               <div className="flex flex-wrap gap-1.5 mt-3">
                 {INTEREST_CHIPS.map(chip => (
-                  <button
-                    key={chip}
-                    type="button"
-                    onClick={() => appendChip(chip)}
-                    className="text-[11px] px-3 py-1 rounded-full border border-cream-400
-                               text-stone-500 bg-white hover:border-maroon-400
-                               hover:text-maroon-700 hover:bg-maroon-50
-                               transition-all duration-150"
-                  >
+                  <button key={chip} type="button" onClick={() => appendChip(chip)}
+                          className="text-[11px] px-3 py-1 rounded-full border border-cream-400
+                                     text-stone-500 bg-white hover:border-maroon-400
+                                     hover:text-maroon-700 hover:bg-maroon-50 transition-all duration-150">
                     {chip}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Error */}
             {error && (
               <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3">
                 <p className="text-sm text-red-700">{error}</p>
               </div>
             )}
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
@@ -280,16 +265,13 @@ export default function Discover() {
                 </svg>
               )}
             </button>
-
           </form>
         </div>
 
-        {/* Footer note */}
         <p className="text-center text-xs text-stone-400 mt-8 leading-relaxed">
-          Your resume is used only for matching — it is not stored permanently or shared.
-          <br />Matching is interest-driven: your resume provides supporting context only.
+          Your resume is processed to extract text and is not stored permanently.
+          <br />Matching is interest-driven — your resume provides supporting context only.
         </p>
-
       </div>
     </div>
   )
