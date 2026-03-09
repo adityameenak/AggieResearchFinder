@@ -299,7 +299,7 @@ export default function Search() {
           <p className="text-[15px] text-stone-500 mb-7">
             Explore{' '}
             <span className="font-semibold text-stone-700">{faculty.length || 553}</span>
-            {' '}researchers across 10 engineering departments at Texas A&amp;M.
+            {' '}researchers across 20 STEM departments at Texas A&amp;M.
           </p>
 
           {/* Search bar */}

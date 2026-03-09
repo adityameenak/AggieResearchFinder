@@ -151,7 +151,7 @@ export default function Home() {
                   <span className="font-semibold text-stone-900">{faculty.length}</span>{' '}
                   faculty profiles across{' '}
                   <span className="font-semibold text-stone-900">{departments.length}</span>{' '}
-                  engineering departments. Enter your interests and instantly
+                  STEM departments. Enter your interests and instantly
                   discover professors, labs, and research areas doing exactly
                   that work.
                 </>
@@ -207,7 +207,7 @@ export default function Home() {
               },
               {
                 val:   loading ? '—' : departments.length,
-                label: 'Engineering departments',
+                label: 'STEM departments',
               },
               { val: 'Free', label: 'No login required' },
             ].map(({ val, label }, i) => (
@@ -319,8 +319,8 @@ export default function Home() {
           <Reveal from="bottom" delay={160}>
             <div className="pl-6 space-y-4 text-stone-600 text-[15px] leading-relaxed">
               <p>
-                Texas A&amp;M's College of Engineering employs over 550 researchers
-                across 10 departments — each with its own directory, formatting, and
+                Texas A&amp;M employs hundreds of researchers across 20 STEM
+                departments — each with its own directory, formatting, and
                 level of detail. Finding a faculty member whose work aligns with your
                 specific interests means manually navigating dozens of pages with no
                 way to search or compare across departments at once.

@@ -83,16 +83,26 @@ function SectionEyebrow({ children }) {
 }
 
 const DEPTS = [
+  'Aerospace Engineering',
+  'Biology',
+  'Biomedical Engineering',
   'Chemical Engineering',
+  'Chemistry',
   'Civil & Environmental Engineering',
   'Computer Science & Engineering',
   'Electrical & Computer Engineering',
+  'Engineering Technology & Industrial Distribution',
   'Industrial & Systems Engineering',
   'Materials Science & Engineering',
+  'Mathematics',
   'Mechanical Engineering',
   'Nuclear Engineering',
   'Ocean Engineering',
+  'Oceanography',
   'Petroleum Engineering',
+  'Physics & Astronomy',
+  'Psychological & Brain Sciences',
+  'Statistics',
 ]
 
 export default function About() {
@@ -131,7 +141,7 @@ export default function About() {
           <div className="grid grid-cols-3 gap-6 sm:gap-12">
             {[
               { number: faculty.length || '553', label: 'Faculty indexed' },
-              { number: '10',  label: 'Engineering departments' },
+              { number: '20',  label: 'STEM departments' },
               { number: '0',   label: 'Logins required' },
             ].map(({ number, label }) => (
               <div key={label} className="text-center">
@@ -158,7 +168,7 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-[15px] text-stone-600 leading-relaxed">
                 <p>
-                  Each TAMU engineering department maintains its own faculty directory
+                  Each TAMU STEM department maintains its own faculty directory
                   with its own format, its own URL structure, and its own level of
                   detail. Some have rich research summaries; others have barely a title.
                 </p>
@@ -209,10 +219,10 @@ export default function About() {
             <SectionEyebrow>Coverage</SectionEyebrow>
             <h2 className="font-display font-bold text-stone-900 text-3xl
                             tracking-tight mb-3">
-              10 departments, one search
+              20 departments, one search
             </h2>
             <p className="text-[15px] text-stone-500 mb-10">
-              Every undergraduate engineering department at TAMU is indexed.
+              Engineering, science, and applied STEM departments at TAMU — all indexed.
             </p>
           </Reveal>
 
@@ -246,7 +256,7 @@ export default function About() {
               {
                 n: '01',
                 title: 'Seed URLs',
-                body: 'Ten department profile-index URLs are stored in seeds.txt. The crawler iterates each one, following pagination if present.',
+                body: 'Twenty department profile-index URLs are stored in seeds.txt. The crawler iterates each one, following pagination if present.',
               },
               {
                 n: '02',
@@ -370,7 +380,7 @@ export default function About() {
               },
               {
                 title: 'Not exhaustive',
-                body: 'Only the ten undergraduate-engineering departments are indexed. Business, architecture, and other colleges are out of scope.',
+                body: 'Twenty STEM departments are indexed. Business, architecture, law, and other colleges are currently out of scope.',
               },
               {
                 title: 'Not affiliated',
