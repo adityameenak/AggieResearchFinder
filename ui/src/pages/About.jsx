@@ -298,68 +298,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Tech stack ────────────────────────────────────── */}
-      <section className="py-20 bg-stone-950 border-b border-stone-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <Reveal>
-            <SectionEyebrow>Tech stack</SectionEyebrow>
-            <h2 className="font-display font-bold text-cream-100 text-3xl
-                            tracking-tight mb-3">
-              Simple tools, deliberately chosen
-            </h2>
-            <p className="text-stone-400 text-[15px] leading-relaxed mb-10 max-w-xl">
-              No frameworks chosen for prestige — only for how well they fit a project
-              that is mostly data and a search box.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {[
-              {
-                label: 'Crawler',
-                pills: ['Python 3.11', 'Playwright', 'BeautifulSoup4', 'asyncio'],
-                desc: 'Async browser automation handles JS-rendered pages. BeautifulSoup parses the HTML. The whole crawler is ~200 lines.',
-              },
-              {
-                label: 'Frontend',
-                pills: ['Vite 5', 'React 18', 'React Router v6', 'Tailwind CSS 3'],
-                desc: 'Vite for near-instant HMR. React for state. Tailwind for the design system. No component library dependencies.',
-              },
-              {
-                label: 'Typography',
-                pills: ['Playfair Display', 'Inter', 'Google Fonts'],
-                desc: 'Playfair Display for editorial headings — academic gravitas without looking dated. Inter for all UI copy.',
-              },
-              {
-                label: 'Data',
-                pills: ['faculty.json', 'localStorage', 'No backend'],
-                desc: 'A single flat JSON file. Saved professors persist to localStorage. Zero network requests after the initial page load.',
-              },
-            ].map(({ label, pills, desc }, i) => (
-              <Reveal key={label} delay={i * 80}>
-                <div className="bg-stone-900 rounded-2xl border border-stone-800 p-6">
-                  <div className="text-[11px] font-semibold text-stone-500 uppercase
-                                  tracking-[0.14em] mb-3">
-                    {label}
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {pills.map(p => (
-                      <span key={p}
-                            className="inline-flex items-center px-2.5 py-0.5 rounded-md
-                                       text-[11px] font-medium bg-stone-800 text-stone-300
-                                       border border-stone-700">
-                        {p}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-[13px] text-stone-400 leading-relaxed">{desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Limitations ───────────────────────────────────── */}
       <section className="py-20 bg-cream-50 border-b border-cream-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
