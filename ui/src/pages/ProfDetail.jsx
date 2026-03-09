@@ -6,16 +6,31 @@ import EmailModal from '../components/EmailModal'
 
 /* ── Dept badge ───────────────────────────────────────────── */
 const DEPT_STYLES = {
-  chemical:   'bg-amber-50  text-amber-800  ring-amber-200',
-  civil:      'bg-emerald-50 text-emerald-800 ring-emerald-200',
-  cse:        'bg-violet-50 text-violet-800  ring-violet-200',
-  electrical: 'bg-blue-50   text-blue-800   ring-blue-200',
-  industrial: 'bg-orange-50 text-orange-800 ring-orange-200',
-  materials:  'bg-rose-50   text-rose-800   ring-rose-200',
-  mechanical: 'bg-teal-50   text-teal-800   ring-teal-200',
-  nuclear:    'bg-red-50    text-red-800    ring-red-200',
-  ocean:      'bg-sky-50    text-sky-800    ring-sky-200',
-  petroleum:  'bg-yellow-50 text-yellow-800 ring-yellow-200',
+  // Engineering
+  aerospace:   'bg-indigo-50  text-indigo-800  ring-indigo-200',
+  biomedical:  'bg-pink-50   text-pink-800   ring-pink-200',
+  chemical:    'bg-amber-50  text-amber-800  ring-amber-200',
+  civil:       'bg-emerald-50 text-emerald-800 ring-emerald-200',
+  cse:         'bg-violet-50 text-violet-800  ring-violet-200',
+  electrical:  'bg-blue-50   text-blue-800   ring-blue-200',
+  etid:        'bg-lime-50   text-lime-800   ring-lime-200',
+  industrial:  'bg-orange-50 text-orange-800 ring-orange-200',
+  materials:   'bg-rose-50   text-rose-800   ring-rose-200',
+  mechanical:  'bg-teal-50   text-teal-800   ring-teal-200',
+  multidisciplinary: 'bg-fuchsia-50 text-fuchsia-800 ring-fuchsia-200',
+  nuclear:     'bg-red-50    text-red-800    ring-red-200',
+  ocean:       'bg-sky-50    text-sky-800    ring-sky-200',
+  petroleum:   'bg-yellow-50 text-yellow-800 ring-yellow-200',
+  // Arts & Sciences
+  biology:     'bg-green-50  text-green-800  ring-green-200',
+  chemistry:   'bg-cyan-50   text-cyan-800   ring-cyan-200',
+  mathematics: 'bg-purple-50 text-purple-800 ring-purple-200',
+  'physics-astronomy':  'bg-slate-50  text-slate-800  ring-slate-200',
+  statistics:  'bg-zinc-50   text-zinc-800   ring-zinc-200',
+  'atmos-science':      'bg-sky-50    text-sky-800    ring-sky-200',
+  'geology-geophysics': 'bg-stone-50  text-stone-800  ring-stone-200',
+  oceanography:         'bg-blue-50   text-blue-800   ring-blue-200',
+  'psychological-brain-sciences': 'bg-rose-50 text-rose-800 ring-rose-200',
 }
 
 function DeptBadge({ dept }) {
@@ -138,21 +153,108 @@ export default function ProfDetail() {
                 </button>
               </div>
 
-              <h1 className="font-display font-bold text-stone-900 tracking-tight
-                             leading-tight mb-2 text-3xl sm:text-4xl">
-                {prof.name}
-              </h1>
-              {prof.title && (
-                <p className="text-[15px] text-stone-500 leading-snug">{prof.title}</p>
-              )}
+              <div className="flex items-start gap-5">
+                {prof.photo_url ? (
+                  <img
+                    src={prof.photo_url}
+                    alt=""
+                    className="w-20 h-20 rounded-xl object-cover flex-shrink-0 ring-1 ring-cream-300"
+                  />
+                ) : (
+                  <div className="w-20 h-20 rounded-xl bg-cream-200 border border-cream-300
+                                  flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl font-bold text-stone-400">
+                      {(prof.name || '?')[0]}
+                    </span>
+                  </div>
+                )}
+                <div>
+                  <h1 className="font-display font-bold text-stone-900 tracking-tight
+                                 leading-tight mb-2 text-3xl sm:text-4xl">
+                    {prof.name}
+                  </h1>
+                  {prof.title && (
+                    <p className="text-[15px] text-stone-500 leading-snug">{prof.title}</p>
+                  )}
+                </div>
+              </div>
             </div>
+
+            {/* AI Research Review */}
+            {prof.ai_review && (
+              <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
+                <div className="text-[11px] font-semibold text-stone-400 uppercase
+                                tracking-[0.14em] mb-5">
+                  Research Overview
+                </div>
+                <p className="text-[15px] text-stone-700 leading-[1.75]">
+                  {prof.ai_review}
+                </p>
+              </div>
+            )}
+
+            {/* Scholar Research Interests */}
+            {prof.scholar_interests && prof.scholar_interests.length > 0 && (
+              <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
+                <div className="text-[11px] font-semibold text-stone-400 uppercase
+                                tracking-[0.14em] mb-4">
+                  Research Interests
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {prof.scholar_interests.map((interest, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs
+                                 font-medium bg-maroon-50 text-maroon-700 ring-1 ring-inset
+                                 ring-maroon-200"
+                    >
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Top Publications */}
+            {prof.publications && prof.publications.length > 0 && (
+              <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
+                <div className="text-[11px] font-semibold text-stone-400 uppercase
+                                tracking-[0.14em] mb-5">
+                  Top Publications
+                </div>
+                <div className="space-y-3">
+                  {prof.publications.slice(0, 10).map((pub, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <span className="text-[11px] text-stone-400 font-mono mt-0.5 flex-shrink-0 w-5 text-right">
+                        {i + 1}.
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-[13px] text-stone-700 font-medium leading-snug">
+                          {pub.title}
+                        </p>
+                        <div className="flex items-center gap-3 mt-1">
+                          {pub.year && (
+                            <span className="text-[11px] text-stone-400">{pub.year}</span>
+                          )}
+                          {pub.cited_by != null && (
+                            <span className="text-[11px] text-stone-400">
+                              {pub.cited_by} citations
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Research summary */}
             {prof.research_summary ? (
               <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
                 <div className="text-[11px] font-semibold text-stone-400 uppercase
                                 tracking-[0.14em] mb-5">
-                  Research Summary
+                  Research Keywords
                 </div>
                 <p className="text-[15px] text-stone-700 leading-[1.75] whitespace-pre-line">
                   {prof.research_summary}
@@ -235,6 +337,20 @@ export default function ProfDetail() {
                     <ExtIcon />
                   </a>
                 )}
+                {prof.google_scholar && (
+                  <a
+                    href={prof.google_scholar}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between w-full px-4 py-2.5
+                               rounded-xl border border-cream-400 text-stone-700 text-sm
+                               font-medium hover:border-maroon-400 hover:text-maroon-700
+                               hover:bg-maroon-50 transition-colors"
+                  >
+                    Google Scholar
+                    <ExtIcon />
+                  </a>
+                )}
                 {prof.email && (
                   <a
                     href={`mailto:${prof.email}`}
@@ -271,6 +387,22 @@ export default function ProfDetail() {
                     <dd className="text-sm text-stone-800 font-mono break-all">
                       {prof.email}
                     </dd>
+                  </div>
+                )}
+                {prof.phone && (
+                  <div>
+                    <dt className="text-xs text-stone-400 mb-0.5">Phone</dt>
+                    <dd className="text-sm text-stone-800">
+                      <a href={`tel:${prof.phone}`} className="hover:text-maroon-700 transition-colors">
+                        {prof.phone}
+                      </a>
+                    </dd>
+                  </div>
+                )}
+                {prof.office && (
+                  <div>
+                    <dt className="text-xs text-stone-400 mb-0.5">Office</dt>
+                    <dd className="text-sm text-stone-800">{prof.office}</dd>
                   </div>
                 )}
               </dl>

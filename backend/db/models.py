@@ -15,6 +15,13 @@ class FacultyRecord(Base):
     profile_url = Column(String)
     lab_website = Column(String)
     research_summary = Column(Text)
+    google_scholar = Column(String)
+    ai_review = Column(Text)
+    photo_url = Column(String)
+    phone = Column(String)
+    office = Column(String)
+    scholar_interests = Column(JSON)
+    publications = Column(JSON)
 
 
 class ResumeSession(Base):

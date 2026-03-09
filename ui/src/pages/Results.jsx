@@ -119,39 +119,133 @@ function FilterPanel({ dept, setDept, hasResearchOnly, setHasResearchOnly,
   )
 }
 
+/* ── Pagination ──────────────────────────────────────────── */
+function Pagination({ currentPage, totalPages, goToPage }) {
+  /* Build visible page numbers: always show first, last, current, and neighbors */
+  const pages = []
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+      pages.push(i)
+    } else if (pages[pages.length - 1] !== '...') {
+      pages.push('...')
+    }
+  }
+
+  return (
+    <nav className="flex items-center justify-center gap-1.5 mt-8 mb-4" aria-label="Pagination">
+      {/* Previous */}
+      <button
+        onClick={() => goToPage(currentPage - 1)}
+        disabled={currentPage <= 1}
+        className="px-3 py-2 text-sm rounded-lg border border-cream-400 text-stone-600
+                   hover:border-maroon-400 hover:text-maroon-700 hover:bg-maroon-50
+                   transition-colors disabled:opacity-30 disabled:pointer-events-none"
+        aria-label="Previous page"
+      >
+        <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+          <path fillRule="evenodd" d="M9.78 4.22a.75.75 0 0 1 0 1.06L7.06 8l2.72 2.72a.75.75 0 1 1-1.06 1.06L5.47 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.75.75 0 0 1 1.06 0Z" clipRule="evenodd" />
+        </svg>
+      </button>
+
+      {/* Page numbers */}
+      {pages.map((p, i) =>
+        p === '...' ? (
+          <span key={`ellipsis-${i}`} className="px-2 text-sm text-stone-400">...</span>
+        ) : (
+          <button
+            key={p}
+            onClick={() => goToPage(p)}
+            className={`min-w-[36px] px-3 py-2 text-sm rounded-lg border transition-colors font-medium
+                        ${p === currentPage
+                          ? 'border-maroon-700 bg-maroon-700 text-cream-100'
+                          : 'border-cream-400 text-stone-600 hover:border-maroon-400 hover:text-maroon-700 hover:bg-maroon-50'
+                        }`}
+            aria-current={p === currentPage ? 'page' : undefined}
+          >
+            {p}
+          </button>
+        )
+      )}
+
+      {/* Next */}
+      <button
+        onClick={() => goToPage(currentPage + 1)}
+        disabled={currentPage >= totalPages}
+        className="px-3 py-2 text-sm rounded-lg border border-cream-400 text-stone-600
+                   hover:border-maroon-400 hover:text-maroon-700 hover:bg-maroon-50
+                   transition-colors disabled:opacity-30 disabled:pointer-events-none"
+        aria-label="Next page"
+      >
+        <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+          <path fillRule="evenodd" d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+        </svg>
+      </button>
+    </nav>
+  )
+}
+
 /* ── Page ─────────────────────────────────────────────────── */
+const PAGE_SIZE = 24
+
 export default function Search() {
   const { faculty, departments, loading } = useApp()
   const [searchParams, setSearchParams] = useSearchParams()
   const inputRef = useRef(null)
+  const topRef = useRef(null)
 
   const qParam    = searchParams.get('q')           ?? ''
   const deptParam = searchParams.get('dept')         ?? ''
   const hasRes    = searchParams.get('hasResearch') === '1'
+  const chipsParam = searchParams.get('chips')       ?? ''
+  const pageParam = parseInt(searchParams.get('page') ?? '1', 10)
 
   const [query,           setQuery]           = useState(qParam)
   const [dept,            setDept]            = useState(deptParam)
   const [hasResearchOnly, setHasResearchOnly] = useState(hasRes)
+  const [selectedChips,   setSelectedChips]   = useState(() => new Set(chipsParam ? chipsParam.split(',') : []))
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   useEffect(() => {
     setQuery(qParam)
     setDept(deptParam)
     setHasResearchOnly(hasRes)
-  }, [qParam, deptParam, hasRes])
+    setSelectedChips(new Set(chipsParam ? chipsParam.split(',') : []))
+  }, [qParam, deptParam, hasRes, chipsParam, pageParam])
 
-  const tokens  = useMemo(() => tokenize(qParam), [qParam])
+  /* Combine free-text query with selected chip terms */
+  const combinedQuery = useMemo(() => {
+    const parts = []
+    if (qParam.trim()) parts.push(qParam.trim())
+    const chipValues = chipsParam ? chipsParam.split(',') : []
+    for (const c of chipValues) {
+      if (!qParam.toLowerCase().includes(c.toLowerCase())) parts.push(c)
+    }
+    return parts.join(' ')
+  }, [qParam, chipsParam])
+
+  const tokens  = useMemo(() => tokenize(combinedQuery), [combinedQuery])
   const results = useMemo(
-    () => searchAndRank(faculty, qParam, { department: deptParam, hasResearchOnly: hasRes }),
-    [faculty, qParam, deptParam, hasRes],
+    () => searchAndRank(faculty, combinedQuery, { department: deptParam, hasResearchOnly: hasRes }),
+    [faculty, combinedQuery, deptParam, hasRes],
   )
 
-  function push(nextQ, nextDept, nextHasRes) {
+  const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE))
+  const currentPage = Math.min(Math.max(1, pageParam), totalPages)
+  const pagedResults = results.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+
+  function push(nextQ, nextDept, nextHasRes, nextChips = selectedChips, nextPage = 1) {
     const p = new URLSearchParams()
-    if (nextQ.trim())  p.set('q',          nextQ.trim())
-    if (nextDept)      p.set('dept',        nextDept)
-    if (nextHasRes)    p.set('hasResearch', '1')
+    if (nextQ.trim())      p.set('q',          nextQ.trim())
+    if (nextDept)          p.set('dept',        nextDept)
+    if (nextHasRes)        p.set('hasResearch', '1')
+    if (nextChips.size > 0) p.set('chips',      [...nextChips].join(','))
+    if (nextPage > 1)      p.set('page',        String(nextPage))
     setSearchParams(p, { replace: true })
+  }
+
+  function goToPage(page) {
+    push(query, dept, hasResearchOnly, selectedChips, page)
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   function onSubmit(e) {
@@ -159,10 +253,12 @@ export default function Search() {
     push(query, dept, hasResearchOnly)
   }
 
-  function appendChip(q) {
-    const next = query.trim() ? `${query.trim()} ${q}` : q
-    setQuery(next)
-    push(next, dept, hasResearchOnly)
+  function toggleChip(q) {
+    const next = new Set(selectedChips)
+    if (next.has(q)) next.delete(q)
+    else next.add(q)
+    setSelectedChips(next)
+    push(query, dept, hasResearchOnly, next)
     inputRef.current?.focus()
   }
 
@@ -170,12 +266,13 @@ export default function Search() {
     setQuery('')
     setDept('')
     setHasResearchOnly(false)
+    setSelectedChips(new Set())
     setSearchParams({}, { replace: true })
     inputRef.current?.focus()
   }
 
-  const hasActive = qParam || deptParam || hasRes
-  const activeFilterCount = [deptParam, hasRes].filter(Boolean).length
+  const hasActive = qParam || deptParam || hasRes || chipsParam || pageParam > 1
+  const activeFilterCount = [deptParam, hasRes, chipsParam].filter(Boolean).length
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-54px)] bg-cream-100">
@@ -255,23 +352,29 @@ export default function Search() {
           <div>
             <p className="text-[11px] text-stone-400 font-semibold uppercase
                           tracking-[0.12em] mb-2.5">
-              Try searching for:
+              Filter by topic:
             </p>
             <div className="flex flex-wrap gap-2">
-              {CHIPS.map(({ label, q }) => (
-                <button
-                  key={q}
-                  type="button"
-                  onClick={() => appendChip(q)}
-                  className="text-xs px-3.5 py-1.5 rounded-full border border-cream-400
-                             text-stone-600 bg-white hover:border-maroon-400
-                             hover:text-maroon-700 hover:bg-maroon-50
-                             hover:scale-[1.03] active:scale-[0.98]
-                             transition-all duration-150 shadow-sm"
-                >
-                  {label}
-                </button>
-              ))}
+              {CHIPS.map(({ label, q }) => {
+                const active = selectedChips.has(q)
+                return (
+                  <button
+                    key={q}
+                    type="button"
+                    onClick={() => toggleChip(q)}
+                    className={`text-xs px-3.5 py-1.5 rounded-full border
+                               transition-all duration-150 shadow-sm
+                               hover:scale-[1.03] active:scale-[0.98]
+                               ${active
+                                 ? 'border-maroon-700 bg-maroon-700 text-cream-100'
+                                 : 'border-cream-400 text-stone-600 bg-white hover:border-maroon-400 hover:text-maroon-700 hover:bg-maroon-50'
+                               }`}
+                  >
+                    {active && <span className="mr-1">&#10003;</span>}
+                    {label}
+                  </button>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -316,7 +419,7 @@ export default function Search() {
           </aside>
 
           {/* ── Results area ──────────────────────────────────── */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0" ref={topRef}>
 
             {/* Mobile filter bar */}
             <div className="lg:hidden mb-5">
@@ -375,18 +478,23 @@ export default function Search() {
                     <>
                       <span className="font-semibold text-stone-800">{results.length}</span>
                       {' '}result{results.length !== 1 ? 's' : ''}
-                      {qParam && (
+                      {combinedQuery && (
                         <>
                           {' '}for{' '}
                           <span className="font-semibold text-maroon-700">
-                            &ldquo;{qParam}&rdquo;
+                            &ldquo;{combinedQuery}&rdquo;
                           </span>
                         </>
+                      )}
+                      {results.length > PAGE_SIZE && (
+                        <span className="text-stone-400">
+                          {' '}&middot; page {currentPage} of {totalPages}
+                        </span>
                       )}
                     </>
                   )}
                 </div>
-                {qParam && results.length > 0 && (
+                {combinedQuery && results.length > 0 && (
                   <span className="text-[11px] text-stone-400 font-medium
                                    uppercase tracking-[0.1em]">
                     Ranked by relevance
@@ -409,9 +517,9 @@ export default function Search() {
             )}
 
             {/* Results grid */}
-            {!loading && results.length > 0 && (
+            {!loading && pagedResults.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {results.map((prof, i) => (
+                {pagedResults.map((prof, i) => (
                   <div
                     key={prof.id}
                     style={{
@@ -425,6 +533,11 @@ export default function Search() {
               </div>
             )}
 
+            {/* Pagination */}
+            {!loading && results.length > PAGE_SIZE && (
+              <Pagination currentPage={currentPage} totalPages={totalPages} goToPage={goToPage} />
+            )}
+
             {/* Empty state */}
             {!loading && results.length === 0 && (
               <div className="flex flex-col items-center justify-center py-28 text-center">
@@ -435,12 +548,12 @@ export default function Search() {
                   <SearchIcon className="w-7 h-7 text-stone-400" />
                 </div>
                 <h3 className="font-display font-bold text-stone-800 text-xl mb-2">
-                  {qParam ? 'No matches found' : 'Start your search'}
+                  {combinedQuery ? 'No matches found' : 'Start your search'}
                 </h3>
                 <p className="text-sm text-stone-500 max-w-xs leading-relaxed mb-7">
-                  {qParam
-                    ? `No professors matched "${qParam}". Try fewer keywords or adjust your filters.`
-                    : 'Enter a keyword above to search faculty by research interest.'}
+                  {combinedQuery
+                    ? `No professors matched "${combinedQuery}". Try fewer keywords or adjust your filters.`
+                    : 'Enter a keyword above or select a topic to search faculty by research interest.'}
                 </p>
                 {hasActive && (
                   <button
@@ -455,7 +568,7 @@ export default function Search() {
             )}
 
             {/* Browse-all footer nudge */}
-            {!loading && !qParam && !deptParam && !hasRes && results.length > 0 && (
+            {!loading && !qParam && !deptParam && !hasRes && !chipsParam && results.length > 0 && results.length <= PAGE_SIZE && (
               <p className="text-center text-xs text-stone-400 mt-10 pb-2">
                 Showing all{' '}
                 <span className="font-semibold">{results.length}</span>{' '}

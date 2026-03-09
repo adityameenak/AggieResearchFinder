@@ -121,18 +121,35 @@ export default function Discover() {
   const navigate = useNavigate()
   const [file,      setFile]      = useState(null)
   const [interests, setInterests] = useState('')
+  const [selectedChips, setSelectedChips] = useState(new Set())
   const [loading,   setLoading]   = useState(false)
   const [step,      setStep]      = useState(0)
   const [error,     setError]     = useState(null)
 
-  function appendChip(chip) {
-    setInterests(prev => prev.trim() ? `${prev.trim()}, ${chip}` : chip)
+  function toggleChip(chip) {
+    setSelectedChips(prev => {
+      const next = new Set(prev)
+      if (next.has(chip)) next.delete(chip)
+      else next.add(chip)
+      return next
+    })
+  }
+
+  /* Merge free-text interests with selected chips for submission */
+  function mergedInterests() {
+    const parts = []
+    const text = interests.trim()
+    if (text) parts.push(text)
+    for (const chip of selectedChips) {
+      if (!text.toLowerCase().includes(chip.toLowerCase())) parts.push(chip)
+    }
+    return parts.join(', ')
   }
 
   const handleSubmit = useCallback(async e => {
     e?.preventDefault()
-    if (!file)             { setError('Please upload your resume first.'); return }
-    if (!interests.trim()) { setError('Please enter at least one research interest.'); return }
+    if (!file)                                          { setError('Please upload your resume first.'); return }
+    if (!interests.trim() && selectedChips.size === 0)  { setError('Please enter at least one research interest.'); return }
 
     setError(null)
     setLoading(true)
@@ -145,7 +162,7 @@ export default function Discover() {
       const res = await fetch('/api/parse', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename: file.name, data, interests: interests.trim() }),
+        body: JSON.stringify({ filename: file.name, data, interests: mergedInterests() }),
       })
 
       setStep(2)
@@ -158,7 +175,7 @@ export default function Discover() {
       setStep(3)
       localStorage.setItem('tamu_session', JSON.stringify({
         parsed_profile,
-        interests: interests.trim(),
+        interests: mergedInterests(),
         filename: file.name,
       }))
 
@@ -167,7 +184,7 @@ export default function Discover() {
       setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
     }
-  }, [file, interests, navigate])
+  }, [file, interests, selectedChips, navigate])
 
   return (
     <div className="min-h-[calc(100vh-54px)] bg-cream-100 flex items-start justify-center
@@ -230,14 +247,20 @@ export default function Discover() {
                 Describe what you want to explore — even if it's new territory for you.
               </p>
               <div className="flex flex-wrap gap-1.5 mt-3">
-                {INTEREST_CHIPS.map(chip => (
-                  <button key={chip} type="button" onClick={() => appendChip(chip)}
-                          className="text-[11px] px-3 py-1 rounded-full border border-cream-400
-                                     text-stone-500 bg-white hover:border-maroon-400
-                                     hover:text-maroon-700 hover:bg-maroon-50 transition-all duration-150">
-                    {chip}
-                  </button>
-                ))}
+                {INTEREST_CHIPS.map(chip => {
+                  const active = selectedChips.has(chip)
+                  return (
+                    <button key={chip} type="button" onClick={() => toggleChip(chip)}
+                            className={`text-[11px] px-3 py-1 rounded-full border transition-all duration-150
+                                        ${active
+                                          ? 'border-maroon-700 bg-maroon-700 text-cream-100'
+                                          : 'border-cream-400 text-stone-500 bg-white hover:border-maroon-400 hover:text-maroon-700 hover:bg-maroon-50'
+                                        }`}>
+                      {active && <span className="mr-1">&#10003;</span>}
+                      {chip}
+                    </button>
+                  )
+                })}
               </div>
             </div>
 

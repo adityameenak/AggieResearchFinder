@@ -73,4 +73,11 @@ def _to_dict(r: FacultyRecord) -> dict:
         "profile_url": r.profile_url,
         "lab_website": r.lab_website,
         "research_summary": r.research_summary,
+        "google_scholar": r.google_scholar,
+        "ai_review": r.ai_review,
+        "photo_url": r.photo_url,
+        "phone": r.phone,
+        "office": r.office,
+        "scholar_interests": r.scholar_interests,
+        "publications": r.publications,
     }

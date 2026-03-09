@@ -114,16 +114,31 @@ export function highlightSegments(text, tokens) {
 // ---------------------------------------------------------------------------
 
 const DEPT_DISPLAY = {
-  chemical:   'Chemical Engineering',
-  civil:      'Civil & Environmental',
-  cse:        'Computer Science & Eng.',
-  electrical: 'Electrical & Computer Eng.',
-  industrial: 'Industrial & Systems',
-  materials:  'Materials Science',
-  mechanical: 'Mechanical Engineering',
-  nuclear:    'Nuclear Engineering',
-  ocean:      'Ocean Engineering',
-  petroleum:  'Petroleum Engineering',
+  // Engineering
+  aerospace:   'Aerospace Engineering',
+  biomedical:  'Biomedical Engineering',
+  chemical:    'Chemical Engineering',
+  civil:       'Civil & Environmental',
+  cse:         'Computer Science & Eng.',
+  electrical:  'Electrical & Computer Eng.',
+  etid:        'Engineering Technology',
+  industrial:  'Industrial & Systems',
+  materials:   'Materials Science',
+  mechanical:  'Mechanical Engineering',
+  multidisciplinary: 'Multidisciplinary Eng.',
+  nuclear:     'Nuclear Engineering',
+  ocean:       'Ocean Engineering',
+  petroleum:   'Petroleum Engineering',
+  // Arts & Sciences
+  biology:     'Biology',
+  chemistry:   'Chemistry',
+  mathematics: 'Mathematics',
+  'physics-astronomy':  'Physics & Astronomy',
+  statistics:  'Statistics',
+  'atmos-science':      'Atmospheric Sciences',
+  'geology-geophysics': 'Geology & Geophysics',
+  oceanography:         'Oceanography',
+  'psychological-brain-sciences': 'Psych. & Brain Sciences',
 }
 
 export function deptLabel(slug) {

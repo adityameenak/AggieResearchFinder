@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from typing import Literal
+from typing import Literal, Optional
 from sqlalchemy.orm import Session
 from db.database import get_db
 from db.models import FacultyRecord, ResumeSession
@@ -13,7 +13,7 @@ router = APIRouter()
 class DraftRequest(BaseModel):
     faculty_id: str
     tone: Literal["professional", "warm", "concise"] = "professional"
-    session_id: str | None = None
+    session_id: Optional[str] = None
     interests: str = ""
 
 

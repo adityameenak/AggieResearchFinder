@@ -25,16 +25,31 @@ function Highlight({ text, tokens }) {
 
 /* ── Department badge ─────────────────────────────────────── */
 const DEPT_STYLES = {
-  chemical:   { dot: 'bg-amber-500',   pill: 'bg-amber-50  text-amber-800  ring-amber-200'  },
-  civil:      { dot: 'bg-emerald-500', pill: 'bg-emerald-50 text-emerald-800 ring-emerald-200' },
-  cse:        { dot: 'bg-violet-500',  pill: 'bg-violet-50 text-violet-800  ring-violet-200' },
-  electrical: { dot: 'bg-blue-500',    pill: 'bg-blue-50   text-blue-800   ring-blue-200'   },
-  industrial: { dot: 'bg-orange-500',  pill: 'bg-orange-50 text-orange-800 ring-orange-200' },
-  materials:  { dot: 'bg-rose-500',    pill: 'bg-rose-50   text-rose-800   ring-rose-200'   },
-  mechanical: { dot: 'bg-teal-500',    pill: 'bg-teal-50   text-teal-800   ring-teal-200'   },
-  nuclear:    { dot: 'bg-red-500',     pill: 'bg-red-50    text-red-800    ring-red-200'    },
-  ocean:      { dot: 'bg-sky-500',     pill: 'bg-sky-50    text-sky-800    ring-sky-200'    },
-  petroleum:  { dot: 'bg-yellow-500',  pill: 'bg-yellow-50 text-yellow-800 ring-yellow-200' },
+  // Engineering
+  aerospace:   { dot: 'bg-indigo-500',  pill: 'bg-indigo-50  text-indigo-800  ring-indigo-200'  },
+  biomedical:  { dot: 'bg-pink-500',    pill: 'bg-pink-50   text-pink-800   ring-pink-200'    },
+  chemical:    { dot: 'bg-amber-500',   pill: 'bg-amber-50  text-amber-800  ring-amber-200'   },
+  civil:       { dot: 'bg-emerald-500', pill: 'bg-emerald-50 text-emerald-800 ring-emerald-200' },
+  cse:         { dot: 'bg-violet-500',  pill: 'bg-violet-50 text-violet-800  ring-violet-200'  },
+  electrical:  { dot: 'bg-blue-500',    pill: 'bg-blue-50   text-blue-800   ring-blue-200'    },
+  etid:        { dot: 'bg-lime-500',    pill: 'bg-lime-50   text-lime-800   ring-lime-200'    },
+  industrial:  { dot: 'bg-orange-500',  pill: 'bg-orange-50 text-orange-800 ring-orange-200'  },
+  materials:   { dot: 'bg-rose-500',    pill: 'bg-rose-50   text-rose-800   ring-rose-200'    },
+  mechanical:  { dot: 'bg-teal-500',    pill: 'bg-teal-50   text-teal-800   ring-teal-200'    },
+  multidisciplinary: { dot: 'bg-fuchsia-500', pill: 'bg-fuchsia-50 text-fuchsia-800 ring-fuchsia-200' },
+  nuclear:     { dot: 'bg-red-500',     pill: 'bg-red-50    text-red-800    ring-red-200'     },
+  ocean:       { dot: 'bg-sky-500',     pill: 'bg-sky-50    text-sky-800    ring-sky-200'     },
+  petroleum:   { dot: 'bg-yellow-500',  pill: 'bg-yellow-50 text-yellow-800 ring-yellow-200'  },
+  // Arts & Sciences
+  biology:     { dot: 'bg-green-500',   pill: 'bg-green-50  text-green-800  ring-green-200'   },
+  chemistry:   { dot: 'bg-cyan-500',    pill: 'bg-cyan-50   text-cyan-800   ring-cyan-200'    },
+  mathematics: { dot: 'bg-purple-500',  pill: 'bg-purple-50 text-purple-800 ring-purple-200'  },
+  'physics-astronomy':  { dot: 'bg-slate-500', pill: 'bg-slate-50  text-slate-800  ring-slate-200'  },
+  statistics:  { dot: 'bg-zinc-500',    pill: 'bg-zinc-50   text-zinc-800   ring-zinc-200'    },
+  'atmos-science':      { dot: 'bg-sky-500',   pill: 'bg-sky-50    text-sky-800    ring-sky-200'    },
+  'geology-geophysics': { dot: 'bg-stone-500', pill: 'bg-stone-50  text-stone-800  ring-stone-200'  },
+  oceanography:         { dot: 'bg-blue-500',  pill: 'bg-blue-50   text-blue-800   ring-blue-200'   },
+  'psychological-brain-sciences': { dot: 'bg-rose-500', pill: 'bg-rose-50 text-rose-800 ring-rose-200' },
 }
 
 function DeptBadge({ dept }) {
@@ -107,19 +122,35 @@ export default function ProfCard({ prof, tokens = [] }) {
       </div>
 
       {/* ── Name + title ─────────────────────────────────────── */}
-      <div className="px-5 pb-4">
-        <Link
-          to={`/prof/${prof.id}`}
-          className="font-display font-bold text-stone-900 text-[17px] leading-snug
-                     hover:text-maroon-700 transition-colors duration-150 block mb-1.5"
-        >
-          <Highlight text={prof.name} tokens={tokens} />
-        </Link>
-        {prof.title && (
-          <p className="text-[12px] text-stone-400 leading-snug line-clamp-2 italic">
-            {prof.title}
-          </p>
+      <div className="px-5 pb-4 flex items-start gap-3">
+        {prof.photo_url ? (
+          <img
+            src={prof.photo_url}
+            alt=""
+            className="w-11 h-11 rounded-full object-cover flex-shrink-0 ring-1 ring-cream-300"
+          />
+        ) : (
+          <div className="w-11 h-11 rounded-full bg-cream-200 border border-cream-300
+                          flex items-center justify-center flex-shrink-0">
+            <span className="text-sm font-semibold text-stone-400">
+              {(prof.name || '?')[0]}
+            </span>
+          </div>
         )}
+        <div className="min-w-0">
+          <Link
+            to={`/prof/${prof.id}`}
+            className="font-display font-bold text-stone-900 text-[17px] leading-snug
+                       hover:text-maroon-700 transition-colors duration-150 block mb-1.5"
+          >
+            <Highlight text={prof.name} tokens={tokens} />
+          </Link>
+          {prof.title && (
+            <p className="text-[12px] text-stone-400 leading-snug line-clamp-2 italic">
+              {prof.title}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* ── Divider ──────────────────────────────────────────── */}
@@ -168,6 +199,20 @@ export default function ProfCard({ prof, tokens = [] }) {
                        hover:bg-maroon-50 transition-colors font-medium"
           >
             Lab
+            <ExtIcon />
+          </a>
+        )}
+        {prof.google_scholar && (
+          <a
+            href={prof.google_scholar}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[11px] px-3 py-1.5
+                       rounded-lg border border-cream-400 text-stone-600
+                       hover:border-maroon-300 hover:text-maroon-700
+                       hover:bg-maroon-50 transition-colors font-medium"
+          >
+            Scholar
             <ExtIcon />
           </a>
         )}

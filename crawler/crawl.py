@@ -37,6 +37,75 @@ from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
 # ---------------------------------------------------------------------------
+# Gemini AI setup
+# ---------------------------------------------------------------------------
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+_GEMINI_MODEL = None
+_GEMINI_DISABLED = False  # Set to True after quota/auth errors to skip all future calls
+
+def _get_gemini_model():
+    global _GEMINI_MODEL, _GEMINI_DISABLED
+    if _GEMINI_DISABLED:
+        return None
+    if _GEMINI_MODEL is None:
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            _GEMINI_DISABLED = True
+            return None
+        try:
+            import google.generativeai as genai
+            genai.configure(api_key=api_key)
+            _GEMINI_MODEL = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
+        except Exception as exc:
+            print(f"  [warn] Could not initialise Gemini: {exc}")
+            _GEMINI_DISABLED = True
+            return None
+    return _GEMINI_MODEL
+
+
+def generate_ai_review(name: str, department: str, research_summary: str) -> str:
+    """Use Gemini to write a comprehensive, readable research review."""
+    global _GEMINI_DISABLED
+    if _GEMINI_DISABLED:
+        return ""
+    model = _get_gemini_model()
+    if model is None:
+        return ""
+    # Skip stub/empty summaries
+    cleaned = research_summary.replace("|", ",").strip()
+    if len(cleaned) < 40:
+        return ""
+    prompt = (
+        f"You are an academic writing assistant. Based on the following scraped research "
+        f"information about a professor, write a comprehensive yet concise review (4-6 sentences) "
+        f"of their research work that a student could read to quickly understand what this "
+        f"professor does and what their lab focuses on. Write in third person. Be specific "
+        f"about research topics and methods. Do not fabricate details beyond what is provided.\n\n"
+        f"Professor: {name}\n"
+        f"Department: {department}\n"
+        f"Research information: {cleaned[:1000]}\n\n"
+        f"Write the review as a single paragraph with no heading or bullet points."
+    )
+    try:
+        response = model.generate_content(prompt)
+        time.sleep(1)  # rate-limit Gemini calls
+        return response.text.strip()
+    except Exception as exc:
+        exc_str = str(exc).lower()
+        if "quota" in exc_str or "resource_exhausted" in exc_str or "429" in exc_str:
+            print(f"  [warn] Gemini quota exhausted — disabling AI reviews for this run.")
+        else:
+            print(f"  [warn] Gemini call failed for {name}: {type(exc).__name__}")
+        _GEMINI_DISABLED = True
+        return ""
+
+# ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
 
@@ -50,7 +119,9 @@ MAX_RETRIES        = 3
 PAGE_TIMEOUT_MS    = 45_000  # 45 s
 
 CSV_FIELDS = ["id", "name", "title", "department", "email",
-              "profile_url", "research_summary", "lab_website"]
+              "profile_url", "research_summary", "lab_website",
+              "google_scholar", "ai_review", "photo_url", "phone", "office",
+              "scholar_interests", "publications"]
 
 # ---------------------------------------------------------------------------
 # Disk cache helpers
@@ -79,13 +150,28 @@ def dept_slug_from_url(url: str) -> str:
     """
     Derive a short department slug from a directory or profile URL.
     e.g. https://engineering.tamu.edu/chemical/profiles/... -> 'chemical'
+         https://artsci.tamu.edu/biology/contact/... -> 'biology'
     """
-    path_parts = urlparse(url).path.strip("/").split("/")
+    parsed = urlparse(url)
+    host = parsed.hostname or ""
+    path_parts = parsed.path.strip("/").split("/")
+
+    if "artsci.tamu.edu" in host:
+        # Arts & Sciences: first path segment is the department slug
+        if path_parts and path_parts[0]:
+            return path_parts[0]
+        return "unknown"
+
     skip = {"engineering", "profiles", "index.html", ""}
     for part in path_parts:
         if part and part not in skip and not part.endswith(".html"):
             return part
     return "unknown"
+
+
+def is_artsci_url(url: str) -> bool:
+    """Check if a URL belongs to the Arts & Sciences domain."""
+    return "artsci.tamu.edu" in (urlparse(url).hostname or "")
 
 
 # ---------------------------------------------------------------------------
@@ -134,16 +220,27 @@ _PROFILE_RE = re.compile(
 def extract_profile_links(html: str, base_url: str) -> list[str]:
     """
     Return sorted, deduplicated absolute profile URLs found in *html*.
-    Matches links that contain /profiles/ and end in .html.
+    Handles both engineering (/profiles/*.html) and arts & sciences pages.
     """
     found: set[str] = set()
+
+    # Strategy 1: regex for /profiles/*.html links (works for both domains)
     for m in _PROFILE_RE.finditer(html):
         href = m.group(1)
         full = urljoin(base_url, href).split("#")[0].split("?")[0]
-        # Skip the directory index page itself
         if full.endswith("index.html"):
             continue
         found.add(full)
+
+    # Strategy 2: BeautifulSoup parsing for Arts & Sciences pages
+    if is_artsci_url(base_url):
+        soup = BeautifulSoup(html, "html.parser")
+        for a in soup.find_all("a", href=True):
+            href = a["href"]
+            if "/profiles/" in href and href.endswith(".html") and not href.endswith("index.html"):
+                full = urljoin(base_url, href).split("#")[0].split("?")[0]
+                found.add(full)
+
     return sorted(found)
 
 
@@ -168,7 +265,8 @@ _EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
 
 _LAB_LINK_RE = re.compile(
     r"(lab\s*website|group\s*website|research\s*group|lab\s*page|"
-    r"visit\s*(my|our|the)?\s*(lab|group|website)|our\s*lab)",
+    r"visit\s*(my|our|the)?\s*(lab|group|website)|our\s*lab|"
+    r"website|home\s*page|personal)",
     re.IGNORECASE,
 )
 
@@ -191,61 +289,8 @@ def _collect_section_text(heading_tag, soup) -> str:
     return re.sub(r"\s+", " ", " ".join(parts)).strip()
 
 
-def extract_profile_fields(html: str) -> dict:
-    """
-    Parse a faculty profile page and return a dict with:
-    name, title, email, research_summary, lab_website
-    """
-    soup = BeautifulSoup(html, "html.parser")
-
-    # ---- Name ---------------------------------------------------------------
-    name = ""
-    for tag in ("h1", "h2"):
-        el = soup.find(tag)
-        if el:
-            name = el.get_text(" ", strip=True)
-            break
-    if not name:
-        for cls in ("faculty-name", "profile-name", "name", "person-name"):
-            el = soup.find(class_=cls)
-            if el:
-                name = el.get_text(" ", strip=True)
-                break
-
-    # ---- Title / rank -------------------------------------------------------
-    title = ""
-    for cls in ("faculty-title", "profile-title", "title", "position", "rank"):
-        el = soup.find(class_=cls)
-        if el:
-            candidate = el.get_text(" ", strip=True)
-            if _TITLE_RE.search(candidate) and len(candidate) < 200:
-                title = candidate
-                break
-    if not title:
-        # Look in first few siblings of h1
-        h1 = soup.find("h1")
-        if h1:
-            for sib in h1.find_next_siblings(["p", "div", "span", "h2", "h3"])[:6]:
-                text = sib.get_text(" ", strip=True)
-                if _TITLE_RE.search(text) and len(text) < 200:
-                    title = text
-                    break
-
-    # ---- Email --------------------------------------------------------------
-    email = ""
-    mailto = soup.find("a", href=re.compile(r"^mailto:", re.I))
-    if mailto:
-        email = mailto["href"].replace("mailto:", "").strip().rstrip(".")
-    if not email:
-        for cls in ("contact", "contact-info", "faculty-contact", "vcard"):
-            el = soup.find(class_=cls)
-            if el:
-                m = _EMAIL_RE.search(el.get_text())
-                if m:
-                    email = m.group()
-                    break
-
-    # ---- Research summary ---------------------------------------------------
+def _extract_research_summary(soup) -> str:
+    """Extract research summary from a faculty profile page (shared logic)."""
     research_summary = ""
 
     # Strategy 1: heading followed by body text
@@ -285,22 +330,105 @@ def extract_profile_fields(html: str) -> dict:
         if candidates:
             research_summary = max(candidates, key=len)[:1200]
 
-    research_summary = re.sub(r"\s+", " ", research_summary).strip()
+    return re.sub(r"\s+", " ", research_summary).strip()
 
-    # ---- Lab website --------------------------------------------------------
+
+def extract_profile_fields(html: str, profile_url: str = "") -> dict:
+    """
+    Parse a faculty profile page and return a dict with:
+    name, title, email, research_summary, lab_website, google_scholar, photo_url, phone, office
+    """
+    if is_artsci_url(profile_url):
+        return _extract_artsci_profile(html, profile_url)
+    return _extract_engineering_profile(html, profile_url)
+
+
+def _extract_artsci_profile(html: str, profile_url: str) -> dict:
+    """Parse an Arts & Sciences faculty profile page."""
+    soup = BeautifulSoup(html, "html.parser")
+
+    # ---- Name ---------------------------------------------------------------
+    name = ""
+    h1 = soup.find("h1")
+    if h1:
+        name = h1.get_text(" ", strip=True)
+
+    # ---- Title / rank -------------------------------------------------------
+    title = ""
+    titles_el = soup.select_one(".profile__titles li")
+    if titles_el:
+        title = titles_el.get_text(" ", strip=True)
+
+    # ---- Contact info (email, phone, office, website) -----------------------
+    email = ""
+    phone = ""
+    office = ""
     lab_website = ""
-    for a in soup.find_all("a", href=True):
-        link_text = a.get_text(strip=True)
-        href = a["href"]
-        if not href or href.startswith("mailto:") or href.startswith("#"):
-            continue
-        if _LAB_LINK_RE.search(link_text):
-            lab_website = href if href.startswith("http") else urljoin("https://engineering.tamu.edu", href)
+
+    for li in soup.select(".profile__contact li"):
+        label_el = li.select_one(".profile__contact-label")
+        label_text = label_el.get_text(strip=True).lower() if label_el else ""
+
+        if "email" in label_text:
+            mailto = li.find("a", href=re.compile(r"^mailto:", re.I))
+            if mailto:
+                email = mailto["href"].replace("mailto:", "").strip()
+            elif not email:
+                # fallback to text
+                value = li.get_text(strip=True)
+                if label_el:
+                    value = value.replace(label_el.get_text(strip=True), "").strip()
+                m = _EMAIL_RE.search(value)
+                if m:
+                    email = m.group()
+        elif "phone" in label_text:
+            value = li.get_text(strip=True)
+            if label_el:
+                value = value.replace(label_el.get_text(strip=True), "").strip()
+            phone = value
+        elif "office" in label_text:
+            value = li.get_text(strip=True)
+            if label_el:
+                value = value.replace(label_el.get_text(strip=True), "").strip()
+            office = value
+        elif not label_text:
+            # No label — check for external website link
+            a = li.find("a", href=re.compile(r"^http", re.I))
+            if a:
+                href = a["href"]
+                if "tamu.edu" not in href and "scholar.google" not in href:
+                    lab_website = href
+
+    # ---- Google Scholar -----------------------------------------------------
+    google_scholar = ""
+    scholar_a = soup.find("a", href=re.compile(r"scholar\.google\.com"))
+    if scholar_a:
+        google_scholar = scholar_a["href"]
+
+    # ---- Photo --------------------------------------------------------------
+    photo_url = ""
+    for sel in (".profile__image img", ".profile img"):
+        img = soup.select_one(sel)
+        if img and img.get("src"):
+            photo_url = urljoin(profile_url, img["src"])
             break
-        # External links near research keywords
-        if href.startswith("http") and "tamu.edu" not in href:
-            if any(kw in link_text.lower() for kw in ("lab", "group", "research")):
-                lab_website = href
+
+    # ---- Research summary ---------------------------------------------------
+    research_summary = _extract_research_summary(soup)
+
+    # ---- Lab website fallback (same blocklist logic) ------------------------
+    _SOCIAL_BLOCKLIST = ("linkedin.com", "facebook.com", "youtube.com",
+                         "twitter.com", "instagram.com", "tiktok.com")
+    if not lab_website:
+        for a in soup.find_all("a", href=True):
+            link_text = a.get_text(strip=True)
+            href = a["href"]
+            if not href or href.startswith("mailto:") or href.startswith("#"):
+                continue
+            if any(domain in href.lower() for domain in _SOCIAL_BLOCKLIST):
+                continue
+            if _LAB_LINK_RE.search(link_text):
+                lab_website = href if href.startswith("http") else urljoin(profile_url, href)
                 break
 
     return {
@@ -309,6 +437,187 @@ def extract_profile_fields(html: str) -> dict:
         "email":            email,
         "research_summary": research_summary,
         "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           office,
+    }
+
+
+def _extract_engineering_profile(html: str, profile_url: str) -> dict:
+    """Parse an Engineering faculty profile page."""
+    soup = BeautifulSoup(html, "html.parser")
+
+    # ---- Name ---------------------------------------------------------------
+    name = ""
+    for tag in ("h1", "h2"):
+        el = soup.find(tag)
+        if el:
+            name = el.get_text(" ", strip=True)
+            break
+    if not name:
+        for cls in ("faculty-name", "profile-name", "name", "person-name"):
+            el = soup.find(class_=cls)
+            if el:
+                name = el.get_text(" ", strip=True)
+                break
+
+    # ---- Title / rank -------------------------------------------------------
+    # TAMU engineering profiles use .profile__titles (same as artsci)
+    title = ""
+    titles_el = soup.select_one(".profile__titles li")
+    if not titles_el:
+        titles_el = soup.select_one(".profile__titles")
+    if titles_el:
+        title = titles_el.get_text(" ", strip=True)
+    # Fallback: old-style selectors
+    if not title:
+        for sel in (".main-profile-info .title", ".main-profile-info h2",
+                    ".profile-header .title", ".field-name-field-title"):
+            el = soup.select_one(sel)
+            if el:
+                candidate = el.get_text(" ", strip=True)
+                if _TITLE_RE.search(candidate) and len(candidate) < 200:
+                    title = candidate
+                    break
+    if not title:
+        for cls in ("faculty-title", "profile-title", "title", "position", "rank"):
+            el = soup.find(class_=cls)
+            if el:
+                candidate = el.get_text(" ", strip=True)
+                if _TITLE_RE.search(candidate) and len(candidate) < 200:
+                    title = candidate
+                    break
+
+    # ---- Contact info via .profile__contact (TAMU unified template) ---------
+    email = ""
+    phone = ""
+    office = ""
+    lab_website_from_contact = ""
+
+    for li in soup.select(".profile__contact li"):
+        label_el = li.select_one(".profile__contact-label")
+        label_text = label_el.get_text(strip=True).lower() if label_el else ""
+
+        if "email" in label_text:
+            mailto = li.find("a", href=re.compile(r"^mailto:", re.I))
+            if mailto:
+                email = mailto["href"].replace("mailto:", "").strip()
+            elif not email:
+                value = li.get_text(strip=True)
+                if label_el:
+                    value = value.replace(label_el.get_text(strip=True), "").strip()
+                m = _EMAIL_RE.search(value)
+                if m:
+                    email = m.group()
+        elif "phone" in label_text:
+            value = li.get_text(strip=True)
+            if label_el:
+                value = value.replace(label_el.get_text(strip=True), "").strip()
+            phone = value
+        elif "office" in label_text:
+            value = li.get_text(strip=True)
+            if label_el:
+                value = value.replace(label_el.get_text(strip=True), "").strip()
+            office = value
+        elif "website" in label_text or not label_text:
+            a = li.find("a", href=re.compile(r"^http", re.I))
+            if a:
+                href = a["href"]
+                if "tamu.edu" not in href and "scholar.google" not in href:
+                    lab_website_from_contact = href
+
+    # Fallback email extraction
+    if not email:
+        mailto = soup.find("a", href=re.compile(r"^mailto:", re.I))
+        if mailto:
+            email = mailto["href"].replace("mailto:", "").strip().rstrip(".")
+    if not email:
+        for cls in ("contact", "contact-info", "faculty-contact", "vcard"):
+            el = soup.find(class_=cls)
+            if el:
+                m = _EMAIL_RE.search(el.get_text())
+                if m:
+                    email = m.group()
+                    break
+
+    # Fallback phone extraction
+    if not phone:
+        tel_a = soup.find("a", href=re.compile(r"^tel:", re.I))
+        if tel_a:
+            phone = tel_a["href"].replace("tel:", "").strip()
+
+    # Fallback office extraction
+    if not office:
+        for sel in (".office", ".location", ".field-name-field-office"):
+            el = soup.select_one(sel)
+            if el:
+                office = el.get_text(" ", strip=True)
+                break
+        if not office:
+            for el in soup.find_all(["dt", "strong", "b"]):
+                if re.search(r"(office|location)", el.get_text(strip=True), re.I):
+                    nxt = el.find_next_sibling()
+                    if nxt:
+                        office = nxt.get_text(" ", strip=True)
+                        break
+
+    # ---- Research summary ---------------------------------------------------
+    research_summary = _extract_research_summary(soup)
+
+    # ---- Lab website --------------------------------------------------------
+    _SOCIAL_BLOCKLIST = ("linkedin.com", "facebook.com", "youtube.com",
+                         "twitter.com", "instagram.com", "tiktok.com")
+    lab_website = lab_website_from_contact
+    if not lab_website:
+        for a in soup.find_all("a", href=True):
+            link_text = a.get_text(strip=True)
+            href = a["href"]
+            if not href or href.startswith("mailto:") or href.startswith("#"):
+                continue
+            if any(domain in href.lower() for domain in _SOCIAL_BLOCKLIST):
+                continue
+            if _LAB_LINK_RE.search(link_text):
+                lab_website = href if href.startswith("http") else urljoin(profile_url or "https://engineering.tamu.edu", href)
+                break
+            # External links near research keywords
+            if href.startswith("http") and "tamu.edu" not in href:
+                if any(kw in link_text.lower() for kw in ("lab", "group", "research")):
+                    lab_website = href
+                    break
+
+    # ---- Google Scholar -----------------------------------------------------
+    google_scholar = ""
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        if "scholar.google.com" in href:
+            google_scholar = href
+            break
+
+    # ---- Photo --------------------------------------------------------------
+    photo_url = ""
+    for sel in (".profile__image img", ".main-profile-info img", ".profile-photo img",
+                ".field-name-field-image img", ".profile-image img",
+                ".photo img", "img.profile"):
+        img = soup.select_one(sel)
+        if img and img.get("src"):
+            src = img["src"]
+            # Skip tracking pixels and SVG logos
+            if "facebook.com" in src or src.endswith(".svg"):
+                continue
+            photo_url = urljoin(profile_url or "https://engineering.tamu.edu", src)
+            break
+
+    return {
+        "name":             name,
+        "title":            title,
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           office,
     }
 
 
@@ -337,6 +646,19 @@ async def crawl(seed_urls: list[str]) -> list[dict]:
                 print("  Skipping — could not load directory page.")
                 continue
 
+            # Arts & Sciences pages may load profiles dynamically
+            if is_artsci_url(seed_url) and _load_cache(seed_url) is None:
+                # Wait for profile links to appear
+                for sel in ('a[href*="/profiles/"]', '.directory', '.profile'):
+                    try:
+                        await page.wait_for_selector(sel, timeout=10_000)
+                        break
+                    except PlaywrightTimeout:
+                        continue
+                await asyncio.sleep(3)  # Extra render time
+                html = await page.content()
+                _save_cache(seed_url, html)
+
             profile_links = extract_profile_links(html, seed_url)
             dept_slug = dept_slug_from_url(seed_url)
             print(f"  Found {len(profile_links)} profile link(s)  dept={dept_slug!r}")
@@ -352,12 +674,21 @@ async def crawl(seed_urls: list[str]) -> list[dict]:
                 if phtml is None:
                     continue
 
-                fields = extract_profile_fields(phtml)
+                fields = extract_profile_fields(phtml, profile_url)
+
+                # Generate AI review
+                ai_review = generate_ai_review(
+                    fields["name"], dept_slug, fields["research_summary"]
+                )
+
                 record = {
                     "id":          hashlib.md5(profile_url.encode()).hexdigest()[:12],
                     "profile_url": profile_url,
                     "department":  dept_slug,
                     **fields,
+                    "ai_review":         ai_review,
+                    "scholar_interests": [],
+                    "publications":      [],
                 }
                 all_records.append(record)
                 print(f"    name={record['name']!r}")

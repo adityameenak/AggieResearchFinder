@@ -1,6 +1,14 @@
-# TAMU Engineering Department Directory Seeds
+# TAMU Faculty Directory Seeds
 # One URL per line. Lines starting with # are ignored.
 # Add more department directories here to expand the dataset.
+
+# ── Engineering ──────────────────────────────────────────────
+
+# Aerospace Engineering
+https://engineering.tamu.edu/aerospace/profiles/index.html#Faculty
+
+# Biomedical Engineering
+https://engineering.tamu.edu/biomedical/profiles/index.html#Faculty
 
 # Chemical Engineering
 https://engineering.tamu.edu/chemical/profiles/index.html#Faculty
@@ -14,6 +22,9 @@ https://engineering.tamu.edu/cse/profiles/index.html#Faculty
 # Electrical & Computer Engineering
 https://engineering.tamu.edu/electrical/profiles/index.html#Faculty
 
+# Engineering Technology & Industrial Distribution
+https://engineering.tamu.edu/etid/profiles/index.html#Faculty
+
 # Industrial & Systems Engineering
 https://engineering.tamu.edu/industrial/profiles/index.html#Faculty
 
@@ -23,6 +34,9 @@ https://engineering.tamu.edu/materials/profiles/index.html#Faculty
 # Mechanical Engineering
 https://engineering.tamu.edu/mechanical/profiles/index.html#Faculty
 
+# Multidisciplinary Engineering (404 — no faculty listing available)
+# https://engineering.tamu.edu/multidisciplinary/profiles/index.html#Faculty
+
 # Nuclear Engineering
 https://engineering.tamu.edu/nuclear/profiles/index.html#Faculty
 
@@ -31,3 +45,32 @@ https://engineering.tamu.edu/ocean/profiles/index.html#Faculty
 
 # Petroleum Engineering
 https://engineering.tamu.edu/petroleum/profiles/index.html#Faculty
+
+# ── Arts & Sciences ──────────────────────────────────────────
+
+# Biology
+https://artsci.tamu.edu/biology/contact/faculty.html
+
+# Chemistry
+https://artsci.tamu.edu/chemistry/contact/profiles/index.html
+
+# Mathematics
+https://artsci.tamu.edu/mathematics/contact/profiles/index.html
+
+# Physics & Astronomy
+https://artsci.tamu.edu/physics-astronomy/contact/profiles/index.html
+
+# Statistics
+https://artsci.tamu.edu/statistics/contact/profiles/index.html
+
+# Atmospheric Sciences (no profile links found)
+# https://artsci.tamu.edu/atmos-science/contact/profiles/index.html
+
+# Geology & Geophysics (no profile links found)
+# https://artsci.tamu.edu/geology-geophysics/contact/profiles/index.html
+
+# Oceanography
+https://artsci.tamu.edu/oceanography/contact/profiles/index.html
+
+# Psychological & Brain Sciences
+https://artsci.tamu.edu/psychological-brain-sciences/contact/profiles/index.html
