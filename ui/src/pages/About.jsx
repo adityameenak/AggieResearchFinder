@@ -155,6 +155,64 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── About the Builders ────────────────────────────── */}
+      <section className="py-24 bg-white border-b border-cream-300">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+
+          {/* Heading + intro */}
+          <Reveal>
+            <SectionEyebrow>The team</SectionEyebrow>
+            <h2 className="font-display font-bold text-stone-900 text-3xl
+                            tracking-tight leading-tight mb-5">
+              About the Builders
+            </h2>
+            <p className="text-[15px] text-stone-600 leading-relaxed max-w-2xl mb-14">
+              Aggie Research Finder was built to make undergraduate research easier to discover
+              and pursue. As students, we saw how difficult it could be to navigate faculty
+              pages, understand what different labs actually work on, and confidently reach out
+              to professors. We wanted to create a platform that connects students with research
+              opportunities based on genuine interests and makes the first step into research
+              far more approachable.
+            </p>
+          </Reveal>
+
+          {/* Profile cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
+            <BuilderCard
+              initials="AM"
+              name="Aditya Meenakshisundaram"
+              role="Chemical Engineering Student, Texas A&M University"
+              bio="Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built Aggie Research Finder to help students discover meaningful research opportunities without the friction and uncertainty that often come with the traditional search process. His goal is to make research exploration clearer, faster, and more accessible for students across campus."
+              linkedinUrl="https://www.linkedin.com/in/adityameenakshi/"
+              from="left"
+              delay={0}
+            />
+            <BuilderCard
+              initials="AV"
+              name="Arun Vaithianathan"
+              role="Chemical Engineering Student, Texas A&M University"
+              bio="Arun is a chemical engineering student with experience in materials research, control systems, and energy entrepreneurship. His work spans graphite synthesis for battery applications, control system design for autonomous systems, and technology commercialization through the TEX-E energy entrepreneurship program. Through Aggie Research Finder, he wanted to simplify how students discover research labs and connect their interests with real-world technical work."
+              linkedinUrl="https://www.linkedin.com/in/akvaithi/"
+              from="right"
+              delay={100}
+            />
+          </div>
+
+          {/* Closing mission paragraph */}
+          <Reveal delay={200}>
+            <div className="max-w-2xl mx-auto text-center">
+              <span className="block w-8 h-px bg-cream-400 mx-auto mb-6" />
+              <p className="text-[15px] text-stone-600 leading-relaxed">
+                At its core, Aggie Research Finder is about lowering the barrier to entry.
+                We built it to help students move from curiosity to action — and make it
+                easier for more people to find research they are genuinely excited about.
+              </p>
+            </div>
+          </Reveal>
+
+        </div>
+      </section>
+
       {/* ── Why it exists ─────────────────────────────────── */}
       <section className="py-20 bg-white border-b border-cream-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -233,65 +291,6 @@ export default function About() {
                                 border border-cream-300 px-4 py-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-maroon-700 flex-shrink-0" />
                   <span className="text-sm text-stone-700 font-medium">{d}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── How it works ──────────────────────────────────── */}
-      <section className="py-20 bg-white border-b border-cream-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <Reveal>
-            <SectionEyebrow>Under the hood</SectionEyebrow>
-            <h2 className="font-display font-bold text-stone-900 text-3xl
-                            tracking-tight mb-12">
-              How the pipeline works
-            </h2>
-          </Reveal>
-
-          <div className="space-y-5">
-            {[
-              {
-                n: '01',
-                title: 'Seed URLs',
-                body: 'Twenty department profile-index URLs are stored in seeds.txt. The crawler iterates each one, following pagination if present.',
-              },
-              {
-                n: '02',
-                title: 'Disk-cached fetching',
-                body: 'Each fetched page is cached to .cache/ keyed by MD5 of the URL. Subsequent runs are nearly instant; only new pages hit the network.',
-              },
-              {
-                n: '03',
-                title: 'Profile extraction',
-                body: 'BeautifulSoup parses each profile page. Research summaries are extracted via four CSS selector strategies with graceful fallbacks.',
-              },
-              {
-                n: '04',
-                title: 'Stable IDs',
-                body: "Each professor's ID is the first 12 characters of MD5(profile_url). Saved-professor lists remain valid across crawler re-runs.",
-              },
-              {
-                n: '05',
-                title: 'Client-side ranking',
-                body: 'The UI tokenises queries and scores each professor by term frequency across name, title, and research summary fields — no server needed.',
-              },
-            ].map(({ n, title, body }, i) => (
-              <Reveal key={n} delay={i * 70}>
-                <div className="flex gap-6 items-start bg-cream-50 rounded-2xl
-                                border border-cream-300 p-6">
-                  <span className="font-display font-bold text-5xl text-cream-300
-                                   leading-none flex-shrink-0 select-none mt-0.5">
-                    {n}
-                  </span>
-                  <div>
-                    <h3 className="font-semibold text-stone-900 text-base mb-1.5">
-                      {title}
-                    </h3>
-                    <p className="text-[14px] text-stone-600 leading-relaxed">{body}</p>
-                  </div>
                 </div>
               </Reveal>
             ))}
@@ -411,64 +410,6 @@ export default function About() {
               website.
             </p>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ── About the Builders ────────────────────────────── */}
-      <section className="py-24 bg-white border-b border-cream-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-
-          {/* Heading + intro */}
-          <Reveal>
-            <SectionEyebrow>The team</SectionEyebrow>
-            <h2 className="font-display font-bold text-stone-900 text-3xl
-                            tracking-tight leading-tight mb-5">
-              About the Builders
-            </h2>
-            <p className="text-[15px] text-stone-600 leading-relaxed max-w-2xl mb-14">
-              Aggie Research Finder was built to make undergraduate research easier to discover
-              and pursue. As students, we saw how difficult it could be to navigate faculty
-              pages, understand what different labs actually work on, and confidently reach out
-              to professors. We wanted to create a platform that connects students with research
-              opportunities based on genuine interests and makes the first step into research
-              far more approachable.
-            </p>
-          </Reveal>
-
-          {/* Profile cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
-            <BuilderCard
-              initials="AM"
-              name="Aditya Meenakshisundaram"
-              role="Chemical Engineering Student, Texas A&M University"
-              bio="Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built Aggie Research Finder to help students discover meaningful research opportunities without the friction and uncertainty that often come with the traditional search process. His goal is to make research exploration clearer, faster, and more accessible for students across campus."
-              linkedinUrl="https://www.linkedin.com/in/adityameenakshi/"
-              from="left"
-              delay={0}
-            />
-            <BuilderCard
-              initials="AV"
-              name="Arun Vaithianathan"
-              role="Chemical Engineering Student, Texas A&M University"
-              bio="Arun is a chemical engineering student with experience in materials research, control systems, and energy entrepreneurship. His work spans graphite synthesis for battery applications, control system design for autonomous systems, and technology commercialization through the TEX-E energy entrepreneurship program. Through Aggie Research Finder, he wanted to simplify how students discover research labs and connect their interests with real-world technical work."
-              linkedinUrl="https://www.linkedin.com/in/akvaithi/"
-              from="right"
-              delay={100}
-            />
-          </div>
-
-          {/* Closing mission paragraph */}
-          <Reveal delay={200}>
-            <div className="max-w-2xl mx-auto text-center">
-              <span className="block w-8 h-px bg-cream-400 mx-auto mb-6" />
-              <p className="text-[15px] text-stone-600 leading-relaxed">
-                At its core, Aggie Research Finder is about lowering the barrier to entry.
-                We built it to help students move from curiosity to action — and make it
-                easier for more people to find research they are genuinely excited about.
-              </p>
-            </div>
-          </Reveal>
-
         </div>
       </section>
 
