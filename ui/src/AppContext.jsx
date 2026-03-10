@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo } from 'react'
+import { extractTopicsFromFaculty, loadSearchCounts, saveSearchCounts, mergeTopics } from './utils/topics'
 
 const AppContext = createContext(null)
 
@@ -37,6 +38,29 @@ export function AppProvider({ children }) {
     faculty.map(f => f.department).filter(Boolean)
   )].sort()
 
+  // Adaptive topic chips: data-derived defaults + search behavior boost
+  const [searchCounts, setSearchCounts] = useState(() => loadSearchCounts())
+
+  const dataTopics = useMemo(
+    () => (faculty.length > 0 ? extractTopicsFromFaculty(faculty) : []),
+    [faculty],
+  )
+
+  const topicChips = useMemo(
+    () => mergeTopics(dataTopics, searchCounts, 15),
+    [dataTopics, searchCounts],
+  )
+
+  function recordSearch(query) {
+    const q = (query || '').trim().toLowerCase()
+    if (!q || q.length < 2) return
+    setSearchCounts(prev => {
+      const next = { ...prev, [q]: (prev[q] || 0) + 1 }
+      saveSearchCounts(next)
+      return next
+    })
+  }
+
   function toggleSave(id) {
     setSaved(prev => {
       const next = prev.includes(id)
@@ -60,6 +84,7 @@ export function AppProvider({ children }) {
     <AppContext.Provider value={{
       faculty, departments, loading, error,
       saved, toggleSave, isSaved, clearSaved,
+      topicChips, recordSearch,
     }}>
       {children}
     </AppContext.Provider>

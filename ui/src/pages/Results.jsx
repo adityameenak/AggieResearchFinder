@@ -4,21 +4,6 @@ import { useApp } from '../AppContext'
 import ProfCard from '../components/ProfCard'
 import { searchAndRank, tokenize, deptLabel } from '../utils/search'
 
-const CHIPS = [
-  { label: 'Machine learning',    q: 'machine learning' },
-  { label: 'Renewable energy',    q: 'renewable energy' },
-  { label: 'Robotics',            q: 'robotics' },
-  { label: 'Carbon capture',      q: 'carbon capture' },
-  { label: 'Battery materials',   q: 'battery materials' },
-  { label: 'Fluid dynamics',      q: 'fluid dynamics' },
-  { label: 'Nanotechnology',      q: 'nanotechnology' },
-  { label: 'Bioinformatics',      q: 'bioinformatics' },
-  { label: 'Drug delivery',       q: 'drug delivery' },
-  { label: 'Quantum computing',   q: 'quantum computing' },
-  { label: 'Semiconductors',      q: 'semiconductors' },
-  { label: 'Structural health',   q: 'structural health monitoring' },
-]
-
 /* ── Search icon ──────────────────────────────────────────── */
 function SearchIcon({ className = 'w-5 h-5' }) {
   return (
@@ -188,7 +173,7 @@ function Pagination({ currentPage, totalPages, goToPage }) {
 const PAGE_SIZE = 24
 
 export default function Search() {
-  const { faculty, departments, loading } = useApp()
+  const { faculty, departments, loading, topicChips, recordSearch } = useApp()
   const [searchParams, setSearchParams] = useSearchParams()
   const inputRef = useRef(null)
   const topRef = useRef(null)
@@ -250,6 +235,7 @@ export default function Search() {
 
   function onSubmit(e) {
     e?.preventDefault()
+    if (query.trim()) recordSearch(query)
     push(query, dept, hasResearchOnly)
   }
 
@@ -355,7 +341,7 @@ export default function Search() {
               Filter by topic:
             </p>
             <div className="flex flex-wrap gap-2">
-              {CHIPS.map(({ label, q }) => {
+              {topicChips.map(({ label, q }) => {
                 const active = selectedChips.has(q)
                 return (
                   <button

@@ -1,12 +1,6 @@
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-const INTEREST_CHIPS = [
-  'machine learning', 'battery materials', 'semiconductors',
-  'carbon capture', 'robotics', 'drug delivery',
-  'computational biology', 'nanotechnology', 'fluid dynamics',
-  'renewable energy', 'materials synthesis', 'biomedical devices',
-]
+import { useApp } from '../AppContext'
 
 const STEPS = [
   'Reading file…',
@@ -119,6 +113,7 @@ function ProcessingOverlay({ step }) {
 /* ── Page ─────────────────────────────────────────────────── */
 export default function Discover() {
   const navigate = useNavigate()
+  const { topicChips } = useApp()
   const [file,      setFile]      = useState(null)
   const [interests, setInterests] = useState('')
   const [selectedChips, setSelectedChips] = useState(new Set())
@@ -247,17 +242,17 @@ export default function Discover() {
                 Describe what you want to explore — even if it's new territory for you.
               </p>
               <div className="flex flex-wrap gap-1.5 mt-3">
-                {INTEREST_CHIPS.map(chip => {
-                  const active = selectedChips.has(chip)
+                {topicChips.map(({ label, q }) => {
+                  const active = selectedChips.has(q)
                   return (
-                    <button key={chip} type="button" onClick={() => toggleChip(chip)}
+                    <button key={q} type="button" onClick={() => toggleChip(q)}
                             className={`text-[11px] px-3 py-1 rounded-full border transition-all duration-150
                                         ${active
                                           ? 'border-maroon-700 bg-maroon-700 text-cream-100'
                                           : 'border-cream-400 text-stone-500 bg-white hover:border-maroon-400 hover:text-maroon-700 hover:bg-maroon-50'
                                         }`}>
                       {active && <span className="mr-1">&#10003;</span>}
-                      {chip}
+                      {label}
                     </button>
                   )
                 })}
