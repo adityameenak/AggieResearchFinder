@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { highlightSegments, deptLabel } from '../utils/search'
 
@@ -92,8 +92,25 @@ function ExtIcon() {
 /* ── Card ─────────────────────────────────────────────────── */
 export default function ProfCard({ prof, tokens = [] }) {
   const { toggleSave, isSaved } = useApp()
-  const saved   = isSaved(prof.id)
-  const snippet = (prof.research_summary ?? '').slice(0, 300)
+  const navigate = useNavigate()
+  const saved    = isSaved(prof.id)
+  const snippet  = (prof.research_summary ?? '').slice(0, 300)
+
+  function handleTrack(e) {
+    e.preventDefault()
+    navigate('/tracker', {
+      state: {
+        prefill: {
+          professorName: prof.name || '',
+          labName:       '',
+          department:    prof.department || '',
+          researchArea:  (prof.scholar_interests ?? []).slice(0, 3).join(', '),
+          sourceLink:    prof.profile_url || '',
+          status:        'Not Started',
+        },
+      },
+    })
+  }
 
   return (
     <article
@@ -216,6 +233,19 @@ export default function ProfCard({ prof, tokens = [] }) {
             <ExtIcon />
           </a>
         )}
+        <button
+          onClick={handleTrack}
+          title="Track this application"
+          className="inline-flex items-center gap-1.5 text-[11px] px-3 py-1.5
+                     rounded-lg border border-cream-400 text-stone-600
+                     hover:border-maroon-300 hover:text-maroon-700
+                     hover:bg-maroon-50 transition-colors font-medium"
+        >
+          <svg viewBox="0 0 12 12" fill="currentColor" className="w-2.5 h-2.5 opacity-70">
+            <path d="M6.5 1.5a.5.5 0 0 0-1 0v4h-4a.5.5 0 0 0 0 1h4v4a.5.5 0 0 0 1 0v-4h4a.5.5 0 0 0 0-1h-4v-4Z" />
+          </svg>
+          Track
+        </button>
         <Link
           to={`/prof/${prof.id}`}
           className="text-[11px] px-3 py-1.5 rounded-lg text-stone-400

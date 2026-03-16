@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { deptLabel } from '../utils/search'
 import EmailModal from '../components/EmailModal'
+import { getApplications } from '../utils/trackerStorage'
 
 /* ── Dept badge ───────────────────────────────────────────── */
 const DEPT_STYLES = {
@@ -73,13 +74,30 @@ export default function ProfDetail() {
   const navigate                         = useNavigate()
   const [emailOpen, setEmailOpen]        = useState(false)
 
-  const prof  = faculty.find(f => f.id === id)
-  const saved = prof ? isSaved(prof.id) : false
+  const prof    = faculty.find(f => f.id === id)
+  const saved   = prof ? isSaved(prof.id) : false
+  const tracked = prof ? getApplications().some(a => a.sourceLink === prof.profile_url && a.professorName === prof.name) : false
 
   // Read session from localStorage (set by Discover flow)
   const session = (() => {
     try { return JSON.parse(localStorage.getItem('tamu_session') || 'null') } catch { return null }
   })()
+
+  function handleTrack() {
+    navigate('/tracker', {
+      state: {
+        prefill: {
+          professorName: prof.name || '',
+          labName:       '',
+          department:    prof.department || '',
+          researchArea:  (prof.scholar_interests ?? []).slice(0, 3).join(', '),
+          sourceLink:    prof.profile_url || '',
+          emailUsed:     prof.email || '',
+          status:        'Not Started',
+        },
+      },
+    })
+  }
 
   if (!prof) {
     return (
@@ -302,6 +320,22 @@ export default function ProfDetail() {
                 </p>
               )}
             </div>
+
+            {/* Track Application CTA */}
+            <button
+              onClick={handleTrack}
+              className={`w-full flex items-center justify-center gap-2 px-4 py-2.5
+                          rounded-2xl border text-sm font-semibold transition-colors
+                          ${tracked
+                            ? 'bg-stone-50 border-stone-200 text-stone-500 hover:bg-stone-100'
+                            : 'bg-white border-stone-200 text-stone-700 hover:border-maroon-300 hover:text-maroon-700 hover:bg-maroon-50'
+                          }`}
+            >
+              <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70">
+                <path d="M7.25 1.5a.75.75 0 0 1 1.5 0v5.25H14a.75.75 0 0 1 0 1.5H8.75v5.25a.75.75 0 0 1-1.5 0V8.25H2a.75.75 0 0 1 0-1.5h5.25V1.5Z" />
+              </svg>
+              {tracked ? 'Already Tracked' : 'Track Application'}
+            </button>
 
             {/* Links */}
             <div className="bg-cream-50 rounded-2xl border border-cream-300 p-5">

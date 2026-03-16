@@ -1,9 +1,14 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { getApplications } from '../utils/trackerStorage'
+import { useMemo } from 'react'
 
 export default function NavBar() {
   const { saved } = useApp()
   const { pathname } = useLocation()
+
+  // Live count of tracked applications — reads localStorage directly so it stays in sync
+  const trackerCount = useMemo(() => getApplications().length, [pathname])
 
   function linkCls(path, exact = false) {
     const active = exact
@@ -68,6 +73,16 @@ export default function NavBar() {
                                w-[18px] h-[18px] rounded-full bg-maroon-700
                                text-cream-50 text-[10px] font-bold leading-none">
                 {saved.length > 9 ? '9+' : saved.length}
+              </span>
+            )}
+          </Link>
+          <Link to="/tracker" className={linkCls('/tracker')}>
+            Tracker
+            {trackerCount > 0 && (
+              <span className="ml-1.5 inline-flex items-center justify-center
+                               w-[18px] h-[18px] rounded-full bg-stone-600
+                               text-white text-[10px] font-bold leading-none">
+                {trackerCount > 9 ? '9+' : trackerCount}
               </span>
             )}
           </Link>

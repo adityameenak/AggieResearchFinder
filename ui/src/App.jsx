@@ -8,6 +8,7 @@ import Saved      from './pages/Saved'
 import About      from './pages/About'
 import Discover   from './pages/Discover'
 import Match      from './pages/Match'
+import Tracker    from './pages/TrackerPage'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/about"    element={<About />}      />
           <Route path="/discover" element={<Discover />}   />
           <Route path="/match"    element={<Match />}      />
+          <Route path="/tracker"  element={<Tracker />}    />
         </Routes>
       </main>
       <Footer />
