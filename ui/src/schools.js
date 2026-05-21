@@ -45,7 +45,7 @@ export const SCHOOLS = {
     },
     officialUrl: 'https://www.rice.edu',
     description: 'Discover research labs across Rice, powered by AI matching.',
-    available: false, // no data crawled yet — landing page renders a "coming soon" state
+    available: true,
   },
 }
 
