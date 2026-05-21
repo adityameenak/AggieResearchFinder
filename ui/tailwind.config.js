@@ -8,18 +8,22 @@ export default {
         display: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       colors: {
+        // `maroon-*` is the active-school accent palette. Values come from
+        // CSS variables (see src/index.css) so `data-school="rice"` on the
+        // SchoolApp wrapper repaints the whole UI without any class renames.
+        // Default values are TAMU maroon; the Rice override swaps to Rice blue.
         maroon: {
-          50:  '#fdf2f2',
-          100: '#fde8e8',
-          200: '#f9c9c9',
-          300: '#f49393',
-          400: '#e05050',
-          500: '#8b1a1a',
-          600: '#6b1414',
-          700: '#500000',
-          800: '#3d0000',
-          900: '#2a0000',
-          950: '#150000',
+          50:  'rgb(var(--maroon-50)  / <alpha-value>)',
+          100: 'rgb(var(--maroon-100) / <alpha-value>)',
+          200: 'rgb(var(--maroon-200) / <alpha-value>)',
+          300: 'rgb(var(--maroon-300) / <alpha-value>)',
+          400: 'rgb(var(--maroon-400) / <alpha-value>)',
+          500: 'rgb(var(--maroon-500) / <alpha-value>)',
+          600: 'rgb(var(--maroon-600) / <alpha-value>)',
+          700: 'rgb(var(--maroon-700) / <alpha-value>)',
+          800: 'rgb(var(--maroon-800) / <alpha-value>)',
+          900: 'rgb(var(--maroon-900) / <alpha-value>)',
+          950: 'rgb(var(--maroon-950) / <alpha-value>)',
         },
         // Rice University blue (#00205B). Used on the school picker today;
         // full per-school theming is tracked separately.

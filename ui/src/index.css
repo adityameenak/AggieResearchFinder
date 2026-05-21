@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── School accent palette ──────────────────────────────────────
+ * `maroon-*` Tailwind classes resolve through these CSS variables
+ * (see tailwind.config.js). Defaults are TAMU maroon. SchoolApp sets
+ * data-school="<code>" on its wrapper so per-school overrides swap
+ * the palette without renaming any classes.
+ * RGB triplets are space-separated so Tailwind's <alpha-value>
+ * placeholder works for utilities like bg-maroon-700/20.
+ * ──────────────────────────────────────────────────────────────── */
+:root {
+  --maroon-50:  253 242 242;
+  --maroon-100: 253 232 232;
+  --maroon-200: 249 201 201;
+  --maroon-300: 244 147 147;
+  --maroon-400: 224 80 80;
+  --maroon-500: 139 26 26;
+  --maroon-600: 107 20 20;
+  --maroon-700: 80 0 0;
+  --maroon-800: 61 0 0;
+  --maroon-900: 42 0 0;
+  --maroon-950: 21 0 0;
+}
+
+[data-school="rice"] {
+  --maroon-50:  238 243 251;
+  --maroon-100: 214 225 243;
+  --maroon-200: 167 190 228;
+  --maroon-300: 113 151 210;
+  --maroon-400: 63 111 187;
+  --maroon-500: 31 74 150;
+  --maroon-600: 14 51 111;
+  --maroon-700: 0 32 91;
+  --maroon-800: 0 24 68;
+  --maroon-900: 0 15 44;
+  --maroon-950: 0 8 23;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -14,8 +50,8 @@
     font-feature-settings: 'cv11', 'ss01';
   }
   ::selection {
-    background-color: #f9c9c9;
-    color: #2a0000;
+    background-color: rgb(var(--maroon-200));
+    color: rgb(var(--maroon-900));
   }
 }
 
@@ -41,9 +77,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  /* Dot grid texture helper */
+  /* Dot grid texture helper — uses the active school accent at low opacity */
   .dot-texture {
-    background-image: radial-gradient(circle, rgba(80,0,0,0.09) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgb(var(--maroon-700) / 0.09) 1px, transparent 1px);
     background-size: 28px 28px;
   }
   .dot-texture-light {

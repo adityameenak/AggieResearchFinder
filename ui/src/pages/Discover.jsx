@@ -205,8 +205,8 @@ export default function Discover() {
           </h1>
           <p className="text-[15px] text-stone-600 leading-relaxed max-w-lg">
             Upload your resume and tell us what excites you. We'll match you with
-            TAMU faculty whose work aligns with where you want to go — not just
-            where you've been.
+            {' '}{school.shortName} faculty whose work aligns with where you want to go —
+            not just where you've been.
           </p>
         </div>
 

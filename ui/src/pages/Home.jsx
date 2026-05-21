@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
-import { useSchoolPath } from '../SchoolContext'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 import Reveal from '../components/Reveal'
 
 /* ── Abstract compass / academic seal decoration ─────────── */
@@ -96,6 +96,7 @@ const WHO = [
 /* ── Page ─────────────────────────────────────────────────── */
 export default function Home() {
   const { faculty, departments, loading } = useApp()
+  const school = useSchool()
   const tx = useSchoolPath()
 
   return (
@@ -149,11 +150,11 @@ export default function Home() {
                 'Loading faculty data…'
               ) : (
                 <>
-                  TAMUResearchFinder indexes{' '}
+                  {school.appName} indexes{' '}
                   <span className="font-semibold text-stone-900">{faculty.length}</span>{' '}
                   faculty profiles across{' '}
                   <span className="font-semibold text-stone-900">{departments.length}</span>{' '}
-                  STEM departments. Enter your interests and instantly
+                  departments. Enter your interests and instantly
                   discover professors, labs, and research areas doing exactly
                   that work.
                 </>
@@ -330,8 +331,8 @@ export default function Home() {
               <p>
                 For undergraduates looking for research positions, graduate students
                 scoping advisors, or anyone trying to understand what's being studied
-                at TAMU Engineering — the current discovery experience is fragmented
-                and frustrating. TAMUResearchFinder fixes that.
+                at {school.shortName} — the current discovery experience is fragmented
+                and frustrating. {school.appName} fixes that.
               </p>
             </div>
           </Reveal>
@@ -352,7 +353,7 @@ export default function Home() {
           <Reveal from="left" className="flex-1">
             <span className="text-xs font-semibold text-maroon-400 uppercase
                              tracking-[0.18em] mb-4 block">
-              Built for curious Aggies
+              Built for curious {school.shortName} students
             </span>
             <h2
               className="font-display font-bold text-cream-100 leading-tight
@@ -364,7 +365,7 @@ export default function Home() {
             <p className="text-stone-400 text-[15px] leading-relaxed max-w-sm">
               Every great research career starts with a connection between
               a student's curiosity and a professor's expertise. We built
-              TAMUResearchFinder to make that connection faster, more
+              {' '}{school.appName} to make that connection faster, more
               accessible, and genuinely serendipitous.
             </p>
           </Reveal>
