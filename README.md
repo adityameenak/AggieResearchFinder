@@ -1,8 +1,14 @@
-# TAMUResearchFinder
+# ResearchFinder (Multi-University)
 
-> AI-powered research discovery and outreach platform for Texas A&M students.
+> AI-powered research discovery and outreach platform for Texas students. Started as the Aggie Research Finder for Texas A&M; now expanding to other Texas universities.
 
-Upload your resume, enter your research interests, and get matched with TAMU faculty whose work aligns with where you want to go — not just where you've been. Then generate a personalized outreach email draft in one click.
+Upload your resume, enter your research interests, and get matched with faculty whose work aligns with where you want to go — not just where you've been. Then generate a personalized outreach email draft in one click.
+
+Supported schools (each with its own subpage and branding):
+- **Texas A&M** — `/tamu` — Aggie Research Finder
+- **Rice** — `/rice` — Owl Research Finder
+
+The landing page at `/` lets users pick their school.
 
 | Part | Stack | Location |
 |------|-------|----------|
@@ -40,18 +46,47 @@ uvicorn main:app --reload
 # → API docs: http://localhost:8000/docs
 ```
 
-Faculty data from `ui/public/faculty.json` is **auto-imported on startup**. No manual step needed.
+Faculty data from `ui/public/faculty.json` is **auto-imported on startup**. No manual step needed. The DB schema is multi-tenant: each `FacultyRecord` carries a `university` code (`tamu`, `rice`, …) and `GET /api/faculty?university=<code>` filters to a single school.
 
 ### Crawler (to collect fresh faculty data)
 
+**TAMU** (engineering + arts & sciences departments):
 ```bash
 cd crawler
 pip install -r requirements.txt
 playwright install chromium
 python crawl.py
-# writes faculty.json + faculty.csv
+# writes faculty.json + faculty.csv (university=tamu)
 cp crawler/faculty.json ui/public/faculty.json
 ```
+
+**Rice** (~5000 profiles via Drupal JSON:API — finishes in ~2 minutes):
+```bash
+cd crawler
+python crawl_rice.py
+# writes faculty-rice.json + faculty-rice.csv
+```
+Rice uses a separate entry point (`crawl_rice.py`) because `profiles.rice.edu` exposes a clean JSON:API at `/jsonapi/node/profile` — no HTML scraping required. Pagination is server-honored (`page[offset]`/`page[limit]`).
+
+**Merge per-school datasets into the UI's combined file** (run after any school's crawl):
+```bash
+cd crawler
+python -c "
+import json
+combined = []
+for path in ['faculty.json', 'faculty-rice.json']:
+    try: combined.extend(json.load(open(path)))
+    except FileNotFoundError: pass
+json.dump(combined, open('../ui/public/faculty.json', 'w'), ensure_ascii=False, indent=2)
+print(f'merged {len(combined)} records')
+"
+```
+
+**Adding another university** — pick the strategy that fits the source:
+- *Has a JSON/REST API?* Copy `crawl_rice.py` as `crawl_<school>.py`, change endpoint + field mapping. Easiest.
+- *Only has HTML directory pages?* Add a `_extract_<school>_profile()` parser in `crawl.py`, dispatch via `extract_profile_fields`, supply a `seeds-<school>.txt`, run `python crawl.py --seeds seeds-<school>.txt --university <code> --output faculty-<code>`.
+
+In both cases, register the school in `ui/src/schools.js`. The `university` field on each record is what makes per-school filtering work end-to-end.
 
 ---
 
@@ -160,54 +195,63 @@ Matching is **interest-driven** — the student's stated interests dominate. Res
 ```
 ResearchFinder/
 ├── README.md
+├── CLAUDE.md                 ← guidance for Claude Code sessions
 ├── .gitignore
 ├── crawler/
-│   ├── crawl.py
+│   ├── crawl.py              ← TAMU + Rice parsers, dispatched by URL
 │   ├── requirements.txt
-│   └── seeds.txt
+│   ├── seeds.txt             ← TAMU department directory URLs
+│   └── seeds-rice.txt        ← Rice profiles.rice.edu paginated URLs
 ├── backend/
 │   ├── main.py               ← FastAPI app entry + startup
 │   ├── requirements.txt
 │   ├── .env.example
 │   ├── db/
-│   │   ├── database.py       ← SQLAlchemy engine + session
-│   │   └── models.py         ← FacultyRecord, ResumeSession
+│   │   ├── database.py       ← SQLAlchemy engine + add-column migration
+│   │   └── models.py         ← FacultyRecord (with university), ResumeSession
 │   ├── routers/
-│   │   ├── faculty.py        ← GET/POST /api/faculty
+│   │   ├── faculty.py        ← GET/POST /api/faculty?university=
 │   │   ├── resume.py         ← POST /api/resume/upload
-│   │   ├── match.py          ← POST /api/match
-│   │   └── email.py          ← POST /api/email/draft
+│   │   ├── match.py          ← POST /api/match (accepts university filter)
+│   │   └── email.py          ← POST /api/email/draft (accepts school_name)
 │   └── services/
 │       ├── llm.py            ← Anthropic client + mock mode
 │       ├── parser.py         ← Resume text extraction + parsing
 │       ├── matcher.py        ← Hybrid keyword matching
-│       └── emailer.py        ← Email draft generation
+│       └── emailer.py        ← Email draft generation (school-aware)
 └── ui/
     ├── package.json
     ├── vite.config.js        ← proxies /api → localhost:8000 in dev
-    ├── tailwind.config.js
+    ├── tailwind.config.js    ← maroon (TAMU) + rice-blue palettes
     ├── public/
-    │   └── faculty.json      ← static dataset for search
+    │   └── faculty.json      ← combined dataset; each record has university
     └── src/
-        ├── App.jsx
-        ├── AppContext.jsx
+        ├── App.jsx           ← /, /:schoolCode/* routing
+        ├── SchoolApp.jsx     ← per-school shell (NavBar + Routes + Footer)
+        ├── SchoolContext.jsx ← useSchool(), useSchoolPath() hooks
+        ├── schools.js        ← school registry (add new schools here)
+        ├── AppContext.jsx    ← filters faculty.json by current school
         ├── utils/
         │   ├── search.js
+        │   ├── topics.js     ← per-school search-count storage
+        │   ├── trackerStorage.js ← per-school applications storage
         │   └── api.js        ← fetch wrapper for backend calls
         ├── pages/
+        │   ├── Landing.jsx   ← school picker at /
         │   ├── Home.jsx
         │   ├── Results.jsx
-        │   ├── ProfDetail.jsx ← now includes Draft Email button
+        │   ├── ProfDetail.jsx
         │   ├── Saved.jsx
-        │   ├── About.jsx
-        │   ├── Discover.jsx  ← resume upload + interests
-        │   └── Match.jsx     ← match results dashboard
+        │   ├── About.jsx     ← copy reads from school config
+        │   ├── Discover.jsx
+        │   ├── Match.jsx
+        │   └── TrackerPage.jsx
         └── components/
-            ├── NavBar.jsx
-            ├── Footer.jsx
+            ├── NavBar.jsx    ← brand + links derived from school context
+            ├── Footer.jsx    ← brand + copy derived from school context
             ├── ProfCard.jsx
             ├── Reveal.jsx
-            └── EmailModal.jsx ← tone selector + editable draft
+            └── EmailModal.jsx ← passes school_name to /api/email
 ```
 
 ---
