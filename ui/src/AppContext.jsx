@@ -59,7 +59,12 @@ export function AppProvider({ children }) {
   )].sort()
 
   // Adaptive topic chips: data-derived defaults + search behavior boost
-  const [searchCounts, setSearchCounts] = useState(() => loadSearchCounts())
+  const [searchCounts, setSearchCounts] = useState(() => loadSearchCounts(school.code))
+
+  // Reload search counts when the school changes (keeps each school's chips isolated)
+  useEffect(() => {
+    setSearchCounts(loadSearchCounts(school.code))
+  }, [school.code])
 
   const dataTopics = useMemo(
     () => (faculty.length > 0 ? extractTopicsFromFaculty(faculty) : []),
@@ -76,7 +81,7 @@ export function AppProvider({ children }) {
     if (!q || q.length < 2) return
     setSearchCounts(prev => {
       const next = { ...prev, [q]: (prev[q] || 0) + 1 }
-      saveSearchCounts(next)
+      saveSearchCounts(next, school.code)
       return next
     })
   }

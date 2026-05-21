@@ -5,7 +5,11 @@
  * user search history so the "filter by topic" chips stay relevant.
  */
 
-const SEARCH_COUNTS_KEY = 'tamu_search_counts'
+const DEFAULT_SCHOOL = 'tamu'
+
+function searchCountsKey(schoolCode = DEFAULT_SCHOOL) {
+  return `${schoolCode}_search_counts`
+}
 
 // ── Title-case helper ──────────────────────────────────────────────────
 
@@ -78,17 +82,17 @@ export function extractTopicsFromFaculty(faculty) {
 
 // ── Search history persistence ─────────────────────────────────────────
 
-export function loadSearchCounts() {
+export function loadSearchCounts(schoolCode = DEFAULT_SCHOOL) {
   try {
-    return JSON.parse(localStorage.getItem(SEARCH_COUNTS_KEY) || '{}')
+    return JSON.parse(localStorage.getItem(searchCountsKey(schoolCode)) || '{}')
   } catch {
     return {}
   }
 }
 
-export function saveSearchCounts(counts) {
+export function saveSearchCounts(counts, schoolCode = DEFAULT_SCHOOL) {
   try {
-    localStorage.setItem(SEARCH_COUNTS_KEY, JSON.stringify(counts))
+    localStorage.setItem(searchCountsKey(schoolCode), JSON.stringify(counts))
   } catch {
     // localStorage unavailable (private browsing, etc.)
   }

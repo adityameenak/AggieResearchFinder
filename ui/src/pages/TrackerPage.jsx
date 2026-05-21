@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useSchool } from '../SchoolContext'
 import {
   getApplications, createApplication, updateApplication, deleteApplication,
   exportToCSV, seedDemoData, STATUSES,
@@ -58,14 +59,20 @@ function EmptyState({ hasFilters, onAdd, onSeed }) {
 /* ── Page ─────────────────────────────────────────────────────── */
 export default function TrackerPage() {
   const location = useLocation()
+  const school   = useSchool()
 
-  const [applications, setApplications] = useState(() => getApplications())
+  const [applications, setApplications] = useState(() => getApplications(school.code))
   const [modalOpen,    setModalOpen]    = useState(false)
   const [editTarget,   setEditTarget]   = useState(null)
   const [prefill,      setPrefill]      = useState(null)
   const [query,        setQuery]        = useState('')
   const [statusFilter, setStatusFilter] = useState('')
   const [sort,         setSort]         = useState('newest')
+
+  // Reload when school changes so each school's tracker is isolated
+  useEffect(() => {
+    setApplications(getApplications(school.code))
+  }, [school.code])
 
   useEffect(() => {
     if (location.state?.prefill) {
@@ -75,11 +82,11 @@ export default function TrackerPage() {
     }
   }, [location.state])
 
-  function refresh() { setApplications(getApplications()) }
+  function refresh() { setApplications(getApplications(school.code)) }
 
   function handleSave(fields) {
-    if (editTarget) updateApplication(editTarget.id, fields)
-    else            createApplication(fields)
+    if (editTarget) updateApplication(editTarget.id, fields, school.code)
+    else            createApplication(fields, school.code)
     refresh()
     setModalOpen(false)
     setEditTarget(null)
@@ -174,7 +181,7 @@ export default function TrackerPage() {
           <EmptyState
             hasFilters={false}
             onAdd={() => { setEditTarget(null); setPrefill(null); setModalOpen(true) }}
-            onSeed={() => { seedDemoData(); refresh() }}
+            onSeed={() => { seedDemoData(school.code); refresh() }}
           />
         ) : (
           <div className="space-y-4">
@@ -196,8 +203,8 @@ export default function TrackerPage() {
                     <ApplicationCard
                       app={app}
                       onEdit={handleEdit}
-                      onDelete={id => { deleteApplication(id); refresh() }}
-                      onUpdate={(id, updates) => { updateApplication(id, updates); refresh() }}
+                      onDelete={id => { deleteApplication(id, school.code); refresh() }}
+                      onUpdate={(id, updates) => { updateApplication(id, updates, school.code); refresh() }}
                     />
                   </Reveal>
                 ))}

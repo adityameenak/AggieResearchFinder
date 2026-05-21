@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
-import { useSchoolPath } from '../SchoolContext'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 import Reveal from '../components/Reveal'
 
 /* ── LinkedIn icon ────────────────────────────────────────── */
@@ -108,7 +108,8 @@ const DEPTS = [
 
 export default function About() {
   const { faculty } = useApp()
-  const tx = useSchoolPath()
+  const school = useSchool()
+  const tx     = useSchoolPath()
 
   return (
     <div className="bg-cream-100">
@@ -124,14 +125,14 @@ export default function About() {
             style={{ opacity: 0, animation: 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s forwards' }}
           >
             Built for Curious{' '}
-            <em className="not-italic text-maroon-700">Aggies</em>
+            <em className="not-italic text-maroon-700">{school.shortName} Students</em>
           </h1>
           <p
             className="text-lg text-stone-600 leading-relaxed max-w-2xl"
             style={{ opacity: 0, animation: 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s forwards' }}
           >
-            ResearchFinder started with a simple frustration: finding a research
-            mentor at Texas A&amp;M should not require clicking through ten separate
+            {school.appName} started with a simple frustration: finding a research
+            mentor at {school.name} should not require clicking through ten separate
             department websites. This tool fixes that.
           </p>
         </div>
@@ -169,7 +170,7 @@ export default function About() {
               About the Builders
             </h2>
             <p className="text-[15px] text-stone-600 leading-relaxed max-w-2xl mb-14">
-              Aggie Research Finder was built to make undergraduate research easier to discover
+              {school.appName} was built to make undergraduate research easier to discover
               and pursue. As students, we saw how difficult it could be to navigate faculty
               pages, understand what different labs actually work on, and confidently reach out
               to professors. We wanted to create a platform that connects students with research
@@ -184,7 +185,7 @@ export default function About() {
               initials="AM"
               name="Aditya Meenakshisundaram"
               role="Chemical Engineering Student, Texas A&M University"
-              bio="Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built Aggie Research Finder to help students discover meaningful research opportunities without the friction and uncertainty that often come with the traditional search process. His goal is to make research exploration clearer, faster, and more accessible for students across campus."
+              bio={`Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built the original Aggie Research Finder to help students discover meaningful research opportunities without the friction and uncertainty that often come with the traditional search process — that work has since expanded into ${school.appName}. His goal is to make research exploration clearer, faster, and more accessible for students across campus.`}
               linkedinUrl="https://www.linkedin.com/in/adityameenakshi/"
               from="left"
               delay={0}
@@ -193,7 +194,7 @@ export default function About() {
               initials="AV"
               name="Arun Vaithianathan"
               role="Chemical Engineering Student, Texas A&M University"
-              bio="Arun is a chemical engineering student with experience in materials research, control systems, and energy entrepreneurship. His work spans graphite synthesis for battery applications, control system design for autonomous systems, and technology commercialization through the TEX-E energy entrepreneurship program. Through Aggie Research Finder, he wanted to simplify how students discover research labs and connect their interests with real-world technical work."
+              bio={`Arun is a chemical engineering student with experience in materials research, control systems, and energy entrepreneurship. His work spans graphite synthesis for battery applications, control system design for autonomous systems, and technology commercialization through the TEX-E energy entrepreneurship program. Through ${school.appName}, he wanted to simplify how students discover research labs and connect their interests with real-world technical work.`}
               linkedinUrl="https://www.linkedin.com/in/akvaithi/"
               from="right"
               delay={100}
@@ -205,7 +206,7 @@ export default function About() {
             <div className="max-w-2xl mx-auto text-center">
               <span className="block w-8 h-px bg-cream-400 mx-auto mb-6" />
               <p className="text-[15px] text-stone-600 leading-relaxed">
-                At its core, Aggie Research Finder is about lowering the barrier to entry.
+                At its core, {school.appName} is about lowering the barrier to entry.
                 We built it to help students move from curiosity to action — and make it
                 easier for more people to find research they are genuinely excited about.
               </p>
@@ -228,7 +229,7 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-[15px] text-stone-600 leading-relaxed">
                 <p>
-                  Each TAMU STEM department maintains its own faculty directory
+                  Each {school.shortName} STEM department maintains its own faculty directory
                   with its own format, its own URL structure, and its own level of
                   detail. Some have rich research summaries; others have barely a title.
                 </p>
@@ -238,8 +239,8 @@ export default function About() {
                   search tools are generic. Google is noisy.
                 </p>
                 <p>
-                  ResearchFinder normalises{' '}
-                  <span className="font-semibold text-stone-800">{faculty.length || 553}</span>
+                  {school.appName} normalises{' '}
+                  <span className="font-semibold text-stone-800">{faculty.length || 0}</span>
                   {' '}profiles into a single searchable index ranked by research-area relevance.
                 </p>
               </div>
@@ -282,7 +283,7 @@ export default function About() {
               20 departments, one search
             </h2>
             <p className="text-[15px] text-stone-500 mb-10">
-              Engineering, science, and applied STEM departments at TAMU — all indexed.
+              Engineering, science, and applied STEM departments at {school.shortName} — all indexed.
             </p>
           </Reveal>
 
@@ -323,7 +324,7 @@ export default function About() {
               },
               {
                 title: 'Not affiliated',
-                body: 'This is an independent student project and is not endorsed by or affiliated with Texas A&M University.',
+                body: `This is an independent student project and is not endorsed by or affiliated with ${school.name}.`,
               },
             ].map(({ title, body }, i) => (
               <Reveal key={title} delay={i * 80}>
@@ -340,14 +341,13 @@ export default function About() {
             <p className="text-sm text-stone-500 mt-8 leading-relaxed">
               For authoritative faculty information, visit the official{' '}
               <a
-                href="https://engineering.tamu.edu"
+                href={school.officialUrl || `https://www.${school.code}.edu`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-maroon-700 hover:underline font-medium"
               >
-                TAMU College of Engineering
-              </a>{' '}
-              website.
+                {school.shortName} website
+              </a>.
             </p>
           </Reveal>
         </div>
@@ -362,7 +362,7 @@ export default function About() {
               Ready to find your research mentor?
             </h2>
             <p className="text-maroon-300 text-[15px] mb-8 leading-relaxed">
-              Search {faculty.length || 553} TAMU Engineering faculty by research interest,
+              Search {faculty.length || 0} {school.shortName} faculty by research interest,
               department, or keyword — in seconds.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

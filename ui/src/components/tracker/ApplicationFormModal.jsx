@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useSchool } from '../../SchoolContext'
 import { STATUSES } from '../../utils/trackerStorage'
 
 const EMPTY = {
@@ -58,6 +59,7 @@ const inputCls = `w-full px-3 py-2 text-sm bg-white border border-stone-200 roun
 
 export default function ApplicationFormModal({ initial = null, prefill = null, onSave, onClose }) {
   const isEdit  = !!initial
+  const school  = useSchool()
   const firstFieldRef = useRef(null)
 
   const [form, setForm] = useState(() => {
@@ -230,7 +232,7 @@ export default function ApplicationFormModal({ initial = null, prefill = null, o
                   type="email"
                   value={form.emailUsed}
                   onChange={e => set('emailUsed', e.target.value)}
-                  placeholder="you@tamu.edu"
+                  placeholder={`you@${school.code}.edu`}
                   className={inputCls}
                 />
               </Field>
@@ -242,7 +244,7 @@ export default function ApplicationFormModal({ initial = null, prefill = null, o
                 type="url"
                 value={form.sourceLink}
                 onChange={e => set('sourceLink', e.target.value)}
-                placeholder="https://engineering.tamu.edu/…"
+                placeholder={`https://${school.code}.edu/…`}
                 className={inputCls}
               />
             </Field>

@@ -21,6 +21,21 @@ export default {
           900: '#2a0000',
           950: '#150000',
         },
+        // Rice University blue (#00205B). Used on the school picker today;
+        // full per-school theming is tracked separately.
+        'rice-blue': {
+          50:  '#eef3fb',
+          100: '#d6e1f3',
+          200: '#a7bee4',
+          300: '#7197d2',
+          400: '#3f6fbb',
+          500: '#1f4a96',
+          600: '#0e336f',
+          700: '#00205B',
+          800: '#001844',
+          900: '#000f2c',
+          950: '#000817',
+        },
         cream: {
           50:  '#FFFDF9',
           100: '#FBF7EF',

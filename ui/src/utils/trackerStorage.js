@@ -4,10 +4,17 @@
  * the body of each exported function with an API call and keep the
  * same signatures — no component changes required.
  *
- * localStorage key: 'tamu_applications'
+ * localStorage keys are per-school: `<schoolCode>_applications`.
+ * Existing pre-multi-uni data lived under 'tamu_applications', which
+ * coincidentally matches the namespace for the TAMU school, so users
+ * don't lose tracked applications when this code lands.
  * ──────────────────────────────────────────────────────────────── */
 
-export const STORAGE_KEY = 'tamu_applications'
+const DEFAULT_SCHOOL = 'tamu'
+
+export function storageKey(schoolCode = DEFAULT_SCHOOL) {
+  return `${schoolCode}_applications`
+}
 
 /** All valid application statuses — edit here to add / rename */
 export const STATUSES = [
@@ -40,22 +47,22 @@ export function statusConfig(status) {
 
 /* ── CRUD ─────────────────────────────────────────────────────── */
 
-export function getApplications() {
+export function getApplications(schoolCode = DEFAULT_SCHOOL) {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(storageKey(schoolCode))
     return raw ? JSON.parse(raw) : []
   } catch {
     return []
   }
 }
 
-export function saveApplications(apps) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(apps))
+export function saveApplications(apps, schoolCode = DEFAULT_SCHOOL) {
+  localStorage.setItem(storageKey(schoolCode), JSON.stringify(apps))
 }
 
 /** Create a new application. Returns the created record. */
-export function createApplication(fields) {
-  const apps = getApplications()
+export function createApplication(fields, schoolCode = DEFAULT_SCHOOL) {
+  const apps = getApplications(schoolCode)
   const now  = new Date().toISOString()
   const app  = {
     professorName: '',
@@ -75,24 +82,24 @@ export function createApplication(fields) {
     lastUpdated: now,
   }
   apps.unshift(app)
-  saveApplications(apps)
+  saveApplications(apps, schoolCode)
   return app
 }
 
 /** Update fields on an existing application. Returns the updated record or null. */
-export function updateApplication(id, updates) {
-  const apps = getApplications()
+export function updateApplication(id, updates, schoolCode = DEFAULT_SCHOOL) {
+  const apps = getApplications(schoolCode)
   const idx  = apps.findIndex(a => a.id === id)
   if (idx === -1) return null
   const updated  = { ...apps[idx], ...updates, lastUpdated: new Date().toISOString() }
   apps[idx]      = updated
-  saveApplications(apps)
+  saveApplications(apps, schoolCode)
   return updated
 }
 
 /** Delete an application by id. */
-export function deleteApplication(id) {
-  saveApplications(getApplications().filter(a => a.id !== id))
+export function deleteApplication(id, schoolCode = DEFAULT_SCHOOL) {
+  saveApplications(getApplications(schoolCode).filter(a => a.id !== id), schoolCode)
 }
 
 /* ── Export ───────────────────────────────────────────────────── */
@@ -123,7 +130,7 @@ export function exportToCSV(apps) {
 
 /* ── Demo seed data ───────────────────────────────────────────── */
 
-export function seedDemoData() {
+export function seedDemoData(schoolCode = DEFAULT_SCHOOL) {
   const offset = days => {
     const d = new Date()
     d.setDate(d.getDate() + days)
@@ -141,7 +148,7 @@ export function seedDemoData() {
       status:        'Applied',
       dateApplied:   offset(-12),
       followUpDate:  offset(2),
-      emailUsed:     'student@tamu.edu',
+      emailUsed:     `student@${schoolCode}.edu`,
       notes:         'Sent initial email. Professor mentioned she has openings for motivated undergrads this fall. Mentioned her recent ICRA paper in my email.',
       sourceLink:    '',
       pinned:        true,
@@ -156,7 +163,7 @@ export function seedDemoData() {
       status:        'Interview Scheduled',
       dateApplied:   offset(-20),
       followUpDate:  offset(5),
-      emailUsed:     'student@tamu.edu',
+      emailUsed:     `student@${schoolCode}.edu`,
       notes:         'Interview scheduled for next Thursday via Zoom at 2pm. Prepare questions about the lab funding and project scope.',
       sourceLink:    '',
       pinned:        false,
@@ -171,7 +178,7 @@ export function seedDemoData() {
       status:        'Follow Up Sent',
       dateApplied:   offset(-30),
       followUpDate:  offset(-2),
-      emailUsed:     'student@tamu.edu',
+      emailUsed:     `student@${schoolCode}.edu`,
       notes:         'No response after 2 weeks. Sent a polite follow-up email on 3/5.',
       sourceLink:    '',
       pinned:        false,
@@ -201,14 +208,14 @@ export function seedDemoData() {
       status:        'Rejected',
       dateApplied:   offset(-45),
       followUpDate:  '',
-      emailUsed:     'student@tamu.edu',
+      emailUsed:     `student@${schoolCode}.edu`,
       notes:         'Received a kind rejection. Lab is full for this semester. She suggested applying again in spring.',
       sourceLink:    '',
       pinned:        false,
       lastUpdated:   ts(10),
     },
   ]
-  saveApplications(demos)
+  saveApplications(demos, schoolCode)
   return demos
 }
 

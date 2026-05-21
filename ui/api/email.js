@@ -7,7 +7,7 @@ export const config = {
 // ---------------------------------------------------------------------------
 // Template drafts (mock mode)
 // ---------------------------------------------------------------------------
-function templateDraft(prof, resumeProfile, interests, tone) {
+function templateDraft(prof, resumeProfile, interests, tone, schoolName = 'Texas A&M University') {
   const name    = resumeProfile?.name    || 'Student'
   const major   = resumeProfile?.major   || 'Engineering'
   const year    = resumeProfile?.year    ? `${resumeProfile.year} ` : ''
@@ -16,13 +16,14 @@ function templateDraft(prof, resumeProfile, interests, tone) {
   const iSnip   = (interests || '').slice(0, 120)
   const profName = prof.name || 'Professor'
   const subject  = `Research Opportunity Inquiry — ${name}`
+  const school   = schoolName
 
   const bodies = {
-    concise: `Dear Prof. ${profName},\n\nI am ${name}, a ${year}${major} student at Texas A&M. Your research on ${snippet}… resonates with my interest in ${iSnip}.\n\nI would love to learn about opportunities to contribute to your lab. I have experience with ${skills} and have attached my resume.\n\nWould you be open to a brief meeting?\n\nBest regards,\n${name}\nTexas A&M University`,
+    concise: `Dear Prof. ${profName},\n\nI am ${name}, a ${year}${major} student at ${school}. Your research on ${snippet}… resonates with my interest in ${iSnip}.\n\nI would love to learn about opportunities to contribute to your lab. I have experience with ${skills} and have attached my resume.\n\nWould you be open to a brief meeting?\n\nBest regards,\n${name}\n${school}`,
 
-    warm: `Dear Prof. ${profName},\n\nHope this message finds you well! My name is ${name} and I'm a ${year}${major} student at Texas A&M. I came across your research on ${snippet}… and found it genuinely exciting — it connects closely with my interest in ${iSnip}.\n\nI'd love to learn more about your work and whether there's any way I could contribute. I have some background in ${skills} and have attached my resume.\n\nThanks so much for taking the time to read this!\n\nWarm regards,\n${name}\nTexas A&M University`,
+    warm: `Dear Prof. ${profName},\n\nHope this message finds you well! My name is ${name} and I'm a ${year}${major} student at ${school}. I came across your research on ${snippet}… and found it genuinely exciting — it connects closely with my interest in ${iSnip}.\n\nI'd love to learn more about your work and whether there's any way I could contribute. I have some background in ${skills} and have attached my resume.\n\nThanks so much for taking the time to read this!\n\nWarm regards,\n${name}\n${school}`,
 
-    professional: `Dear Prof. ${profName},\n\nMy name is ${name}, and I am a ${year}${major} student at Texas A&M University. I have been exploring research opportunities in ${iSnip} and was particularly drawn to your work on ${snippet}…\n\nI am writing to inquire whether there are any openings in your research group. My background includes experience with ${skills}, and I am committed to contributing meaningfully to ongoing projects. I have attached my resume for your consideration.\n\nI would welcome the opportunity to discuss your current research at your convenience.\n\nSincerely,\n${name}\nTexas A&M University`,
+    professional: `Dear Prof. ${profName},\n\nMy name is ${name}, and I am a ${year}${major} student at ${school}. I have been exploring research opportunities in ${iSnip} and was particularly drawn to your work on ${snippet}…\n\nI am writing to inquire whether there are any openings in your research group. My background includes experience with ${skills}, and I am committed to contributing meaningfully to ongoing projects. I have attached my resume for your consideration.\n\nI would welcome the opportunity to discuss your current research at your convenience.\n\nSincerely,\n${name}\n${school}`,
   }
 
   return { subject, body: bodies[tone] || bodies.professional, tone }
@@ -44,13 +45,13 @@ Subject: [subject line]
 
 [email body starting with "Dear Prof. [name],"]`
 
-async function llmDraft(prof, resumeProfile, interests, tone, apiKey) {
+async function llmDraft(prof, resumeProfile, interests, tone, apiKey, schoolName = 'Texas A&M University') {
   const { default: Anthropic } = await import('@anthropic-ai/sdk')
   const client = new Anthropic({ apiKey })
   const skills  = (resumeProfile?.technical_skills || []).slice(0, 5).join(', ') || 'various tools'
   const themes  = (resumeProfile?.inferred_themes  || []).slice(0, 4).join(', ') || interests
 
-  const prompt = `Professor: Prof. ${prof.name}\nTitle: ${prof.title || ''}\nDepartment: ${prof.department || ''}\nResearch: ${(prof.research_summary || '').slice(0, 400)}\n\nStudent: ${resumeProfile?.name || 'Student'}, ${resumeProfile?.year || ''} ${resumeProfile?.major || 'Engineering student'}\nInterests: ${interests}\nThemes from resume: ${themes}\nSkills: ${skills}\n\nTone: ${TONES[tone] || TONES.professional}\n\nWrite the email now.`
+  const prompt = `Professor: Prof. ${prof.name}\nTitle: ${prof.title || ''}\nDepartment: ${prof.department || ''}\nResearch: ${(prof.research_summary || '').slice(0, 400)}\n\nStudent: ${resumeProfile?.name || 'Student'}, ${resumeProfile?.year || ''} ${resumeProfile?.major || 'Engineering student'} at ${schoolName}\nInterests: ${interests}\nThemes from resume: ${themes}\nSkills: ${skills}\n\nTone: ${TONES[tone] || TONES.professional}\n\nThe student attends ${schoolName} — sign off with that university name.\n\nWrite the email now.`
 
   const msg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -79,17 +80,18 @@ async function llmDraft(prof, resumeProfile, interests, tone, apiKey) {
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
 
-  const { prof, parsed_profile, interests = '', tone = 'professional' } = req.body
+  const { prof, parsed_profile, interests = '', tone = 'professional',
+          school_name = 'Texas A&M University' } = req.body
   if (!prof) return res.status(400).json({ error: 'Professor data required.' })
 
   const apiKey = process.env.ANTHROPIC_API_KEY
   let draft
   try {
     draft = apiKey
-      ? await llmDraft(prof, parsed_profile, interests, tone, apiKey)
-      : templateDraft(prof, parsed_profile, interests, tone)
+      ? await llmDraft(prof, parsed_profile, interests, tone, apiKey, school_name)
+      : templateDraft(prof, parsed_profile, interests, tone, school_name)
   } catch {
-    draft = templateDraft(prof, parsed_profile, interests, tone)
+    draft = templateDraft(prof, parsed_profile, interests, tone, school_name)
   }
 
   res.json({ ...draft, mock_mode: !apiKey })

@@ -37,15 +37,16 @@ export default function Landing() {
 }
 
 function SchoolCard({ school }) {
+  const c = school.classes
   const inner = (
     <div className={[
       'group relative rounded-xl border bg-white p-6 transition-all duration-200',
       school.available
-        ? 'border-stone-200 hover:border-maroon-400 hover:shadow-md cursor-pointer'
+        ? `border-stone-200 ${c.cardHover} hover:shadow-md cursor-pointer`
         : 'border-stone-200 opacity-60 cursor-not-allowed',
     ].join(' ')}>
       <div className="flex items-baseline gap-1 mb-3">
-        <span className="font-display italic text-maroon-700 text-[22px] font-bold leading-none">
+        <span className={`font-display italic ${c.brandText} text-[22px] font-bold leading-none`}>
           {school.brandPrefix}
         </span>
         <span className="font-sans font-semibold text-stone-800 text-[14px] tracking-tight">
@@ -57,7 +58,7 @@ function SchoolCard({ school }) {
 
       <div className="flex items-center justify-between">
         {school.available ? (
-          <span className="text-xs font-semibold text-maroon-700 group-hover:underline">
+          <span className={`text-xs font-semibold ${c.pillText} group-hover:underline`}>
             Enter →
           </span>
         ) : (

@@ -15,6 +15,16 @@ class DraftRequest(BaseModel):
     tone: Literal["professional", "warm", "concise"] = "professional"
     session_id: Optional[str] = None
     interests: str = ""
+    school_name: Optional[str] = None
+
+
+# Map university code → display name used in email signatures. Kept in sync
+# with ui/src/schools.js. Falls back to a generic phrase if a faculty record
+# has a code that's not listed.
+SCHOOL_NAMES = {
+    "tamu": "Texas A&M University",
+    "rice": "Rice University",
+}
 
 
 @router.post("/draft")
@@ -35,11 +45,19 @@ def draft_email(req: DraftRequest, db: Session = Depends(get_db)):
             if not interests:
                 interests = session.interests or ""
 
+    # School name: caller-supplied > derive from faculty's university > default
+    school_name = (
+        req.school_name
+        or SCHOOL_NAMES.get((prof.get("university") or "").lower())
+        or "Texas A&M University"
+    )
+
     draft = emailer.generate_draft(
         prof=prof,
         resume_profile=resume_profile,
         interests=interests,
         tone=req.tone,
+        school_name=school_name,
     )
 
     return {

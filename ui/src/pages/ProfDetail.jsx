@@ -80,7 +80,7 @@ export default function ProfDetail() {
 
   const prof    = faculty.find(f => f.id === id)
   const saved   = prof ? isSaved(prof.id) : false
-  const tracked = prof ? getApplications().some(a => a.sourceLink === prof.profile_url && a.professorName === prof.name) : false
+  const tracked = prof ? getApplications(school.code).some(a => a.sourceLink === prof.profile_url && a.professorName === prof.name) : false
 
   // Read session from localStorage (set by Discover flow)
   const session = (() => {

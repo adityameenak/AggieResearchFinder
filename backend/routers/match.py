@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -13,6 +14,7 @@ class MatchRequest(BaseModel):
     session_id: str
     interests: str = ""
     top_n: int = 20
+    university: Optional[str] = None
 
 
 @router.post("")
@@ -26,12 +28,16 @@ def run_match(req: MatchRequest, db: Session = Depends(get_db)):
     interests = req.interests.strip() or session.interests or ""
     resume_profile = session.parsed_profile or {}
 
-    # Load faculty
-    faculty_records = db.query(FacultyRecord).all()
+    # Load faculty, optionally scoped to a single university
+    query = db.query(FacultyRecord)
+    if req.university:
+        query = query.filter(FacultyRecord.university == req.university.lower())
+    faculty_records = query.all()
     if not faculty_records:
+        scope = f" for university={req.university}" if req.university else ""
         raise HTTPException(
             status_code=503,
-            detail="No faculty data loaded. Run POST /api/faculty/import first.",
+            detail=f"No faculty data loaded{scope}. Run POST /api/faculty/import first.",
         )
     faculty = [_to_dict(r) for r in faculty_records]
 

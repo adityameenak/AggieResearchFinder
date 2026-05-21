@@ -15,6 +15,16 @@ export const SCHOOLS = {
     brandPrefix: 'TAMU',
     brandSuffix: 'ResearchFinder',
     accent: 'maroon',
+    // Tailwind class strings must be written in full so the JIT compiler
+    // includes them — don't interpolate `bg-${accent}-700`.
+    classes: {
+      brandText:    'text-maroon-700',
+      brandHover:   'group-hover:text-maroon-600',
+      cardHover:    'hover:border-maroon-400',
+      pillBg:       'bg-maroon-700',
+      pillText:     'text-maroon-700',
+    },
+    officialUrl: 'https://engineering.tamu.edu',
     description: 'Discover research labs across Texas A&M, powered by AI matching.',
     available: true,
   },
@@ -25,7 +35,15 @@ export const SCHOOLS = {
     appName: 'Owl Research Finder',
     brandPrefix: 'Owl',
     brandSuffix: 'ResearchFinder',
-    accent: 'maroon', // placeholder until Rice palette lands
+    accent: 'rice-blue',
+    classes: {
+      brandText:    'text-rice-blue-700',
+      brandHover:   'group-hover:text-rice-blue-600',
+      cardHover:    'hover:border-rice-blue-400',
+      pillBg:       'bg-rice-blue-700',
+      pillText:     'text-rice-blue-700',
+    },
+    officialUrl: 'https://www.rice.edu',
     description: 'Discover research labs across Rice, powered by AI matching.',
     available: false, // no data crawled yet — landing page renders a "coming soon" state
   },

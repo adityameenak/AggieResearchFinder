@@ -11,7 +11,7 @@ export default function NavBar() {
   const { pathname } = useLocation()
 
   // Live count of tracked applications — reads localStorage directly so it stays in sync
-  const trackerCount = useMemo(() => getApplications().length, [pathname])
+  const trackerCount = useMemo(() => getApplications(school.code).length, [pathname, school.code])
 
   // Active matching: compare against the school-prefixed path
   function linkCls(rel, exact = false) {

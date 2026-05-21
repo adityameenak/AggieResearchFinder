@@ -53,6 +53,7 @@ def _template_draft(
     resume_profile: dict,
     interests: str,
     tone: str,
+    school_name: str = "Texas A&M University",
 ) -> dict[str, str]:
     """Return a polished template-based draft when LLM is unavailable."""
     student_name = (resume_profile or {}).get("name") or "Student"
@@ -72,7 +73,7 @@ def _template_draft(
         body = f"""\
 Dear Prof. {prof_name},
 
-I am {student_name}, a {year_str}{major} student at Texas A&M. I came across your research on {research_snippet}… and it resonates strongly with my interest in {interests_snippet}.
+I am {student_name}, a {year_str}{major} student at {school_name}. I came across your research on {research_snippet}… and it resonates strongly with my interest in {interests_snippet}.
 
 I would love to know if there are any opportunities to contribute to your lab. I have experience with {skills_str} and am eager to apply it in a research setting. My resume is attached.
 
@@ -80,13 +81,13 @@ Would you be open to a brief meeting to discuss?
 
 Best regards,
 {student_name}
-Texas A&M University"""
+{school_name}"""
 
     elif tone == "warm":
         body = f"""\
 Dear Prof. {prof_name},
 
-I hope this message finds you well! My name is {student_name}, and I'm a {year_str}{major} student at Texas A&M. I recently read about your work on {research_snippet}… and found myself genuinely excited — it connects closely with what I've been exploring in {interests_snippet}.
+I hope this message finds you well! My name is {student_name}, and I'm a {year_str}{major} student at {school_name}. I recently read about your work on {research_snippet}… and found myself genuinely excited — it connects closely with what I've been exploring in {interests_snippet}.
 
 I'd love to learn more about your research and whether there's any way I could contribute. I have some background in {skills_str} and am always looking to grow in a real research environment. I've attached my resume in case it's helpful.
 
@@ -94,13 +95,13 @@ Thanks so much for taking the time to read this — I'd really welcome the chanc
 
 Warm regards,
 {student_name}
-Texas A&M University"""
+{school_name}"""
 
     else:  # professional
         body = f"""\
 Dear Prof. {prof_name},
 
-My name is {student_name}, and I am a {year_str}{major} student at Texas A&M University. I have been exploring research opportunities in {interests_snippet} and came across your work on {research_snippet}…, which I found particularly compelling.
+My name is {student_name}, and I am a {year_str}{major} student at {school_name}. I have been exploring research opportunities in {interests_snippet} and came across your work on {research_snippet}…, which I found particularly compelling.
 
 I am writing to inquire whether there are openings in your research group for an undergraduate/graduate research assistant. My background includes experience with {skills_str}, and I am committed to contributing meaningfully to an ongoing project.
 
@@ -110,7 +111,7 @@ Thank you for your time.
 
 Sincerely,
 {student_name}
-Texas A&M University"""
+{school_name}"""
 
     return {"subject": subject, "body": body, "tone": tone}
 
@@ -120,13 +121,14 @@ def generate_draft(
     resume_profile: dict,
     interests: str,
     tone: str = "professional",
+    school_name: str = "Texas A&M University",
 ) -> dict[str, str]:
     """
     Generate an outreach email draft.
     Returns {"subject": str, "body": str, "tone": str}.
     """
     if llm.MOCK_MODE:
-        return _template_draft(prof, resume_profile, interests, tone)
+        return _template_draft(prof, resume_profile, interests, tone, school_name)
 
     student_name = (resume_profile or {}).get("name") or "the student"
     major = (resume_profile or {}).get("major") or "engineering"
@@ -140,10 +142,11 @@ def generate_draft(
         f"Department: {prof.get('department', '')}\n"
         f"Research summary: {(prof.get('research_summary') or '')[:500]}\n\n"
         f"Student name: {student_name}\n"
-        f"Student year/major: {year} {major}\n"
+        f"Student year/major: {year} {major} at {school_name}\n"
         f"Student stated interests: {interests}\n"
         f"Student inferred themes: {themes}\n"
         f"Student skills: {skills}\n\n"
+        f"The student attends {school_name} — sign off with that university name.\n\n"
         f"{TONE_NOTES.get(tone, TONE_NOTES['professional'])}\n\n"
         "Write the email now."
     )
@@ -155,4 +158,4 @@ def generate_draft(
         return result
     except Exception as exc:
         print(f"[emailer] LLM call failed ({exc}), using template")
-        return _template_draft(prof, resume_profile, interests, tone)
+        return _template_draft(prof, resume_profile, interests, tone, school_name)

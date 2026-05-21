@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSchool } from '../SchoolContext'
 
 const TONES = [
   { id: 'professional', label: 'Professional' },
@@ -21,6 +22,7 @@ function CopyIcon({ done }) {
 
 // session = { parsed_profile, interests } from localStorage
 export default function EmailModal({ prof, session, onClose }) {
+  const school = useSchool()
   const [tone,     setTone]     = useState('professional')
   const [draft,    setDraft]    = useState(null)
   const [bodyEdit, setBodyEdit] = useState('')
@@ -42,6 +44,7 @@ export default function EmailModal({ prof, session, onClose }) {
           parsed_profile: session?.parsed_profile ?? null,
           interests:      session?.interests ?? '',
           tone:           selectedTone,
+          school_name:    school.name,
         }),
       })
       if (!res.ok) {
