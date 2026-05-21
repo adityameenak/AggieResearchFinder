@@ -1,0 +1,56 @@
+# Rice University Faculty Crawler — seed URLs
+# Lines starting with # are ignored.
+#
+# profiles.rice.edu is a single unified directory across all of Rice.
+# It's paginated 0..43 (44 pages of ~30 faculty each → ~1320 records).
+# The crawler will collect every /faculty/<slug> profile from these pages.
+#
+# To run:
+#   python crawl.py --seeds seeds-rice.txt --university rice --output faculty-rice
+# To validate the parser on a small sample first:
+#   python crawl.py --seeds seeds-rice.txt --university rice --output faculty-rice --limit 5
+
+https://profiles.rice.edu/faculty?page=0
+https://profiles.rice.edu/faculty?page=1
+https://profiles.rice.edu/faculty?page=2
+https://profiles.rice.edu/faculty?page=3
+https://profiles.rice.edu/faculty?page=4
+https://profiles.rice.edu/faculty?page=5
+https://profiles.rice.edu/faculty?page=6
+https://profiles.rice.edu/faculty?page=7
+https://profiles.rice.edu/faculty?page=8
+https://profiles.rice.edu/faculty?page=9
+https://profiles.rice.edu/faculty?page=10
+https://profiles.rice.edu/faculty?page=11
+https://profiles.rice.edu/faculty?page=12
+https://profiles.rice.edu/faculty?page=13
+https://profiles.rice.edu/faculty?page=14
+https://profiles.rice.edu/faculty?page=15
+https://profiles.rice.edu/faculty?page=16
+https://profiles.rice.edu/faculty?page=17
+https://profiles.rice.edu/faculty?page=18
+https://profiles.rice.edu/faculty?page=19
+https://profiles.rice.edu/faculty?page=20
+https://profiles.rice.edu/faculty?page=21
+https://profiles.rice.edu/faculty?page=22
+https://profiles.rice.edu/faculty?page=23
+https://profiles.rice.edu/faculty?page=24
+https://profiles.rice.edu/faculty?page=25
+https://profiles.rice.edu/faculty?page=26
+https://profiles.rice.edu/faculty?page=27
+https://profiles.rice.edu/faculty?page=28
+https://profiles.rice.edu/faculty?page=29
+https://profiles.rice.edu/faculty?page=30
+https://profiles.rice.edu/faculty?page=31
+https://profiles.rice.edu/faculty?page=32
+https://profiles.rice.edu/faculty?page=33
+https://profiles.rice.edu/faculty?page=34
+https://profiles.rice.edu/faculty?page=35
+https://profiles.rice.edu/faculty?page=36
+https://profiles.rice.edu/faculty?page=37
+https://profiles.rice.edu/faculty?page=38
+https://profiles.rice.edu/faculty?page=39
+https://profiles.rice.edu/faculty?page=40
+https://profiles.rice.edu/faculty?page=41
+https://profiles.rice.edu/faculty?page=42
+https://profiles.rice.edu/faculty?page=43

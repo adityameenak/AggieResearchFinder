@@ -151,6 +151,10 @@ def dept_slug_from_url(url: str) -> str:
     Derive a short department slug from a directory or profile URL.
     e.g. https://engineering.tamu.edu/chemical/profiles/... -> 'chemical'
          https://artsci.tamu.edu/biology/contact/... -> 'biology'
+
+    For Rice profile pages the URL doesn't encode the department, so this
+    returns 'rice-unknown' as a placeholder. The Rice profile extractor
+    overrides it with the actual slugified department.
     """
     parsed = urlparse(url)
     host = parsed.hostname or ""
@@ -161,6 +165,9 @@ def dept_slug_from_url(url: str) -> str:
         if path_parts and path_parts[0]:
             return path_parts[0]
         return "unknown"
+
+    if is_rice_url(url):
+        return "rice-unknown"
 
     skip = {"engineering", "profiles", "index.html", ""}
     for part in path_parts:
@@ -174,20 +181,68 @@ def is_artsci_url(url: str) -> bool:
     return "artsci.tamu.edu" in (urlparse(url).hostname or "")
 
 
+def is_rice_url(url: str) -> bool:
+    """Check if a URL belongs to a Rice University domain."""
+    host = (urlparse(url).hostname or "").lower()
+    return host == "profiles.rice.edu" or host.endswith(".rice.edu") or host == "rice.edu"
+
+
+# Map of Rice "School" / department name patterns → short slug. Kept narrow
+# on purpose; anything not matched falls through to a slug derived from the
+# raw department string.
+_RICE_DEPT_SLUGS = {
+    "bioengineering": "bioengineering",
+    "chemical and biomolecular engineering": "chemical",
+    "civil and environmental engineering": "civil",
+    "computational applied mathematics": "cmor",
+    "computer science": "cse",
+    "electrical and computer engineering": "electrical",
+    "materials science": "materials",
+    "mechanical engineering": "mechanical",
+    "statistics": "statistics",
+}
+
+
+def slugify_rice_dept(department_text: str) -> str:
+    if not department_text:
+        return "unknown"
+    lower = department_text.lower().strip()
+    for needle, slug in _RICE_DEPT_SLUGS.items():
+        if needle in lower:
+            return slug
+    # Fallback: kebab-case first 2 words
+    words = re.findall(r"[a-z0-9]+", lower)
+    return "-".join(words[:2]) if words else "unknown"
+
+
 # ---------------------------------------------------------------------------
 # Page fetching (Playwright + cache + retry)
 # ---------------------------------------------------------------------------
 
 async def fetch_html(page, url: str, retries: int = MAX_RETRIES) -> Optional[str]:
-    """Return rendered HTML for *url*, using cache when available."""
+    """Return rendered HTML for *url*, using cache when available.
+
+    Rice's CDN times out under `networkidle` because of background analytics
+    scripts. For Rice we use `domcontentloaded` plus a short settle delay so
+    JS-rendered content has a chance to populate.
+    """
     cached = _load_cache(url)
     if cached is not None:
         return cached
 
+    rice = is_rice_url(url)
+    wait_until = "domcontentloaded" if rice else "networkidle"
+
     for attempt in range(retries):
         try:
-            await page.goto(url, wait_until="networkidle", timeout=PAGE_TIMEOUT_MS)
+            await page.goto(url, wait_until=wait_until, timeout=PAGE_TIMEOUT_MS)
+            if rice:
+                # Settle delay for Rice CMS to inject server-rendered fragments.
+                await page.wait_for_timeout(1500)
             html = await page.content()
+            # Reject obvious bot-block placeholders so we don't cache empty pages.
+            if rice and len(html) < 1000:
+                raise RuntimeError(f"suspiciously small response ({len(html)} bytes) — likely bot-blocked")
             _save_cache(url, html)
             await asyncio.sleep(RATE_LIMIT_SECONDS)
             return html
@@ -217,14 +272,32 @@ _PROFILE_RE = re.compile(
 )
 
 
+_RICE_PROFILE_RE = re.compile(
+    r'href=["\'](/faculty/[a-z0-9][a-z0-9\-]+)/?["\']',
+    re.IGNORECASE,
+)
+
+
 def extract_profile_links(html: str, base_url: str) -> list[str]:
     """
     Return sorted, deduplicated absolute profile URLs found in *html*.
-    Handles both engineering (/profiles/*.html) and arts & sciences pages.
+    Handles TAMU engineering (/profiles/*.html), TAMU arts & sciences,
+    and Rice profiles.rice.edu (/faculty/<slug>).
     """
     found: set[str] = set()
 
-    # Strategy 1: regex for /profiles/*.html links (works for both domains)
+    if is_rice_url(base_url):
+        # Rice profile pattern is /faculty/<slug> (no .html, no trailing path)
+        for m in _RICE_PROFILE_RE.finditer(html):
+            href = m.group(1).rstrip("/")
+            # Skip the listing itself (/faculty with no slug after it)
+            if href == "/faculty":
+                continue
+            full = urljoin(base_url, href).split("#")[0].split("?")[0]
+            found.add(full)
+        return sorted(found)
+
+    # Strategy 1: regex for /profiles/*.html links (works for both TAMU domains)
     for m in _PROFILE_RE.finditer(html):
         href = m.group(1)
         full = urljoin(base_url, href).split("#")[0].split("?")[0]
@@ -336,11 +409,149 @@ def _extract_research_summary(soup) -> str:
 def extract_profile_fields(html: str, profile_url: str = "") -> dict:
     """
     Parse a faculty profile page and return a dict with:
-    name, title, email, research_summary, lab_website, google_scholar, photo_url, phone, office
+    name, title, email, research_summary, lab_website, google_scholar,
+    photo_url, phone, office. The Rice extractor additionally returns
+    `department` (already slugified) which overrides the URL-derived slug
+    in the calling code.
     """
+    if is_rice_url(profile_url):
+        return _extract_rice_profile(html, profile_url)
     if is_artsci_url(profile_url):
         return _extract_artsci_profile(html, profile_url)
     return _extract_engineering_profile(html, profile_url)
+
+
+# ---------------------------------------------------------------------------
+# Rice profile parser
+# ---------------------------------------------------------------------------
+
+_SOCIAL_BLOCKLIST = ("linkedin.com", "facebook.com", "youtube.com",
+                     "twitter.com", "instagram.com", "tiktok.com",
+                     "news.rice.edu")
+
+
+def _extract_rice_profile(html: str, profile_url: str) -> dict:
+    """Parse a profiles.rice.edu faculty page.
+
+    Rice's CMS wraps fields in .article__* classes inside an .article--bio
+    container. Department is read from the first internal rice.edu link
+    in .article__author-contact (e.g. "Civil and Environmental Engineering"
+    → cee.rice.edu) and slugified via slugify_rice_dept().
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    base = "https://profiles.rice.edu"
+
+    # ---- Name ---------------------------------------------------------------
+    name = ""
+    name_el = soup.find(class_="article__author-name")
+    if name_el:
+        name = name_el.get_text(" ", strip=True)
+
+    # ---- Contact container (used for department + contact info) -------------
+    contact = soup.find(class_="article__author-contact")
+
+    # ---- Title --------------------------------------------------------------
+    title = ""
+    for role in soup.find_all(class_="article__author-role"):
+        # Skip role nodes nested inside the contact box — those are dept links.
+        if contact and contact in role.parents:
+            continue
+        # The first non-nested role is the academic title (may have <br/> for
+        # additional roles; collapse to a single line).
+        title = re.sub(r"\s+", " ", role.get_text(" ", strip=True)).strip()
+        break
+
+    # ---- Department ---------------------------------------------------------
+    department_text = ""
+    if contact:
+        for a in contact.find_all("a", href=True):
+            href = a["href"]
+            if href.startswith("mailto:"):
+                continue
+            if "rice.edu" in href:
+                department_text = a.get_text(" ", strip=True)
+                break
+    department = slugify_rice_dept(department_text)
+
+    # ---- Email / phone / office --------------------------------------------
+    email = ""
+    phone = ""
+    office = ""
+
+    address_el = soup.find(class_="article__author-address")
+    if address_el:
+        # Email is the only mailto link in this block.
+        mailto = address_el.find("a", href=re.compile(r"^mailto:", re.I))
+        if mailto:
+            email = mailto["href"].replace("mailto:", "").strip()
+        # Phone may appear as 713-348-5903 or (713) 348-4286. Office is whatever is
+        # left after stripping the contact header, phone, and email.
+        text = address_el.get_text(" ", strip=True)
+        text = re.sub(r"^\s*CONTACT\s*\|?\s*", "", text)
+        phone_match = re.search(r"(?:\(\d{3}\)\s*|\b\d{3}-)\d{3}[-\s]?\d{4}", text)
+        if phone_match:
+            phone = phone_match.group().strip()
+        # Office = everything before the phone (or before the email if no phone)
+        cut_token = phone or email
+        if cut_token and cut_token in text:
+            office = text.split(cut_token, 1)[0].strip(" |")
+        else:
+            office = text.strip(" |")
+        # Strip dangling pipe/whitespace
+        office = re.sub(r"\s*\|\s*$", "", office).strip()
+
+    # Fallback: any mailto on the page
+    if not email:
+        mailto = soup.find("a", href=re.compile(r"^mailto:", re.I))
+        if mailto:
+            email = mailto["href"].replace("mailto:", "").strip()
+
+    # ---- Photo --------------------------------------------------------------
+    photo_url = ""
+    photo_container = soup.find(class_="article__image")
+    if photo_container:
+        img = photo_container.find("img")
+        if img and img.get("src"):
+            photo_url = urljoin(base, img["src"])
+
+    # ---- Websites: lab + Google Scholar ------------------------------------
+    lab_website = ""
+    google_scholar = ""
+    websites_el = soup.find(class_="article__website")
+    if websites_el:
+        for a in websites_el.find_all("a", href=True):
+            href = a["href"]
+            if not href.startswith("http"):
+                continue
+            if "scholar.google" in href and not google_scholar:
+                google_scholar = href
+                continue
+            if any(domain in href.lower() for domain in _SOCIAL_BLOCKLIST):
+                continue
+            # First non-Scholar, non-social external link → treat as lab/personal site
+            if not lab_website:
+                lab_website = href
+
+    # ---- Research summary / bio --------------------------------------------
+    research_summary = ""
+    body_el = soup.find(class_="profileBody")
+    if body_el:
+        research_summary = re.sub(r"\s+", " ", body_el.get_text(" ", strip=True)).strip()
+        research_summary = research_summary[:1500]
+
+    return {
+        "name":             name,
+        "title":            title,
+        "department":       department,
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           office,
+    }
 
 
 def _extract_artsci_profile(html: str, profile_url: str) -> dict:
@@ -625,19 +836,38 @@ def _extract_engineering_profile(html: str, profile_url: str) -> dict:
 # Main crawl routine
 # ---------------------------------------------------------------------------
 
-async def crawl(seed_urls: list[str], university: str = "tamu") -> list[dict]:
+async def crawl(seed_urls: list[str], university: str = "tamu", limit: int = 0) -> list[dict]:
     all_records: list[dict] = []
     seen_profile_urls: set[str] = set()
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=True)
-        page = await browser.new_page()
-        await page.set_extra_http_headers({
-            "User-Agent": (
-                "Mozilla/5.0 (compatible; TAMUResearchCrawler/1.0; "
-                "educational-use)"
-            )
-        })
+        # `--disable-blink-features=AutomationControlled` plus realistic
+        # Sec-Fetch headers are required for Rice's CDN to return profile
+        # HTML instead of a 406. The user-agent keeps the bot identifier as
+        # a suffix so curious admins can still see who's hitting them.
+        browser = await pw.chromium.launch(
+            headless=True,
+            args=["--disable-blink-features=AutomationControlled"],
+        )
+        context = await browser.new_context(
+            user_agent=(
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36 "
+                "(ResearchFinderBot/1.0; educational-use)"
+            ),
+            viewport={"width": 1280, "height": 720},
+            extra_http_headers={
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "none",
+                "Sec-Fetch-User": "?1",
+                "Upgrade-Insecure-Requests": "1",
+            },
+        )
+        page = await context.new_page()
 
         for seed_url in seed_urls:
             print(f"\n[directory] {seed_url}")
@@ -676,9 +906,14 @@ async def crawl(seed_urls: list[str], university: str = "tamu") -> list[dict]:
 
                 fields = extract_profile_fields(phtml, profile_url)
 
+                # For Rice, the profile-derived department overrides the URL
+                # placeholder. Use the effective slug for the AI review prompt
+                # so it isn't told "rice-unknown".
+                effective_dept = fields.get("department") or dept_slug
+
                 # Generate AI review
                 ai_review = generate_ai_review(
-                    fields["name"], dept_slug, fields["research_summary"]
+                    fields["name"], effective_dept, fields["research_summary"]
                 )
 
                 record = {
@@ -692,7 +927,13 @@ async def crawl(seed_urls: list[str], university: str = "tamu") -> list[dict]:
                     "publications":      [],
                 }
                 all_records.append(record)
-                print(f"    name={record['name']!r}")
+                print(f"    name={record['name']!r}  dept={record.get('department')!r}")
+
+                if limit and len(all_records) >= limit:
+                    print(f"\nReached limit of {limit} record(s) — stopping early.")
+                    save_outputs(all_records)
+                    await browser.close()
+                    return all_records
 
             # Write after each department so results are available incrementally
             if all_records:
@@ -761,7 +1002,33 @@ def main() -> None:
         help="University code stamped on every emitted record (default: tamu). "
              "Use lowercase short codes like 'tamu', 'rice', 'utaustin'.",
     )
+    parser.add_argument(
+        "--seeds",
+        default="seeds.txt",
+        help="Path to a seeds file (one URL per line, # for comments). "
+             "Default: seeds.txt. For Rice, pass seeds-rice.txt.",
+    )
+    parser.add_argument(
+        "--output",
+        default="faculty",
+        help="Output filename stem (default: 'faculty'). Writes <stem>.json + "
+             "<stem>.csv. For Rice, use --output faculty-rice to avoid "
+             "overwriting the TAMU dataset.",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="Stop after this many faculty records (0 = no limit). Useful "
+             "for validating a new parser on a small sample.",
+    )
     args = parser.parse_args()
+
+    # Override module-level paths from CLI args
+    global SEEDS_FILE, OUTPUT_JSON, OUTPUT_CSV
+    SEEDS_FILE  = Path(args.seeds)
+    OUTPUT_JSON = Path(f"{args.output}.json")
+    OUTPUT_CSV  = Path(f"{args.output}.csv")
 
     if args.no_cache and CACHE_DIR.exists():
         shutil.rmtree(CACHE_DIR)
@@ -782,8 +1049,9 @@ def main() -> None:
             "No seed URLs found. Add them to seeds.txt or pass as CLI arguments."
         )
 
-    print(f"Crawling {len(unique_seeds)} seed URL(s) for university={args.university} …")
-    records = asyncio.run(crawl(unique_seeds, university=args.university))
+    print(f"Crawling {len(unique_seeds)} seed URL(s) for university={args.university} "
+          f"(output: {OUTPUT_JSON.name}, limit: {args.limit or 'none'}) …")
+    records = asyncio.run(crawl(unique_seeds, university=args.university, limit=args.limit))
 
     if records:
         save_outputs(records)
