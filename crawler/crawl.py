@@ -625,7 +625,7 @@ def _extract_engineering_profile(html: str, profile_url: str) -> dict:
 # Main crawl routine
 # ---------------------------------------------------------------------------
 
-async def crawl(seed_urls: list[str]) -> list[dict]:
+async def crawl(seed_urls: list[str], university: str = "tamu") -> list[dict]:
     all_records: list[dict] = []
     seen_profile_urls: set[str] = set()
 
@@ -683,6 +683,7 @@ async def crawl(seed_urls: list[str]) -> list[dict]:
 
                 record = {
                     "id":          hashlib.md5(profile_url.encode()).hexdigest()[:12],
+                    "university":  university,
                     "profile_url": profile_url,
                     "department":  dept_slug,
                     **fields,
@@ -754,6 +755,12 @@ def main() -> None:
         action="store_true",
         help="Delete disk cache and re-download all pages",
     )
+    parser.add_argument(
+        "--university",
+        default="tamu",
+        help="University code stamped on every emitted record (default: tamu). "
+             "Use lowercase short codes like 'tamu', 'rice', 'utaustin'.",
+    )
     args = parser.parse_args()
 
     if args.no_cache and CACHE_DIR.exists():
@@ -775,8 +782,8 @@ def main() -> None:
             "No seed URLs found. Add them to seeds.txt or pass as CLI arguments."
         )
 
-    print(f"Crawling {len(unique_seeds)} seed URL(s) …")
-    records = asyncio.run(crawl(unique_seeds))
+    print(f"Crawling {len(unique_seeds)} seed URL(s) for university={args.university} …")
+    records = asyncio.run(crawl(unique_seeds, university=args.university))
 
     if records:
         save_outputs(records)

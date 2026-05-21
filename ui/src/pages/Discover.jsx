@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 
 const STEPS = [
   'Reading file…',
@@ -114,6 +115,9 @@ function ProcessingOverlay({ step }) {
 export default function Discover() {
   const navigate = useNavigate()
   const { topicChips } = useApp()
+  const school     = useSchool()
+  const tx         = useSchoolPath()
+  const sessionKey = `${school.code}_session`
   const [file,      setFile]      = useState(null)
   const [interests, setInterests] = useState('')
   const [selectedChips, setSelectedChips] = useState(new Set())
@@ -168,18 +172,18 @@ export default function Discover() {
       const { parsed_profile } = await res.json()
 
       setStep(3)
-      localStorage.setItem('tamu_session', JSON.stringify({
+      localStorage.setItem(sessionKey, JSON.stringify({
         parsed_profile,
         interests: mergedInterests(),
         filename: file.name,
       }))
 
-      navigate('/match')
+      navigate(tx('/match'))
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
     }
-  }, [file, interests, selectedChips, navigate])
+  }, [file, interests, selectedChips, navigate, sessionKey, tx])
 
   return (
     <div className="min-h-[calc(100vh-54px)] bg-cream-100 flex items-start justify-center

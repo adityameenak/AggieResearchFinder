@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 import { deptLabel } from '../utils/search'
 import EmailModal from '../components/EmailModal'
 import { getApplications } from '../utils/trackerStorage'
@@ -72,6 +73,9 @@ export default function ProfDetail() {
   const { id }                           = useParams()
   const { faculty, toggleSave, isSaved } = useApp()
   const navigate                         = useNavigate()
+  const school                           = useSchool()
+  const tx                               = useSchoolPath()
+  const sessionKey                       = `${school.code}_session`
   const [emailOpen, setEmailOpen]        = useState(false)
 
   const prof    = faculty.find(f => f.id === id)
@@ -80,11 +84,11 @@ export default function ProfDetail() {
 
   // Read session from localStorage (set by Discover flow)
   const session = (() => {
-    try { return JSON.parse(localStorage.getItem('tamu_session') || 'null') } catch { return null }
+    try { return JSON.parse(localStorage.getItem(sessionKey) || 'null') } catch { return null }
   })()
 
   function handleTrack() {
-    navigate('/tracker', {
+    navigate(tx('/tracker'), {
       state: {
         prefill: {
           professorName: prof.name || '',
@@ -120,7 +124,7 @@ export default function ProfDetail() {
           could not be found.
         </p>
         <Link
-          to="/search"
+          to={tx('/search')}
           className="inline-flex items-center gap-1.5 text-sm px-6 py-2.5
                      bg-maroon-700 text-cream-100 rounded-xl hover:bg-maroon-600
                      transition-colors font-medium"
@@ -313,7 +317,7 @@ export default function ProfDetail() {
               </button>
               {!session && (
                 <p className="text-[10px] text-maroon-400 mt-2 text-center leading-relaxed">
-                  <Link to="/discover" className="underline underline-offset-2 hover:text-maroon-300">
+                  <Link to={tx('/discover')} className="underline underline-offset-2 hover:text-maroon-300">
                     Upload your resume
                   </Link>{' '}
                   for a personalized draft.
@@ -443,7 +447,7 @@ export default function ProfDetail() {
             </div>
 
             <Link
-              to="/search"
+              to={tx('/search')}
               className="flex items-center justify-center gap-1.5 w-full py-2.5
                          rounded-xl border border-cream-300 text-sm text-stone-500
                          hover:bg-cream-200 hover:text-stone-700 transition-colors

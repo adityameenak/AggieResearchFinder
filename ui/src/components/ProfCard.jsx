@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchoolPath } from '../SchoolContext'
 import { highlightSegments, deptLabel } from '../utils/search'
 
 /* ── Highlight renderer ───────────────────────────────────── */
@@ -93,12 +94,13 @@ function ExtIcon() {
 export default function ProfCard({ prof, tokens = [] }) {
   const { toggleSave, isSaved } = useApp()
   const navigate = useNavigate()
+  const tx       = useSchoolPath()
   const saved    = isSaved(prof.id)
   const snippet  = (prof.research_summary ?? '').slice(0, 300)
 
   function handleTrack(e) {
     e.preventDefault()
-    navigate('/tracker', {
+    navigate(tx('/tracker'), {
       state: {
         prefill: {
           professorName: prof.name || '',
@@ -156,7 +158,7 @@ export default function ProfCard({ prof, tokens = [] }) {
         )}
         <div className="min-w-0">
           <Link
-            to={`/prof/${prof.id}`}
+            to={tx(`/prof/${prof.id}`)}
             className="font-display font-bold text-stone-900 text-[17px] leading-snug
                        hover:text-maroon-700 transition-colors duration-150 block mb-1.5"
           >
@@ -247,7 +249,7 @@ export default function ProfCard({ prof, tokens = [] }) {
           Track
         </button>
         <Link
-          to={`/prof/${prof.id}`}
+          to={tx(`/prof/${prof.id}`)}
           className="text-[11px] px-3 py-1.5 rounded-lg text-stone-400
                      hover:text-maroon-700 hover:bg-cream-200
                      transition-colors font-medium ml-auto"

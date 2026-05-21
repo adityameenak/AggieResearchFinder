@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchoolPath } from '../SchoolContext'
 import ProfCard from '../components/ProfCard'
 
 export default function Saved() {
   const { faculty, saved, clearSaved } = useApp()
+  const tx = useSchoolPath()
   const savedProfs = faculty.filter(f => saved.includes(f.id))
 
   return (
@@ -86,7 +88,7 @@ export default function Saved() {
             icon on any card. They'll appear here for quick reference.
           </p>
           <Link
-            to="/search"
+            to={tx('/search')}
             className="inline-flex items-center gap-2 px-7 py-3 bg-maroon-700
                        hover:bg-maroon-600 text-cream-100 text-sm font-semibold
                        rounded-xl transition-colors shadow-sm shadow-maroon-950/20"

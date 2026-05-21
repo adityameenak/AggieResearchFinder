@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
-from fastapi import APIRouter, Depends, HTTPException
+from typing import Optional
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from db.database import get_db
 from db.models import FacultyRecord
@@ -14,9 +15,14 @@ FACULTY_JSON_CANDIDATES = [
 
 
 @router.get("")
-def list_faculty(db: Session = Depends(get_db)):
-    records = db.query(FacultyRecord).all()
-    return [_to_dict(r) for r in records]
+def list_faculty(
+    university: Optional[str] = Query(None, description="Filter by university code, e.g. 'tamu' or 'rice'"),
+    db: Session = Depends(get_db),
+):
+    query = db.query(FacultyRecord)
+    if university:
+        query = query.filter(FacultyRecord.university == university.lower())
+    return [_to_dict(r) for r in query.all()]
 
 
 @router.get("/{faculty_id}")
@@ -66,6 +72,7 @@ def import_faculty(db: Session = Depends(get_db)):
 def _to_dict(r: FacultyRecord) -> dict:
     return {
         "id": r.id,
+        "university": r.university,
         "name": r.name,
         "title": r.title,
         "department": r.department,

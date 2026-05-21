@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 
 const NAV = [
   { to: '/',         label: 'Home' },
@@ -9,6 +10,9 @@ const NAV = [
 ]
 
 export default function Footer() {
+  const school = useSchool()
+  const tx     = useSchoolPath()
+
   return (
     <footer className="bg-stone-950 border-t border-stone-800">
       {/* Maroon accent line */}
@@ -19,18 +23,18 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <Link to="/" className="inline-flex items-baseline gap-0.5 mb-4 group select-none">
+            <Link to={tx('/')} className="inline-flex items-baseline gap-0.5 mb-4 group select-none">
               <span className="font-display italic text-maroon-400 text-[20px] font-bold
                                leading-none group-hover:text-maroon-300 transition-colors">
-                TAMU
+                {school.brandPrefix}
               </span>
               <span className="font-sans font-semibold text-cream-300 text-[14px]
                                tracking-tight group-hover:text-cream-200 transition-colors">
-                ResearchFinder
+                {school.brandSuffix}
               </span>
             </Link>
             <p className="text-xs text-stone-500 leading-relaxed max-w-[220px]">
-              Helping Texas A&amp;M students discover engineering research
+              Helping {school.name} students discover research
               opportunities across all departments, powered by AI matching
               and personalized outreach drafting.
             </p>
@@ -46,7 +50,7 @@ export default function Footer() {
               {NAV.map(({ to, label }) => (
                 <li key={to}>
                   <Link
-                    to={to}
+                    to={tx(to)}
                     className="text-sm text-stone-400 hover:text-cream-200
                                transition-colors duration-150"
                   >
@@ -54,6 +58,15 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/"
+                  className="text-sm text-stone-500 hover:text-cream-200
+                             transition-colors duration-150"
+                >
+                  Switch university ↗
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -64,10 +77,10 @@ export default function Footer() {
               Data &amp; Attribution
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
-              Faculty profiles sourced from the Texas A&amp;M College of
-              Engineering public directory. AI matching and email drafts
-              are generated automatically — always review before sending.
-              Not affiliated with or endorsed by Texas A&amp;M University.
+              Faculty profiles sourced from the {school.name} public
+              directory. AI matching and email drafts are generated
+              automatically — always review before sending. Not affiliated
+              with or endorsed by {school.name}.
             </p>
           </div>
         </div>
@@ -75,8 +88,8 @@ export default function Footer() {
         <div className="border-t border-stone-800 pt-7 flex flex-col sm:flex-row
                         items-start sm:items-center justify-between gap-3
                         text-xs text-stone-600">
-          <span>&copy; {new Date().getFullYear()} TAMUResearchFinder</span>
-          <span>Not affiliated with Texas A&amp;M University</span>
+          <span>&copy; {new Date().getFullYear()} {school.appName}</span>
+          <span>Not affiliated with {school.name}</span>
         </div>
       </div>
     </footer>

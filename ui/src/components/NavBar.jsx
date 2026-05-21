@@ -1,19 +1,24 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 import { getApplications } from '../utils/trackerStorage'
 import { useMemo } from 'react'
 
 export default function NavBar() {
-  const { saved } = useApp()
+  const { saved }   = useApp()
+  const school      = useSchool()
+  const tx          = useSchoolPath()
   const { pathname } = useLocation()
 
   // Live count of tracked applications — reads localStorage directly so it stays in sync
   const trackerCount = useMemo(() => getApplications().length, [pathname])
 
-  function linkCls(path, exact = false) {
+  // Active matching: compare against the school-prefixed path
+  function linkCls(rel, exact = false) {
+    const full = tx(rel)
     const active = exact
-      ? pathname === path
-      : pathname === path || pathname.startsWith(path + '/')
+      ? pathname === full
+      : pathname === full || pathname.startsWith(full + '/')
     return [
       'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
       active
@@ -23,9 +28,9 @@ export default function NavBar() {
   }
 
   const searchActive =
-    pathname === '/search' || pathname.startsWith('/prof')
+    pathname === tx('/search') || pathname.startsWith(tx('/prof'))
   const discoverActive =
-    pathname === '/discover' || pathname === '/match'
+    pathname === tx('/discover') || pathname === tx('/match')
 
   return (
     <nav className="relative bg-cream-50/95 backdrop-blur-sm border-b border-cream-300 sticky top-0 z-50">
@@ -34,22 +39,22 @@ export default function NavBar() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[54px] flex items-center justify-between">
         {/* Brand */}
-        <Link to="/" className="flex items-baseline gap-0.5 select-none group">
+        <Link to={tx('/')} className="flex items-baseline gap-0.5 select-none group">
           <span className="font-display italic text-maroon-700 text-[20px] font-bold
                            leading-none group-hover:text-maroon-600 transition-colors">
-            TAMU
+            {school.brandPrefix}
           </span>
           <span className="font-sans font-semibold text-stone-800 text-[14px]
                            tracking-tight group-hover:text-stone-900 transition-colors">
-            ResearchFinder
+            {school.brandSuffix}
           </span>
         </Link>
 
         {/* Links */}
         <div className="flex items-center gap-0.5">
-          <Link to="/" className={linkCls('/', true)}>Home</Link>
+          <Link to={tx('/')} className={linkCls('/', true)}>Home</Link>
           <Link
-            to="/search"
+            to={tx('/search')}
             className={[
               'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
               searchActive ? 'text-maroon-700' : 'text-stone-500 hover:text-stone-900',
@@ -58,7 +63,7 @@ export default function NavBar() {
             Search
           </Link>
           <Link
-            to="/discover"
+            to={tx('/discover')}
             className={[
               'relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-150',
               discoverActive ? 'text-maroon-700' : 'text-stone-500 hover:text-stone-900',
@@ -66,7 +71,7 @@ export default function NavBar() {
           >
             Discover
           </Link>
-          <Link to="/saved" className={linkCls('/saved')}>
+          <Link to={tx('/saved')} className={linkCls('/saved')}>
             Saved
             {saved.length > 0 && (
               <span className="ml-1.5 inline-flex items-center justify-center
@@ -76,7 +81,7 @@ export default function NavBar() {
               </span>
             )}
           </Link>
-          <Link to="/tracker" className={linkCls('/tracker')}>
+          <Link to={tx('/tracker')} className={linkCls('/tracker')}>
             Tracker
             {trackerCount > 0 && (
               <span className="ml-1.5 inline-flex items-center justify-center
@@ -86,11 +91,11 @@ export default function NavBar() {
               </span>
             )}
           </Link>
-          <Link to="/about" className={linkCls('/about')}>About</Link>
+          <Link to={tx('/about')} className={linkCls('/about')}>About</Link>
 
           {/* CTA */}
           <Link
-            to="/discover"
+            to={tx('/discover')}
             className="ml-3 px-4 py-1.5 bg-maroon-700 text-cream-100 text-[13px]
                        font-semibold rounded-lg hover:bg-maroon-600 transition-colors
                        shadow-sm shadow-maroon-900/20"

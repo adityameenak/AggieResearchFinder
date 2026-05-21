@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, Text, Float, Integer, DateTime, JSON
+from sqlalchemy import Column, String, Text, Float, Integer, DateTime, JSON, Index
 from sqlalchemy.sql import func
 from db.database import Base
 
@@ -8,6 +8,7 @@ class FacultyRecord(Base):
     __tablename__ = "faculty"
 
     id = Column(String, primary_key=True)
+    university = Column(String, nullable=False, default="tamu", server_default="tamu", index=True)
     name = Column(String, nullable=False)
     title = Column(String)
     department = Column(String)

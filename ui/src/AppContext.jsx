@@ -1,37 +1,57 @@
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
+import { useSchool } from './SchoolContext'
 import { extractTopicsFromFaculty, loadSearchCounts, saveSearchCounts, mergeTopics } from './utils/topics'
 
 const AppContext = createContext(null)
 
 export function AppProvider({ children }) {
+  const school    = useSchool()
+  const savedKey  = `${school.code}_saved_profs`
+
   const [faculty, setFaculty]   = useState([])
   const [loading, setLoading]   = useState(true)
   const [error,   setError]     = useState(null)
 
-  // Saved IDs persisted to localStorage
+  // Saved IDs persisted to localStorage, per-school namespaced
   const [saved, setSaved] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem('tamu_saved_profs') || '[]')
+      return JSON.parse(localStorage.getItem(savedKey) || '[]')
     } catch {
       return []
     }
   })
 
+  // When school changes, reload the saved set from the new namespace
   useEffect(() => {
+    try {
+      setSaved(JSON.parse(localStorage.getItem(savedKey) || '[]'))
+    } catch {
+      setSaved([])
+    }
+  }, [savedKey])
+
+  useEffect(() => {
+    let cancelled = false
+    setLoading(true)
     fetch('/faculty.json')
       .then(r => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
       })
       .then(data => {
-        setFaculty(Array.isArray(data) ? data : [])
+        if (cancelled) return
+        const filtered = (Array.isArray(data) ? data : [])
+          .filter(f => (f.university || 'tamu').toLowerCase() === school.code)
+        setFaculty(filtered)
         setLoading(false)
       })
       .catch(e => {
+        if (cancelled) return
         setError(e.message)
         setLoading(false)
       })
-  }, [])
+    return () => { cancelled = true }
+  }, [school.code])
 
   // Derived: unique sorted department slugs from loaded data
   const departments = [...new Set(
@@ -66,7 +86,7 @@ export function AppProvider({ children }) {
       const next = prev.includes(id)
         ? prev.filter(x => x !== id)
         : [...prev, id]
-      localStorage.setItem('tamu_saved_profs', JSON.stringify(next))
+      localStorage.setItem(savedKey, JSON.stringify(next))
       return next
     })
   }
@@ -77,7 +97,7 @@ export function AppProvider({ children }) {
 
   function clearSaved() {
     setSaved([])
-    localStorage.removeItem('tamu_saved_profs')
+    localStorage.removeItem(savedKey)
   }
 
   return (

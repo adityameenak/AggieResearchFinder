@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchoolPath } from '../SchoolContext'
 import Reveal from '../components/Reveal'
 
 /* ── Abstract compass / academic seal decoration ─────────── */
@@ -95,6 +96,7 @@ const WHO = [
 /* ── Page ─────────────────────────────────────────────────── */
 export default function Home() {
   const { faculty, departments, loading } = useApp()
+  const tx = useSchoolPath()
 
   return (
     <div className="flex flex-col">
@@ -161,7 +163,7 @@ export default function Home() {
             {/* CTAs */}
             <div className="hero-animate-4 flex flex-col sm:flex-row gap-3">
               <Link
-                to="/discover"
+                to={tx('/discover')}
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5
                            bg-maroon-700 text-cream-100 rounded-xl font-semibold text-sm
                            hover:bg-maroon-600 transition-all duration-200
@@ -175,7 +177,7 @@ export default function Home() {
                 </svg>
               </Link>
               <Link
-                to="/search"
+                to={tx('/search')}
                 className="inline-flex items-center justify-center px-8 py-3.5
                            border border-stone-300 text-stone-700 rounded-xl
                            font-semibold text-sm hover:border-stone-400
@@ -276,7 +278,7 @@ export default function Home() {
           <Reveal from="bottom" delay={300}>
             <div className="text-center mt-12">
               <Link
-                to="/discover"
+                to={tx('/discover')}
                 className="inline-flex items-center gap-2 px-7 py-3 bg-maroon-700
                            text-cream-100 rounded-xl font-semibold text-sm
                            hover:bg-maroon-600 transition-colors shadow-sm"
@@ -405,7 +407,7 @@ export default function Home() {
               Texas A&amp;M Engineering. No account. No forms. Just results.
             </p>
             <Link
-              to="/discover"
+              to={tx('/discover')}
               className="inline-flex items-center gap-2.5 px-9 py-4 bg-cream-100
                          text-maroon-800 rounded-xl font-bold text-sm
                          hover:bg-cream-50 transition-all duration-200

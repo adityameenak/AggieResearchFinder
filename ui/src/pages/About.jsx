@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchoolPath } from '../SchoolContext'
 import Reveal from '../components/Reveal'
 
 /* ── LinkedIn icon ────────────────────────────────────────── */
@@ -107,6 +108,7 @@ const DEPTS = [
 
 export default function About() {
   const { faculty } = useApp()
+  const tx = useSchoolPath()
 
   return (
     <div className="bg-cream-100">
@@ -365,7 +367,7 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
-                to="/search"
+                to={tx('/search')}
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-cream-100
                            hover:bg-white text-maroon-800 text-sm font-semibold
                            rounded-xl transition-colors shadow-lg shadow-maroon-950/30"
@@ -373,7 +375,7 @@ export default function About() {
                 Search Faculty →
               </Link>
               <Link
-                to="/"
+                to={tx('/')}
                 className="inline-flex items-center gap-2 px-8 py-3.5
                            border border-maroon-600 text-maroon-200 text-sm font-semibold
                            rounded-xl hover:bg-maroon-700 transition-colors"

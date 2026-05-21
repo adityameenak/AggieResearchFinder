@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchool, useSchoolPath } from '../SchoolContext'
 import { deptLabel } from '../utils/search'
 import { matchFaculty } from '../utils/matcher'
 import EmailModal from '../components/EmailModal'
@@ -183,20 +184,23 @@ function ResumeCard({ profile, interests, onReset }) {
 export default function Match() {
   const navigate = useNavigate()
   const { faculty, loading: facultyLoading } = useApp()
+  const school     = useSchool()
+  const tx         = useSchoolPath()
+  const sessionKey = `${school.code}_session`
   const [session,   setSession]   = useState(null)
   const [matches,   setMatches]   = useState([])
   const [emailProf, setEmailProf] = useState(null)
 
   useEffect(() => {
-    const raw = localStorage.getItem('tamu_session')
-    if (!raw) { navigate('/discover'); return }
+    const raw = localStorage.getItem(sessionKey)
+    if (!raw) { navigate(tx('/discover')); return }
     try {
       const sess = JSON.parse(raw)
       setSession(sess)
     } catch {
-      navigate('/discover')
+      navigate(tx('/discover'))
     }
-  }, [navigate])
+  }, [navigate, sessionKey, tx])
 
   // Run matching once faculty is loaded and session is ready
   useEffect(() => {
@@ -206,8 +210,8 @@ export default function Match() {
   }, [session, faculty, facultyLoading])
 
   function handleReset() {
-    localStorage.removeItem('tamu_session')
-    navigate('/discover')
+    localStorage.removeItem(sessionKey)
+    navigate(tx('/discover'))
   }
 
   if (facultyLoading || (session && !matches.length && faculty.length === 0)) {
@@ -274,7 +278,7 @@ export default function Match() {
         {matches.length > 0 && (
           <div className="mt-10 text-center border-t border-cream-300 pt-8">
             <p className="text-sm text-stone-500 mb-3">Want to browse all faculty without matching?</p>
-            <Link to="/search"
+            <Link to={tx('/search')}
                   className="inline-flex items-center gap-1.5 text-sm text-maroon-700
                              font-semibold hover:text-maroon-600 transition-colors">
               Go to Faculty Search →
