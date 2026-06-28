@@ -32,16 +32,24 @@ npm run preview                   # preview built bundle
 ```bash
 source venv/bin/activate
 
-# TAMU (default — uses seeds.txt, writes faculty.json)
+# TAMU — HTML scraping via crawl.py (uses seeds.txt, writes faculty.json)
 python crawl.py
 
-# Rice (~1320 profiles, ~45 min)
-python crawl.py --seeds seeds-rice.txt --university rice --output faculty-rice
+# Rice — JSON:API via crawl_rice.py (separate entry point, NOT crawl.py).
+# Pulls the Drupal endpoint, filters to STEM research faculty, ~607 records,
+# runs in ~2 min (plain requests, no Playwright/Chromium).
+python crawl_rice.py --output faculty-rice
+python crawl_rice.py --limit 40 --output /tmp/smoke   # quick validation
+python crawl_rice.py --all                            # disable STEM/Faculty filter
+python crawl_rice.py --keep-emeritus                  # keep emeriti (dropped by default)
 
-# Validate a new parser on 5 records before committing to a long run
-python crawl.py --seeds seeds-<school>.txt --university <code> --output faculty-<code> --limit 5
+# AI research reviews (ai_review) — runs against any faculty file, in place.
+# Needs a local Ollama server (`ollama serve`) + the model pulled.
+python enrich_ollama.py --file faculty-rice.json --model gemma3:4b
 ```
 Output stems are configurable via `--output`. After running per-school crawls, merge their JSON arrays into `ui/public/faculty.json` (see README).
+
+**Two crawler entry points, by design.** TAMU uses `crawl.py` (per-profile HTML scraping driven by `seeds.txt`). Rice uses `crawl_rice.py` because Rice exposes a single paginated Drupal **JSON:API** (`profiles.rice.edu/jsonapi/node/profile`) — structured records, no per-page HTML. Keep them separate; don't fold Rice into `crawl.py`. The `crawl.py --seeds seeds-rice.txt` path and `_extract_rice_profile` are legacy HTML fallbacks and are not how `faculty-rice.json` is produced.
 
 No test suite is configured in any of the three components.
 
@@ -51,7 +59,8 @@ No test suite is configured in any of the three components.
 - Every faculty record carries a `university` field (`tamu`, `rice`, …).
 - The UI is a multi-tenant SPA rooted at `/`: `/` shows a school picker (Landing), `/:schoolCode/*` mounts the per-school app shell.
 - All per-user localStorage (saved profs, in-progress session, application tracker, search counts) is namespaced by school code so a Rice user's data never leaks into the TAMU view (and vice versa).
-- Adding a school = entry in `ui/src/schools.js` + parser in `crawler/crawl.py` + crawl run + merge into `ui/public/faculty.json`.
+- Adding a school = entry in `ui/src/schools.js` + a crawler (extend `crawl.py` for HTML directories, or a `crawl_<school>.py` for a structured API like Rice's) + STEM dept slugs registered in `ui/src/utils/search.js` `DEPT_DISPLAY` + crawl run + optional `ai_review` enrichment + merge into `ui/public/faculty.json`.
+- **Texas-university playbook (the goal is to keep onboarding more):** (1) find the directory/API; if it's a Drupal/JSON:API like Rice, clone `crawl_rice.py` and remap `field_*` names. (2) Census raw departments + a category/role field first, then build a STEM whitelist + role filter so you ship curated research faculty, not the whole HR directory. (3) Confirm `photo_url`/`email`/`research_summary` completeness lands near TAMU's (~100/99/100%) before merging — that bar is what "refined" means here. (4) Run `enrich_ollama.py --file faculty-<code>.json` for reviews. (5) Add dept labels + (optionally) a brand accent palette.
 
 **Per-school UI rendering.** `App.jsx` mounts `<SchoolApp>` for any `/:schoolCode/*` route. `SchoolApp` wraps the existing pages in `SchoolProvider` + `AppProvider` so every page can call `useSchool()` for branding and `useSchoolPath()` for school-prefixed Link/navigate targets. Invalid school codes redirect to `/` via SchoolProvider's guard. **Don't write absolute Links inside per-school pages** — use `useSchoolPath()` (`to={tx('/search')}`) or it'll break Rice's namespace.
 
@@ -65,7 +74,16 @@ No test suite is configured in any of the three components.
 
 **Crawler dispatcher.** `extract_profile_fields(html, url)` routes by URL host: Rice → `_extract_rice_profile`, TAMU artsci → `_extract_artsci_profile`, otherwise → `_extract_engineering_profile`. Each parser returns the same field shape. For Rice, `department` is read from the profile page itself (URL doesn't encode it) and slugified via `slugify_rice_dept()`. The TAMU URL-derived `dept_slug` is overridden by the parser's returned `department` via the `**fields` spread.
 
-**Rice anti-bot guards.** `profiles.rice.edu` returns 406 to plain crawlers. The crawler's Playwright context now sends a Chrome-like UA (with `ResearchFinderBot/1.0` suffix so we're still honest) plus `Sec-Fetch-*` headers, and `fetch_html` uses `domcontentloaded` + a 1.5s settle for Rice URLs (`networkidle` hangs there). If you add another university and see empty HTML or 406s, copy the Rice header set.
+**Rice anti-bot guards.** `profiles.rice.edu` returns **406** to plain crawlers. `crawl_rice.py` defeats this with plain `requests` + a Chrome-like UA (with `ResearchFinderBot/1.0` suffix so we're still honest), `Accept: application/vnd.api+json`, `Referer: https://profiles.rice.edu/`, and `Sec-Fetch-*` headers (see `HEADERS` in the file). **No Playwright/Chromium needed** — an earlier version drove a headless browser before we found the header set that works. If a new school's JSON/HTML comes back empty or 406s, copy this header block first.
+
+**Rice JSON:API field-mapping gotchas** (cost real debugging time — don't relearn them):
+- **Photos require `?include=field_image`.** Without it the `included` array is empty and every `photo_url` silently resolves to `""` (this is why the first Rice ship had 0% photos). The image lives in an inlined `file--file` entity; read `attributes.uri.url` and prefix with `https://profiles.rice.edu`.
+- **`field_image` relationship `data` is a LIST** (`[{...}]`), not a single object. Iterate it.
+- **`field_links` is an ATTRIBUTE, not a relationship.** It's a plain list of Drupal link dicts on `attributes`. Do **not** add it to `include` (the API 400s — `field_links` is "not a valid relationship field name"). That mistake is why `lab_website` was 0%.
+- **Filtering is load-bearing.** The raw endpoint returns ~4,400 records across every Rice unit (admin offices, residential colleges, alumni, emeriti, humanities, business). `crawl_rice.py` keeps only `field_profile_category == "Faculty"` AND a department that maps to a known STEM slug (`STEM_RULES`), and drops emeriti — yielding ~607 research faculty comparable to the curated TAMU set. `--all` / `--keep-emeritus` disable these.
+- **Department names are filthy.** 241 raw variants with stray whitespace, `&` vs `and`, `Department of …` prefixes, and typos (`MSNE`, `Physics of Astronomy`). `stem_slug()` normalizes then substring-matches `STEM_RULES` (ordered: specific phrases before the bare `mathematics` fallback). New Rice STEM slugs (`biosciences`, `earth-environmental`, `systems-synthetic-biology`, `applied-physics`, `cmor`, `kinesiology`) are registered in `ui/src/utils/search.js` `DEPT_DISPLAY` — add a label there or they render as the raw slug.
+
+**ai_review enrichment.** Reviews are generated post-crawl by `enrich_ollama.py` (local Ollama, `--file <faculty json>`), `enrich.py` (Gemini, needs `GEMINI_API_KEY`), or `enrich_local.py` (no-API templates — low quality, the "faculty member in …" text the other two are built to replace). All are re-runnable and only touch records missing a real review. `enrich_ollama.py` takes `--file` so it works per school; point it at `faculty-rice.json`. None of these run without either Ollama up or an API key, so a fresh crawl ships with `ai_review` empty until enriched.
 
 **Matching is interest-first.** `services/matcher.py` weights student-stated interests over resume content (resume contribution is multiplied by 0.35). Fit labels are relative to the top score in the result set, not absolute thresholds — see README "Matching Algorithm" for the exact rules.
 
@@ -87,7 +105,7 @@ Backend deploy entry point is `backend/Procfile` (`uvicorn main:app --host 0.0.0
 ## Gotchas
 
 - `backend/tamurf.db`, `backend/uploads/`, `crawler/venv/`, and `crawler/.cache/` are gitignored — never commit them.
-- The crawler ships a ~4MB `faculty.json` per school in-tree; don't regenerate-and-commit casually. Each Rice crawl re-runs in ~45 minutes.
+- The crawler ships a `faculty[-<code>].json` per school in-tree; don't regenerate-and-commit casually. The Rice JSON:API crawl (`crawl_rice.py`) re-runs in ~2 minutes; `ai_review` enrichment over those records via local Ollama takes much longer (tens of minutes) — run it once and reuse.
 - `ui/public/faculty.json` is the *combined* file the UI fetches and the backend imports on startup. After running per-school crawls, you must merge them into this file (see README quick-start).
 - When adding new internal Links in per-school pages, always use `useSchoolPath()` — absolute paths like `to="/search"` will navigate the user out of the school namespace.
 - localStorage keys follow the pattern `<schoolCode>_<name>`. Don't write to bare `tamu_*` keys; use `${school.code}_*`.

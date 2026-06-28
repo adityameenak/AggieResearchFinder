@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
-Enrich faculty.json with AI-generated research reviews using a local Ollama model.
-Re-runnable: replaces formulaic template reviews and fills missing ones.
+Enrich a faculty JSON file with AI-generated research reviews using a local
+Ollama model. Re-runnable: replaces formulaic template reviews and fills
+missing ones.
+
+Usage:
+  python enrich_ollama.py                      # default: faculty.json (TAMU)
+  python enrich_ollama.py --file faculty-rice.json
+  python enrich_ollama.py --file faculty-rice.json --model gemma3:4b
 """
-import json, sys, time
+import argparse, json, sys, time
 from pathlib import Path
 import requests
 
-FACULTY_JSON = Path(__file__).parent / "faculty.json"
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "gemma3:4b"
 SAVE_EVERY = 25
@@ -41,11 +46,12 @@ def needs_review(rec):
     return False
 
 
-def generate_review(rec):
+def generate_review(rec, model=MODEL):
     """Call Ollama to generate a research review."""
     cleaned = rec.get("research_summary", "").replace("|", ", ").strip()[:1000]
     name = rec["name"]
-    dept = rec.get("department", "")
+    # Humanize the dept slug so the model doesn't echo "systems-synthetic-biology".
+    dept = rec.get("department", "").replace("-", " ")
 
     # Include Scholar interests if available
     interests = rec.get("scholar_interests", [])
@@ -68,7 +74,7 @@ def generate_review(rec):
     try:
         resp = requests.post(
             OLLAMA_URL,
-            json={"model": MODEL, "prompt": prompt, "stream": False},
+            json={"model": model, "prompt": prompt, "stream": False},
             timeout=120,
         )
         resp.raise_for_status()
@@ -83,11 +89,21 @@ def generate_review(rec):
 
 
 def main():
-    if not FACULTY_JSON.exists():
-        print(f"Error: {FACULTY_JSON} not found")
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--file", default="faculty.json",
+                    help="Faculty JSON file to enrich in place (default: faculty.json).")
+    ap.add_argument("--model", default=MODEL, help=f"Ollama model tag (default: {MODEL}).")
+    args = ap.parse_args()
+
+    faculty_json = Path(args.file)
+    if not faculty_json.is_absolute():
+        faculty_json = Path(__file__).parent / faculty_json
+    if not faculty_json.exists():
+        print(f"Error: {faculty_json} not found")
         sys.exit(1)
 
-    data = json.loads(FACULTY_JSON.read_text(encoding="utf-8"))
+    data = json.loads(faculty_json.read_text(encoding="utf-8"))
     candidates = [(i, r) for i, r in enumerate(data) if needs_review(r)]
 
     print(f"Total records: {len(data)}")
@@ -102,7 +118,7 @@ def main():
 
     for idx, (rec_idx, rec) in enumerate(candidates):
         name = rec.get("name", "???")
-        review = generate_review(rec)
+        review = generate_review(rec, args.model)
 
         if review:
             data[rec_idx]["ai_review"] = review
@@ -114,16 +130,16 @@ def main():
 
         # Save progress periodically
         if generated > 0 and generated % SAVE_EVERY == 0:
-            FACULTY_JSON.write_text(
+            faculty_json.write_text(
                 json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
             )
             print(f"  [checkpoint] Saved progress ({generated} reviews so far)")
 
     # Final save
-    FACULTY_JSON.write_text(
+    faculty_json.write_text(
         json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-    print(f"\nDone: {generated} reviews generated, {errors} errors. Saved to {FACULTY_JSON}")
+    print(f"\nDone: {generated} reviews generated, {errors} errors. Saved to {faculty_json}")
 
 
 if __name__ == "__main__":

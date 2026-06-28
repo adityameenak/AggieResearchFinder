@@ -139,6 +139,14 @@ const DEPT_DISPLAY = {
   'geology-geophysics': 'Geology & Geophysics',
   oceanography:         'Oceanography',
   'psychological-brain-sciences': 'Psych. & Brain Sciences',
+  // Rice-specific STEM departments (see crawler/crawl_rice.py STEM_RULES)
+  biosciences:          'BioSciences',
+  bioengineering:       'Bioengineering',
+  'earth-environmental': 'Earth & Environmental',
+  'systems-synthetic-biology': 'Systems & Synthetic Biology',
+  'applied-physics':    'Applied Physics',
+  cmor:                 'Computational & Applied Math',
+  kinesiology:          'Kinesiology',
 }
 
 export function deptLabel(slug) {

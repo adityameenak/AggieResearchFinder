@@ -73,10 +73,16 @@ Rice uses a separate entry point (`crawl_rice.py`) because `profiles.rice.edu` e
 cd crawler
 python -c "
 import json
+# Map each per-school file to its university code. The TAMU faculty.json is not
+# self-tagged, so we backfill 'tamu' here; per-school files that already carry a
+# 'university' field (e.g. faculty-rice.json) keep their own value.
+SOURCES = {'faculty.json': 'tamu', 'faculty-rice.json': 'rice'}
 combined = []
-for path in ['faculty.json', 'faculty-rice.json']:
-    try: combined.extend(json.load(open(path)))
-    except FileNotFoundError: pass
+for path, uni in SOURCES.items():
+    try: recs = json.load(open(path))
+    except FileNotFoundError: continue
+    for r in recs: r.setdefault('university', uni)
+    combined.extend(recs)
 json.dump(combined, open('../ui/public/faculty.json', 'w'), ensure_ascii=False, indent=2)
 print(f'merged {len(combined)} records')
 "
