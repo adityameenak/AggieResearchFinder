@@ -322,7 +322,11 @@ _RICE_PROFILE_RE = re.compile(
 # /people/faculty-directory/<slug>. Capture the path and the trailing slug so
 # we can drop category landing pages that share the prefix.
 _UT_PROFILE_RE = re.compile(
-    r'/people/faculty(?:-directory)?/(?P<slug>[a-z0-9][a-z0-9\-]+)/?',
+    # Three UT person-page shapes across the different dept site themes:
+    #   ECE (Drupal Kit):   /people/faculty/<slug>
+    #   ME (legacy):        /people/faculty-directory/<slug>
+    #   Cockrell WordPress: /person/<slug>   (ae, bme, che, caee, …)
+    r'(?:/people/faculty(?:-directory)?|/person|/faculty-and-staff)/(?P<slug>[a-z0-9][a-z0-9\-]+)/?',
     re.IGNORECASE,
 )
 
@@ -631,13 +635,30 @@ def _extract_rice_profile(html: str, profile_url: str) -> dict:
 
 
 def _extract_ut_profile(html: str, profile_url: str) -> dict:
-    """Parse a UT Austin (Cockrell/UT Drupal Kit) faculty profile page.
+    """Dispatch a UT profile to the right theme parser by subdomain.
 
-    Verified against ece.utexas.edu; the shared UT Drupal Kit theme exposes
-    stable `field--name-field-*` / `views-field-field-*` wrappers. Other UT
-    colleges (CNS) use different markup — extend or special-case as you add
-    their seeds. Returns the standard field shape plus `department` (derived
-    from the subdomain) so it survives the `**fields` spread in crawl().
+    UT departments run three different site themes (no shared structure):
+      - ece.utexas.edu          → UT Drupal Kit   (`field--name-field-*`)
+      - me.utexas.edu           → ME legacy theme (`.facphoto`, `.endowtitle`)
+      - everything else Cockrell → modern WordPress (`.page-header__*`,
+        `.contact__*`), e.g. ae/bme/che/caee/pge
+    All three return the same field shape plus `department` (from the host).
+    """
+    host = (urlparse(profile_url).hostname or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    if host.startswith("ece."):
+        return _extract_ut_drupalkit_profile(html, profile_url)
+    if host.startswith("me."):
+        return _extract_ut_me_profile(html, profile_url)
+    return _extract_ut_cockrell_profile(html, profile_url)
+
+
+def _extract_ut_drupalkit_profile(html: str, profile_url: str) -> dict:
+    """Parse the UT Drupal Kit theme (ece.utexas.edu).
+
+    The theme exposes stable `field--name-field-*` / `views-field-field-*`
+    wrappers; the name lives in `<title>`, not an `<h1>`.
     """
     soup = BeautifulSoup(html, "html.parser")
 
@@ -731,6 +752,156 @@ def _extract_ut_profile(html: str, profile_url: str) -> dict:
         "photo_url":        photo_url,
         "phone":            phone,
         "office":           office,
+    }
+
+
+_UT_EXT_LINK_SKIP = ("utexas.edu", "scholar.google", "facebook.com", "twitter.com",
+                     "x.com", "linkedin.com", "youtube.com", "instagram.com",
+                     "qualtrics.com", "give.", "giving", "pantheonsite.io",
+                     # admin/form/aggregator domains that aren't a lab site
+                     "compliancebridge.com", "secure4.", "researchgate.net",
+                     "orcid.org", "wikipedia.org", "doi.org", "github.com/login",
+                     "maps.google", "goo.gl", "bit.ly")
+
+
+def _extract_ut_cockrell_profile(html: str, profile_url: str) -> dict:
+    """Parse the modern Cockrell WordPress theme (ae/bme/che/caee/pge …).
+
+    Stable block classes: `.page-header__name`, `.position__title`/
+    `.position__description`, `.contact__email|phone_number|building_number`,
+    `.research_interests__content`, plus the portrait in `og:image`.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    def text(sel):
+        el = soup.select_one(sel)
+        return re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip() if el else ""
+
+    name = text(".page-header__name")
+    if not name and soup.title:
+        name = soup.title.get_text(strip=True).split("|")[0].split(" - ")[0].strip()
+    if not name:
+        name = profile_url.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").title()
+
+    title = " | ".join(p for p in (text(".position__title"),
+                                   text(".position__description")) if p)
+
+    email = ""
+    a = soup.select_one(".contact__email a[href^='mailto:']") or \
+        soup.find("a", href=lambda h: h and h.startswith("mailto:"))
+    if a:
+        email = a["href"].replace("mailto:", "").split("?")[0].strip()
+
+    phone = text(".contact__phone_number")
+    office = text(".contact__building_number")
+
+    # Portrait: the WordPress theme reliably sets og:image.
+    photo_url = ""
+    og = soup.find("meta", property="og:image")
+    if og and og.get("content"):
+        photo_url = og["content"].strip()
+
+    # Research summary: research-interests block + any taxonomy research areas.
+    parts = [text(".research_interests__content") or text(".page-header__research-interests")]
+    tax = soup.select_one(".person-taxonomy-listing__listing")
+    if tax:
+        parts.append(re.sub(r"\s+", " ", tax.get_text(" | ", strip=True)).strip(" |"))
+    research_summary = " | ".join(p for p in parts if p)[:1500]
+
+    # External links: first scholar.google → google_scholar; first other
+    # non-UT, non-social link → lab_website.
+    google_scholar = ""
+    lab_website = ""
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href.startswith("http"):
+            continue
+        if "scholar.google" in href and not google_scholar:
+            google_scholar = href
+        elif not lab_website and not any(s in href for s in _UT_EXT_LINK_SKIP):
+            lab_website = href
+
+    return {
+        "name":             name,
+        "title":            title,
+        "department":       ut_dept_from_host(profile_url),
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           office,
+    }
+
+
+def _extract_ut_me_profile(html: str, profile_url: str) -> dict:
+    """Parse the ME (Walker Dept.) legacy theme (me.utexas.edu).
+
+    Uses `.facphoto` / `.endowtitle` / `.contact` markers with generic
+    fallbacks (h1 name, mailto, og:image, research-heading section text).
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    name = ""
+    h1 = soup.find("h1")
+    if h1:
+        name = h1.get_text(" ", strip=True)
+    if not name and soup.title:
+        name = soup.title.get_text(strip=True).split("|")[0].split(" - ")[0].strip()
+    if not name:
+        name = profile_url.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").title()
+
+    endow = soup.select_one(".endowtitle")
+    title = endow.get_text(" ", strip=True) if endow else ""
+    if not title:
+        m = _TITLE_RE.search(soup.get_text(" ", strip=True))
+        title = m.group(0).title() if m else ""
+
+    email = ""
+    a = soup.find("a", href=lambda h: h and h.startswith("mailto:"))
+    if a:
+        email = a["href"].replace("mailto:", "").split("?")[0].strip()
+
+    contact = soup.select_one(".contact")
+    phone = ""
+    if contact:
+        pm = re.search(r"\(?\d{3}\)?[\s.\-]\d{3}[\s.\-]\d{4}", contact.get_text(" ", strip=True))
+        phone = pm.group(0) if pm else ""
+
+    photo_url = ""
+    fp = soup.select_one(".facphoto img") or soup.select_one("img.facphoto")
+    if fp and fp.get("src"):
+        photo_url = urljoin(profile_url, fp["src"])
+    if not photo_url:
+        og = soup.find("meta", property="og:image")
+        if og and og.get("content"):
+            photo_url = og["content"].strip()
+
+    research_summary = _extract_research_summary(soup)[:1500]
+
+    google_scholar = ""
+    lab_website = ""
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href.startswith("http"):
+            continue
+        if "scholar.google" in href and not google_scholar:
+            google_scholar = href
+        elif not lab_website and not any(s in href for s in _UT_EXT_LINK_SKIP):
+            lab_website = href
+
+    return {
+        "name":             name,
+        "title":            title,
+        "department":       ut_dept_from_host(profile_url),
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           "",
     }
 
 
@@ -1016,6 +1187,60 @@ def _extract_engineering_profile(html: str, profile_url: str) -> dict:
 # Main crawl routine
 # ---------------------------------------------------------------------------
 
+async def _collect_ut_directory_links(page, seed_url: str, max_pages: int = 30) -> list[str]:
+    """Collect every faculty profile link from a UT directory, clicking through
+    the client-side "Next" pagination (no URL change) that the Cockrell sites
+    use. ECE/ME directories have no pagination, so the loop returns after one
+    pass. Also gives lazy-loaded lists (e.g. pge) time to populate.
+    """
+    try:
+        await page.goto(seed_url, wait_until="networkidle", timeout=PAGE_TIMEOUT_MS)
+    except Exception as exc:
+        print(f"  [error] directory load failed: {exc}")
+        return []
+    # Wait for actual profile-card anchors to materialize — some directories
+    # (e.g. pge) lazy-load the list well after networkidle fires.
+    link_sel = ("a[href*='/person/'], a[href*='/people/faculty'], "
+                "a[href*='/faculty-and-staff/']")
+    try:
+        await page.wait_for_selector(link_sel, timeout=15_000)
+    except PlaywrightTimeout:
+        await page.wait_for_timeout(2500)  # last-ditch settle before giving up
+
+    all_links: set[str] = set()
+    for _ in range(max_pages):
+        before = len(all_links)
+        for link in extract_profile_links(await page.content(), seed_url):
+            all_links.add(link)
+        # Click an enabled "Next" control if one exists.
+        clicked = await page.evaluate(
+            """() => {
+                const cands = [...document.querySelectorAll(
+                    'a[rel=next], button, a')];
+                const nxt = cands.find(e => {
+                    const t = (e.textContent || '').trim();
+                    const al = (e.getAttribute('aria-label') || '');
+                    const isNext = /^next\\b/i.test(t) || /next/i.test(al) ||
+                                   e.getAttribute('rel') === 'next';
+                    const disabled = e.disabled ||
+                        e.getAttribute('aria-disabled') === 'true' ||
+                        /disabled/i.test(e.className);
+                    return isNext && !disabled && e.offsetParent !== null;
+                });
+                if (nxt) { nxt.click(); return true; }
+                return false;
+            }"""
+        )
+        if not clicked:
+            break
+        await page.wait_for_timeout(1200)
+        for link in extract_profile_links(await page.content(), seed_url):
+            all_links.add(link)
+        if len(all_links) == before:   # pagination didn't yield anything new
+            break
+    return sorted(all_links)
+
+
 async def crawl(seed_urls: list[str], university: str = "tamu", limit: int = 0) -> list[dict]:
     all_records: list[dict] = []
     seen_profile_urls: set[str] = set()
@@ -1051,25 +1276,33 @@ async def crawl(seed_urls: list[str], university: str = "tamu", limit: int = 0) 
 
         for seed_url in seed_urls:
             print(f"\n[directory] {seed_url}")
-            html = await fetch_html(page, seed_url)
-            if html is None:
-                print("  Skipping — could not load directory page.")
-                continue
 
-            # Arts & Sciences pages may load profiles dynamically
-            if is_artsci_url(seed_url) and _load_cache(seed_url) is None:
-                # Wait for profile links to appear
-                for sel in ('a[href*="/profiles/"]', '.directory', '.profile'):
-                    try:
-                        await page.wait_for_selector(sel, timeout=10_000)
-                        break
-                    except PlaywrightTimeout:
-                        continue
-                await asyncio.sleep(3)  # Extra render time
-                html = await page.content()
-                _save_cache(seed_url, html)
+            # UT directories paginate client-side ("Next" button, no URL change)
+            # and lazy-load cards, so collect links by walking the live DOM
+            # across pages rather than from a single fetch_html() snapshot.
+            if is_ut_url(seed_url):
+                profile_links = await _collect_ut_directory_links(page, seed_url)
+            else:
+                html = await fetch_html(page, seed_url)
+                if html is None:
+                    print("  Skipping — could not load directory page.")
+                    continue
 
-            profile_links = extract_profile_links(html, seed_url)
+                # Arts & Sciences pages may load profiles dynamically
+                if is_artsci_url(seed_url) and _load_cache(seed_url) is None:
+                    # Wait for profile links to appear
+                    for sel in ('a[href*="/profiles/"]', '.directory', '.profile'):
+                        try:
+                            await page.wait_for_selector(sel, timeout=10_000)
+                            break
+                        except PlaywrightTimeout:
+                            continue
+                    await asyncio.sleep(3)  # Extra render time
+                    html = await page.content()
+                    _save_cache(seed_url, html)
+
+                profile_links = extract_profile_links(html, seed_url)
+
             dept_slug = dept_slug_from_url(seed_url)
             print(f"  Found {len(profile_links)} profile link(s)  dept={dept_slug!r}")
 

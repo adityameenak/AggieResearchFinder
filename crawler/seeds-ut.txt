@@ -20,34 +20,38 @@
 # subdomain→slug row to _UT_SUBDOMAIN_DEPT, (3) running with --limit 5 first.
 
 # ── Cockrell School of Engineering ───────────────────────────
+# Three site themes, handled by _extract_ut_profile()'s host dispatch:
+#   ece → Drupal Kit | me → legacy | ae/bme/che/caee/pge → modern WordPress
 
-# [OK] Electrical & Computer Engineering — reference implementation
+# [OK] Electrical & Computer Engineering (Drupal Kit)
 https://www.ece.utexas.edu/people/faculty
 
-# [PARSE] Walker Dept. of Mechanical Engineering
-#   Directory yields ~80 /people/faculty-directory/<slug> links, but profile
-#   pages are NOT UT Drupal Kit — needs a me.utexas.edu field parser branch.
-# https://www.me.utexas.edu/people/faculty-directory
+# [OK] Aerospace Engineering & Engineering Mechanics (WordPress, /person/)
+https://www.ae.utexas.edu/people/faculty
 
-# [LINKS] Aerospace Engineering & Engineering Mechanics
-# https://ae.utexas.edu/people/faculty
+# [OK] Biomedical Engineering (WordPress, /person/)
+https://bme.utexas.edu/people/faculty
 
-# [LINKS] Civil, Architectural & Environmental Engineering
-# https://caee.utexas.edu/people/faculty
+# [OK] McKetta Dept. of Chemical Engineering (WordPress, /person/)
+https://che.utexas.edu/people/faculty
 
-# [LINKS] McKetta Dept. of Chemical Engineering
-# https://che.utexas.edu/people/faculty/
+# [OK] Civil, Architectural & Environmental Engineering (WordPress, /person/)
+https://www.caee.utexas.edu/people/faculty
 
-# [TODO] Biomedical Engineering — confirm directory URL
-# https://bme.utexas.edu/people/faculty
+# [OK] Walker Dept. of Mechanical Engineering (legacy, /people/faculty-directory/)
+https://www.me.utexas.edu/people/faculty-directory
 
-# [TODO] Hildebrand Dept. of Petroleum & Geosystems Engineering
-# https://pge.utexas.edu/people/faculty
+# [PARTIAL] Hildebrand Dept. of Petroleum & Geosystems Eng. (WordPress variant,
+#   /faculty-and-staff/<slug>). Name/email/photo parse; title/research use
+#   different block classes than the other WP depts — refine selectors.
+https://www.pge.utexas.edu/faculty-staff/faculty-directory/
 
-# ── College of Natural Sciences (different markup — future work) ──
-# CNS departments do not use the Cockrell theme; each needs its own link
-# extraction + field parser. Listed here as targets, intentionally disabled.
+# ── College of Natural Sciences (next wave — separate themes per dept) ──
+# Each CNS dept uses its own site/markup; verify link-pattern + fields before
+# enabling. Targets:
 # https://www.cs.utexas.edu/people/faculty            # Computer Science
 # https://web.ma.utexas.edu/                          # Mathematics
 # https://cm.utexas.edu/                              # Chemistry
 # https://ph.utexas.edu/                              # Physics
+# https://stat.utexas.edu/                            # Statistics & Data Sci
+# https://molecularbiosci.utexas.edu/                 # Molecular Biosciences
