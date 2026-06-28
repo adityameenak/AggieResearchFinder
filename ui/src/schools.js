@@ -47,6 +47,27 @@ export const SCHOOLS = {
     description: 'Discover research labs across Rice, powered by AI matching.',
     available: true,
   },
+  ut: {
+    code: 'ut',
+    name: 'The University of Texas at Austin',
+    shortName: 'UT Austin',
+    appName: 'Longhorn Research Finder',
+    brandPrefix: 'Longhorn',
+    brandSuffix: 'ResearchFinder',
+    accent: 'ut-orange',
+    classes: {
+      brandText:    'text-ut-orange-700',
+      brandHover:   'group-hover:text-ut-orange-600',
+      cardHover:    'hover:border-ut-orange-400',
+      pillBg:       'bg-ut-orange-600',
+      pillText:     'text-ut-orange-700',
+    },
+    officialUrl: 'https://www.utexas.edu',
+    description: 'Discover research labs across UT Austin, powered by AI matching.',
+    // Scaffolding: only ECE faculty are crawled so far. Flip to true once
+    // enough Cockrell/CNS departments are merged into faculty.json.
+    available: false,
+  },
 }
 
 export const SCHOOL_LIST = Object.values(SCHOOLS)

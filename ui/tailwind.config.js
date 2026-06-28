@@ -40,6 +40,21 @@ export default {
           900: '#000f2c',
           950: '#000817',
         },
+        // UT Austin burnt orange (#BF5700). Same role as rice-blue — used on
+        // the school picker / per-school accent until full theming lands.
+        'ut-orange': {
+          50:  '#fdf4ec',
+          100: '#fbe4d2',
+          200: '#f6c4a0',
+          300: '#f0a06b',
+          400: '#e87d3c',
+          500: '#d4651f',
+          600: '#bf5700',
+          700: '#a04900',
+          800: '#7e3a00',
+          900: '#5f2c00',
+          950: '#371900',
+        },
         cream: {
           50:  '#FFFDF9',
           100: '#FBF7EF',

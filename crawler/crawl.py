@@ -169,6 +169,10 @@ def dept_slug_from_url(url: str) -> str:
     if is_rice_url(url):
         return "rice-unknown"
 
+    if is_ut_url(url):
+        # UT encodes the department in the subdomain, not the path.
+        return ut_dept_from_host(url)
+
     skip = {"engineering", "profiles", "index.html", ""}
     for part in path_parts:
         if part and part not in skip and not part.endswith(".html"):
@@ -185,6 +189,43 @@ def is_rice_url(url: str) -> bool:
     """Check if a URL belongs to a Rice University domain."""
     host = (urlparse(url).hostname or "").lower()
     return host == "profiles.rice.edu" or host.endswith(".rice.edu") or host == "rice.edu"
+
+
+def is_ut_url(url: str) -> bool:
+    """Check if a URL belongs to a UT Austin domain (utexas.edu)."""
+    host = (urlparse(url).hostname or "").lower()
+    return host == "utexas.edu" or host.endswith(".utexas.edu")
+
+
+# UT Austin spreads its STEM faculty across per-department subdomains
+# (ece.utexas.edu, me.utexas.edu, …). The leading subdomain label IS the
+# department, so we map it to the shared slug schema. Add a row here when you
+# add a department's directory to seeds-ut.txt.
+_UT_SUBDOMAIN_DEPT = {
+    # Cockrell School of Engineering
+    "ece":  "electrical",      # Electrical & Computer Engineering
+    "me":   "mechanical",      # Walker Dept. of Mechanical Engineering
+    "che":  "chemical",        # McKetta Dept. of Chemical Engineering
+    "caee": "civil",           # Civil, Architectural & Environmental Engineering
+    "ae":   "aerospace",       # Aerospace Engineering & Engineering Mechanics
+    "bme":  "biomedical",      # Biomedical Engineering
+    "pge":  "petroleum",       # Hildebrand Dept. of Petroleum & Geosystems Eng.
+    # College of Natural Sciences (markup may differ — verify before enabling)
+    "cs":   "cse",             # Computer Science
+    "math": "mathematics",
+    "stat": "statistics",
+    "cm":   "chemistry",       # Dept. of Chemistry
+    "ph":   "physics-astronomy",
+}
+
+
+def ut_dept_from_host(url: str) -> str:
+    """Derive a UT department slug from the subdomain (www. is ignored)."""
+    host = (urlparse(url).hostname or "").lower()
+    labels = [l for l in host.split(".") if l and l != "www"]
+    if labels:
+        return _UT_SUBDOMAIN_DEPT.get(labels[0], labels[0])
+    return "unknown"
 
 
 # Map of Rice "School" / department name patterns → short slug. Kept narrow
@@ -277,6 +318,23 @@ _RICE_PROFILE_RE = re.compile(
     re.IGNORECASE,
 )
 
+# UT (Cockrell) person pages live under /people/faculty/<slug> or
+# /people/faculty-directory/<slug>. Capture the path and the trailing slug so
+# we can drop category landing pages that share the prefix.
+_UT_PROFILE_RE = re.compile(
+    r'/people/faculty(?:-directory)?/(?P<slug>[a-z0-9][a-z0-9\-]+)/?',
+    re.IGNORECASE,
+)
+
+# Slugs that sit under /people/faculty/ but are listing/category pages, not
+# people. (UT groups faculty by appointment type on these landing pages.)
+_UT_NON_PROFILE_SLUGS = {
+    "adjunct", "affiliate", "affiliated", "emeritus", "emeriti", "emeritas",
+    "lecturer", "lecturers", "joint", "courtesy", "visiting", "research",
+    "adjoint", "staff", "leadership", "faculty", "all", "tenured",
+    "tenure-track", "professors-of-practice",
+}
+
 
 def extract_profile_links(html: str, base_url: str) -> list[str]:
     """
@@ -294,6 +352,22 @@ def extract_profile_links(html: str, base_url: str) -> list[str]:
             if href == "/faculty":
                 continue
             full = urljoin(base_url, href).split("#")[0].split("?")[0]
+            found.add(full)
+        return sorted(found)
+
+    if is_ut_url(base_url):
+        # UT (Cockrell) profile pattern: /people/faculty/<person-slug> or
+        # /people/faculty-directory/<person-slug>. The same path also hosts
+        # category landing pages (adjunct, affiliate, emeritus, …) we skip.
+        soup = BeautifulSoup(html, "html.parser")
+        for a in soup.find_all("a", href=True):
+            m = _UT_PROFILE_RE.search(a["href"])
+            if not m:
+                continue
+            slug = m.group("slug").lower()
+            if slug in _UT_NON_PROFILE_SLUGS:
+                continue
+            full = urljoin(base_url, m.group(0)).split("#")[0].split("?")[0].rstrip("/")
             found.add(full)
         return sorted(found)
 
@@ -416,6 +490,8 @@ def extract_profile_fields(html: str, profile_url: str = "") -> dict:
     """
     if is_rice_url(profile_url):
         return _extract_rice_profile(html, profile_url)
+    if is_ut_url(profile_url):
+        return _extract_ut_profile(html, profile_url)
     if is_artsci_url(profile_url):
         return _extract_artsci_profile(html, profile_url)
     return _extract_engineering_profile(html, profile_url)
@@ -544,6 +620,110 @@ def _extract_rice_profile(html: str, profile_url: str) -> dict:
         "name":             name,
         "title":            title,
         "department":       department,
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           office,
+    }
+
+
+def _extract_ut_profile(html: str, profile_url: str) -> dict:
+    """Parse a UT Austin (Cockrell/UT Drupal Kit) faculty profile page.
+
+    Verified against ece.utexas.edu; the shared UT Drupal Kit theme exposes
+    stable `field--name-field-*` / `views-field-field-*` wrappers. Other UT
+    colleges (CNS) use different markup — extend or special-case as you add
+    their seeds. Returns the standard field shape plus `department` (derived
+    from the subdomain) so it survives the `**fields` spread in crawl().
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    def field(name):
+        return soup.find(class_=lambda c: c and f"field--name-{name}" in c)
+
+    def views_field(name):
+        return soup.find(class_=lambda c: c and f"views-field-field-{name}" in c)
+
+    # Name: the UT Drupal Kit doesn't render an <h1>; the <title> is
+    # "<Name> | <Dept> at UT Austin". Fall back to the URL slug.
+    name = ""
+    if soup.title:
+        name = soup.title.get_text(strip=True).split("|")[0].strip()
+    if not name:
+        slug = profile_url.rstrip("/").rsplit("/", 1)[-1]
+        name = slug.replace("-", " ").title()
+
+    # Title: department position + any endowed/special chair line.
+    title_parts = []
+    pos = field("field-faculty-position")
+    if pos:
+        title_parts.append(pos.get_text(" ", strip=True))
+    special = field("field-special-position-title")
+    if special:
+        title_parts.append(special.get_text(" ", strip=True))
+    title = " | ".join(p for p in title_parts if p)
+
+    # Email via mailto:
+    email = ""
+    em = views_field("email") or soup
+    a = em.find("a", href=lambda h: h and h.startswith("mailto:"))
+    if a:
+        email = a["href"].replace("mailto:", "").split("?")[0].strip()
+
+    phone = ""
+    ph = views_field("phone")
+    if ph:
+        phone = re.sub(r"\s+", " ", ph.get_text(" ", strip=True)).strip()
+
+    office = ""
+    of = views_field("office")
+    if of:
+        office = re.sub(r"^\s*Office:?\s*", "", of.get_text(" ", strip=True)).strip()
+
+    # Portrait image (relative to the dept host).
+    photo_url = ""
+    po = views_field("portrait")
+    img = po.find("img") if po else None
+    if img and img.get("src"):
+        photo_url = urljoin(profile_url, img["src"])
+
+    # Google Scholar + lab/personal website.
+    google_scholar = ""
+    gs = field("field-google-scholar-profile")
+    a = gs.find("a", href=True) if gs else None
+    if a:
+        google_scholar = a["href"]
+
+    lab_website = ""
+    ws = field("field-website-group") or field("field-personal-website")
+    a = ws.find("a", href=True) if ws else None
+    if a and a["href"].startswith("http"):
+        lab_website = a["href"]
+
+    # Research summary: prefer the body bio; append research-areas terms so the
+    # search tokenizer still matches when the bio is thin or empty.
+    research_summary = ""
+    body = field("body")
+    if body:
+        research_summary = re.sub(r"\s+", " ", body.get_text(" ", strip=True)).strip()
+    areas = field("field-research-areas")
+    if areas:
+        areas_txt = re.sub(r"^\s*Research Areas?\s*\|?\s*", "",
+                           areas.get_text(" | ", strip=True)).strip(" |")
+        if areas_txt:
+            research_summary = (f"{research_summary} | {areas_txt}"
+                                if research_summary else areas_txt)
+    if not research_summary:
+        research_summary = _extract_research_summary(soup)
+    research_summary = research_summary[:1500]
+
+    return {
+        "name":             name,
+        "title":            title,
+        "department":       ut_dept_from_host(profile_url),
         "email":            email,
         "research_summary": research_summary,
         "lab_website":      lab_website,

@@ -1,0 +1,53 @@
+# UT Austin Faculty Directory Seeds
+# One URL per line. Lines starting with # are ignored.
+#
+# Run:  python crawl.py --seeds seeds-ut.txt --university ut --output faculty-ut
+#
+# Unlike TAMU (one engineering domain) and Rice (one JSON:API), UT Austin
+# spreads STEM faculty across per-department subdomains, each a separately
+# themed site. The department is taken from the subdomain (see
+# _UT_SUBDOMAIN_DEPT in crawl.py), and profiles are parsed by
+# _extract_ut_profile(), which targets the shared "UT Drupal Kit" markup.
+#
+# STATUS LEGEND
+#   [OK]     verified end-to-end (links extract + profile fields parse)
+#   [LINKS]  directory likely JS-rendered — links may only appear under
+#            Playwright; verify a real crawl finds profiles
+#   [PARSE]  links extract, but profile markup differs from the UT Drupal Kit
+#            theme — needs a per-site branch in _extract_ut_profile()
+#
+# Add a department by: (1) confirming its directory URL here, (2) adding its
+# subdomain→slug row to _UT_SUBDOMAIN_DEPT, (3) running with --limit 5 first.
+
+# ── Cockrell School of Engineering ───────────────────────────
+
+# [OK] Electrical & Computer Engineering — reference implementation
+https://www.ece.utexas.edu/people/faculty
+
+# [PARSE] Walker Dept. of Mechanical Engineering
+#   Directory yields ~80 /people/faculty-directory/<slug> links, but profile
+#   pages are NOT UT Drupal Kit — needs a me.utexas.edu field parser branch.
+# https://www.me.utexas.edu/people/faculty-directory
+
+# [LINKS] Aerospace Engineering & Engineering Mechanics
+# https://ae.utexas.edu/people/faculty
+
+# [LINKS] Civil, Architectural & Environmental Engineering
+# https://caee.utexas.edu/people/faculty
+
+# [LINKS] McKetta Dept. of Chemical Engineering
+# https://che.utexas.edu/people/faculty/
+
+# [TODO] Biomedical Engineering — confirm directory URL
+# https://bme.utexas.edu/people/faculty
+
+# [TODO] Hildebrand Dept. of Petroleum & Geosystems Engineering
+# https://pge.utexas.edu/people/faculty
+
+# ── College of Natural Sciences (different markup — future work) ──
+# CNS departments do not use the Cockrell theme; each needs its own link
+# extraction + field parser. Listed here as targets, intentionally disabled.
+# https://www.cs.utexas.edu/people/faculty            # Computer Science
+# https://web.ma.utexas.edu/                          # Mathematics
+# https://cm.utexas.edu/                              # Chemistry
+# https://ph.utexas.edu/                              # Physics
