@@ -210,13 +210,43 @@ _UT_SUBDOMAIN_DEPT = {
     "ae":   "aerospace",       # Aerospace Engineering & Engineering Mechanics
     "bme":  "biomedical",      # Biomedical Engineering
     "pge":  "petroleum",       # Hildebrand Dept. of Petroleum & Geosystems Eng.
-    # College of Natural Sciences (markup may differ — verify before enabling)
-    "cs":   "cse",             # Computer Science
-    "math": "mathematics",
-    "stat": "statistics",
-    "cm":   "chemistry",       # Dept. of Chemistry
-    "ph":   "physics-astronomy",
+    # College of Natural Sciences. Most CNS depts render profiles at
+    # <dept>.utexas.edu/directory/<slug> off a shared central directory
+    # (directory.cns.utexas.edu) — see _extract_ut_cns_profile.
+    "cs":              "cse",                  # Computer Science
+    "math":            "mathematics",
+    "stat":            "statistics",
+    "sds":             "statistics",           # Statistics & Data Sciences
+    "chemistry":       "chemistry",
+    "cm":              "chemistry",            # (legacy host alias)
+    "physics":         "physics-astronomy",
+    "ph":              "physics-astronomy",    # (legacy host alias)
+    "molecularbiosci": "biosciences",          # Molecular Biosciences
+    "integrativebio":  "biosciences",          # Integrative Biology
+    "neuroscience":    "neuroscience",
+    "astronomy":       "physics-astronomy",
 }
+
+# CNS hosts whose profiles use the shared central-directory heading theme.
+_UT_CNS_HOSTS = ("math.", "physics.", "chemistry.", "molecularbiosci.",
+                 "integrativebio.", "neuroscience.", "astronomy.", "sds.",
+                 "stat.")
+
+# CNS dept directories list *everyone* (grad students, staff, finance managers,
+# …), so we keep only records whose title marks them as research/teaching
+# faculty. Engineering depts are unaffected — this filter is CNS-scoped.
+_UT_CNS_FACULTY_RE = re.compile(
+    r"professor|lecturer|instructor|instruction|\bchair\b|emerit|"
+    r"distinguished|\bfaculty\b|research scientist",
+    re.IGNORECASE,
+)
+
+
+def is_ut_cns_url(url: str) -> bool:
+    host = (urlparse(url).hostname or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    return host.startswith(_UT_CNS_HOSTS)
 
 
 def ut_dept_from_host(url: str) -> str:
@@ -326,7 +356,8 @@ _UT_PROFILE_RE = re.compile(
     #   ECE (Drupal Kit):   /people/faculty/<slug>
     #   ME (legacy):        /people/faculty-directory/<slug>
     #   Cockrell WordPress: /person/<slug>   (ae, bme, che, caee, …)
-    r'(?:/people/faculty(?:-directory)?|/person|/faculty-and-staff)/(?P<slug>[a-z0-9][a-z0-9\-]+)/?',
+    r'(?:/people/faculty(?:-directory|-researchers)?|/person|/faculty-and-staff'
+    r'|/directory)/(?P<slug>[a-z0-9][a-z0-9\-]+)/?',
     re.IGNORECASE,
 )
 
@@ -647,6 +678,10 @@ def _extract_ut_profile(html: str, profile_url: str) -> dict:
     host = (urlparse(profile_url).hostname or "").lower()
     if host.startswith("www."):
         host = host[4:]
+    if host.startswith(_UT_CNS_HOSTS):
+        return _extract_ut_cns_profile(html, profile_url)
+    if host.startswith("cs."):
+        return _extract_ut_cs_profile(html, profile_url)
     if host.startswith("ece."):
         return _extract_ut_drupalkit_profile(html, profile_url)
     if host.startswith("me."):
@@ -901,6 +936,199 @@ def _extract_ut_me_profile(html: str, profile_url: str) -> dict:
         "google_scholar":   google_scholar,
         "photo_url":        photo_url,
         "phone":            phone,
+        "office":           "",
+    }
+
+
+def _dedup_text(s: str) -> str:
+    """CNS pages render desktop+mobile copies of each section, so the text is
+    doubled. Collapse exact consecutive duplicate phrases and a fully-doubled
+    string back to a single copy."""
+    s = re.sub(r"\s+", " ", s or "").strip()
+    if not s:
+        return s
+    half = len(s) // 2
+    if s[:half].strip() == s[half:].strip():   # exactly doubled
+        return s[:half].strip()
+    # otherwise drop immediately-repeated " | "-joined or sentence chunks
+    seen, out = set(), []
+    for part in re.split(r"(?<=[.!?])\s+|\s\|\s", s):
+        p = part.strip()
+        if p and p.lower() not in seen:
+            seen.add(p.lower())
+            out.append(p)
+    return " ".join(out)
+
+
+def _cns_section(soup, names) -> str:
+    """Return the text under the first <h2>/<h3>/<h4> whose label is in *names*,
+    gathered until the next heading."""
+    for h in soup.find_all(["h2", "h3", "h4"]):
+        if h.get_text(" ", strip=True).strip() in names:
+            parts = []
+            for sib in h.find_all_next():
+                if sib.name in ("h1", "h2", "h3", "h4"):
+                    break
+                t = sib.get_text(" ", strip=True)
+                if t:
+                    parts.append(t)
+                if sum(len(p) for p in parts) > 1500:
+                    break
+            return _dedup_text(" ".join(parts))
+    return ""
+
+
+def _extract_ut_cns_profile(html: str, profile_url: str) -> dict:
+    """Parse the shared CNS central-directory theme (math/physics/chemistry/
+    molbio/…, served at <dept>.utexas.edu/directory/<slug>).
+
+    Content is organized under headings (Contact Information / Research /
+    Research Areas / Fields of Interest), with the portrait hosted on
+    directory.cns.utexas.edu. No semantic field classes, so we extract by
+    heading and dedup the doubled desktop+mobile markup.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    name = ""
+    h1 = soup.find("h1")
+    if h1:
+        name = h1.get_text(" ", strip=True)
+    if not name:
+        name = profile_url.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").title()
+
+    # Title: the first non-empty text node after the name heading.
+    title = ""
+    if h1:
+        for sib in h1.find_all_next():
+            t = sib.get_text(" ", strip=True)
+            if t:
+                title = t[:160]
+                break
+
+    contact = _cns_section(soup, {"Contact Information"})
+
+    email = ""
+    a = soup.find("a", href=lambda h: h and h.startswith("mailto:"))
+    if a:
+        email = a["href"].replace("mailto:", "").split("?")[0].strip()
+    elif contact:
+        m = _EMAIL_RE.search(contact)
+        email = m.group(0) if m else ""
+
+    phone = ""
+    if contact:
+        pm = re.search(r"\(?\d{3}\)?[\s.\-]\d{3}[\s.\-]\d{4}", contact)
+        phone = pm.group(0) if pm else ""
+
+    office = ""
+    if contact:
+        om = re.search(r"([A-Z]{2,4})\s*Room Number:\s*([\w.\-]+)", contact)
+        if om:
+            office = f"{om.group(1)} {om.group(2)}"
+
+    # Portrait from the central CNS directory.
+    photo_url = ""
+    for img in soup.find_all("img"):
+        src = img.get("src") or ""
+        if "directory.cns.utexas.edu" in src or "/files/" in src and "logo" not in src.lower():
+            photo_url = urljoin(profile_url, src)
+            break
+
+    # Research summary: the Research bio plus the area/interest tag sections.
+    bio = _cns_section(soup, {"Research", "Research Summary", "Research Statement"})
+    tags = _cns_section(soup, {"Research Areas", "Fields of Interest",
+                               "Research Interests", "Areas of Interest"})
+    research_summary = " | ".join(p for p in (bio, tags) if p)[:1500]
+
+    google_scholar = ""
+    lab_website = ""
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href.startswith("http"):
+            continue
+        if "scholar.google" in href and not google_scholar:
+            google_scholar = href
+        elif not lab_website and not any(s in href for s in _UT_EXT_LINK_SKIP):
+            lab_website = href
+
+    return {
+        "name":             name,
+        "title":            title,
+        "department":       ut_dept_from_host(profile_url),
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            phone,
+        "office":           office,
+    }
+
+
+def _extract_ut_cs_profile(html: str, profile_url: str) -> dict:
+    """Parse the UTCS theme (cs.utexas.edu/people/faculty-researchers/<slug>).
+
+    Drupal-based: h1 name, position text right after the name, portrait under
+    the `faculty_photo` image style, bio in `field--name-body`.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    name = ""
+    h1 = soup.find("h1")
+    if h1:
+        name = h1.get_text(" ", strip=True)
+    if not name:
+        name = profile_url.rstrip("/").rsplit("/", 1)[-1].replace("-", " ").title()
+
+    title = ""
+    if h1:
+        for sib in h1.find_all_next():
+            t = sib.get_text(" ", strip=True)
+            if t:
+                title = t[:160]
+                break
+
+    email = ""
+    a = soup.find("a", href=lambda h: h and h.startswith("mailto:"))
+    if a:
+        email = a["href"].replace("mailto:", "").split("?")[0].strip()
+
+    photo_url = ""
+    for img in soup.find_all("img"):
+        src = img.get("src") or ""
+        if "faculty_photo" in src or "/styles/" in src:
+            photo_url = urljoin(profile_url, src.split("?")[0])
+            break
+
+    body = soup.find(class_=lambda c: c and "field--name-body" in c)
+    research_summary = ""
+    if body:
+        research_summary = re.sub(r"\s+", " ", body.get_text(" ", strip=True)).strip()
+    if not research_summary:
+        research_summary = _extract_research_summary(soup)
+    research_summary = research_summary[:1500]
+
+    google_scholar = ""
+    lab_website = ""
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href.startswith("http"):
+            continue
+        if "scholar.google" in href and not google_scholar:
+            google_scholar = href
+        elif not lab_website and not any(s in href for s in _UT_EXT_LINK_SKIP):
+            lab_website = href
+
+    return {
+        "name":             name,
+        "title":            title,
+        "department":       "cse",
+        "email":            email,
+        "research_summary": research_summary,
+        "lab_website":      lab_website,
+        "google_scholar":   google_scholar,
+        "photo_url":        photo_url,
+        "phone":            "",
         "office":           "",
     }
 
@@ -1192,20 +1420,41 @@ async def _collect_ut_directory_links(page, seed_url: str, max_pages: int = 30) 
     the client-side "Next" pagination (no URL change) that the Cockrell sites
     use. ECE/ME directories have no pagination, so the loop returns after one
     pass. Also gives lazy-loaded lists (e.g. pge) time to populate.
+
+    Runs in a dedicated clean context: the main crawl context forces
+    `Sec-Fetch-Site: none` on every request, which breaks the same-origin XHR
+    that CNS directory pages use to lazy-load their faculty cards (the browser
+    must set Sec-Fetch per-request). A plain context lets it do that.
     """
+    ctx = await page.context.browser.new_context(
+        user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 "
+                   "Safari/537.36 ResearchFinderBot/1.0",
+    )
+    dpage = await ctx.new_page()
     try:
-        await page.goto(seed_url, wait_until="networkidle", timeout=PAGE_TIMEOUT_MS)
+        return await _collect_ut_directory_links_inner(dpage, seed_url, max_pages)
+    finally:
+        await ctx.close()
+
+
+async def _collect_ut_directory_links_inner(page, seed_url, max_pages) -> list[str]:
+    # `domcontentloaded` (not networkidle): CNS sites keep background
+    # connections open, so networkidle never fires and the goto would throw.
+    try:
+        await page.goto(seed_url, wait_until="domcontentloaded", timeout=PAGE_TIMEOUT_MS)
     except Exception as exc:
         print(f"  [error] directory load failed: {exc}")
         return []
-    # Wait for actual profile-card anchors to materialize — some directories
-    # (e.g. pge) lazy-load the list well after networkidle fires.
+    # Wait for actual profile-card anchors to materialize — directories
+    # lazy-load their lists well after the document is ready.
     link_sel = ("a[href*='/person/'], a[href*='/people/faculty'], "
-                "a[href*='/faculty-and-staff/']")
+                "a[href*='/faculty-and-staff/'], a[href*='/directory/']")
     try:
-        await page.wait_for_selector(link_sel, timeout=15_000)
+        await page.wait_for_selector(link_sel, timeout=20_000)
     except PlaywrightTimeout:
         await page.wait_for_timeout(2500)  # last-ditch settle before giving up
+    await page.wait_for_timeout(800)  # let the rest of the list settle
 
     all_links: set[str] = set()
     for _ in range(max_pages):
@@ -1318,6 +1567,13 @@ async def crawl(seed_urls: list[str], university: str = "tamu", limit: int = 0) 
                     continue
 
                 fields = extract_profile_fields(phtml, profile_url)
+
+                # CNS directories list everyone; keep only faculty.
+                if is_ut_cns_url(profile_url) and not _UT_CNS_FACULTY_RE.search(
+                        fields.get("title", "")):
+                    print(f"    [skip non-faculty] {fields.get('name')!r} "
+                          f"({fields.get('title','')[:30]!r})")
+                    continue
 
                 # For Rice, the profile-derived department overrides the URL
                 # placeholder. Use the effective slug for the AI review prompt

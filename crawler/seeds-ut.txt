@@ -46,12 +46,29 @@ https://www.me.utexas.edu/people/faculty-directory
 #   different block classes than the other WP depts — refine selectors.
 https://www.pge.utexas.edu/faculty-staff/faculty-directory/
 
-# ── College of Natural Sciences (next wave — separate themes per dept) ──
-# Each CNS dept uses its own site/markup; verify link-pattern + fields before
-# enabling. Targets:
-# https://www.cs.utexas.edu/people/faculty            # Computer Science
-# https://web.ma.utexas.edu/                          # Mathematics
-# https://cm.utexas.edu/                              # Chemistry
-# https://ph.utexas.edu/                              # Physics
-# https://stat.utexas.edu/                            # Statistics & Data Sci
-# https://molecularbiosci.utexas.edu/                 # Molecular Biosciences
+# ── College of Natural Sciences ──────────────────────────────
+# Most CNS depts render profiles at <dept>.utexas.edu/directory/<slug> off a
+# shared central directory (directory.cns.utexas.edu) — handled by
+# _extract_ut_cns_profile (heading-based). These directories list EVERYONE
+# (grad students, staff, …); the crawler keeps only faculty via
+# _UT_CNS_FACULTY_RE. CS is a separate UTCS theme (_extract_ut_cs_profile).
+
+# [OK] Mathematics
+https://math.utexas.edu/people/faculty
+
+# [OK] Physics
+https://physics.utexas.edu/directory
+
+# [OK] Chemistry
+https://chemistry.utexas.edu/directory
+
+# [OK] Statistics & Data Sciences
+https://stat.utexas.edu/directory
+
+# [OK] Molecular Biosciences (directory pre-filtered to faculty positions)
+https://molecularbiosci.utexas.edu/directory?position%5B0%5D=1-Tenure-Track/Tenured%20Faculty&position%5B1%5D=2-Professional-Track%20Faculty
+
+# [OK] Computer Science (UTCS theme; list at /people, profiles at
+#   /people/faculty-researchers/<slug>. /people/faculty-researchers itself
+#   redirects to login, so seed /people.)
+https://www.cs.utexas.edu/people
