@@ -2,9 +2,10 @@
  * Registry of supported universities. Adding a new school means adding an entry
  * here and ensuring crawler output is tagged with the matching `code`.
  *
- * `accent` controls the brand-color token used by NavBar/Footer/CTAs. It must
- * resolve to existing Tailwind classes (currently only `maroon` is themed —
- * other schools will reuse a neutral palette until per-school themes land).
+ * `accent` is the school's static brand palette (used on the multi-school
+ * picker where all schools render at once). App-wide theming is separate: the
+ * per-school app uses `maroon-*` classes repainted by `[data-school="<code>"]`
+ * CSS-variable overrides in index.css — add a block there for each school.
  */
 export const SCHOOLS = {
   tamu: {

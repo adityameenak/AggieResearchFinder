@@ -130,7 +130,7 @@ export default function Home() {
             <div className="hero-animate-1 flex items-center gap-2.5 mb-7">
               <span className="w-6 h-px bg-maroon-700" />
               <span className="text-xs font-semibold text-maroon-700 uppercase tracking-[0.18em]">
-                Texas A&amp;M Engineering
+                {school.shortName} STEM Research
               </span>
             </div>
 
@@ -314,7 +314,7 @@ export default function Home() {
                          tracking-tight mb-8 border-l-[3px] border-maroon-700 pl-6
                          text-[1.9rem] sm:text-[2.5rem]"
             >
-              "Finding research opportunities at Texas A&amp;M shouldn't
+              "Finding research opportunities at {school.shortName} shouldn't
               require a map."
             </blockquote>
           </Reveal>
@@ -322,7 +322,7 @@ export default function Home() {
           <Reveal from="bottom" delay={160}>
             <div className="pl-6 space-y-4 text-stone-600 text-[15px] leading-relaxed">
               <p>
-                Texas A&amp;M employs hundreds of researchers across 20 STEM
+                {school.name} employs hundreds of researchers across its STEM
                 departments — each with its own directory, formatting, and
                 level of detail. Finding a faculty member whose work aligns with your
                 specific interests means manually navigating dozens of pages with no
@@ -404,8 +404,8 @@ export default function Home() {
               <br />research match?
             </h2>
             <p className="text-maroon-200 text-sm mb-8 max-w-md mx-auto leading-relaxed">
-              Search {loading ? '553+' : faculty.length} faculty profiles across
-              Texas A&amp;M Engineering. No account. No forms. Just results.
+              Search {loading ? '500+' : faculty.length} {school.shortName} STEM
+              faculty profiles. No account. No forms. Just results.
             </p>
             <Link
               to={tx('/discover')}
