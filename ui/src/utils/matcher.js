@@ -20,8 +20,15 @@ function countHits(tokens, haystack) {
   return score
 }
 
+// A professor is only matchable if we know what they research — otherwise
+// there's no basis for a "research fit". Blank profiles are excluded entirely.
+export function isMatchable(prof) {
+  return Boolean((prof.research_summary || '').trim() ||
+                 (prof.scholar_interests || []).length)
+}
+
 function scoreProf(prof, interestTokens, resumeTokens) {
-  const research = prof.research_summary || ''
+  const research = `${prof.research_summary || ''} ${(prof.scholar_interests || []).join(' ')}`
   const haystack = `${research} ${prof.name || ''} ${prof.department || ''}`
 
   let primary = countHits(interestTokens, haystack)
@@ -51,7 +58,11 @@ function buildExplanation(prof, interests) {
   }[prof.department] || prof.department || 'their department'
 
   const research = (prof.research_summary || '').slice(0, 130).replace(/\|.*$/, '').trim()
+    || (prof.scholar_interests || []).slice(0, 3).join(', ')
   const iSnip = (interests || '').slice(0, 80)
+  if (!research) {
+    return `Prof. ${prof.name} works in ${dept} — related to your stated interest in ${iSnip}.`
+  }
   return `Prof. ${prof.name}'s work in ${dept} focuses on ${research}… — closely related to your stated interest in ${iSnip}.`
 }
 
@@ -64,9 +75,11 @@ export function matchFaculty(faculty, interests, resumeProfile, topN = 20) {
     ...(resumeProfile?.lab_techniques    || []),
   ].join(' '))
 
-  let scored = faculty.map(prof => ({ prof, score: scoreProf(prof, iTokens, rTokens) }))
+  // Never match against profiles with no research info — they can't be a fit.
+  const matchable = faculty.filter(isMatchable)
+  let scored = matchable.map(prof => ({ prof, score: scoreProf(prof, iTokens, rTokens) }))
   scored = scored.filter(x => x.score > 0)
-  if (!scored.length) scored = faculty.map(prof => ({ prof, score: 1 }))
+  if (!scored.length) scored = matchable.map(prof => ({ prof, score: 1 }))
 
   scored.sort((a, b) => b.score - a.score)
   scored = scored.slice(0, topN)
