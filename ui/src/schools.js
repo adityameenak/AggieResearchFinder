@@ -64,9 +64,8 @@ export const SCHOOLS = {
     },
     officialUrl: 'https://www.utexas.edu',
     description: 'Discover STEM research labs across UT Austin, powered by AI matching.',
-    // Scaffolding: only ECE faculty are crawled so far. Flip to true once
-    // enough Cockrell/CNS departments are merged into faculty.json.
-    available: false,
+    // Live: all 13 STEM departments crawled (Cockrell engineering + CNS).
+    available: true,
   },
 }
 

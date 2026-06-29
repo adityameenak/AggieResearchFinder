@@ -76,7 +76,7 @@ import json
 # Map each per-school file to its university code. The TAMU faculty.json is not
 # self-tagged, so we backfill 'tamu' here; per-school files that already carry a
 # 'university' field (e.g. faculty-rice.json) keep their own value.
-SOURCES = {'faculty.json': 'tamu', 'faculty-rice.json': 'rice'}
+SOURCES = {'faculty.json': 'tamu', 'faculty-rice.json': 'rice', 'faculty-ut.json': 'ut'}
 combined = []
 for path, uni in SOURCES.items():
     try: recs = json.load(open(path))
