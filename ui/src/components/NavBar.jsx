@@ -78,16 +78,6 @@ export default function NavBar() {
           </Link>
           <Link to={tx('/international')} className={linkCls('/international')}>Int'l</Link>
           <Link to={tx('/about')} className={linkCls('/about')}>About</Link>
-
-          {/* CTA */}
-          <Link
-            to={tx('/discover')}
-            className="ml-3 px-4 py-1.5 bg-maroon-700 text-cream-100 text-[13px]
-                       font-semibold rounded-lg hover:bg-maroon-600 transition-colors
-                       shadow-sm shadow-maroon-900/20"
-          >
-            Get Matched →
-          </Link>
         </div>
       </div>
     </nav>

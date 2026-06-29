@@ -64,26 +64,34 @@ export function scoreProfessor(prof, tokens) {
 // ---------------------------------------------------------------------------
 
 /**
- * Crawlers append research areas/keywords to the bio as " | "-joined tails
- * (e.g. "Our lab studies ... | Biophysics | Nanoscience"). Split a record's
- * research_summary into a prose `summary` (the preview) and short `keywords`
- * (shown as tags), folding in scholar_interests. A part is "prose" if it's
- * long or sentence-like; short parts become keywords.
+ * Split a record into a readable `summary` (the card preview) and short
+ * `keywords` (tag pills).
+ *
+ * The preview prefers `ai_review` — a clean generated paragraph — because
+ * `research_summary` is frequently just a run-on of research areas (e.g. TAMU:
+ * "High-speed combustion Laser diagnostics Turbulent flames"), which reads as
+ * junk in a preview and belongs in the keyword pills instead. We only fall
+ * back to a research_summary segment when it's genuinely sentence-like.
+ * Keywords come from the " | "-joined research-area tail + scholar_interests,
+ * junk-filtered.
  */
 export function splitResearch(prof) {
-  const raw = (prof.research_summary || '').trim()
-  const parts = raw.split('|').map(s => s.trim()).filter(Boolean)
+  const parts = (prof.research_summary || '').split('|').map(s => s.trim()).filter(Boolean)
 
-  let summary = ''
-  let i = 0
-  if (parts.length && (parts[0].length > 80 || /[.!?]/.test(parts[0]))) {
-    summary = parts[0]
-    i = 1
+  let summary = (prof.ai_review || '').trim()
+  let keywordParts = parts
+  if (!summary) {
+    // No AI review — use a real sentence from the summary if one exists.
+    const sentence = parts.find(p => /[.!?]/.test(p) && p.split(/\s+/).length >= 10)
+    if (sentence) {
+      summary = sentence
+      keywordParts = parts.filter(p => p !== sentence)
+    }
   }
+
   const keywords = []
-  for (; i < parts.length; i++) {
-    if (parts[i].length <= 60) keywords.push(parts[i])
-    else if (!summary) summary = parts[i]   // no prose yet → use the long part
+  for (const p of keywordParts) {
+    if (p.length <= 60) keywords.push(p)   // run-on prose blobs are dropped, not shown
   }
   for (const k of prof.scholar_interests || []) {
     if (k && String(k).trim()) keywords.push(String(k).trim())
@@ -95,7 +103,7 @@ export function splitResearch(prof) {
     if (seen.has(l) || !isUsefulTopic(k)) return false
     seen.add(l)
     return true
-  }).slice(0, 8)
+  }).slice(0, 10)
   return { summary, keywords: dedup }
 }
 
