@@ -34,9 +34,9 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-xs text-stone-500 leading-relaxed max-w-[220px]">
-              Helping {school.name} students discover research
-              opportunities across all departments, powered by AI matching
-              and personalized outreach drafting.
+              Helping {school.name} students and researchers discover STEM
+              research opportunities across every STEM department, powered by
+              AI matching and personalized outreach drafting.
             </p>
           </div>
 

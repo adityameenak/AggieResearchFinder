@@ -10,14 +10,14 @@ export default function Landing() {
         <div className="w-full max-w-3xl">
           <div className="text-center mb-12">
             <div className="text-[11px] font-semibold text-stone-500 uppercase tracking-[0.18em] mb-4">
-              Texas University Research Finder
+              Texas STEM Research Finder
             </div>
             <h1 className="font-display text-4xl sm:text-5xl text-stone-900 leading-tight mb-4">
               Pick your university
             </h1>
             <p className="text-stone-600 text-base max-w-xl mx-auto leading-relaxed">
               Each school has its own faculty directory, branding, and matching dashboard.
-              Choose where you go to see research labs near you.
+              Choose your university to explore STEM research labs and advisors.
             </p>
           </div>
 

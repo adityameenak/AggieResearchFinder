@@ -25,7 +25,7 @@ export const SCHOOLS = {
       pillText:     'text-maroon-700',
     },
     officialUrl: 'https://engineering.tamu.edu',
-    description: 'Discover research labs across Texas A&M, powered by AI matching.',
+    description: 'Discover STEM research labs across Texas A&M, powered by AI matching.',
     available: true,
   },
   rice: {
@@ -44,7 +44,7 @@ export const SCHOOLS = {
       pillText:     'text-rice-blue-700',
     },
     officialUrl: 'https://www.rice.edu',
-    description: 'Discover research labs across Rice, powered by AI matching.',
+    description: 'Discover STEM research labs across Rice, powered by AI matching.',
     available: true,
   },
   ut: {
@@ -63,7 +63,7 @@ export const SCHOOLS = {
       pillText:     'text-ut-orange-700',
     },
     officialUrl: 'https://www.utexas.edu',
-    description: 'Discover research labs across UT Austin, powered by AI matching.',
+    description: 'Discover STEM research labs across UT Austin, powered by AI matching.',
     // Scaffolding: only ECE faculty are crawled so far. Flip to true once
     // enough Cockrell/CNS departments are merged into faculty.json.
     available: false,
