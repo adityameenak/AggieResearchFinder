@@ -454,18 +454,27 @@ _LAB_LINK_RE = re.compile(
 
 
 def _collect_section_text(heading_tag, soup) -> str:
-    """Gather text from siblings after *heading_tag* until the next heading."""
+    """Gather text after *heading_tag* until the next heading.
+
+    Walks the document in order (not just direct siblings) so it still captures
+    a section whose body lives in a different wrapper than the heading — a
+    common TAMU layout where the "Research Interests" prose isn't a sibling of
+    the <h2>. Descendants of an already-collected block are skipped to avoid
+    double-counting the same text.
+    """
     parts: list[str] = []
-    for sib in heading_tag.find_next_siblings():
-        if sib.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
+    taken: set[int] = set()
+    for el in heading_tag.find_all_next():
+        if el.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
             break
-        if sib.name in ("ul", "ol"):
-            items = [li.get_text(" ", strip=True) for li in sib.find_all("li")]
-            parts.append(" | ".join(filter(None, items)))
-        else:
-            t = sib.get_text(" ", strip=True)
-            if t:
-                parts.append(t)
+        if el.name not in ("p", "li", "div", "span", "td", "blockquote"):
+            continue
+        if any(id(anc) in taken for anc in el.parents):
+            continue  # parent already captured this text
+        t = el.get_text(" ", strip=True)
+        if t:
+            parts.append(t)
+            taken.add(id(el))
         if sum(len(p) for p in parts) > 1200:
             break
     return re.sub(r"\s+", " ", " ".join(parts)).strip()
