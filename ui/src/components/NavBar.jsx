@@ -1,17 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
-import { getApplications } from '../utils/trackerStorage'
-import { useMemo } from 'react'
 
 export default function NavBar() {
-  const { saved }   = useApp()
+  const { savedCount } = useApp()
   const school      = useSchool()
   const tx          = useSchoolPath()
   const { pathname } = useLocation()
-
-  // Live count of tracked applications — reads localStorage directly so it stays in sync
-  const trackerCount = useMemo(() => getApplications(school.code).length, [pathname, school.code])
 
   // Active matching: compare against the school-prefixed path
   function linkCls(rel, exact = false) {
@@ -69,25 +64,15 @@ export default function NavBar() {
               discoverActive ? 'text-maroon-700' : 'text-stone-500 hover:text-stone-900',
             ].join(' ')}
           >
-            Discover
+            Match
           </Link>
-          <Link to={tx('/saved')} className={linkCls('/saved')}>
+          <Link to={tx('/tracker')} className={linkCls('/tracker')}>
             Saved
-            {saved.length > 0 && (
+            {savedCount > 0 && (
               <span className="ml-1.5 inline-flex items-center justify-center
                                w-[18px] h-[18px] rounded-full bg-maroon-700
                                text-cream-50 text-[10px] font-bold leading-none">
-                {saved.length > 9 ? '9+' : saved.length}
-              </span>
-            )}
-          </Link>
-          <Link to={tx('/tracker')} className={linkCls('/tracker')}>
-            Tracker
-            {trackerCount > 0 && (
-              <span className="ml-1.5 inline-flex items-center justify-center
-                               w-[18px] h-[18px] rounded-full bg-stone-600
-                               text-white text-[10px] font-bold leading-none">
-                {trackerCount > 9 ? '9+' : trackerCount}
+                {savedCount > 9 ? '9+' : savedCount}
               </span>
             )}
           </Link>

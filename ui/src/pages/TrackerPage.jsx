@@ -1,10 +1,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSchool } from '../SchoolContext'
-import {
-  getApplications, createApplication, updateApplication, deleteApplication,
-  exportToCSV, seedDemoData, STATUSES,
-} from '../utils/trackerStorage'
+import { useApp } from '../AppContext'
+import { exportToCSV, seedDemoData, STATUSES } from '../utils/trackerStorage'
 import ApplicationsSummaryCards from '../components/tracker/ApplicationsSummaryCards'
 import ApplicationsToolbar      from '../components/tracker/ApplicationsToolbar'
 import ApplicationCard          from '../components/tracker/ApplicationCard'
@@ -60,19 +58,16 @@ function EmptyState({ hasFilters, onAdd, onSeed }) {
 export default function TrackerPage() {
   const location = useLocation()
   const school   = useSchool()
+  // The unified list lives in AppContext (single source of truth shared with
+  // the bookmark buttons and the nav badge).
+  const { applications, addApp, editApp, removeApp, refreshApps } = useApp()
 
-  const [applications, setApplications] = useState(() => getApplications(school.code))
   const [modalOpen,    setModalOpen]    = useState(false)
   const [editTarget,   setEditTarget]   = useState(null)
   const [prefill,      setPrefill]      = useState(null)
   const [query,        setQuery]        = useState('')
   const [statusFilter, setStatusFilter] = useState('')
   const [sort,         setSort]         = useState('newest')
-
-  // Reload when school changes so each school's tracker is isolated
-  useEffect(() => {
-    setApplications(getApplications(school.code))
-  }, [school.code])
 
   useEffect(() => {
     if (location.state?.prefill) {
@@ -82,12 +77,9 @@ export default function TrackerPage() {
     }
   }, [location.state])
 
-  function refresh() { setApplications(getApplications(school.code)) }
-
   function handleSave(fields) {
-    if (editTarget) updateApplication(editTarget.id, fields, school.code)
-    else            createApplication(fields, school.code)
-    refresh()
+    if (editTarget) editApp(editTarget.id, fields)
+    else            addApp(fields)
     setModalOpen(false)
     setEditTarget(null)
     setPrefill(null)
@@ -138,10 +130,11 @@ export default function TrackerPage() {
           <div className="flex items-start justify-between gap-4 mb-7 flex-wrap">
             <div>
               <h1 className="font-display font-bold text-stone-900 text-3xl tracking-tight">
-                My Applications
+                My List
               </h1>
               <p className="text-sm text-stone-500 mt-1">
-                Track every lab and professor you reach out to.
+                Every professor you've saved — set their status as you reach out
+                (Saved → Interested → Emailed → Replied …).
               </p>
             </div>
 
@@ -181,7 +174,7 @@ export default function TrackerPage() {
           <EmptyState
             hasFilters={false}
             onAdd={() => { setEditTarget(null); setPrefill(null); setModalOpen(true) }}
-            onSeed={() => { seedDemoData(school.code); refresh() }}
+            onSeed={() => { seedDemoData(school.code); refreshApps() }}
           />
         ) : (
           <div className="space-y-4">
@@ -203,8 +196,8 @@ export default function TrackerPage() {
                     <ApplicationCard
                       app={app}
                       onEdit={handleEdit}
-                      onDelete={id => { deleteApplication(id, school.code); refresh() }}
-                      onUpdate={(id, updates) => { updateApplication(id, updates, school.code); refresh() }}
+                      onDelete={id => removeApp(id)}
+                      onUpdate={(id, updates) => editApp(id, updates)}
                     />
                   </Reveal>
                 ))}

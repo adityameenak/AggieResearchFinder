@@ -8,7 +8,6 @@ import Footer     from './components/Footer'
 import Home       from './pages/Home'
 import Results    from './pages/Results'
 import ProfDetail from './pages/ProfDetail'
-import Saved      from './pages/Saved'
 import About      from './pages/About'
 import Discover   from './pages/Discover'
 import Match      from './pages/Match'
@@ -42,7 +41,7 @@ export default function SchoolApp() {
               <Route path="search"   element={<Results />}    />
               <Route path="results"  element={<Navigate to="../search" replace />} />
               <Route path="prof/:id" element={<ProfDetail />} />
-              <Route path="saved"    element={<Saved />}      />
+              <Route path="saved"    element={<Navigate to="../tracker" replace />} />
               <Route path="about"    element={<About />}      />
               <Route path="discover" element={<Discover />}   />
               <Route path="match"    element={<Match />}      />

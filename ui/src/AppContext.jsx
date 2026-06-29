@@ -1,34 +1,26 @@
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { useSchool } from './SchoolContext'
 import { extractTopicsFromFaculty, loadSearchCounts, saveSearchCounts, mergeTopics } from './utils/topics'
+import {
+  getApplications, createApplication, updateApplication, deleteApplication,
+} from './utils/trackerStorage'
 
 const AppContext = createContext(null)
 
 export function AppProvider({ children }) {
   const school    = useSchool()
-  const savedKey  = `${school.code}_saved_profs`
 
   const [faculty, setFaculty]   = useState([])
   const [loading, setLoading]   = useState(true)
   const [error,   setError]     = useState(null)
 
-  // Saved IDs persisted to localStorage, per-school namespaced
-  const [saved, setSaved] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem(savedKey) || '[]')
-    } catch {
-      return []
-    }
-  })
-
-  // When school changes, reload the saved set from the new namespace
-  useEffect(() => {
-    try {
-      setSaved(JSON.parse(localStorage.getItem(savedKey) || '[]'))
-    } catch {
-      setSaved([])
-    }
-  }, [savedKey])
+  // The unified saved / tracking list. Saving a professor IS a tracker entry
+  // (status "Saved") — the My List page lets you advance status (Interested,
+  // Emailed, …). AppContext is the single source of truth so the bookmark
+  // state, the nav badge, and the list page never desync.
+  const [applications, setApplications] = useState(() => getApplications(school.code))
+  useEffect(() => { setApplications(getApplications(school.code)) }, [school.code])
+  function refreshApps() { setApplications(getApplications(school.code)) }
 
   useEffect(() => {
     let cancelled = false
@@ -86,29 +78,46 @@ export function AppProvider({ children }) {
     })
   }
 
-  function toggleSave(id) {
-    setSaved(prev => {
-      const next = prev.includes(id)
-        ? prev.filter(x => x !== id)
-        : [...prev, id]
-      localStorage.setItem(savedKey, JSON.stringify(next))
-      return next
-    })
-  }
-
   function isSaved(id) {
-    return saved.includes(id)
+    return applications.some(a => a.profId === id)
   }
 
-  function clearSaved() {
-    setSaved([])
-    localStorage.removeItem(savedKey)
+  // Toggle a professor in/out of the saved list. Accepts a prof object
+  // (preferred — captures name/dept/links) or a bare id (back-compat).
+  function toggleSave(prof) {
+    const id = typeof prof === 'string' ? prof : prof?.id
+    if (!id) return
+    const existing = applications.find(a => a.profId === id)
+    if (existing) {
+      deleteApplication(existing.id, school.code)
+    } else {
+      const p = typeof prof === 'object' && prof ? prof : {}
+      createApplication({
+        profId:        id,
+        professorName: p.name || '',
+        department:    p.department || '',
+        researchArea:  (p.scholar_interests || []).slice(0, 3).join(', '),
+        sourceLink:    p.profile_url || '',
+        emailUsed:     p.email || '',
+        status:        'Saved',
+      }, school.code)
+    }
+    refreshApps()
   }
+
+  // CRUD used by the My List page (kept here so all mutations flow through one
+  // place and the saved-state stays consistent everywhere).
+  function addApp(fields)        { createApplication(fields, school.code); refreshApps() }
+  function editApp(id, updates)  { updateApplication(id, updates, school.code); refreshApps() }
+  function removeApp(id)         { deleteApplication(id, school.code); refreshApps() }
+
+  const savedCount = applications.length
 
   return (
     <AppContext.Provider value={{
       faculty, departments, loading, error,
-      saved, toggleSave, isSaved, clearSaved,
+      applications, savedCount, isSaved, toggleSave,
+      addApp, editApp, removeApp, refreshApps,
       topicChips, recordSearch,
     }}>
       {children}

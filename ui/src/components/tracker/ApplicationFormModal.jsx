@@ -7,7 +7,7 @@ const EMPTY = {
   labName:       '',
   department:    '',
   researchArea:  '',
-  status:        'Not Started',
+  status:        'Saved',
   dateApplied:   '',
   followUpDate:  '',
   emailUsed:     '',

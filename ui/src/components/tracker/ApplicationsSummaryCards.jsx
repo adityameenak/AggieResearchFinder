@@ -1,4 +1,4 @@
-const IN_PROGRESS = ['Not Started', 'Drafting Email', 'Applied', 'Follow Up Sent']
+const IN_PROGRESS = ['Saved', 'Interested', 'Drafting Email', 'Emailed', 'Replied', 'Applied']
 const DONE        = ['Interview Scheduled', 'Accepted', 'Rejected', 'Closed']
 
 export default function ApplicationsSummaryCards({ applications }) {

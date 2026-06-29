@@ -16,12 +16,15 @@ export function storageKey(schoolCode = DEFAULT_SCHOOL) {
   return `${schoolCode}_applications`
 }
 
-/** All valid application statuses — edit here to add / rename */
+/** All valid statuses — a saved professor starts at "Saved" and advances down
+ *  this outreach pipeline. Edit here to add / rename. */
 export const STATUSES = [
-  'Not Started',
+  'Saved',
+  'Interested',
   'Drafting Email',
+  'Emailed',
+  'Replied',
   'Applied',
-  'Follow Up Sent',
   'Interview Scheduled',
   'Accepted',
   'Rejected',
@@ -30,10 +33,12 @@ export const STATUSES = [
 
 /** Visual config for each status — used by StatusBadge + summary cards */
 export const STATUS_CONFIG = {
-  'Not Started':         { bg: 'bg-stone-100',   text: 'text-stone-600',   dot: 'bg-stone-400',   ring: 'ring-stone-200',   cardAccent: 'border-l-stone-300'   },
+  'Saved':               { bg: 'bg-stone-100',   text: 'text-stone-600',   dot: 'bg-stone-400',   ring: 'ring-stone-200',   cardAccent: 'border-l-stone-300'   },
+  'Interested':          { bg: 'bg-sky-50',      text: 'text-sky-700',     dot: 'bg-sky-400',     ring: 'ring-sky-200',     cardAccent: 'border-l-sky-300'     },
   'Drafting Email':      { bg: 'bg-blue-50',     text: 'text-blue-700',    dot: 'bg-blue-400',    ring: 'ring-blue-200',    cardAccent: 'border-l-blue-300'    },
+  'Emailed':             { bg: 'bg-indigo-50',   text: 'text-indigo-700',  dot: 'bg-indigo-500',  ring: 'ring-indigo-200',  cardAccent: 'border-l-indigo-400'  },
+  'Replied':             { bg: 'bg-teal-50',     text: 'text-teal-700',    dot: 'bg-teal-500',    ring: 'ring-teal-200',    cardAccent: 'border-l-teal-400'    },
   'Applied':             { bg: 'bg-amber-50',    text: 'text-amber-700',   dot: 'bg-amber-500',   ring: 'ring-amber-200',   cardAccent: 'border-l-amber-400'   },
-  'Follow Up Sent':      { bg: 'bg-orange-50',   text: 'text-orange-700',  dot: 'bg-orange-500',  ring: 'ring-orange-200',  cardAccent: 'border-l-orange-400'  },
   'Interview Scheduled': { bg: 'bg-violet-50',   text: 'text-violet-700',  dot: 'bg-violet-500',  ring: 'ring-violet-200',  cardAccent: 'border-l-violet-400'  },
   'Accepted':            { bg: 'bg-green-50',    text: 'text-green-800',   dot: 'bg-green-500',   ring: 'ring-green-200',   cardAccent: 'border-l-green-400'   },
   'Rejected':            { bg: 'bg-red-50',      text: 'text-red-700',     dot: 'bg-red-400',     ring: 'ring-red-200',     cardAccent: 'border-l-red-300'     },
@@ -69,7 +74,7 @@ export function createApplication(fields, schoolCode = DEFAULT_SCHOOL) {
     labName:       '',
     department:    '',
     researchArea:  '',
-    status:        'Not Started',
+    status:        'Saved',
     dateApplied:   '',
     lastUpdated:   now,
     followUpDate:  '',
@@ -175,7 +180,7 @@ export function seedDemoData(schoolCode = DEFAULT_SCHOOL) {
       labName:       'Neural Interfaces & Biomedical Devices Lab',
       department:    'biomedical',
       researchArea:  'Neural interfaces, Brain-machine interfaces, Medical devices',
-      status:        'Follow Up Sent',
+      status:        'Emailed',
       dateApplied:   offset(-30),
       followUpDate:  offset(-2),
       emailUsed:     `student@${schoolCode}.edu`,
@@ -241,7 +246,7 @@ export function daysUntilFollowUp(followUpDate) {
 export function computeSummary(apps) {
   return {
     total:     apps.length,
-    awaiting:  apps.filter(a => ['Applied', 'Follow Up Sent', 'Drafting Email', 'Not Started'].includes(a.status)).length,
+    awaiting:  apps.filter(a => ['Saved', 'Interested', 'Drafting Email', 'Emailed', 'Replied', 'Applied'].includes(a.status)).length,
     interview: apps.filter(a => a.status === 'Interview Scheduled').length,
     accepted:  apps.filter(a => a.status === 'Accepted').length,
     rejected:  apps.filter(a => a.status === 'Rejected').length,

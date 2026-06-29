@@ -62,7 +62,7 @@ function MatchCard({ result, onDraftEmail }) {
           <FitBadge label={fit_label} />
           <DeptBadge dept={prof.department} />
         </div>
-        <button onClick={() => toggleSave(prof.id)} title={saved ? 'Remove from saved' : 'Save'}
+        <button onClick={() => toggleSave(prof)} title={saved ? 'Remove from saved' : 'Save'}
                 className={`flex-shrink-0 p-1.5 rounded-lg transition-all active:scale-90 ${
                   saved ? 'text-maroon-700 bg-maroon-100 hover:bg-maroon-200'
                         : 'text-stone-300 hover:text-maroon-700 hover:bg-maroon-50'}`}>
