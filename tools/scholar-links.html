@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scholar Links — internal tool</title>
+<style>
+  :root { --bg:#faf8f3; --card:#fff; --line:#e7e0d3; --ink:#2a2622; --muted:#8a8275; --accent:#500000; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  header { position:sticky; top:0; background:var(--card); border-bottom:1px solid var(--line); padding:12px 20px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; z-index:10; }
+  header h1 { font-size:16px; margin:0; }
+  .muted { color:var(--muted); }
+  .pill { background:#f0ece2; border-radius:999px; padding:2px 10px; font-size:12px; }
+  main { max-width:740px; margin:0 auto; padding:20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:14px; }
+  .name { font-size:17px; font-weight:700; margin:0; }
+  .sub { color:var(--muted); font-size:13px; margin:2px 0 10px; }
+  a.btn, button { font:inherit; border:1px solid var(--line); background:#fff; border-radius:9px; padding:7px 12px; cursor:pointer; font-weight:600; text-decoration:none; color:var(--accent); display:inline-flex; gap:5px; align-items:center; }
+  a.btn:hover, button:hover { background:#f5f1e9; }
+  .links { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+  .links a.dim { color:#bbb; pointer-events:none; border-color:#eee; }
+  input[type=url] { width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 10px; font:inherit; }
+  input.ok { border-color:#7bb37b; background:#f3faf3; }
+  input.bad { border-color:#d49a9a; }
+  select, input[type=file] { font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .done { opacity:.55; }
+  .empty { text-align:center; padding:60px 20px; color:var(--muted); }
+  code { background:#f0ece2; padding:1px 5px; border-radius:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Scholar Links <span class="muted">— paste Google Scholar URLs for blank profiles</span></h1>
+  <label>School <select id="school"><option value="">All</option></select></label>
+  <span class="pill" id="progress">0 / 0</span>
+  <button id="export">Export links</button>
+  <input type="file" id="picker" accept="application/json" style="display:none" />
+  <button id="load">Load queue…</button>
+</header>
+<main id="list"><div class="empty" id="hint">Loading… if nothing appears, click <b>Load queue…</b> and pick <code>scholar-links-queue.json</code>.</div></main>
+
+<script>
+const LS = 'scholarLinks'
+let QUEUE = []
+let links = JSON.parse(localStorage.getItem(LS) || '{}')  // id -> scholar url
+
+const save = () => localStorage.setItem(LS, JSON.stringify(links))
+const isScholar = u => /scholar\.google\.[a-z.]+\/citations\?.*user=/.test(u || '')
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))
+
+function render() {
+  const school = document.getElementById('school').value
+  const list = document.getElementById('list')
+  const have = Object.values(links).filter(isScholar).length
+  document.getElementById('progress').textContent = `${have} / ${QUEUE.length} linked`
+
+  const items = QUEUE.filter(r => !school || r.university === school)
+  if (!items.length) { list.innerHTML = '<div class="empty">Nothing here.</div>'; return }
+
+  list.innerHTML = items.slice(0, 80).map(r => {
+    const cur = links[r.id] || ''
+    // Pre-filled Google Scholar author search for this person
+    const q = encodeURIComponent(`${r.name} ${r.university.toUpperCase()}`)
+    const search = `https://scholar.google.com/citations?view_op=search_authors&mauthors=${q}`
+    const link = (href, label) => href
+      ? `<a class="btn" href="${href}" target="_blank" rel="noopener">${label} ↗</a>`
+      : `<a class="btn dim">${label}</a>`
+    return `<div class="card ${isScholar(cur) ? 'done' : ''}" data-id="${r.id}">
+      <p class="name">${esc(r.name)}</p>
+      <p class="sub">${esc(r.title || '')} · ${esc(r.department)} · ${r.university.toUpperCase()}</p>
+      <div class="links">
+        <a class="btn" href="${search}" target="_blank" rel="noopener">🔍 Search Scholar ↗</a>
+        ${link(r.profile_url, 'Profile')}
+        ${link(r.lab_website, 'Lab')}
+      </div>
+      <input type="url" placeholder="Paste the Google Scholar profile URL (…/citations?user=…)"
+             value="${esc(cur)}" class="${cur ? (isScholar(cur)?'ok':'bad') : ''}" />
+    </div>`
+  }).join('') + (items.length > 80 ? `<div class="empty">…and ${items.length-80} more.</div>` : '')
+
+  list.querySelectorAll('.card').forEach(card => {
+    const id = card.dataset.id
+    const inp = card.querySelector('input')
+    inp.oninput = () => {
+      const v = inp.value.trim()
+      if (v) { links[id] = v } else { delete links[id] }
+      inp.className = v ? (isScholar(v) ? 'ok' : 'bad') : ''
+      save()
+      document.getElementById('progress').textContent =
+        `${Object.values(links).filter(isScholar).length} / ${QUEUE.length} linked`
+      card.classList.toggle('done', isScholar(v))
+    }
+  })
+}
+
+function ingest(data) {
+  QUEUE = Array.isArray(data) ? data : []
+  document.getElementById('hint')?.remove()
+  const schools = [...new Set(QUEUE.map(r => r.university))].sort()
+  document.getElementById('school').innerHTML =
+    '<option value="">All</option>' + schools.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('')
+  render()
+}
+
+document.getElementById('school').onchange = render
+document.getElementById('load').onclick = () => document.getElementById('picker').click()
+document.getElementById('picker').onchange = e => {
+  const f = e.target.files[0]; if (f) f.text().then(t => ingest(JSON.parse(t)))
+}
+document.getElementById('export').onclick = () => {
+  const out = {}
+  for (const [id, url] of Object.entries(links)) if (isScholar(url)) out[id] = url
+  const blob = new Blob([JSON.stringify(out, null, 2)], {type:'application/json'})
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob); a.download = 'scholar-links.json'; a.click()
+}
+fetch('./scholar-links-queue.json').then(r => r.ok ? r.json() : Promise.reject()).then(ingest).catch(() => {})
+</script>
+</body>
+</html>

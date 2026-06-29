@@ -421,14 +421,19 @@
     "department": "electrical",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/kanad.basu",
-    "research_summary": "",
+    "research_summary": "Research interests: Hardware Security, Post-Silicon Validation, VLSI Testing, Functional Safety. Selected work: Lossless data compression and real-time decompression; Analyzing and mitigating the impact of permanent faults on a systolic array based neural network accelerator; NIST Post-Quantum CryptographyA Hardware Evaluation Study; Processor description languages; Fault-tolerant Systolic Array Based Accelerators for Deep Neural Network Execution.",
     "lab_website": "https://ieeexplore.ieee.org/abstract/document/9049424",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=q0PDoH8AAAAJ&hl=en",
+    "ai_review": "Kanad Basu’s research within the Electrical Engineering department centers on critical aspects of hardware security and validation techniques for complex integrated circuits. His work primarily focuses on mitigating faults in VLSI designs, particularly through the development of fault-tolerant systolic array based accelerators tailored for deep neural networks alongside analyses of permanent faults impacting neural network performance.  Specifically, Professor Basu investigates lossless data compression and real-time decompression algorithms, as well as conducting hardware evaluations of post-quantum cryptography standards – most recently with the NIST – utilizing rigorous testing methodologies. Furthermore, his research extends to processor description languages and post-silicon validation strategies, reflecting a commitment to ensuring the functional safety and reliability of modern hardware systems.  His Google Scholar profile highlights a strong concentration within Hardware Security, Post-Silicon Validation, VLSI Testing, and Functional Safety, indicating a dedicated focus on these areas.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/3682/conversions/Kanad-Basu-photo-medium.jpg",
     "phone": "+1 (972) 883-4341",
     "office": "ECS 4.922",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Hardware Security",
+      "Post-Silicon Validation",
+      "VLSI Testing",
+      "Functional Safety"
+    ],
     "publications": []
   },
   {
@@ -1051,14 +1056,18 @@
     "department": "cse",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/zhiyu.chen2",
-    "research_summary": "",
+    "research_summary": "Research interests: AI, LLM, AI for Health. Selected work: FinQA: A Dataset of Numerical Reasoning over Financial Data; HybridQA: A Dataset of Multi-Hop Question Answering over Tabular and Textual Data; ConvFinQA: Exploring the Chain of Numerical Reasoning in Conversational Finance Question Answering; Logical natural language generation from open-domain tables; Explanations from large language models make small reasoners better.",
     "lab_website": "https://czyssrs.github.io/",
     "google_scholar": "https://scholar.google.com/citations?user=Wusd9LgAAAAJ&hl=en",
-    "ai_review": "",
+    "ai_review": "Zoey Zhiyu Chen’s research within the CSE department centers on leveraging Large Language Models (LLMs) to address complex reasoning challenges across several domains. Her work primarily focuses on Artificial Intelligence, particularly exploring applications of LLMs in AI for Health and financial contexts. Dr. Chen is known for developing novel datasets like FinQA, HybridQA, and ConvFinQA designed to evaluate numerical reasoning over financial data and multi-hop question answering incorporating both tabular and textual information. Notably, her research investigates the use of logical natural language generation alongside large models to improve smaller reasoners, as evidenced by her exploration of explanations from LLMs impacting human performance. These investigations align with her broader interests in AI and LLM development, suggesting a lab dedicated to advancing intelligent systems through innovative dataset creation and model-human interaction studies.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4286/conversions/IMG_8275-medium.jpg",
     "phone": "+1 (972) 883-4239",
     "office": "ECS3.410",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "AI",
+      "LLM",
+      "AI for Health"
+    ],
     "publications": []
   },
   {
@@ -2851,14 +2860,18 @@
     "department": "cse",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/yunhui.guo",
-    "research_summary": "",
+    "research_summary": "Research interests: Computer Vision, Machine Learning, Edge Computing. Selected work: Spottune: transfer learning through adaptive fine-tuning; A broader study of cross-domain few-shot learning; A survey on methods and theories of quantized neural networks; Depthwise Convolution is All You Need for Learning Multiple Visual Domains; Improved schemes for episodic memory-based lifelong learning.",
     "lab_website": "https://yunhuiguo.github.io/",
     "google_scholar": "https://scholar.google.com/citations?user=BxIXuZYAAAAJ&hl=en&authuser=1",
-    "ai_review": "",
+    "ai_review": "Yunhui Guo’s research within the CSE department centers on the intersection of computer vision, machine learning, and edge computing, consistently exploring innovative approaches to intelligent systems.  Their work demonstrates a significant focus on transfer learning, particularly through projects like Spottune which utilizes adaptive fine-tuning, alongside broader investigations into cross-domain few-shot learning. Guo’s research also includes detailed analyses of quantized neural networks and the application of Depthwise Convolutions for multi-domain visual understanding.  Notably, they have contributed to methodologies within episodic memory-based lifelong learning systems, reflecting a commitment to robust and adaptable AI solutions.  Driven by interests gleaned from Google Scholar searches in computer vision, machine learning, and edge computing, Professor Guo’s lab investigates efficient and effective techniques for real-time image processing and intelligent device applications.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4597/conversions/small-min-medium.jpg",
     "phone": "+1 (972) 883-4203",
     "office": "ECS4.604",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Computer Vision",
+      "Machine Learning",
+      "Edge Computing"
+    ],
     "publications": []
   },
   {
@@ -4363,14 +4376,16 @@
     "department": "physics-astronomy",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/yveshon.kwan",
-    "research_summary": "",
+    "research_summary": "Research interests: Condensed matter theory. Selected work: Kekulé spiral order at all nonzero integer fillings in twisted bilayer graphene; One-dimensional Luttinger liquids in a two-dimensional moiré lattice; Global phase diagram of the normal state of twisted bilayer graphene; Moiré fractional Chern insulators. III. Hartree-Fock phase diagram, magic angle regime for Chern insulator states, role of moiré potential, and Goldstone gaps in rhombohedral …; Exciton band topology in spontaneous quantum anomalous Hall insulators: Applications to twisted bilayer graphene.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=_YdLwzIAAAAJ&hl=en",
-    "ai_review": "",
+    "ai_review": "Yves Kwan’s research within the physics and astronomy department centers on condensed matter theory, primarily investigating emergent phenomena in two-dimensional materials utilizing theoretical modeling techniques. His work focuses extensively on twisted bilayer graphene, where he has explored complex topological phases including Kekulé spiral order, one-dimensional Luttinger liquids arranged within moiré lattices, and a comprehensive global phase diagram of the material’s normal state. Kwan's research also encompasses related areas such as moiré fractional Chern insulators and spontaneous quantum anomalous Hall insulators, often utilizing Hartree-Fock calculations to map out phases in the magic angle regime and analyze Goldstone gaps. Notably, he investigates exciton band topology within twisted bilayer graphene, contributing significant insights into the material’s unique electronic properties through computational approaches.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4484/conversions/cropped-medium.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Condensed matter theory"
+    ],
     "publications": []
   },
   {
@@ -4651,14 +4666,20 @@
     "department": "mechanical",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/jiannan.li",
-    "research_summary": "",
+    "research_summary": "Research interests: bioprinting, biomaterials, microfluidics, tissue engineering, cancer study. Selected work: Pretreatment of corn stover via sodium hydroxide–urea solutions to improve the glucose yield; Development and systematic characterization of GelMA/alginate/PEGDMA/xanthan gum hydrogel bioink system for extrusion bioprinting; Microfluidic-enabled print-to-screen platform for high-throughput screening of combinatorial chemotherapy; Deciphering the metabolic role of AMPK in cancer multi-drug resistance; An osteoinductive and biodegradable intramedullary implant accelerates bone healing and mitigates complications of bone transport in male rats.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=gqdl-CkAAAAJ&inst=5746887945952177237",
-    "ai_review": "",
+    "ai_review": "Jiannan Li’s research program within the Mechanical Engineering Department centers on innovative applications of materials and microfabrication techniques to address challenges in biomedicine and sustainable resource utilization. His work spans several interconnected areas, including bioprinting utilizing hydrogel bioinks like GelMA alongside alginate and PEGDMA for tissue engineering applications; the development of microfluidic platforms for high-throughput drug screening, specifically examining combinatorial chemotherapy and cancer multi-drug resistance mechanisms through AMPK investigation; and fundamental research in biomaterials, demonstrated by his pretreatment studies of corn stover to enhance glucose yield. Notably, Li’s lab also investigates advanced materials for bone regeneration with an osteoinductive implant designed to accelerate healing.  These diverse projects demonstrate a strong focus on leveraging microfluidics, bioprinting, and biomaterial design for advancements in cancer study and tissue engineering.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4598/conversions/JiannanLi-medium.jpg",
     "phone": "+1 (972) 883-3129",
     "office": "ECSW 3.355A",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "bioprinting",
+      "biomaterials",
+      "microfluidics",
+      "tissue engineering",
+      "cancer study"
+    ],
     "publications": []
   },
   {
@@ -5155,14 +5176,16 @@
     "department": "biology",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/sxm170074",
-    "research_summary": "",
+    "research_summary": "Research interests: Cancer Metabolism. Selected work: p63 and SOX2 dictate glucose reliance and metabolic vulnerabilities in squamous cell carcinomas; Stromal Hedgehog pathway activation by IHH suppresses lung adenocarcinoma growth and metastasis by limiting reactive oxygen species; Oxidative stress and the intersection of oncogenic signaling and metabolism in squamous cell carcinomas; Epigenome modulated xenobiotic detoxification pathways control DMBA-induced breast cancer in agouti Avy/a mice; Targeting the glucose–insulin link in head and neck squamous cell carcinoma induces cytotoxic oxidative stress and inhibits cancer growth.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=45tPMCMAAAAJ&hl=en",
-    "ai_review": "",
+    "ai_review": "Simbarashe (Simba) Mazambani’s research program within the biology department centers on understanding the intricate relationship between metabolism and cancer, specifically focusing on squamous cell carcinomas. His work investigates how metabolic vulnerabilities, such as glucose dependence, are dictated by key transcription factors like p63 and SOX2, utilizing cellular models and in vivo studies with agouti Avy/a mice. Mazambani’s research also explores the role of stromal signaling pathways – notably Hedgehog activation – in suppressing lung adenocarcinoma growth via oxidative stress reduction. Furthermore, he examines how epigenetic modifications influence xenobiotic detoxification pathways impacting breast cancer development and investigates the direct targeting of the glucose-insulin axis to induce cytotoxic oxidative stress within head and neck squamous cell carcinoma.  Ultimately, Mazambani’s research utilizes a combination of molecular techniques and preclinical models to dissect the metabolic mechanisms driving these aggressive cancers.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/3911/conversions/IMG_5254-medium.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Cancer Metabolism"
+    ],
     "publications": []
   },
   {
@@ -7657,14 +7680,20 @@
     "department": "chemistry",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/sns170230",
-    "research_summary": "",
+    "research_summary": "Research interests: Bio-Energy, Bio-Diesel, Bio-based Coatings, Liquid Crystal, Organic Chemistry. Selected work: Composition and physical properties of cress (Lepidium sativum L.) and field pennycress (Thlaspi arvense L.) oils; Wild Brazilian Mustard (Brassica junceaL.) Seed Oil Methyl Esters as Biodiesel Fuel; Biodiesel from plant oils; Preparation and evaluation of jojoba oil methyl esters as biodiesel and as a blend component in ultra-low sulfur diesel fuel; Identification of Non-edible Seeds as Potential Feedstock for the Production and Application of Bio-diesel.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=9EksWKtR--UC&hl=en",
-    "ai_review": "",
+    "ai_review": "Dr. Shailesh Shah’s research within the chemistry department centers on utilizing renewable resources for sustainable energy and material applications. His work primarily focuses on converting plant oils—including those from cress, pennycress, and Brazilian mustard—into biodiesel fuel through methods such as transesterification, alongside investigating their physicochemical properties.  Furthermore, Dr. Shah’s research extends to the exploration of liquid crystals and bio-based coatings derived from organic chemistry principles. Utilizing a range of analytical techniques, his lab investigates the potential of various plant oils as feedstock for biodiesel production and explores their performance in fuel blends, aligning with his identified interests in bio-energy and sustainable materials.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/3305/conversions/Dr.-Shailesh-Shah-medium.jpg",
     "phone": "+1 (972) 883-3994",
     "office": "BE 2.322",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Bio-Energy",
+      "Bio-Diesel",
+      "Bio-based Coatings",
+      "Liquid Crystal",
+      "Organic Chemistry"
+    ],
     "publications": []
   },
   {
@@ -8755,14 +8784,17 @@
     "department": "geosciences",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/lowell.waite",
-    "research_summary": "",
+    "research_summary": "Research interests: Sedimentary basins, stratigraphy. Selected work: Construction of the seawater 87Sr86Sr curve for the Cenozoic and Cretaceous: supporting data; The carbonate analogs through time (CATT) hypothesis and the global atlas of carbonate fields—A systematic and predictive look at Phanerozoic carbonate systems; Petroleum geochemistry of the Cenomanian–Turonian Eagle Ford oils of south Texas; Origin and description of the micropore network within the Lower Cretaceous Stuart City Trend tight-gas limestone reservoir in Pawnee Field in South Texas; Importance of sequence stratigraphic concepts in development of reservoir architecture in Upper Jurassic grainstones, Hadriya and Hanifa reservoirs, Saudi Arabia.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?hl=en&user=wF9e_JIAAAAJ",
-    "ai_review": "",
+    "ai_review": "Lowell Waite’s research within the geosciences department centers on sedimentary basin analysis, primarily focusing on stratigraphic interpretation and the geological characteristics of carbonate systems across diverse time periods. His work leverages detailed geochemical analyses, including seawater strontium isotope tracing (as evidenced by his construction of the Cenozoic and Cretaceous 87Sr86Sr curve), to investigate the formation and evolution of Phanerozoic carbonate fields through the ‘Carbonate Analogs Through Time’ hypothesis. Furthermore, Professor Waite examines petroleum reservoirs, notably the Cenomanian-Turonian Eagle Ford oils in South Texas and the Stuart City Trend tight-gas limestone reservoir in Pawnee Field, Saudi Arabia, utilizing sequence stratigraphic principles to understand reservoir architecture within these sedimentary environments. His research interests align strongly with both carbonate systems and regional basin development, as reflected in his Google Scholar profile and published work.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/2935/conversions/IMG_0148-medium.jpg",
     "phone": "+1 (972) 883-5319",
     "office": "ROC1.206",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Sedimentary basins",
+      "stratigraphy"
+    ],
     "publications": []
   },
   {

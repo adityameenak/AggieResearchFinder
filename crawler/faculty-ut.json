@@ -133,14 +133,17 @@
     "name": "Ali Yilmaz",
     "title": "Adjunct Professor",
     "email": "ayilmaz@mail.utexas.edu",
-    "research_summary": "Electromagnetics & Acoustics (EA)",
+    "research_summary": "Research interests: Computational Electromagnetics, High-Performance Computing. Selected work: Time domain adaptive integral method for surface integral equations; AustinMan and AustinWoman: High-fidelity, anatomical voxel models developed from the VHP color images; A parallel FFT accelerated transient field-circuit simulator; Fast and rigorous analysis of EMC/EMI phenomena on electrically large and complex cable-loaded structures; Microwave-assisted low-temperature growth of thin films in solution.",
     "lab_website": "http://users.ece.utexas.edu/~yilmaz////",
     "google_scholar": "https://scholar.google.com/citations?user=Yn2jHisAAAAJ&hl=en&oi=ao",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/Yilmaz-Ali.jpg",
     "phone": "512-471-2054",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Ali Yilmaz’s research within the Electrical Engineering department centers on the intersection of computational electromagnetics and high-performance computing, utilizing advanced methods to address complex electromagnetic challenges. His work encompasses several key areas, including the development and application of time domain adaptive integral methods for surface integral equation solutions, as evidenced by his published work on AustinMan and AustinWoman – detailed voxel models created from VHP color images. Furthermore, Professor Yilmaz investigates transient field simulation with parallel FFT acceleration and conducts rigorous analyses of Electromagnetic Compatibility/Interference (EMC/EMI) phenomena, particularly focusing on large cable-loaded structures. Notably, he also explores microwave-assisted thin film growth techniques, demonstrating a broad expertise within the field’s technological advancements.",
+    "scholar_interests": [
+      "Computational Electromagnetics",
+      "High-Performance Computing"
+    ],
     "publications": []
   },
   {
@@ -367,14 +370,19 @@
     "name": "Christine Julien",
     "title": "Adjunct Faculty",
     "email": "c.julien@mail.utexas.edu",
-    "research_summary": "Software Engineering and Systems (SES)",
+    "research_summary": "Research interests: pervasive computing, mobile computing, software engineering, middleware. Selected work: Comparative evaluation of Received Signal-Strength Index (RSSI) based indoor localization techniques for construction jobsites; Virtual sensors: Abstracting data from physical sensors; Egospaces: Facilitating rapid development of context-aware mobile applications; Perceptions on the state of the art in verification and validation in cyber-physical systems; Sasha: creative goal-oriented reasoning in smart homes with large language models.",
     "lab_website": "http://users.ece.utexas.edu/~julien/",
     "google_scholar": "https://scholar.google.com/citations?user=p-rQXOQAAAAJ&hl=en&oi=ao",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/Julien-Christine.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Christine Julien’s research within the Electrical Engineering department centers on the intersection of pervasive and mobile computing, exploring innovative solutions for real-world applications through a blend of software engineering and middleware techniques. Her work investigates practical challenges in location technologies, notably evaluating Received Signal-Strength Index (RSSI) for indoor localization specifically within construction environments.  Furthermore, Professor Julien’s lab is actively engaged in developing virtual sensor systems to abstract data from physical sensors and utilizing frameworks like Egospaces to accelerate the creation of context-aware mobile applications. Recent research also delves into verification and validation strategies for cyber-physical systems alongside exploring creative applications of large language models, such as Sasha, within smart home environments focused on goal-oriented reasoning.  Her Google Scholar profile highlights her sustained interest in these core areas of pervasive computing and their associated software development methodologies.",
+    "scholar_interests": [
+      "pervasive computing",
+      "mobile computing",
+      "software engineering",
+      "middleware"
+    ],
     "publications": []
   },
   {
@@ -1177,14 +1185,16 @@
     "name": "Mark McDermott",
     "title": "Professor of Practice Emeritus | Entrepreneur in Residence",
     "email": "mcdermot@ece.utexas.edu",
-    "research_summary": "Research",
+    "research_summary": "Research interests: VLSI and Embedded Systems. Selected work: A CMOS electrochemical impedance spectroscopy (EIS) biosensor array; Integrated charge-pump phase-locked loop circuit; A CMOS electrochemical impedance spectroscopy biosensor array for label-free biomolecular detection; Multiplexed identification, quantification and genotyping of infectious agents using a semiconductor biochip; Detecting short branches in a prefetch buffer using target location information in a branch target cache.",
     "lab_website": "http://users.ece.utexas.edu/~mcdermot/",
     "google_scholar": "https://scholar.google.com/citations?hl=en&user=XWcR-yoAAAAJ",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/McDermott-Mark.jpg",
     "phone": "512-471-3253",
     "office": "EER 5.826",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Mark McDermott’s research within the Electrical Engineering department centers on the intersection of VLSI design and embedded systems, primarily focusing on developing innovative semiconductor-based biosensors and memory technologies. His work has notably involved creating CMOS electrochemical impedance spectroscopy (EIS) biosensor arrays for label-free detection of biomolecules, including a multiplexed biochip capable of identifying and quantifying infectious agents through genomic analysis. Furthermore, Professor McDermott’s investigations include the design of integrated charge-pump phase-locked loop circuits and novel approaches to optimizing memory systems, such as detecting short branches in a branch target cache using target location information.  His research leverages advanced CMOS fabrication techniques to create highly specialized microelectronic devices for biomedical diagnostics and data processing applications, aligning closely with his identified interests on Google Scholar.",
+    "scholar_interests": [
+      "VLSI and Embedded Systems"
+    ],
     "publications": []
   },
   {
@@ -1249,14 +1259,16 @@
     "name": "Milos Gligoric",
     "title": "Associate Professor | Archie W. Straiton Endowed Faculty Fellowship in Engineering",
     "email": "gligoric@utexas.edu",
-    "research_summary": "Software Engineering and Systems (SES)",
+    "research_summary": "Research interests: Software Engineering. Selected work: Practical regression test selection with dynamic file dependencies; Test generation through programming in UDITA; Comparing non-adequate test suites using coverage criteria; The kokkos ecosystem: Comprehensive performance portability for high performance computing; Coditt5: Pretraining for source code and natural language editing.",
     "lab_website": "http://users.ece.utexas.edu/~gligoric/",
     "google_scholar": "https://scholar.google.com/citations?user=MeZLMbkAAAAJ&hl=en",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/Gligoric-Milos.png",
     "phone": "",
     "office": "EER 7.886",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Milos Gligoric’s research program within the Electrical Engineering Department centers around innovative approaches to software engineering, particularly focused on improving testing methodologies and harnessing the power of high-performance computing. His work encompasses practical solutions like regression test selection incorporating dynamic file dependencies and test generation techniques utilizing UDITA (Unified Design for Iterative Testing and Analysis).  Notably, Gligoric investigates performance optimization through his exploration of the kokkos ecosystem for portable HPC applications, alongside research into evaluating and comparing test suite adequacy using coverage metrics. Furthermore, he is currently engaged in cutting-edge work on pretraining models, such as Coditt5, to enhance both source code and natural language editing capabilities – reflecting a broad commitment to advancing software engineering practices through rigorous experimentation and computational methods.",
+    "scholar_interests": [
+      "Software Engineering"
+    ],
     "publications": []
   },
   {
@@ -1411,14 +1423,18 @@
     "name": "Nur Touba",
     "title": "Professor | General Motors Foundation Centennial Teaching Fellowship in Electrical Engineering",
     "email": "touba@ece.utexas.edu",
-    "research_summary": "Integrated Circuits & Systems (ICS)",
+    "research_summary": "Research interests: VLSI Testing, Fault Tolerance, Reliability. Selected work: Survey of test vector compression techniques; Static compaction techniques to control scan vector power dissipation; System-on-Chip Test Architectures: Nanometer Design for Testability (Systems on Silicon); Scan vector compression/decompression using statistical coding; An efficient test vector compression scheme using selective Huffman coding.",
     "lab_website": "http://users.ece.utexas.edu/~touba////",
     "google_scholar": "https://scholar.google.com/citations?user=O9MCt9MAAAAJ&hl=en&oi=ao",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/Touba-Nur.jpg",
     "phone": "512-232-1456",
     "office": "EER 4.870",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Nur Touba’s research within the Electrical Engineering department focuses on critical aspects of ensuring the reliability and performance of complex integrated circuits, specifically through the lens of Very Large Scale Integration (VLSI) testing. Her work centers around techniques for minimizing test vector power dissipation using static compaction methods and exploring innovative System-on-Chip Test Architectures designed for nanometer scale designs. Notably, Professor Touba has conducted extensive research into scan vector compression, including employing statistical coding and selective Huffman coding schemes to reduce the volume of data required during testing. Her published work, as reflected in her Google Scholar profile, demonstrates a strong commitment to fault tolerance and reliability within VLSI design, with particular attention given to survey methodologies and practical implementation strategies.",
+    "scholar_interests": [
+      "VLSI Testing",
+      "Fault Tolerance",
+      "Reliability"
+    ],
     "publications": []
   },
   {
@@ -1699,14 +1715,19 @@
     "name": "Sarfraz Khurshid",
     "title": "Professor | Temple Foundation Endowed Teaching Fellowship in Engineering No. 2",
     "email": "khurshid@ece.utexas.edu",
-    "research_summary": "Software Engineering and Systems (SES)",
+    "research_summary": "Research interests: software testing and verification, debugging, error recovery, specification languages. Selected work: Korat: Automated testing based on Java predicates; Generalized symbolic execution for model checking and testing; Deeproad: Gan-based metamorphic testing and input validation framework for autonomous driving systems; Test input generation with Java PathFinder; Improving bug localization using structured information retrieval.",
     "lab_website": "http://users.ece.utexas.edu/~khurshid////",
     "google_scholar": "https://scholar.google.com/citations?user=bG5-ZzIAAAAJ&hl=en&oi=ao",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/Khurshid-Sarfraz.jpg",
     "phone": "512-471-8244",
     "office": "EER 7.880",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Sarfraz Khurshid’s research within the electrical engineering department centers on innovative approaches to software testing and verification, particularly for complex systems. His work leverages techniques such as automated testing utilizing Java predicates, generalized symbolic execution for formal model checking, and metamorphic testing frameworks like Deeproad – specifically employing Generative Adversarial Networks (GANs) for input validation in autonomous driving applications.  Dr. Khurshid’s research also encompasses improving bug localization through structured information retrieval and developing tools like Java Pathfinder to generate test inputs.  Notably, his Google Scholar profile indicates a strong focus on specification languages, debugging, and error recovery methodologies within the broader field of software testing and verification.",
+    "scholar_interests": [
+      "software testing and verification",
+      "debugging",
+      "error recovery",
+      "specification languages"
+    ],
     "publications": []
   },
   {
@@ -1897,14 +1918,17 @@
     "name": "Vijay Garg",
     "title": "Professor | Cullen Trust for Higher Education Endowed Professor in Engineering #5",
     "email": "garg@ece.utexas.edu",
-    "research_summary": "Software Engineering and Systems (SES)",
+    "research_summary": "Research interests: Distributed Systems, Discrete Event Systems. Selected work: Modeling and control of logical discrete event systems; Elements of distributed computing; Detection of weak unstable predicates in distributed programs; Formulas for calculating supremal controllable and normal sublanguages; On controllability and normality of discrete event dynamical systems.",
     "lab_website": "http://users.ece.utexas.edu/~garg/",
     "google_scholar": "https://scholar.google.com/citations?user=lHre0o0AAAAJ&hl=en&oi=ao",
     "photo_url": "https://www.ece.utexas.edu/sites/default/files/portraits/Garg-Vijay_0.jpeg",
     "phone": "512-471-9424",
     "office": "EER 7.884",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Vijay Garg’s research within the Electrical Engineering Department centers on the theoretical foundations and practical applications of distributed and discrete event systems. His work primarily investigates control methodologies for logical discrete event systems, exploring techniques like modeling and control to ensure predictable behavior in these complex environments.  Specifically, Professor Garg’s research includes analyzing weak unstable predicates within distributed programs, developing formulas for calculating supremal controllable and normal sublanguages—concepts central to understanding system stability—and contributing to the understanding of controllability and normality in discrete event dynamical systems.  Given his Google Scholar interests, he focuses heavily on distributed computing principles and their implementation within these system types.  Ultimately, Professor Garg’s research aims to provide rigorous mathematical tools and insights for designing robust and reliable distributed systems.",
+    "scholar_interests": [
+      "Distributed Systems",
+      "Discrete Event Systems"
+    ],
     "publications": []
   },
   {
@@ -7927,14 +7951,19 @@
     "name": "Arvind Ravikumar",
     "title": "",
     "email": "arvind.ravikumar@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Carbon Accounting, Energy Supply Chains, Energy and Climate Policy, Methane Emissions. Selected work: On the climate impacts of blue hydrogen production; Machine vision for natural gas methane emissions detection using an infrared camera; Closing the methane gap in US oil and natural gas production emissions inventories; A review of close-range and screening technologies for mitigating fugitive methane emissions in upstream oil and gas; Are optical gas imaging technologies effective for methane leak detection?.",
     "lab_website": "https://arvindravikumar.com/",
     "google_scholar": "https://scholar.google.com/citations?user=JgkvadQAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/2021-PGE-Faculty-Ravikumar-Arvind-1_1.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Arvind Ravikumar’s research within the petroleum department centers on quantifying and mitigating greenhouse gas emissions across energy supply chains, with a particular focus on methane. His work utilizes diverse methodological approaches including machine vision techniques – specifically employing infrared cameras for detecting methane leaks – alongside rigorous carbon accounting analyses of blue hydrogen production and US oil & gas inventories. Ravikumar’s research actively investigates the effectiveness of various mitigation technologies, such as optical gas imaging, and critically examines methodologies surrounding methane emissions measurement and reporting within policy contexts.  Notably, he has published on the climate impacts of hydrogen production pathways and the application of advanced sensor technologies to address fugitive emissions in upstream operations, demonstrating a commitment to both technological innovation and policy-relevant research concerning energy and climate challenges.",
+    "scholar_interests": [
+      "Carbon Accounting",
+      "Energy Supply Chains",
+      "Energy and Climate Policy",
+      "Methane Emissions"
+    ],
     "publications": []
   },
   {
@@ -7981,14 +8010,20 @@
     "name": "Carlos Torres-Verdín",
     "title": "",
     "email": "cverdin@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Borehole Geophysics, Formation Evaluation, Petrophysics, Rock Physics, Well Logging. Selected work: Assessing the utility of FIB-SEM images for shale digital rock physics; Principles of spatial surface electric field filtering in magnetotellurics; electromagnetic array profiling (EMAP); Rapid 2.5-dimensional forward modeling and inversion via a new nonlinear scattering approximation; Numerical simulation of shale-gas production: from pore-scale modeling of slip-flow, Knudsen diffusion, and Langmuir desorption to reservoir modeling of compressible fluid; Electrical conductivity, induced polarization, and permeability of the Fontainebleau sandstone.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=I-J9Dc8AAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Torres-Verdin-Carlos.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Carlos Torres-Verdín’s research program within the petroleum department centers on utilizing geophysical and petrophysical techniques to investigate subsurface reservoir properties. His work predominantly focuses on borehole geophysics, employing methods such as electromagnetic array profiling (EMAP) and well logging to characterize formations. Specifically, Professor Torres-Verdín investigates the electrical behavior of rocks, including studies of conductivity, induced polarization, and permeability in sandstones like Fontainebleau, alongside advanced modeling approaches. He utilizes numerical simulations, incorporating pore-scale physics like slip-flow and diffusion, alongside rapid 2.5D forward modeling to predict shale-gas production. Furthermore, his research explores the application of techniques such as FIB-SEM imaging and magnetotellurics to enhance formation evaluation through digital rock physics analysis.",
+    "scholar_interests": [
+      "Borehole Geophysics",
+      "Formation Evaluation",
+      "Petrophysics",
+      "Rock Physics",
+      "Well Logging"
+    ],
     "publications": []
   },
   {
@@ -8017,14 +8052,17 @@
     "name": "David DiCarlo",
     "title": "",
     "email": "dicarlo@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Petroleum Engineering, Flow in Porous Media. Selected work: Physics of water repellent soils; Preferential flow in water‐repellent sands; Experimental measurements of saturation overshoot on infiltration; Size-dependent properties of silica nanoparticles for Pickering stabilization of emulsions and foams; Measurement of aperture distribution, capillary pressure, relative permeability, and in situ saturation in a rock fracture using computed tomography scanning.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=OFIvuBQAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/DiCarlo-David.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "David DiCarlo’s research within the petroleum engineering field centers on understanding fluid flow behavior within porous media, primarily focusing on water and emulsions. His work utilizes experimental techniques, including computed tomography scanning of rock fractures to measure key parameters such as aperture distribution, capillary pressure, and saturation, alongside detailed measurements of saturation overshoot during infiltration in water-repellent sands. DiCarlo’s investigations also explore the influence of nanoparticle size on emulsion stabilization – specifically examining silica nanoparticles for Pickering effects – and the physics governing water repellency in soils.  Notably, his research leverages preferential flow studies to analyze fluid movement within these complex systems, contributing significantly to advancements in flow in porous media research.",
+    "scholar_interests": [
+      "Petroleum Engineering",
+      "Flow in Porous Media"
+    ],
     "publications": []
   },
   {
@@ -8035,14 +8073,20 @@
     "name": "Eric van Oort",
     "title": "",
     "email": "vanoort@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Drilling, Drilling Engineering, Cementing, Drilling Fluids, Managed Pressure Drilling. Selected work: On the physical and chemical stability of shales; The swelling of clays: molecular simulations of the hydration of montmorillonite; Optically detected spin coherence of the diamond NV centre in its triplet ground state; Transport in shales and the design of improved water-based shale drilling fluids; Avoiding losses in depleted and weak zones by constantly strengthening wellbores.",
     "lab_website": "http://oesi.tamu.edu/",
     "google_scholar": "https://scholar.google.com/citations?user=r7InKAUAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/van-Oort-Eric2.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Eric van Oort’s research within the petroleum department centers on critical aspects of drilling operations and wellbore integrity, driven by his extensive interest in drilling, cementing, and associated fluid technologies. His work investigates the fundamental properties governing shale behavior, particularly focusing on the physical and chemical stability of shales and the molecular mechanisms behind clay swelling through sophisticated simulations of montmorillonite hydration. Furthermore, Professor van Oort’s research employs optically detected spin coherence techniques to study the diamond NV center, while also contributing to practical solutions like designing improved water-based shale drilling fluids and strategies for mitigating losses in challenging geological formations via borehole strengthening.  His investigations are consistently grounded in a combination of experimental transport studies and engineering design considerations within managed pressure drilling systems.",
+    "scholar_interests": [
+      "Drilling",
+      "Drilling Engineering",
+      "Cementing",
+      "Drilling Fluids",
+      "Managed Pressure Drilling"
+    ],
     "publications": []
   },
   {
@@ -8053,14 +8097,19 @@
     "name": "Gary Pope",
     "title": "",
     "email": "gpope@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, reservoir engineering, enhanced oil recovery, reservoir simulation. Selected work: Fundamentals of enhanced oil recovery; Reservoir simulation of CO2 storage in deep saline aquifers; A compositional simulator for modeling surfactant enhanced aquifer remediation, 1 formulation; The application of fractional flow theory to enhanced oil recovery; Identification and evaluation of high-performance EOR surfactants.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=OZRKwPQAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Pope-Gary.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Gary Pope’s research within the Petroleum Engineering department centers on optimizing hydrocarbon resource recovery through advanced techniques in reservoir engineering and enhanced oil recovery (EOR). His work primarily utilizes reservoir simulation – including compositional simulators – to investigate complex scenarios such as CO2 storage in deep saline aquifers and surfactant-enhanced aquifer remediation. Professor Pope’s investigations frequently leverage fractional flow theory and the formulation of novel, high-performance EOR surfactants for targeted applications.  Specifically, his research portfolio includes foundational studies on enhanced oil recovery fundamentals alongside detailed simulations addressing reservoir behavior under various EOR methodologies. His consistent focus reflects a commitment to utilizing simulation tools and compositional analysis within reservoir engineering to improve oilfield performance.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "reservoir engineering",
+      "enhanced oil recovery",
+      "reservoir simulation"
+    ],
     "publications": []
   },
   {
@@ -8071,14 +8120,19 @@
     "name": "Hewei Tang",
     "title": "",
     "email": "hewei.tang@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Coupled-physics numerical simulation, deep learning, data assimilation, inverse modeling. Selected work: Time series data analysis for automatic flow influx detection during drilling; A deep learning-accelerated data assimilation and forecasting workflow for commercial-scale geologic carbon storage; Uncertainty quantification of the fracture network with a novel fractured reservoir forward model; Analyzing the well-interference phenomenon in the eagle ford shale/austin chalk production system with a comprehensive compositional reservoir model; Predicting thermal performance of an enhanced geothermal system from tracer tests in a data assimilation framework.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=3RLrc6cAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/2024_CPE_Hewei-Tang-6.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Hewei Tang’s research within the petroleum engineering department centers on leveraging advanced computational techniques to address critical challenges in subsurface reservoir characterization and management. His work primarily utilizes coupled-physics numerical simulation alongside deep learning methodologies, including data assimilation and inverse modeling, to develop sophisticated solutions for various problems. Specifically, Professor Tang’s research encompasses applications such as automatic flow influx detection during drilling through time series analysis, optimizing geologic carbon storage with accelerated data assimilation workflows, and quantifying uncertainty in complex fracture networks via novel forward models. Furthermore, he investigates well-interference phenomena using compositional reservoir modeling and predicts thermal performance of enhanced geothermal systems by integrating tracer test data within a data assimilation framework – all reflecting a strong focus on predictive analytics for the petroleum industry.",
+    "scholar_interests": [
+      "Coupled-physics numerical simulation",
+      "deep learning",
+      "data assimilation",
+      "inverse modeling"
+    ],
     "publications": []
   },
   {
@@ -8089,14 +8143,20 @@
     "name": "Hilary Olson",
     "title": "",
     "email": "holson@utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: micropaleontology, stratigraphy, marine geology, carbon storage, geoscience education. Selected work: Seabed characterization on the New Jersey middle and outer shelf: correlatability and spatial variability of seafloor sediment properties; Foraminifera as proxies for sea-level change on siliciclastic margins; Correlation of side-scan backscatter intensity with grain-size distribution of shelf sediments, New Jersey margin; Detailed investigation of sorted bedforms, or “rippled scour depressions,” within the Martha's Vineyard Coastal Observatory, Massachusetts; Recent and modern marine erosion on the New Jersey outer shelf.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=qab2BZMAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Olson-Hilary.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Hilary Olson’s research focuses on utilizing micropaleontological and stratigraphic techniques to investigate processes within modern and ancient marine environments, particularly along the New Jersey shelf and Massachusetts coast. Her work centers around seafloor sediment analysis, employing methods such as side-scan backscatter intensity correlation and foraminifera paleontology to reconstruct past sea levels and understand spatial variability in sediment properties. Specifically, Olson investigates phenomena like sorted bedforms – rippled scour depressions – and recent erosion patterns on the offshore shelf, often linked to carbon storage potential.  Her research draws heavily on correlations between stratigraphic data and seafloor characteristics, demonstrating a strong commitment to marine geology and geoscience education as reflected by her Google Scholar interests. Ultimately, Olson’s investigations provide valuable insights into sedimentary processes and their implications for understanding coastal evolution and paleoclimate change.",
+    "scholar_interests": [
+      "micropaleontology",
+      "stratigraphy",
+      "marine geology",
+      "carbon storage",
+      "geoscience education"
+    ],
     "publications": []
   },
   {
@@ -8107,14 +8167,20 @@
     "name": "Hugh Daigle",
     "title": "",
     "email": "daigle@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, petrophysics, gas hydrates, nanoparticles, sustainability. Selected work: Analysis of rate of penetration (ROP) prediction in drilling using physics-based and data-driven models; Thermal conductivity in porous media: Percolation‐based effective‐medium approximation; Combining mercury intrusion and nuclear magnetic resonance measurements using percolation theory; Determining fractal dimension from nuclear magnetic resonance data in rocks with internal magnetic field gradients; Extending NMR data for permeability estimation in fine-grained sediments.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=XitKtgEAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Daigle-Hugh.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Hugh Daigle’s research within the petroleum engineering department centers on utilizing advanced characterization techniques to improve drilling efficiency and understand subsurface reservoir properties. His work primarily focuses on petrophysical analysis of porous media, particularly exploring thermal conductivity using percolation theory and applying nuclear magnetic resonance (NMR) spectroscopy to determine permeability in fine-grained sediments. Notably, he investigates rate of penetration (ROP) prediction through the integration of both physics-based models and data-driven approaches, alongside examining the role of nanoparticles within these systems.  Daigle’s research also incorporates gas hydrates and sustainability considerations, reflecting a commitment to innovative solutions for the petroleum industry. Through methods like mercury intrusion measurements and fractal dimension analysis from NMR data, he aims to refine our understanding of complex rock formations.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "petrophysics",
+      "gas hydrates",
+      "nanoparticles",
+      "sustainability"
+    ],
     "publications": []
   },
   {
@@ -8143,14 +8209,20 @@
     "name": "John Foster",
     "title": "",
     "email": "jfoster@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: computational mechanics, peridynamics, fracture mechanics, hydraulic fracturing, petroleum engineering. Selected work: Handbook of peridynamic modeling; An energy based failure criterion for use with peridynamic states; Viscoplasticity using peridynamics; A fully coupled porous flow and geomechanics model for fluid driven cracks: a peridynamics approach; A meshfree unification: reproducing kernel peridynamics.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=TjdPwewAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Foster-John.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "John Foster’s research within the petroleum engineering department centers on utilizing advanced computational modeling techniques to understand complex rock behavior relevant to energy extraction. His work primarily focuses on peridynamics, a meshfree method, to investigate fracture mechanics and hydraulic fracturing processes, often incorporating an energy-based failure criterion and viscoplasticity models for realistic material representation. Foster’s research includes the development of fully coupled porous flow and geomechanics models using peridynamics to simulate fluid-driven cracks, as well as exploring the unification of peridynamic formulations through techniques like reproducing kernel peridynamics. His published work, including a handbook on peridynamic modeling, demonstrates a significant contribution to this specialized field, aligning with his extensive research interests in computational mechanics and hydraulic fracturing.",
+    "scholar_interests": [
+      "computational mechanics",
+      "peridynamics",
+      "fracture mechanics",
+      "hydraulic fracturing",
+      "petroleum engineering"
+    ],
     "publications": []
   },
   {
@@ -8161,14 +8233,20 @@
     "name": "Jon Olson",
     "title": "",
     "email": "jolson@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, hydraulic fracturing, geomechanics, unconventional reservoirs, induced seismicity. Selected work: Natural fractures in shale: A review and new observations; Characteristics and origins of coal cleat: a review; Numerical modeling of multistranded-hydraulic-fracture propagation: accounting for the interaction between induced and natural fractures; Mechanical and fracture stratigraphy; Simultaneous multifracture treatments: fully coupled fluid flow and fracture mechanics for horizontal wells.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=XjKKz70AAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/JonOlson.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Jon Olson’s research within the petroleum engineering department focuses on understanding complex reservoir behavior in unconventional resources, primarily through an interdisciplinary approach combining geomechanical analysis with hydraulic fracturing techniques. His work centers around investigating the influence of natural fractures—such as those found in shale and coal—on fluid flow pathways, often utilizing numerical modeling to simulate multistranded fracture propagation alongside induced seismicity concerns. Olson’s research specifically addresses topics like the characteristics and origins of coal cleats, coupled fluid flow and fracture mechanics for horizontal well treatments involving simultaneous multifracture stimulation, and integrates mechanical and fracture stratigraphy to predict reservoir responses.  His Google Scholar profile reflects a strong interest in hydraulic fracturing, geomechanics, unconventional reservoirs, and induced seismicity, demonstrating a commitment to advancing our knowledge of these critical aspects within the petroleum industry.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "hydraulic fracturing",
+      "geomechanics",
+      "unconventional reservoirs",
+      "induced seismicity"
+    ],
     "publications": []
   },
   {
@@ -8179,14 +8257,17 @@
     "name": "Kamy Sepehrnoori",
     "title": "",
     "email": "kamys@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Petroleum Engineering, Reservoir Simulation. Selected work: Reservoir simulation of CO2 storage in deep saline aquifers; Gas flow in ultra-tight shale strata; Development of an efficient embedded discrete fracture model for 3D compositional reservoir simulation in fractured reservoirs; CO2 injection for enhanced oil recovery in Bakken tight oil reservoirs; A compositional simulator for modeling surfactant enhanced aquifer remediation, 1 formulation.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=_D0BjPwAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Sepehrnoori-Kamy.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Kamy Sepehrnoori’s research within the petroleum engineering department centers on advanced reservoir simulation techniques with a particular focus on unconventional and enhanced oil recovery methods. His work predominantly utilizes numerical modeling to investigate complex flow phenomena, including gas transport in ultra-tight shale formations and CO2 storage potential within deep saline aquifers. Notably, he has developed an embedded discrete fracture model for simulating compositional flows in fractured reservoirs and explored the application of CO2 injection strategies, such as in the Bakken formation, for enhanced oil recovery. Furthermore, Sepehrnoori’s research includes a compositional simulator designed to model surfactant-enhanced aquifer remediation, reflecting a commitment to innovative solutions within reservoir characterization and management.",
+    "scholar_interests": [
+      "Petroleum Engineering",
+      "Reservoir Simulation"
+    ],
     "publications": []
   },
   {
@@ -8197,14 +8278,20 @@
     "name": "Kenneth Gray",
     "title": "",
     "email": "ken_gray@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, rock mechanics, drilling, fracturing, transient flow. Selected work: The mechanical behavior of anisotropic sedimentary rocks; Finite-element studies of near-wellbore region during cementing operations: Part I; Review of fundamental studies on lost circulation and wellbore strengthening; Analysis of rate of penetration (ROP) prediction in drilling using physics-based and data-driven models; A review on fracture-initiation and-propagation pressures for lost circulation and wellbore strengthening.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=w0hSlZgAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Gray-Ken.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Kenneth Gray’s research within the petroleum engineering department centers on understanding complex fluid flow and mechanical behavior in subsurface formations, primarily focusing on applications relevant to drilling and unconventional resource development. His work utilizes a combination of techniques including finite-element modeling to investigate near-wellbore phenomena during cementing operations and detailed analysis of transient flow dynamics. Professor Gray’s research spans critical challenges like lost circulation, wellbore strengthening, and fracture mechanics within anisotropic sedimentary rocks, often employing physics-based models alongside data-driven approaches for ROP prediction.  Specifically, his investigations include a review of fundamental studies on lost circulation alongside the development of predictive models for fracturing pressures and detailed mechanical characterization of rock behavior during drilling operations.  His Google Scholar profile indicates a sustained interest in petroleum engineering, rock mechanics, and related areas within the broader field of subsurface fluid flow.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "rock mechanics",
+      "drilling",
+      "fracturing",
+      "transient flow"
+    ],
     "publications": []
   },
   {
@@ -8215,14 +8302,17 @@
     "name": "Kishore Mohanty",
     "title": "",
     "email": "mohanty@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, chemical engineering. Selected work: Kinetic simulation of methane hydrate formation and dissociation in porous media; Physicochemical interactions during surfactant flooding of fractured carbonate reservoirs; Proppant transport study in fractures with intersections; Physics of oil entrapment in water-wet rock; Synergy between nanoparticles and surfactants in stabilizing foams for oil recovery.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=Eocb9J4AAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Mohanty-Kishore.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Kishore Mohanty’s research program sits at the intersection of petroleum and chemical engineering, focusing on fundamental processes governing fluid flow and interaction within subsurface formations. His work centers heavily on characterizing complex phenomena critical to hydrocarbon recovery, notably through kinetic simulations of methane hydrate behavior in porous media and detailed investigations into surfactant-enhanced oil recovery in fractured carbonate reservoirs.  Specifically, Professor Mohanty’s research delves into the physics of oil entrapment within water-wet rock matrices and utilizes experimental studies, including proppant transport analyses with fracture intersections, alongside computational modeling. Furthermore, he actively investigates synergistic relationships between nanoparticles and surfactants to optimize foam stability for improved oil recovery applications, reflecting a strong interest in innovative solutions for reservoir challenges.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "chemical engineering"
+    ],
     "publications": []
   },
   {
@@ -8251,14 +8341,18 @@
     "name": "Larry Lake",
     "title": "",
     "email": "larry_lake@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: reservoir engineering, enhanced oil recovery, petroleum engineering. Selected work: Enhanced oil recovery; Fundamentals of enhanced oil recovery; Reservoir simulation of CO2 storage in deep saline aquifers; Statistics for petroleum engineers and geoscientists; A capacitance model to infer interwell connectivity from production-and injection-rate fluctuations.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=eGlURRYAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Lake-Larry.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Larry Lake’s research within the Petroleum Engineering Department centers on optimizing hydrocarbon resource extraction and storage through advanced techniques in reservoir engineering and enhanced oil recovery (EOR). His work primarily investigates the application of reservoir simulation, utilizing computational models to study CO2 storage potential within deep saline aquifers – a key area given growing concerns about carbon sequestration.  Professor Lake’s research also incorporates statistical analysis, as evidenced by his publication on “Statistics for Petroleum Engineers and Geoscientists,” alongside investigations into interwell connectivity using capacitance modeling based on production-and injection-rate fluctuations.  His consistent focus aligns with broad interests in reservoir engineering, EOR methodologies, and the practical application of these principles within the petroleum industry, as reflected in his extensive Google Scholar profile.",
+    "scholar_interests": [
+      "reservoir engineering",
+      "enhanced oil recovery",
+      "petroleum engineering"
+    ],
     "publications": []
   },
   {
@@ -8269,14 +8363,19 @@
     "name": "Mary Wheeler",
     "title": "",
     "email": "mfw@oden.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: computational science, engineering, applied mathematics, geosciences. Selected work: An elliptic collocation-finite element method with interior penalties; A priori L_2 error estimates for Galerkin approximations to parabolic partial differential equations; Finite element and finite difference methods for continuous flows in porous media; Improved energy estimates for interior penalty, constrained and discontinuous Galerkin methods for elliptic problems. Part I; Mixed finite elements for elliptic problems with tensor coefficients as cell-centered finite differences.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=sX58qHkAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Wheeler2.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Mary Wheeler’s research program centers on developing and analyzing advanced numerical methods within the fields of petroleum engineering, geosciences, and related disciplines. Her work primarily focuses on solving partial differential equations governing fluid flow in complex media using techniques such as elliptic collocation-finite element methods and Galerkin approximations. Specifically, she investigates error estimation strategies – including *a priori* L₂ estimates – alongside improvements to established methods like interior penalty and discontinuous Galerkin approaches for elliptic problems. Wheeler’s lab utilizes finite element and finite difference methodologies, often incorporating mixed elements and tensor coefficients, with a notable interest in applying these techniques to continuous flows within porous media. This research demonstrates a strong commitment to computational science and engineering through rigorous mathematical analysis and the development of efficient numerical solutions.",
+    "scholar_interests": [
+      "computational science",
+      "engineering",
+      "applied mathematics",
+      "geosciences"
+    ],
     "publications": []
   },
   {
@@ -8287,14 +8386,20 @@
     "name": "Masa Prodanovic",
     "title": "",
     "email": "masha@utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: multiphase flow in porous media, digital rock physics, ferrofluids, foams, petroleum engineering. Selected work: Comprehensive comparison of pore-scale models for multiphase flow in porous media; Multiscale, multiphysics network modeling of shale matrix gas flows; A level set method for determining critical curvatures for drainage and imbibition; PoreFlow-Net: A 3D convolutional neural network to predict fluid flow through porous media; 3D image-based characterization of fluid displacement in a Berea core.",
     "lab_website": "https://www.digitalrocksportal.org/",
     "google_scholar": "https://scholar.google.com/citations?user=hs_-TQoAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Prodanovic-Masa.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Masa Prodanovic’s research within the petroleum engineering department centers on understanding and predicting fluid behavior within complex porous media systems. His work leverages advanced computational techniques, including digital rock physics and network modeling, to investigate multiphase flow phenomena such as gas flows in shale matrices and liquid displacement in core samples like Berea cores. Specifically, Prodanovic’s research employs methodologies like level set methods for curvature analysis alongside the development of novel tools such as the PoreFlow-Net – a 3D convolutional neural network – to model fluid flow at multiple scales.  His investigations also extend to characterizing fluid dynamics using foams and ferrofluids, reflecting a broad interest in applying these concepts to practical petroleum engineering challenges. Ultimately, Prodanovic’s research aims to improve pore-scale models and predictive capabilities for reservoir simulation and characterization.",
+    "scholar_interests": [
+      "multiphase flow in porous media",
+      "digital rock physics",
+      "ferrofluids",
+      "foams",
+      "petroleum engineering"
+    ],
     "publications": []
   },
   {
@@ -8305,14 +8410,20 @@
     "name": "Matthew Balhoff",
     "title": "",
     "email": "balhoff@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, enhanced oil recovery, CCUS, microfluidics, reservoir simulation. Selected work: Assessing the utility of FIB-SEM images for shale digital rock physics; A 2.5-D glass micromodel for investigation of multi-phase flow in porous media; Effect of Reservoir Heterogeneity on Primary Recovery and CO2Huff ‘n’ Puff Recovery in Shale-Oil Reservoirs; Numerical analysis for promoting uniform development of simultaneous multiple-fracture propagation in horizontal wells; Reservoir simulation and optimization of Huff-and-Puff operations in the Bakken Shale.",
     "lab_website": "https://www.sciencedirect.com/science/journal/13651609/106/supp/C",
     "google_scholar": "https://scholar.google.com/citations?user=cbFq7J0AAAAJ&hl=en&oi=ao",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/faculty/2023_Balhoff-Matthew-fe8.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Matthew Balhoff’s research within the Petroleum Engineering Department centers on advancing techniques for optimizing hydrocarbon recovery and carbon capture utilization and storage (CCUS). His work primarily focuses on enhanced oil recovery (EOR) methods, particularly in unconventional shale reservoirs like the Bakken Shale, utilizing numerical simulation and reservoir modeling to investigate strategies such as Huff-and-Puff operations. Balhoff’s lab employs a variety of experimental approaches, including 2.5-D glass micromodels and focused ion beam scanning electron microscopy (FIB-SEM) analysis of shale digital rocks to characterize porous media flow behavior. Furthermore, he investigates the impact of reservoir heterogeneity on recovery processes through simulation studies, notably concerning multiple-fracture propagation in horizontal wells. Ultimately, Balhoff’s research aims to improve the efficiency and effectiveness of both traditional oil production and emerging CCUS technologies.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "enhanced oil recovery",
+      "CCUS",
+      "microfluidics",
+      "reservoir simulation"
+    ],
     "publications": []
   },
   {
@@ -8323,14 +8434,20 @@
     "name": "Michael Pyrcz",
     "title": "",
     "email": "mpyrcz@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Geostatistics, Data Analytics, Spatial Data Analytics, Machine Learning, Data Science. Selected work: Geostatistical reservoir modeling; Architecture of turbidite channel systems on the continental slope: patterns and predictions; PoreFlow-Net: A 3D convolutional neural network to predict fluid flow through porous media; Stochastic surface-based modeling of turbidite lobes; Fast evaluation of well placements in heterogeneous reservoir models using machine learning.",
     "lab_website": "https://www.michaelpyrcz.com",
     "google_scholar": "https://scholar.google.com/citations?user=QVZ20eQAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Pyrcz.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Michael Pyrcz’s research within the petroleum department centers on leveraging advanced analytical techniques to understand complex geological systems, primarily focusing on sedimentary basins and reservoir characterization. His work utilizes geostatistical methods, including 3D convolutional neural networks like PoreFlow-Net, to develop predictive models for fluid flow through porous media, particularly in turbidite channel systems and lobes found on the continental slope. Employing data analytics, spatial data analysis, and machine learning algorithms – as reflected in his Google Scholar interests – he investigates methods such as stochastic surface-based modeling and fast well placement evaluations using machine learning to improve reservoir models’ accuracy.  Ultimately, Professor Pyrcz’s research aims to translate complex geological datasets into actionable insights for petroleum exploration and production.",
+    "scholar_interests": [
+      "Geostatistics",
+      "Data Analytics",
+      "Spatial Data Analytics",
+      "Machine Learning",
+      "Data Science"
+    ],
     "publications": []
   },
   {
@@ -8359,14 +8476,20 @@
     "name": "Mukul Sharma",
     "title": "",
     "email": "msharma@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: petroleum engineering, hydraulic fracturing, formation damage, water injection, production engineering. Selected work: Adhesion Forces between E. c oli bacteria and biomaterial surfaces; Surface–active compounds from microorganisms; Factors controlling the stability of colloid-stabilized emulsions: I. An experimental investigation; Molecular determinants of bacterial adhesion monitored by atomic force microscopy; The effect of colloidal particles on fluid-fluid interfacial properties and emulsion stability.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=dxbN2TEAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Sharma-Mukul.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Professor Mukul Sharma’s research within the Petroleum Engineering Department centers around fundamental aspects of reservoir fluids and their interactions with engineered systems. His work investigates critical challenges in hydrocarbon recovery through investigations into hydraulic fracturing processes, specifically focusing on adhesion forces between bacteria and biomaterials, as well as examining the impact of formation damage and colloidal particles on water injection and emulsion stability. Sharma’s lab utilizes a combination of experimental techniques, including colloid-stabilized emulsion studies and atomic force microscopy to characterize these interfacial phenomena at a molecular level. Leveraging his Google Scholar interests, his research consistently explores factors controlling fluid behavior within reservoirs, particularly concerning the influence of microbial activity and colloidal systems on production engineering applications like water injection strategies.",
+    "scholar_interests": [
+      "petroleum engineering",
+      "hydraulic fracturing",
+      "formation damage",
+      "water injection",
+      "production engineering"
+    ],
     "publications": []
   },
   {
@@ -8377,14 +8500,20 @@
     "name": "Nicolas Espinoza",
     "title": "",
     "email": "espinoza@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Petroleum Engineering, Geomechanics, Unconventionals, Carbon Storage, Gas Hydrates. Selected work: Physical Properties of Hydrate‐Bearing Sediments; Water‐CO2‐mineral systems: Interfacial tension, contact angle, and diffusion—Implications to CO2geological storage; CO2 breakthrough—Caprock sealing efficiency and integrity for carbon geological storage; Properties and phenomena relevant to CH4‐CO2replacement in hydrate‐bearing sediments; CO2 geological storage—Geotechnical implications.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=WpKx-qgAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Espinoza-Nicolas.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Nicolas Espinoza’s research program within petroleum engineering centers on understanding and optimizing unconventional reservoirs and carbon storage technologies. His work primarily focuses on the complex interactions between fluids – specifically water, CO2, and minerals – within hydrate-bearing sediments, utilizing experimental investigations of physical properties such as interfacial tension and diffusion to model fluid behavior.  A significant portion of his research examines the geotechnical implications of CO2 injection for geological storage, including assessing caprock sealing efficiency and integrity through studies like “CO2 breakthrough—Caprock sealing efficiency and integrity for carbon geological storage.” Furthermore, Espinoza investigates phenomena related to methane-CO2 replacement within hydrates, contributing to a broader understanding of gas hydrate systems relevant to both energy resource extraction and environmental sequestration.  His research interests, as reflected in his Google Scholar profile, strongly emphasize petroleum engineering, geomechanics, unconventionals, and carbon storage.",
+    "scholar_interests": [
+      "Petroleum Engineering",
+      "Geomechanics",
+      "Unconventionals",
+      "Carbon Storage",
+      "Gas Hydrates"
+    ],
     "publications": []
   },
   {
@@ -8413,14 +8542,19 @@
     "name": "Quoc Nguyen",
     "title": "",
     "email": "quoc_p_nguyen@mail.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Interface & Colloid Science, Geosystems Engineering, Enhanced Oil Recovery, Carbon Utilization & Storage. Selected work: Stability of aqueous silica nanoparticle dispersions; A Systematic Laboratory Approach to Low-Cost, High-Performance Chemical Flooding; A Systematic Laboratory Approach to Low-Cost, High-Performance Chemical Flooding; Nanotechnology for oilfield applications: Challenges and impact; Modeling low salinity waterflooding: ion exchange, geochemistry and wettability alteration.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=l0IDbJAAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Nguyen-Quoc.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Quoc Nguyen’s research within the petroleum department centers on innovative solutions for enhanced oil recovery and carbon management, primarily through the study of interfacial phenomena and colloid science. His work investigates the stability of aqueous silica nanoparticle dispersions, alongside developing systematic laboratory approaches to improve chemical flooding techniques for enhanced oil recovery. Notably, he explores nanotechnology applications within oilfields, addressing associated challenges while assessing their impact, and utilizes modeling to understand complex processes like ion exchange and wettability alteration during low salinity waterflooding.  Professor Nguyen’s research aligns strongly with geosystems engineering and carbon utilization & storage, reflecting a commitment to both traditional petroleum recovery methods and emerging strategies for mitigating climate change.",
+    "scholar_interests": [
+      "Interface & Colloid Science",
+      "Geosystems Engineering",
+      "Enhanced Oil Recovery",
+      "Carbon Utilization & Storage"
+    ],
     "publications": []
   },
   {
@@ -8431,14 +8565,20 @@
     "name": "Ryosuke Okuno",
     "title": "",
     "email": "okuno@utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Enhanced Oil Recovery, Thermodynamics, Phase Behavior, Geochemistry, CO2 Capture and Storage. Selected work: A new algorithm for Rachford-Rice for multiphase compositional simulation; Measurements and Modeling of Interfacial Tension for CO2/CH4/Brine Systems under Reservoir Conditions; Optimal application conditions for steam/solvent coinjection; Three-phase flash in compositional simulation using a reduced method; An experimental study of multiphase behavior for n-butane/bitumen/water mixtures.",
     "lab_website": "https://www.ryosukeokuno.com/",
     "google_scholar": "https://scholar.google.com/citations?user=zqr56ycAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Okuno-Ryosuke.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Ryosuke Okuno’s research within the petroleum department centers on advancing techniques for efficient oil recovery and mitigating carbon dioxide emissions. His work primarily investigates Enhanced Oil Recovery (EOR) strategies, frequently employing computational fluid dynamics through algorithms like the Rachford-Rice method to simulate multiphase compositional flow.  Specifically, Professor Okuno conducts experimental studies of complex mixtures—such as n-butane/bitumen/water—alongside thermodynamic modeling and phase behavior analysis, particularly concerning CO2/CH4/brine systems under reservoir conditions. He also explores optimal injection strategies like steam/solvent coinjection and utilizes reduced methods for three-phase flash calculations in compositional simulations.  Through this multifaceted approach, his research contributes to understanding and optimizing processes related to CO2 Capture and Storage as well as traditional EOR applications.",
+    "scholar_interests": [
+      "Enhanced Oil Recovery",
+      "Thermodynamics",
+      "Phase Behavior",
+      "Geochemistry",
+      "CO2 Capture and Storage"
+    ],
     "publications": []
   },
   {
@@ -8449,14 +8589,19 @@
     "name": "Wen Song",
     "title": "",
     "email": "wensong@utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: energy, microfluidic, nanoporous materials, reactive transport. Selected work: Functionalization of Micromodels with Kaolinite for Investigation of Low Salinity Oil-Recovery Processes; Chip-off-the-old-rock: the study of reservoir-relevant geological processes with real-rock micromodels; Direct visualization of pore-scale fines migration and formation damage during low-salinity waterflooding; Mechanisms of multiphase reactive flow using biogenically calcite-functionalized micromodels; Determination of Dew Point Conditions for CO2 with Impurities Using Microfluidics.",
     "lab_website": "http://www.wensong.org",
     "google_scholar": "https://scholar.google.com/citations?user=8F_va_MAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Song-Wen.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Professor Wen Song’s research program within the petroleum department investigates fundamental processes governing oil recovery and multiphase flow using innovative experimental techniques. His work centers on the creation and application of microfluidic models, particularly those incorporating nanoporous materials like kaolinite, to simulate reservoir-relevant scenarios such as low salinity waterflooding and fines migration. Song’s lab employs chip-off-the-old-rock methodologies with real rock micromodels coupled with direct visualization using microfluidics to study pore-scale phenomena, including the impact of impurities on dew point determination. Furthermore, he investigates reactive transport mechanisms utilizing biogenically calcite-functionalized models to understand complex interactions between fluids and reservoir minerals.  His research interests align strongly with energy systems and nanoporous materials, reflecting a commitment to advancing understanding within these critical areas.",
+    "scholar_interests": [
+      "energy",
+      "microfluidic",
+      "nanoporous materials",
+      "reactive transport"
+    ],
     "publications": []
   },
   {
@@ -8467,14 +8612,19 @@
     "name": "Yingda Lu",
     "title": "",
     "email": "yingdalu@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Flow assurance, Multiphase transport, Complex fluids, Rheology. Selected work: The effect of operating temperatures on wax deposition; Counterintuitive effects of the oil flow rate on wax deposition; Wax deposition mechanisms: Is the current description sufficient?; Effect of temperature on wettability of oil/brine/rock systems; Fatty acids for nutraceuticals and biofuels from hydrothermal carbonization of microalgae.",
     "lab_website": "https://sites.google.com/view/yingdalu",
     "google_scholar": "https://scholar.google.com/citations?user=xdpCAR4AAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Updated_Yingda_.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Professor Yingda Lu’s research within the petroleum department centers on understanding complex fluid behavior and its implications for flow assurance systems. Her work primarily investigates multiphase transport phenomena, particularly focusing on wax deposition – examining the impact of temperature variations and counterintuitive flow rate effects on this process through detailed rheological studies. Furthermore, Professor Lu explores interfacial phenomena such as wettability changes within oil/brine/rock systems at elevated temperatures, utilizing laboratory experiments to investigate these interactions.  Notably, her research also extends beyond traditional petroleum applications into novel areas like the utilization of fatty acids derived from hydrothermal carbonization of microalgae for both nutraceutical and biofuel production. Professor Lu’s consistent engagement with Google Scholar indicates a dedicated focus on flow assurance, multiphase transport, complex fluids, and rheology within her investigations.",
+    "scholar_interests": [
+      "Flow assurance",
+      "Multiphase transport",
+      "Complex fluids",
+      "Rheology"
+    ],
     "publications": []
   },
   {
@@ -8485,14 +8635,20 @@
     "name": "Zoya Heidari",
     "title": "",
     "email": "zoya@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Petrophysics, Borehole Geophysics, Formation Evaluation, Rock Physics, Petroleum Engineering. Selected work: Experimental quantification of the effect of thermal maturity of kerogen on its wettability; Improved Estimation of Mineral and Fluid Volumetric Concentrations in Thinly-Bedded and Invaded Formations; Molecular dynamic simulation of the impact of thermal maturity and reservoir temperature on the contact angle and wettability of kerogen; A New Method for Quantifying Cation Exchange Capacity in Clay Minerals; Inversion-based method for estimating total organic carbon and porosity and for diagnosing mineral constituents from multiple well logs in shale-gas formations.",
     "lab_website": "https://www.flickr.com/photos/ut-pge/",
     "google_scholar": "https://scholar.google.com/citations?user=z-E_vXwAAAAJ&hl=en",
     "photo_url": "https://www.pge.utexas.edu/wp-content/uploads/Heidari-Zoya.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Zoya Heidari’s research within the petroleum engineering department centers on advancing our understanding of reservoir rock properties and their influence on fluid flow. Her work primarily focuses on petrophysics, borehole geophysics, and formation evaluation, employing techniques such as experimental quantification of kerogen wettability influenced by thermal maturity and molecular dynamic simulations to investigate temperature effects. Specifically, Professor Heidari utilizes methods including inversion-based log analysis alongside innovative approaches like quantifying cation exchange capacity in clay minerals to improve volumetric estimations within complex formations – particularly those found in shale-gas reservoirs. Her research reflects a dedication to refining formation evaluation techniques, ultimately contributing to more accurate reservoir characterization and improved petroleum engineering practices.  Her Google Scholar interests further highlight her expertise across these core areas of study.",
+    "scholar_interests": [
+      "Petrophysics",
+      "Borehole Geophysics",
+      "Formation Evaluation",
+      "Rock Physics",
+      "Petroleum Engineering"
+    ],
     "publications": []
   },
   {
@@ -8977,7 +9133,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Francesco%20Maggi%2C%20mathematics%20Directory.jpg",
     "phone": "",
     "office": "PMA 10.124",
-    "ai_review": "Please provide me with the scraped research information about Professor Francesco Maggi! I need the text to be able to write the review for you. Once you paste the information here, I’ll craft a concise and informative summary suitable for a student.",
+    "ai_review": "Please provide me with the scraped research information about Professor Francesco Maggi! I need the text from the source you linked to in order to write the review for you. Once you paste the information here, I will craft a concise and informative paragraph as requested.",
     "scholar_interests": [],
     "publications": []
   },

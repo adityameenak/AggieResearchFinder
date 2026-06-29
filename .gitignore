@@ -6,6 +6,7 @@ dist
 crawler/.cache
 crawler/.env
 crawler/venv/
+crawler/venv312/
 .playwright-mcp/
 
 # Backend

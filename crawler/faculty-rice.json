@@ -331,14 +331,18 @@
     "department": "materials",
     "email": "",
     "profile_url": "https://profiles.rice.edu/faculty/valery-khabashesku",
-    "research_summary": "",
+    "research_summary": "Research interests: materials, chemistry, nanotechnology. Selected work: Improving the dispersion and integration of single-walled carbon nanotubes in epoxy composites through functionalization; Reinforcing epoxy polymer composites through covalent integration of functionalized nanotubes; Sidewall carboxylic acid functionalization of single-walled carbon nanotubes; Fluorination of single-wall carbon nanotubes and subsequent derivatization reactions; Sidewall amino-functionalization of single-walled carbon nanotubes through fluorination and subsequent reactions with terminal diamines.",
     "lab_website": "",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=OXQVuFAAAAAJ&hl=en",
+    "ai_review": "Valery Khabashesku’s research focuses on enhancing the properties of epoxy polymer composites through innovative manipulation of single-walled carbon nanotubes (SWCNTs). His work centers around improving the dispersion and covalent integration of SWCNTs within epoxy matrices, primarily utilizing functionalization techniques such as carboxylic acid and amino modification. Specifically, he investigates methods like fluorination followed by derivatization reactions to tailor SWCNT sidewalls for optimal compatibility with epoxy polymers. Khabashesku’s research employs a combination of chemical synthesis and materials characterization to achieve enhanced mechanical reinforcement and integration within the composite material.  His investigations align closely with interests in materials science, chemistry, and nanotechnology as evidenced by his Google Scholar profile.",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "materials",
+      "chemistry",
+      "nanotechnology"
+    ],
     "publications": []
   },
   {
@@ -349,14 +353,16 @@
     "department": "materials",
     "email": "",
     "profile_url": "https://profiles.rice.edu/faculty/francisco-robles-hernandez",
-    "research_summary": "",
+    "research_summary": "Research interests: Materials Science and Engineering. Selected work: Efficient solar water-splitting using a nanocrystalline CoO photocatalyst; Interlayer-expanded molybdenum disulfide nanocomposites for electrochemical magnesium storage; Enhancing sodium-ion battery performance with interlayer-expanded MoS2–PEO nanocomposites; Trimetallic NiFeMo for overall electrochemical water splitting with a low cell voltage; Making g-C3N4 ultra-thin nanosheets active for photocatalytic overall water splitting.",
     "lab_website": "",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=j26yO8sAAAAJ&hl=en",
+    "ai_review": "Francisco Robles Hernandez’s research within the Department of Materials focuses on innovative solutions in electrochemical energy conversion and storage, primarily through materials science engineering techniques. His work centers around developing advanced photocatalytic systems for solar water-splitting, notably utilizing nanocrystalline CoO catalysts and ultra-thin g-C3N4 nanosheets to enhance efficiency. Hernandez’s lab investigates the properties of layered materials, specifically exploring interlayer-expanded molybdenum disulfide (MoS2) nanocomposites for electrochemical magnesium storage and sodium-ion battery performance improvements through MoS2–PEO composites. Furthermore, he is actively researching trimetallic NiFeMo systems for optimized water splitting, aiming for reduced cell voltages, demonstrating a strong commitment to sustainable energy technologies and utilizing methods such as electrochemical characterization and materials synthesis.",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Materials Science and Engineering"
+    ],
     "publications": []
   },
   {

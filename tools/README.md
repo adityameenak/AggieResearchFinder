@@ -60,3 +60,35 @@ PY
 ```
 The exported decisions can then drive a targeted re-enrichment pass (only the
 "needs enrich" / "has lab" set).
+
+## Google Scholar enrichment (for blank profiles)
+
+Many thin profiles are blank only because the directory page has no research
+text — but the professor has a Google Scholar profile with interests +
+publications. We scrape that **by URL** with **pydoll** (a real Chrome via CDP):
+plain `requests` / Playwright / SeleniumBase-UC all trip Scholar's CAPTCHA
+headless, but pydoll fetching a *profile page* (not the author search, which is
+still walled) goes through clean.
+
+**Automatic** — scrape every thin profile that already has a `google_scholar`
+link (needs the py3.12 venv: `python3.12 -m venv venv312 && venv312/bin/pip
+install pydoll-python beautifulsoup4`):
+```bash
+cd crawler
+./venv312/bin/python enrich_scholar_pydoll.py --file faculty-ut.json
+```
+It fills `scholar_interests` + a `research_summary` (interests + recent work).
+Follow with `enrich_ollama.py --file …` to turn that into a clean `ai_review`.
+
+**Manual links** — for the ~473 thin profiles with *no* captured Scholar link,
+`scholar-links.html` lets you find + paste them fast:
+```bash
+cd tools && python3 -m http.server 8090   # → http://localhost:8090/scholar-links.html
+```
+It auto-loads `scholar-links-queue.json`; each card has a pre-filled **Search
+Scholar** button. Paste the `…/citations?user=…` URL (validated), then **Export
+links** → `scholar-links.json`. Apply them:
+```bash
+./venv312/bin/python enrich_scholar_pydoll.py --file faculty-rice.json --map scholar-links.json
+```
+Then re-run `enrich_ollama.py` and re-merge into `ui/public/faculty.json`.
