@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchoolPath } from '../SchoolContext'
-import { highlightSegments, deptLabel, isActiveLab } from '../utils/search'
+import { highlightSegments, deptLabel, isActiveLab, splitResearch } from '../utils/search'
 
 /* ── Highlight renderer ───────────────────────────────────── */
 function Highlight({ text, tokens }) {
@@ -96,7 +96,7 @@ export default function ProfCard({ prof, tokens = [] }) {
   const navigate = useNavigate()
   const tx       = useSchoolPath()
   const saved    = isSaved(prof.id)
-  const snippet  = (prof.research_summary ?? '').slice(0, 300)
+  const { summary, keywords } = splitResearch(prof)
 
   function handleTrack(e) {
     e.preventDefault()
@@ -188,19 +188,30 @@ export default function ProfCard({ prof, tokens = [] }) {
       {/* ── Divider ──────────────────────────────────────────── */}
       <div className="h-px bg-cream-300 mx-5" />
 
-      {/* ── Research snippet ─────────────────────────────────── */}
+      {/* ── Research preview + keyword tags ──────────────────── */}
       <div className="flex-1 px-5 py-4">
-        {snippet ? (
-          <p className="text-[13px] text-stone-600 leading-[1.75] line-clamp-4">
-            <Highlight text={snippet} tokens={tokens} />
-            {(prof.research_summary ?? '').length > 300 && (
-              <span className="text-stone-400"> &hellip;</span>
-            )}
+        {summary ? (
+          <p className="text-[13px] text-stone-600 leading-[1.7] line-clamp-3">
+            <Highlight text={summary} tokens={tokens} />
           </p>
-        ) : (
+        ) : keywords.length === 0 ? (
           <p className="text-xs text-stone-400 italic leading-relaxed">
             No research summary available.
           </p>
+        ) : null}
+
+        {keywords.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {keywords.map((k, i) => (
+              <span
+                key={i}
+                className="inline-block px-2 py-0.5 rounded-md bg-cream-200
+                           text-[10.5px] font-medium text-stone-600 leading-tight"
+              >
+                {k}
+              </span>
+            ))}
+          </div>
         )}
       </div>
 

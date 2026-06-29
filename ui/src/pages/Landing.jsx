@@ -6,21 +6,26 @@ export default function Landing() {
     <div className="min-h-screen bg-cream-50 flex flex-col">
       <div className="h-[2.5px] bg-maroon-700" />
 
-      <main className="flex-1 flex items-center justify-center px-6 py-16">
+      <main className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-3xl">
-          <div className="text-center mb-12">
-            <div className="text-[11px] font-semibold text-stone-500 uppercase tracking-[0.18em] mb-4">
-              Texas STEM Research Finder
+          <div className="text-center mb-14">
+            <div className="text-[11px] font-semibold text-maroon-700 uppercase tracking-[0.2em] mb-5">
+              For students &amp; researchers at every level
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl text-stone-900 leading-tight mb-4">
-              Pick your university
+            <h1 className="font-display font-bold text-stone-900 leading-[1.03]
+                           text-5xl sm:text-6xl md:text-7xl mb-6">
+              Texas <span className="text-maroon-700">STEM</span><br className="sm:hidden" /> Research Finder
             </h1>
-            <p className="text-stone-600 text-base max-w-xl mx-auto leading-relaxed">
-              Each school has its own faculty directory, branding, and matching dashboard.
-              Choose your university to explore STEM research labs and advisors.
+            <p className="text-stone-600 text-lg max-w-xl mx-auto leading-relaxed">
+              Find research labs and faculty advisors across Texas universities —
+              search by interest, match your resume, and draft outreach in one click.
             </p>
           </div>
 
+          <div className="text-center text-[11px] font-semibold text-stone-400
+                          uppercase tracking-[0.18em] mb-5">
+            Pick your university
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {SCHOOL_LIST.map((school) => (
               <SchoolCard key={school.code} school={school} />

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
 import Reveal from '../components/Reveal'
 
@@ -83,31 +82,9 @@ function SectionEyebrow({ children }) {
   )
 }
 
-const DEPTS = [
-  'Aerospace Engineering',
-  'Biology',
-  'Biomedical Engineering',
-  'Chemical Engineering',
-  'Chemistry',
-  'Civil & Environmental Engineering',
-  'Computer Science & Engineering',
-  'Electrical & Computer Engineering',
-  'Engineering Technology & Industrial Distribution',
-  'Industrial & Systems Engineering',
-  'Materials Science & Engineering',
-  'Mathematics',
-  'Mechanical Engineering',
-  'Nuclear Engineering',
-  'Ocean Engineering',
-  'Oceanography',
-  'Petroleum Engineering',
-  'Physics & Astronomy',
-  'Psychological & Brain Sciences',
-  'Statistics',
-]
-
+/* Shared, school-agnostic About page. The per-school Home pages cover the
+ * problem / coverage / stats; this page is simply who built it and why. */
 export default function About() {
-  const { faculty, departments } = useApp()
   const school = useSchool()
   const tx     = useSchoolPath()
 
@@ -118,75 +95,52 @@ export default function About() {
       <section className="relative bg-cream-50 border-b border-cream-300 overflow-hidden">
         <div className="absolute inset-0 dot-texture opacity-60 pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-          <SectionEyebrow>About the project</SectionEyebrow>
+          <SectionEyebrow>About</SectionEyebrow>
           <h1
             className="font-display font-bold text-stone-900 text-4xl sm:text-5xl
                        tracking-tight leading-[1.12] mb-6"
             style={{ opacity: 0, animation: 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s forwards' }}
           >
-            Built for Curious{' '}
-            <em className="not-italic text-maroon-700">{school.shortName} Students</em>
+            Two students making research{' '}
+            <em className="not-italic text-maroon-700">findable</em>
           </h1>
           <p
             className="text-lg text-stone-600 leading-relaxed max-w-2xl"
             style={{ opacity: 0, animation: 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s forwards' }}
           >
-            {school.appName} started with a simple frustration: finding a research
-            mentor at {school.name} should not require clicking through ten separate
-            department websites. This tool fixes that.
+            The Texas STEM Research Finder grew out of a simple frustration: finding
+            a research mentor shouldn't mean clicking through dozens of department
+            pages. We built one place to search faculty across Texas universities by
+            what they actually work on — and to make that first email easier to send.
           </p>
         </div>
       </section>
 
-      {/* ── Stats bar ─────────────────────────────────────── */}
-      <section className="bg-maroon-700 py-10 border-b border-maroon-900/20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-3 gap-6 sm:gap-12">
-            {[
-              { number: faculty.length || '553', label: 'Faculty indexed' },
-              { number: departments.length || '20',  label: 'STEM departments' },
-              { number: '0',   label: 'Logins required' },
-            ].map(({ number, label }) => (
-              <div key={label} className="text-center">
-                <div className="font-display font-bold text-4xl text-cream-100 mb-1">
-                  {number}
-                </div>
-                <div className="text-sm text-maroon-300">{label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── About the Builders ────────────────────────────── */}
+      {/* ── The builders ──────────────────────────────────── */}
       <section className="py-24 bg-white border-b border-cream-300">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
-          {/* Heading + intro */}
           <Reveal>
             <SectionEyebrow>The team</SectionEyebrow>
             <h2 className="font-display font-bold text-stone-900 text-3xl
                             tracking-tight leading-tight mb-5">
-              About the Builders
+              Meet the builders
             </h2>
             <p className="text-[15px] text-stone-600 leading-relaxed max-w-2xl mb-14">
-              {school.appName} was built to make STEM research easier to discover
-              and pursue — for undergraduates, graduate applicants, and postdocs alike.
-              As students, we saw how difficult it could be to navigate faculty
-              pages, understand what different labs actually work on, and confidently reach out
-              to professors. We wanted to create a platform that connects people with research
-              opportunities based on genuine interests and makes the first step into research
-              far more approachable.
+              We're two engineering students who kept hitting the same wall trying to
+              get into research — faculty pages scattered across departments, no easy
+              way to tell what a lab actually works on, and a blank-page moment every
+              time it came to reaching out. So we built the tool we wished we'd had,
+              and have been expanding it across Texas universities since.
             </p>
           </Reveal>
 
-          {/* Profile cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
             <BuilderCard
               initials="AM"
               name="Aditya Meenakshisundaram"
               role="Chemical Engineering Student, Texas A&M University"
-              bio={`Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built the original Aggie Research Finder to help students discover meaningful research opportunities without the friction and uncertainty that often come with the traditional search process — that work has since expanded into ${school.appName}. His goal is to make research exploration clearer, faster, and more accessible for students across campus.`}
+              bio="Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built the original Aggie Research Finder to help students discover meaningful research opportunities without the friction of the traditional search — work that has since grown into the multi-university Texas STEM Research Finder."
               linkedinUrl="https://www.linkedin.com/in/adityameenakshi/"
               from="left"
               delay={0}
@@ -195,21 +149,20 @@ export default function About() {
               initials="AV"
               name="Arun Vaithianathan"
               role="Chemical Engineering Student, Texas A&M University"
-              bio={`Arun is a chemical engineering student with experience in materials research, control systems, and energy entrepreneurship. His work spans graphite synthesis for battery applications, control system design for autonomous systems, and technology commercialization through the TEX-E energy entrepreneurship program. Through ${school.appName}, he wanted to simplify how students discover research labs and connect their interests with real-world technical work.`}
+              bio="Arun is a chemical engineering student with experience in materials research, control systems, and energy entrepreneurship — from graphite synthesis for batteries to control-system design and the TEX-E energy entrepreneurship program. He works on making research labs easier to discover and connect with across schools."
               linkedinUrl="https://www.linkedin.com/in/akvaithi/"
               from="right"
               delay={100}
             />
           </div>
 
-          {/* Closing mission paragraph */}
           <Reveal delay={200}>
             <div className="max-w-2xl mx-auto text-center">
               <span className="block w-8 h-px bg-cream-400 mx-auto mb-6" />
               <p className="text-[15px] text-stone-600 leading-relaxed">
-                At its core, {school.appName} is about lowering the barrier to entry.
-                We built it to help students move from curiosity to action — and make it
-                easier for more people to find research they are genuinely excited about.
+                At its core, this project is about lowering the barrier to entry —
+                helping students and researchers at every level move from curiosity
+                to a first conversation with a lab they're genuinely excited about.
               </p>
             </div>
           </Reveal>
@@ -217,145 +170,8 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Why it exists ─────────────────────────────────── */}
-      <section className="py-20 bg-white border-b border-cream-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-            <Reveal from="left">
-              <SectionEyebrow>The problem</SectionEyebrow>
-              <h2 className="font-display font-bold text-stone-900 text-3xl
-                              tracking-tight leading-tight mb-5">
-                Research discovery is broken
-              </h2>
-              <div className="space-y-4 text-[15px] text-stone-600 leading-relaxed">
-                <p>
-                  Each {school.shortName} STEM department maintains its own faculty directory
-                  with its own format, its own URL structure, and its own level of
-                  detail. Some have rich research summaries; others have barely a title.
-                </p>
-                <p>
-                  People looking for STEM research opportunities — undergrads, incoming
-                  graduate students, and postdocs alike — have no good starting point. The university
-                  search tools are generic. Google is noisy.
-                </p>
-                <p>
-                  {school.appName} normalises{' '}
-                  <span className="font-semibold text-stone-800">{faculty.length || 0}</span>
-                  {' '}profiles into a single searchable index ranked by research-area relevance.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal from="right" delay={150}>
-              <SectionEyebrow>The approach</SectionEyebrow>
-              <h2 className="font-display font-bold text-stone-900 text-3xl
-                              tracking-tight leading-tight mb-5">
-                Crawl once, search instantly
-              </h2>
-              <div className="space-y-4 text-[15px] text-stone-600 leading-relaxed">
-                <p>
-                  A Playwright-driven crawler visits every department directory, follows
-                  each profile link, and extracts name, title, email, research interests,
-                  and lab website — storing results in a flat JSON file.
-                </p>
-                <p>
-                  The UI is entirely static. There is no backend, no database, no auth.
-                  The dataset loads once; all filtering and ranking happens client-side
-                  in milliseconds.
-                </p>
-                <p>
-                  Re-running the crawler at the start of each semester keeps the index
-                  current. The whole pipeline fits in a single Python file.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Departments ───────────────────────────────────── */}
-      <section className="py-20 bg-cream-200 border-b border-cream-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <Reveal>
-            <SectionEyebrow>Coverage</SectionEyebrow>
-            <h2 className="font-display font-bold text-stone-900 text-3xl
-                            tracking-tight mb-3">
-              Every STEM department, one search
-            </h2>
-            <p className="text-[15px] text-stone-500 mb-10">
-              Engineering, science, and applied STEM departments at {school.shortName} — all indexed.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {DEPTS.map((d, i) => (
-              <Reveal key={d} delay={i * 50}>
-                <div className="flex items-center gap-3 bg-cream-50 rounded-xl
-                                border border-cream-300 px-4 py-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-maroon-700 flex-shrink-0" />
-                  <span className="text-sm text-stone-700 font-medium">{d}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Limitations ───────────────────────────────────── */}
-      <section className="py-20 bg-cream-50 border-b border-cream-300">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <Reveal>
-            <SectionEyebrow>Limitations</SectionEyebrow>
-            <h2 className="font-display font-bold text-stone-900 text-3xl
-                            tracking-tight mb-10">
-              What this tool is not
-            </h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[
-              {
-                title: 'Not real-time',
-                body: 'The dataset reflects the last crawler run. New hires or changes may lag by a semester.',
-              },
-              {
-                title: 'Not exhaustive',
-                body: 'Every STEM department is indexed. Business, architecture, law, and other non-STEM colleges are currently out of scope.',
-              },
-              {
-                title: 'Not affiliated',
-                body: `This is an independent student project and is not endorsed by or affiliated with ${school.name}.`,
-              },
-            ].map(({ title, body }, i) => (
-              <Reveal key={title} delay={i * 80}>
-                <div className="bg-cream-100 rounded-2xl border border-cream-300 p-6">
-                  <div className="w-2 h-2 rounded-full bg-maroon-700 mb-4" />
-                  <h3 className="font-semibold text-stone-900 text-sm mb-2">{title}</h3>
-                  <p className="text-[13px] text-stone-500 leading-relaxed">{body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={300}>
-            <p className="text-sm text-stone-500 mt-8 leading-relaxed">
-              For authoritative faculty information, visit the official{' '}
-              <a
-                href={school.officialUrl || `https://www.${school.code}.edu`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-maroon-700 hover:underline font-medium"
-              >
-                {school.shortName} website
-              </a>.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ── CTA ───────────────────────────────────────────── */}
-      <section className="bg-maroon-800 py-20">
+      <section className="bg-maroon-800 py-16">
         <Reveal>
           <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
             <h2 className="font-display font-bold text-cream-100 text-3xl
@@ -363,7 +179,7 @@ export default function About() {
               Ready to find your research mentor?
             </h2>
             <p className="text-maroon-300 text-[15px] mb-8 leading-relaxed">
-              Search {faculty.length || 0} {school.shortName} faculty by research interest,
+              Search {school.shortName} STEM faculty by research interest,
               department, or keyword — in seconds.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

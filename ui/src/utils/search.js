@@ -56,6 +56,42 @@ export function scoreProfessor(prof, tokens) {
 // ---------------------------------------------------------------------------
 
 /**
+ * Crawlers append research areas/keywords to the bio as " | "-joined tails
+ * (e.g. "Our lab studies ... | Biophysics | Nanoscience"). Split a record's
+ * research_summary into a prose `summary` (the preview) and short `keywords`
+ * (shown as tags), folding in scholar_interests. A part is "prose" if it's
+ * long or sentence-like; short parts become keywords.
+ */
+export function splitResearch(prof) {
+  const raw = (prof.research_summary || '').trim()
+  const parts = raw.split('|').map(s => s.trim()).filter(Boolean)
+
+  let summary = ''
+  let i = 0
+  if (parts.length && (parts[0].length > 80 || /[.!?]/.test(parts[0]))) {
+    summary = parts[0]
+    i = 1
+  }
+  const keywords = []
+  for (; i < parts.length; i++) {
+    if (parts[i].length <= 60) keywords.push(parts[i])
+    else if (!summary) summary = parts[i]   // no prose yet → use the long part
+  }
+  for (const k of prof.scholar_interests || []) {
+    if (k && String(k).trim()) keywords.push(String(k).trim())
+  }
+  // de-dupe (case-insensitive), cap
+  const seen = new Set()
+  const dedup = keywords.filter(k => {
+    const l = k.toLowerCase()
+    if (seen.has(l)) return false
+    seen.add(l)
+    return true
+  }).slice(0, 8)
+  return { summary, keywords: dedup }
+}
+
+/**
  * A lab website or Google Scholar profile is a proxy for an active, often-funded
  * research group — the most relevant signal for someone (e.g. an international
  * student) looking for a faculty member who can fund a research position.
