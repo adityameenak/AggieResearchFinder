@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchoolPath } from '../SchoolContext'
-import { highlightSegments, deptLabel } from '../utils/search'
+import { highlightSegments, deptLabel, isActiveLab } from '../utils/search'
 
 /* ── Highlight renderer ───────────────────────────────────── */
 function Highlight({ text, tokens }) {
@@ -125,7 +125,20 @@ export default function ProfCard({ prof, tokens = [] }) {
 
       {/* ── Card header ──────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-2 px-5 pt-5 pb-4">
-        <DeptBadge dept={prof.department} />
+        <div className="flex flex-wrap items-center gap-1.5">
+          <DeptBadge dept={prof.department} />
+          {isActiveLab(prof) && (
+            <span
+              title="Has a lab website or Google Scholar profile — an active research group"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px]
+                         font-semibold ring-1 ring-inset leading-none
+                         bg-emerald-50 text-emerald-800 ring-emerald-200"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+              Active lab
+            </span>
+          )}
+        </div>
         <button
           onClick={() => toggleSave(prof.id)}
           title={saved ? 'Remove from saved' : 'Save professor'}

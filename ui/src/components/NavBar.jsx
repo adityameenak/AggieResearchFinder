@@ -91,6 +91,7 @@ export default function NavBar() {
               </span>
             )}
           </Link>
+          <Link to={tx('/international')} className={linkCls('/international')}>Int'l</Link>
           <Link to={tx('/about')} className={linkCls('/about')}>About</Link>
 
           {/* CTA */}

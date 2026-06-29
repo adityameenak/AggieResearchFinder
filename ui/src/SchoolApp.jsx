@@ -13,6 +13,7 @@ import About      from './pages/About'
 import Discover   from './pages/Discover'
 import Match      from './pages/Match'
 import Tracker    from './pages/TrackerPage'
+import International from './pages/International'
 
 export default function SchoolApp() {
   // Stamp the active school code onto <html> so the CSS variable overrides in
@@ -46,6 +47,7 @@ export default function SchoolApp() {
               <Route path="discover" element={<Discover />}   />
               <Route path="match"    element={<Match />}      />
               <Route path="tracker"  element={<Tracker />}    />
+              <Route path="international" element={<International />} />
             </Routes>
           </main>
           <Footer />

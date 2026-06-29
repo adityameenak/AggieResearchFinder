@@ -18,8 +18,8 @@ function SearchIcon({ className = 'w-5 h-5' }) {
 
 /* ── Filter panel (shared across sidebar + mobile) ────────── */
 function FilterPanel({ dept, setDept, hasResearchOnly, setHasResearchOnly,
-                       hasActive, clearAll, departments, query, onDeptChange,
-                       onResearchChange }) {
+                       activeLabsOnly, hasActive, clearAll, departments, query,
+                       onDeptChange, onResearchChange, onActiveLabsChange }) {
   return (
     <div className="space-y-5">
 
@@ -80,6 +80,32 @@ function FilterPanel({ dept, setDept, hasResearchOnly, setHasResearchOnly,
             </div>
             <div className="text-[11px] text-stone-400 mt-0.5 leading-relaxed">
               Only show faculty with published research info
+            </div>
+          </div>
+        </label>
+
+        <label className="flex items-start gap-3 cursor-pointer group mt-3">
+          <div className="relative mt-0.5 flex-shrink-0">
+            <input
+              type="checkbox"
+              checked={activeLabsOnly}
+              onChange={e => onActiveLabsChange(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div className="w-9 h-5 bg-cream-300 rounded-full peer-checked:bg-maroon-700
+                            transition-colors duration-200 border border-cream-400
+                            peer-checked:border-maroon-700" />
+            <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full
+                            shadow-sm transition-transform duration-200
+                            peer-checked:translate-x-4" />
+          </div>
+          <div>
+            <div className="text-sm font-medium text-stone-700 leading-tight
+                            group-hover:text-stone-900 transition-colors">
+              Active labs only
+            </div>
+            <div className="text-[11px] text-stone-400 mt-0.5 leading-relaxed">
+              Has a lab website or Google Scholar — a likely-funded research group
             </div>
           </div>
         </label>
@@ -183,12 +209,14 @@ export default function Search() {
   const qParam    = searchParams.get('q')           ?? ''
   const deptParam = searchParams.get('dept')         ?? ''
   const hasRes    = searchParams.get('hasResearch') === '1'
+  const activeParam = searchParams.get('active') === '1'
   const chipsParam = searchParams.get('chips')       ?? ''
   const pageParam = parseInt(searchParams.get('page') ?? '1', 10)
 
   const [query,           setQuery]           = useState(qParam)
   const [dept,            setDept]            = useState(deptParam)
   const [hasResearchOnly, setHasResearchOnly] = useState(hasRes)
+  const [activeLabsOnly,  setActiveLabsOnly]  = useState(activeParam)
   const [selectedChips,   setSelectedChips]   = useState(() => new Set(chipsParam ? chipsParam.split(',') : []))
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
@@ -196,8 +224,9 @@ export default function Search() {
     setQuery(qParam)
     setDept(deptParam)
     setHasResearchOnly(hasRes)
+    setActiveLabsOnly(activeParam)
     setSelectedChips(new Set(chipsParam ? chipsParam.split(',') : []))
-  }, [qParam, deptParam, hasRes, chipsParam, pageParam])
+  }, [qParam, deptParam, hasRes, activeParam, chipsParam, pageParam])
 
   /* Combine free-text query with selected chip terms */
   const combinedQuery = useMemo(() => {
@@ -212,22 +241,29 @@ export default function Search() {
 
   const tokens  = useMemo(() => tokenize(combinedQuery), [combinedQuery])
   const results = useMemo(
-    () => searchAndRank(faculty, combinedQuery, { department: deptParam, hasResearchOnly: hasRes }),
-    [faculty, combinedQuery, deptParam, hasRes],
+    () => searchAndRank(faculty, combinedQuery, { department: deptParam, hasResearchOnly: hasRes, activeLabsOnly: activeParam }),
+    [faculty, combinedQuery, deptParam, hasRes, activeParam],
   )
 
   const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE))
   const currentPage = Math.min(Math.max(1, pageParam), totalPages)
   const pagedResults = results.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
 
-  function push(nextQ, nextDept, nextHasRes, nextChips = selectedChips, nextPage = 1) {
+  function push(nextQ, nextDept, nextHasRes, nextChips = selectedChips, nextPage = 1,
+                nextActive = activeLabsOnly) {
     const p = new URLSearchParams()
     if (nextQ.trim())      p.set('q',          nextQ.trim())
     if (nextDept)          p.set('dept',        nextDept)
     if (nextHasRes)        p.set('hasResearch', '1')
+    if (nextActive)        p.set('active',      '1')
     if (nextChips.size > 0) p.set('chips',      [...nextChips].join(','))
     if (nextPage > 1)      p.set('page',        String(nextPage))
     setSearchParams(p, { replace: true })
+  }
+
+  function onActiveLabsChange(checked) {
+    setActiveLabsOnly(checked)
+    push(query, dept, hasResearchOnly, selectedChips, 1, checked)
   }
 
   function goToPage(page) {
@@ -254,13 +290,14 @@ export default function Search() {
     setQuery('')
     setDept('')
     setHasResearchOnly(false)
+    setActiveLabsOnly(false)
     setSelectedChips(new Set())
     setSearchParams({}, { replace: true })
     inputRef.current?.focus()
   }
 
-  const hasActive = qParam || deptParam || hasRes || chipsParam || pageParam > 1
-  const activeFilterCount = [deptParam, hasRes, chipsParam].filter(Boolean).length
+  const hasActive = qParam || deptParam || hasRes || activeParam || chipsParam || pageParam > 1
+  const activeFilterCount = [deptParam, hasRes, activeParam, chipsParam].filter(Boolean).length
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-54px)] bg-cream-100">
@@ -384,10 +421,12 @@ export default function Search() {
                   dept={dept} setDept={setDept}
                   hasResearchOnly={hasResearchOnly}
                   setHasResearchOnly={setHasResearchOnly}
+                  activeLabsOnly={activeLabsOnly}
                   hasActive={hasActive} clearAll={clearAll}
                   departments={departments} query={query}
                   onDeptChange={v => { setDept(v); push(query, v, hasResearchOnly) }}
                   onResearchChange={v => { setHasResearchOnly(v); push(query, dept, v) }}
+                  onActiveLabsChange={onActiveLabsChange}
                 />
               </div>
 
@@ -446,10 +485,12 @@ export default function Search() {
                     dept={dept} setDept={setDept}
                     hasResearchOnly={hasResearchOnly}
                     setHasResearchOnly={setHasResearchOnly}
+                    activeLabsOnly={activeLabsOnly}
                     hasActive={hasActive} clearAll={clearAll}
                     departments={departments} query={query}
                     onDeptChange={v => { setDept(v); push(query, v, hasResearchOnly) }}
                     onResearchChange={v => { setHasResearchOnly(v); push(query, dept, v) }}
+                    onActiveLabsChange={onActiveLabsChange}
                   />
                 </div>
               )}

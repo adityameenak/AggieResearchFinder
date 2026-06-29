@@ -56,10 +56,19 @@ export function scoreProfessor(prof, tokens) {
 // ---------------------------------------------------------------------------
 
 /**
+ * A lab website or Google Scholar profile is a proxy for an active, often-funded
+ * research group — the most relevant signal for someone (e.g. an international
+ * student) looking for a faculty member who can fund a research position.
+ */
+export function isActiveLab(prof) {
+  return Boolean((prof.lab_website || '').trim() || (prof.google_scholar || '').trim())
+}
+
+/**
  * Filter, score, and sort the faculty array.
  * @param {object[]} faculty - full faculty array
  * @param {string}   query   - raw search string
- * @param {object}   filters - { department: string, hasResearchOnly: bool }
+ * @param {object}   filters - { department, hasResearchOnly, activeLabsOnly }
  * @returns {object[]} ranked results (each has a `_score` property)
  */
 export function searchAndRank(faculty, query, filters = {}) {
@@ -68,6 +77,8 @@ export function searchAndRank(faculty, query, filters = {}) {
   let results = faculty.filter(prof => {
     if (filters.department && prof.department !== filters.department) return false
     if (filters.hasResearchOnly && !(prof.research_summary || '').trim()) return false
+    // "Active labs": proxy for an active, often-funded research group.
+    if (filters.activeLabsOnly && !isActiveLab(prof)) return false
     return true
   })
 
