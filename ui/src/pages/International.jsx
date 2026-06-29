@@ -15,12 +15,24 @@ function SectionEyebrow({ children }) {
   )
 }
 
+// Policy landscape is volatile — this is a dated snapshot, not live data.
+const RESEARCH_DATE = 'June 29, 2026'
+
+// Key developments as of RESEARCH_DATE (see disclaimer). Kept high-level on
+// purpose; specifics change often and must be confirmed with ISSS/USCIS.
+const POLICY_SNAPSHOT = [
+  'STEM OPT remains available — eligible STEM grads can still get the 24-month extension (36 months total), but 2026 rules tightened it (e.g. a 60-day cumulative unemployment cap and stricter employer / I-983 reporting).',
+  'A 2026 DHS rule replaces open-ended "Duration of Status" with fixed admission periods (commonly ~4 years), phasing in around September 2026 — longer programs may need a USCIS extension.',
+  'The post-completion grace period is being cut from 60 to 30 days, and the USCIS I-765 filing fee rose (~$1,780 with premium processing); some OPT/STEM OPT filings now require biometrics.',
+  'OPT processing has been paused for applicants from travel-ban-affected countries, and in-person F-1 visa interviews are again required (the interview waiver was narrowed in late 2025).',
+]
+
 const TERMS = [
   ['RA / GRA', 'Graduate Research Assistantship — a paid research position with a faculty PI that usually covers a stipend and tuition. The most common way funded grad students are supported.'],
   ['TA', 'Teaching Assistantship — paid teaching support, also typically with stipend + tuition. Often available in large STEM departments.'],
   ['CPT', 'Curricular Practical Training — work authorization for internships/research tied to your program, used during your studies.'],
-  ['OPT', 'Optional Practical Training — up to 12 months of work authorization after graduation in your field.'],
-  ['STEM OPT', 'A 24-month extension of OPT for graduates of eligible STEM degrees — 36 months total. This is the single biggest reason a STEM focus matters for international students.'],
+  ['OPT', 'Optional Practical Training — up to 12 months of work authorization after graduation in your field. As of 2026 the post-completion window to file/depart is being shortened (see the policy snapshot).'],
+  ['STEM OPT', 'A 24-month extension of OPT for graduates of eligible STEM degrees — 36 months total — still available as of 2026, with tighter unemployment and reporting rules. This long work runway is the single biggest reason a STEM focus matters for international students.'],
 ]
 
 export default function International() {
@@ -47,6 +59,43 @@ export default function International() {
               {' '}{school.appName} to find a lab that can support you, and how to
               reach out.
             </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Dated policy snapshot */}
+      <section className="py-12 border-b border-cream-300 bg-amber-50/40">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <Reveal>
+            <div className="rounded-xl border border-amber-300 bg-amber-50 p-5 sm:p-6">
+              <div className="flex items-center justify-between gap-3 flex-wrap mb-3">
+                <h2 className="font-display font-bold text-stone-900 text-lg tracking-tight">
+                  Policy snapshot
+                </h2>
+                <span className="text-[11px] font-semibold text-amber-800 bg-amber-100
+                                 ring-1 ring-amber-300 rounded-full px-2.5 py-1 leading-none">
+                  Researched {RESEARCH_DATE}
+                </span>
+              </div>
+              <p className="text-stone-600 text-sm leading-relaxed mb-3">
+                U.S. international-student policy is changing quickly in 2026. The
+                points below were accurate when researched but may already be
+                out of date — treat them as a starting point, not authority.
+              </p>
+              <ul className="space-y-2">
+                {POLICY_SNAPSHOT.map((pt, i) => (
+                  <li key={i} className="flex gap-2.5 text-stone-700 text-sm leading-relaxed">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-[12px] text-stone-500 mt-4 leading-relaxed">
+                Always confirm current rules with {school.name}'s international
+                student services (ISSS) office and official USCIS / DHS guidance
+                before acting.
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -153,9 +202,12 @@ export default function International() {
             </Link>
             <p className="mt-10 text-xs text-stone-400 max-w-2xl mx-auto leading-relaxed">
               This guide is general information, not legal or immigration advice.
-              Visa rules change and individual situations vary — always confirm
-              CPT/OPT/funding specifics with {school.name}'s international student
-              services office and your department's graduate coordinator.
+              The policy details here were researched on <strong>{RESEARCH_DATE}</strong>;
+              U.S. visa and work-authorization rules change frequently and
+              individual situations vary. Always confirm current CPT/OPT/STEM OPT
+              and funding specifics with {school.name}'s international student
+              services (ISSS) office, your department's graduate coordinator, and
+              official USCIS / DHS sources before making decisions.
             </p>
           </Reveal>
         </div>
