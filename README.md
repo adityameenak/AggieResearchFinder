@@ -7,6 +7,8 @@ Upload your resume, enter your research interests, and get matched with faculty 
 Supported schools (each with its own subpage and branding):
 - **Texas A&M** — `/tamu` — Aggie Research Finder
 - **Rice** — `/rice` — Owl Research Finder
+- **UT Austin** — `/ut` — Longhorn Research Finder
+- **UT Dallas** — `/utd` — Comet Research Finder
 
 The landing page at `/` lets users pick their school.
 
@@ -76,7 +78,7 @@ import json
 # Map each per-school file to its university code. The TAMU faculty.json is not
 # self-tagged, so we backfill 'tamu' here; per-school files that already carry a
 # 'university' field (e.g. faculty-rice.json) keep their own value.
-SOURCES = {'faculty.json': 'tamu', 'faculty-rice.json': 'rice', 'faculty-ut.json': 'ut'}
+SOURCES = {'faculty.json': 'tamu', 'faculty-rice.json': 'rice', 'faculty-ut.json': 'ut', 'faculty-utd.json': 'utd'}
 combined = []
 for path, uni in SOURCES.items():
     try: recs = json.load(open(path))

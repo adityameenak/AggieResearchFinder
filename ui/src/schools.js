@@ -85,9 +85,8 @@ export const SCHOOLS = {
     },
     officialUrl: 'https://www.utdallas.edu',
     description: 'Discover STEM research labs across UT Dallas, powered by AI matching.',
-    // Held for review: STEM faculty crawled from profiles.utdallas.edu, not yet
-    // merged into faculty.json. Flip to true once reviewed.
-    available: false,
+    // Live: 542 STEM faculty crawled from profiles.utdallas.edu.
+    available: true,
   },
 }
 
