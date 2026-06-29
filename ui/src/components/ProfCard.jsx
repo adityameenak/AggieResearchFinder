@@ -179,7 +179,9 @@ export default function ProfCard({ prof, tokens = [] }) {
           </p>
         ) : keywords.length === 0 ? (
           <p className="text-xs text-stone-400 italic leading-relaxed">
-            No research summary available.
+            {isActiveLab(prof)
+              ? 'No summary captured — see their lab site or Scholar profile below for research details.'
+              : 'No research summary available.'}
           </p>
         ) : null}
 
