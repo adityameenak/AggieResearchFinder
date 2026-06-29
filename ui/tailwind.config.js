@@ -40,6 +40,20 @@ export default {
           900: '#000f2c',
           950: '#000817',
         },
+        // UT Dallas green (#154734). Same role as rice-blue / ut-orange.
+        'utd-green': {
+          50:  '#eef5f1',
+          100: '#d4e6dd',
+          200: '#a9cdbb',
+          300: '#79b094',
+          400: '#4a906e',
+          500: '#2a6f4f',
+          600: '#1d5a3f',
+          700: '#154734',
+          800: '#103829',
+          900: '#0b291e',
+          950: '#061811',
+        },
         // UT Austin burnt orange (#BF5700). Same role as rice-blue — used on
         // the school picker / per-school accent until full theming lands.
         'ut-orange': {

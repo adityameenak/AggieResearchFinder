@@ -67,6 +67,27 @@ export const SCHOOLS = {
     // Live: all 13 STEM departments crawled (Cockrell engineering + CNS).
     available: true,
   },
+  utd: {
+    code: 'utd',
+    name: 'The University of Texas at Dallas',
+    shortName: 'UT Dallas',
+    appName: 'Comet Research Finder',
+    brandPrefix: 'Comet',
+    brandSuffix: 'ResearchFinder',
+    accent: 'utd-green',
+    classes: {
+      brandText:    'text-utd-green-700',
+      brandHover:   'group-hover:text-utd-green-600',
+      cardHover:    'hover:border-utd-green-400',
+      pillBg:       'bg-utd-green-700',
+      pillText:     'text-utd-green-700',
+    },
+    officialUrl: 'https://www.utdallas.edu',
+    description: 'Discover STEM research labs across UT Dallas, powered by AI matching.',
+    // Held for review: STEM faculty crawled from profiles.utdallas.edu, not yet
+    // merged into faculty.json. Flip to true once reviewed.
+    available: false,
+  },
 }
 
 export const SCHOOL_LIST = Object.values(SCHOOLS)

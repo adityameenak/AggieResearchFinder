@@ -147,6 +147,9 @@ const DEPT_DISPLAY = {
   'applied-physics':    'Applied Physics',
   cmor:                 'Computational & Applied Math',
   kinesiology:          'Kinesiology',
+  // UT Dallas-specific STEM departments (see crawler/crawl_utd.py STEM_RULES)
+  'systems-engineering': 'Systems Engineering',
+  geosciences:          'Geosciences',
 }
 
 export function deptLabel(slug) {
