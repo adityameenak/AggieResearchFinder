@@ -107,7 +107,7 @@ const DEPTS = [
 ]
 
 export default function About() {
-  const { faculty } = useApp()
+  const { faculty, departments } = useApp()
   const school = useSchool()
   const tx     = useSchoolPath()
 
@@ -144,7 +144,7 @@ export default function About() {
           <div className="grid grid-cols-3 gap-6 sm:gap-12">
             {[
               { number: faculty.length || '553', label: 'Faculty indexed' },
-              { number: '20',  label: 'STEM departments' },
+              { number: departments.length || '20',  label: 'STEM departments' },
               { number: '0',   label: 'Logins required' },
             ].map(({ number, label }) => (
               <div key={label} className="text-center">
@@ -170,10 +170,11 @@ export default function About() {
               About the Builders
             </h2>
             <p className="text-[15px] text-stone-600 leading-relaxed max-w-2xl mb-14">
-              {school.appName} was built to make undergraduate research easier to discover
-              and pursue. As students, we saw how difficult it could be to navigate faculty
+              {school.appName} was built to make STEM research easier to discover
+              and pursue — for undergraduates, graduate applicants, and postdocs alike.
+              As students, we saw how difficult it could be to navigate faculty
               pages, understand what different labs actually work on, and confidently reach out
-              to professors. We wanted to create a platform that connects students with research
+              to professors. We wanted to create a platform that connects people with research
               opportunities based on genuine interests and makes the first step into research
               far more approachable.
             </p>
@@ -234,8 +235,8 @@ export default function About() {
                   detail. Some have rich research summaries; others have barely a title.
                 </p>
                 <p>
-                  Students looking for research opportunities — especially undergrads and
-                  incoming graduate students — have no good starting point. The university
+                  People looking for STEM research opportunities — undergrads, incoming
+                  graduate students, and postdocs alike — have no good starting point. The university
                   search tools are generic. Google is noisy.
                 </p>
                 <p>
@@ -280,7 +281,7 @@ export default function About() {
             <SectionEyebrow>Coverage</SectionEyebrow>
             <h2 className="font-display font-bold text-stone-900 text-3xl
                             tracking-tight mb-3">
-              20 departments, one search
+              Every STEM department, one search
             </h2>
             <p className="text-[15px] text-stone-500 mb-10">
               Engineering, science, and applied STEM departments at {school.shortName} — all indexed.
@@ -320,7 +321,7 @@ export default function About() {
               },
               {
                 title: 'Not exhaustive',
-                body: 'Twenty STEM departments are indexed. Business, architecture, law, and other colleges are currently out of scope.',
+                body: 'Every STEM department is indexed. Business, architecture, law, and other non-STEM colleges are currently out of scope.',
               },
               {
                 title: 'Not affiliated',

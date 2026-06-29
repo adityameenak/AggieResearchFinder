@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useApp } from '../AppContext'
+import { useSchool } from '../SchoolContext'
 import ProfCard from '../components/ProfCard'
 import { searchAndRank, tokenize, deptLabel } from '../utils/search'
 
@@ -174,6 +175,7 @@ const PAGE_SIZE = 24
 
 export default function Search() {
   const { faculty, departments, loading, topicChips, recordSearch } = useApp()
+  const school = useSchool()
   const [searchParams, setSearchParams] = useSearchParams()
   const inputRef = useRef(null)
   const topRef = useRef(null)
@@ -285,7 +287,7 @@ export default function Search() {
           <p className="text-[15px] text-stone-500 mb-7">
             Explore{' '}
             <span className="font-semibold text-stone-700">{faculty.length || 553}</span>
-            {' '}researchers across 20 STEM departments at Texas A&amp;M.
+            {' '}researchers across {departments.length || 'all'} STEM departments at {school.shortName}.
           </p>
 
           {/* Search bar */}
