@@ -38,6 +38,36 @@
   --maroon-950: 0 8 23;
 }
 
+/* UT Austin burnt orange (#BF5700) */
+[data-school="ut"] {
+  --maroon-50:  253 244 236;
+  --maroon-100: 251 228 210;
+  --maroon-200: 246 196 160;
+  --maroon-300: 240 160 107;
+  --maroon-400: 232 125 60;
+  --maroon-500: 212 101 31;
+  --maroon-600: 191 87 0;
+  --maroon-700: 160 73 0;
+  --maroon-800: 126 58 0;
+  --maroon-900: 95 44 0;
+  --maroon-950: 55 25 0;
+}
+
+/* UT Dallas green (#154734) */
+[data-school="utd"] {
+  --maroon-50:  238 245 241;
+  --maroon-100: 212 230 221;
+  --maroon-200: 169 205 187;
+  --maroon-300: 121 176 148;
+  --maroon-400: 74 144 110;
+  --maroon-500: 42 111 79;
+  --maroon-600: 29 90 63;
+  --maroon-700: 21 71 52;
+  --maroon-800: 16 56 41;
+  --maroon-900: 11 41 30;
+  --maroon-950: 6 24 17;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
