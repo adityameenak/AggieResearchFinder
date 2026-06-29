@@ -28,11 +28,17 @@ export function tokenize(query) {
 export function scoreProfessor(prof, tokens) {
   if (!tokens.length) return 1  // no query → equal weight
 
+  // Scraped Google Scholar interests are part of the searchable text so a
+  // query like "machine learning" matches a PI whose Scholar profile lists it
+  // even if the bio doesn't spell it out.
+  const scholarText = (prof.scholar_interests || []).join(' ')
+
   const parts = [
     (prof.research_summary || '') + ' ',
     (prof.name             || '') + ' ',
     (prof.title            || '') + ' ',
     (prof.department       || '') + ' ',
+    scholarText            + ' ',
   ]
   const haystack = parts.join(' ').toLowerCase()
 
@@ -46,8 +52,9 @@ export function scoreProfessor(prof, tokens) {
     }
     // Bonus: token appears in name
     if ((prof.name || '').toLowerCase().includes(token)) score += 5
-    // Bonus: token appears in research summary specifically
+    // Bonus: token in research summary or Scholar interests specifically
     if ((prof.research_summary || '').toLowerCase().includes(token)) score += 2
+    if (scholarText.toLowerCase().includes(token)) score += 2
   }
   return score
 }
