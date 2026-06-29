@@ -68,6 +68,16 @@ export function AppProvider({ children }) {
     [dataTopics, searchCounts],
   )
 
+  // Department-adaptive chips: when a department is selected, derive the chips
+  // from just that department's faculty so the filters get more specific
+  // (e.g. aerospace surfaces "propulsion", CS surfaces "machine learning").
+  function topicChipsFor(dept) {
+    if (!dept) return topicChips
+    const subset = faculty.filter(f => f.department === dept)
+    if (subset.length === 0) return topicChips
+    return mergeTopics(extractTopicsFromFaculty(subset), searchCounts, 15)
+  }
+
   function recordSearch(query) {
     const q = (query || '').trim().toLowerCase()
     if (!q || q.length < 2) return
@@ -118,7 +128,7 @@ export function AppProvider({ children }) {
       faculty, departments, loading, error,
       applications, savedCount, isSaved, toggleSave,
       addApp, editApp, removeApp, refreshApps,
-      topicChips, recordSearch,
+      topicChips, topicChipsFor, recordSearch,
     }}>
       {children}
     </AppContext.Provider>

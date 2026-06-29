@@ -1,6 +1,7 @@
 /**
- * Search & ranking utilities for the TAMU Research Finder.
+ * Search & ranking utilities for the Texas STEM Research Finder.
  */
+import { isUsefulTopic } from './topics'
 
 // ---------------------------------------------------------------------------
 // Tokenization
@@ -80,11 +81,11 @@ export function splitResearch(prof) {
   for (const k of prof.scholar_interests || []) {
     if (k && String(k).trim()) keywords.push(String(k).trim())
   }
-  // de-dupe (case-insensitive), cap
+  // de-dupe (case-insensitive), drop junk/heading terms, cap
   const seen = new Set()
   const dedup = keywords.filter(k => {
     const l = k.toLowerCase()
-    if (seen.has(l)) return false
+    if (seen.has(l) || !isUsefulTopic(k)) return false
     seen.add(l)
     return true
   }).slice(0, 8)

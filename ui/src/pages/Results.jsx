@@ -200,7 +200,7 @@ function Pagination({ currentPage, totalPages, goToPage }) {
 const PAGE_SIZE = 24
 
 export default function Search() {
-  const { faculty, departments, loading, topicChips, recordSearch } = useApp()
+  const { faculty, departments, loading, topicChips, topicChipsFor, recordSearch } = useApp()
   const school = useSchool()
   const [searchParams, setSearchParams] = useSearchParams()
   const inputRef = useRef(null)
@@ -243,6 +243,12 @@ export default function Search() {
   const results = useMemo(
     () => searchAndRank(faculty, combinedQuery, { department: deptParam, hasResearchOnly: hasRes, activeLabsOnly: activeParam }),
     [faculty, combinedQuery, deptParam, hasRes, activeParam],
+  )
+
+  // Topic chips adapt to the selected department (more specific filters).
+  const chips = useMemo(
+    () => topicChipsFor(deptParam),
+    [deptParam, faculty, topicChips], // eslint-disable-line react-hooks/exhaustive-deps
   )
 
   const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE))
@@ -380,7 +386,7 @@ export default function Search() {
               Filter by topic:
             </p>
             <div className="flex flex-wrap gap-2">
-              {topicChips.map(({ label, q }) => {
+              {chips.map(({ label, q }) => {
                 const active = selectedChips.has(q)
                 return (
                   <button

@@ -34,6 +34,38 @@ const GENERIC_TERMS = new Set([
   'control', 'imaging', 'synthesis', 'analysis', 'simulation',
 ])
 
+// Section headings / boilerplate that leak in from scraped profiles and just
+// pollute the chips and search (they're not research topics).
+const JUNK_TOPICS = new Set([
+  'research', 'research areas', 'research area', 'research interests',
+  'research interest', 'research summary', 'research focus', 'research statement',
+  'fields of interest', 'field of interest', 'areas of interest', 'area of interest',
+  'contact information', 'biography', 'bio', 'overview', 'education',
+  'publications', 'selected publications', 'awards', 'honors', 'honors and awards',
+  'teaching', 'teaching areas', 'appointments', 'affiliations', 'affiliation',
+  'centers and institutes', 'professional preparation', 'additional information',
+  'email address', 'email', 'phone', 'office', 'fax', 'address',
+  'curriculum vitae', 'cv', 'website', 'web site', 'google scholar', 'scholar',
+  'n/a', 'na', 'none', 'tba', 'professor', 'associate professor',
+  'assistant professor', 'faculty', 'lecturer', 'department',
+])
+
+/**
+ * Is a string a genuinely useful research topic (vs. a heading, a stopword
+ * fragment, a building code, a number, or a too-generic single word)?
+ */
+export function isUsefulTopic(term) {
+  const t = (term || '').trim().toLowerCase().replace(/\s+/g, ' ')
+  if (t.length < 3 || t.length > 45) return false
+  if (!/[a-z]/.test(t)) return false                 // must contain a letter
+  if (/^\d/.test(t) || /^[a-z]{2,4}\s?\d/i.test(t)) return false  // codes like "WEL 3.120"
+  if (JUNK_TOPICS.has(t)) return false
+  if (!t.includes(' ') && GENERIC_TERMS.has(t)) return false
+  if (/^(and|or|the|of|in|with|for|to|a|an)\b/.test(t)) return false  // fragment
+  if (/\b(and|or|of|the)$/.test(t)) return false     // dangling-conjunction fragment
+  return true
+}
+
 /**
  * Scan scholar_interests and research_summary across all faculty records.
  * Returns the top 30 topics ranked by how many faculty mention each one.
@@ -50,9 +82,7 @@ export function extractTopicsFromFaculty(faculty) {
     // Primary source: scholar_interests (curated, clean)
     for (const interest of (f.scholar_interests || [])) {
       const norm = interest.trim().toLowerCase()
-      if (norm.length < 3 || seen.has(norm)) continue
-      // Skip single-word generic terms that aren't useful as chip labels
-      if (!norm.includes(' ') && GENERIC_TERMS.has(norm)) continue
+      if (seen.has(norm) || !isUsefulTopic(norm)) continue
       seen.add(norm)
       counts.set(norm, (counts.get(norm) || 0) + 1)
     }
@@ -62,8 +92,7 @@ export function extractTopicsFromFaculty(faculty) {
       const segments = f.research_summary.split('|')
       for (let i = 1; i < segments.length; i++) {
         const topic = segments[i].trim().toLowerCase()
-        if (topic.length < 3 || topic.length > 40 || seen.has(topic)) continue
-        if (!topic.includes(' ') && GENERIC_TERMS.has(topic)) continue
+        if (seen.has(topic) || !isUsefulTopic(topic)) continue
         seen.add(topic)
         counts.set(topic, (counts.get(topic) || 0) + 1)
       }
