@@ -1237,14 +1237,18 @@
     "department": "electrical",
     "email": "stpierre@bcm.edu",
     "profile_url": "https://profiles.rice.edu/faculty/francois-st-pierre",
-    "research_summary": "",
+    "research_summary": "Research interests: Neurophotonics, bioengineering, systems & synthetic biology. Selected work: Improving FRET dynamic range with bright green and red fluorescent proteins; High-fidelity optical reporting of neuronal electrical activity with an ultrafast fluorescent voltage sensor; Ultrafast two-photon imaging of a high-gain voltage indicator in awake behaving mice; Subcellular imaging of voltage and calcium signals reveals neural processing in vivo; One-step cloning and chromosomal integration of DNA.",
     "lab_website": "https://www.bcm.edu/people-search/francois-st-pierre-31095",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=lK136qQAAAAJ&hl=en",
+    "ai_review": "Francois St-Pierre’s research program within the Electrical Engineering department investigates the intersection of neurophotonics, bioengineering, and synthetic biology to understand fundamental neural processes. His work centers on developing advanced optical methods for monitoring neuronal activity in vivo, notably through the creation of ultrafast fluorescent voltage sensors utilizing bright green and red fluorescent proteins. Specifically, he employs techniques such as two-photon imaging and subcellular imaging to investigate voltage and calcium signaling dynamics within awake mice, allowing for high-fidelity reporting of electrical activity. Furthermore, Professor St-Pierre’s lab utilizes innovative approaches like one-step cloning and chromosomal integration of DNA to engineer synthetic biological circuits directly within neuronal cells – reflecting a commitment to systems-level investigations of neural function.",
     "photo_url": "https://profiles.rice.edu/sites/g/files/bxs3881/files/2020-07/Francois.jpeg",
     "phone": "281-888-8468",
     "office": "BCM S636A",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Neurophotonics",
+      "bioengineering",
+      "systems & synthetic biology"
+    ],
     "publications": []
   },
   {
@@ -8185,14 +8189,18 @@
     "department": "earth-environmental",
     "email": "AndrewHoffman@rice.edu",
     "profile_url": "https://profiles.rice.edu/faculty/andrew-hoffman",
-    "research_summary": "",
+    "research_summary": "Research interests: glaciology, ice sheets, radar geophysics. Selected work: Antarctic Bedmap data: FAIR sharing of 60 years of ice bed, surface and thickness data; Bedmap3 updated ice bed, surface and thickness gridded datasets for Antarctica; Climatology and surface impacts of atmospheric rivers on West Antarctica; Atmospheric rivers in Antarctica; Brief communication: Heterogenous thinning and subglacial lake activity on Thwaites Glacier, West Antarctica.",
     "lab_website": "https://hoffmaao.github.io/",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=jf4jwlMAAAAJ&hl=en",
+    "ai_review": "Professor Andrew Hoffman’s research focuses on understanding the dynamics of ice sheets, primarily through the application of radar geophysics and detailed geospatial analysis. His work centers around Antarctica, where he leverages data from projects like Bedmap3 – generating comprehensive gridded datasets of ice bed, surface, and thickness – to investigate critical processes such as atmospheric river impacts and subglacial lake activity. Specifically, his research has involved analyzing 60 years of Antarctic Bedmap data for FAIR sharing and investigating the heterogeneous thinning observed on Thwaites Glacier in conjunction with evidence of subglacial lake development. Utilizing radar geophysics, Hoffman’s lab investigates the complex interplay between atmosphere, ice sheets, and underlying topography within West Antarctica, contributing significantly to our understanding of ice sheet stability and climate change impacts.",
     "photo_url": "",
     "phone": "",
     "office": "Keith-Wiess Geology Lab",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "glaciology",
+      "ice sheets",
+      "radar geophysics"
+    ],
     "publications": []
   },
   {

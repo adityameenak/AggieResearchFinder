@@ -6709,14 +6709,17 @@
     "name": "Raghavendra  Bollapragada",
     "title": "Distinguished",
     "email": "raghu.bollapragada@utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Optimization, Machine Learning. Selected work: Exact and inexact subsampled Newton methods for optimization; A progressive batching L-BFGS method for machine learning; Adaptive sampling strategies for stochastic optimization; Balancing communication and computation in distributed optimization; An investigation of Newton-sketch and subsampled Newton methods.",
     "lab_website": "https://sites.google.com/view/raghub/home",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=ktNuwakAAAAJ&hl=en",
     "photo_url": "https://www.me.utexas.edu/images/faculty/2020-ME-Faculty-Portrait-Bollapragada-Raghu-7.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Raghavendra Bollapragada’s research within the Mechanical Engineering department centers on the intersection of optimization and machine learning techniques, primarily utilizing numerical analysis and algorithm development. His work focuses heavily on improving efficiency in computationally intensive tasks, particularly through methods like subsampled Newton methods and L-BFGS algorithms tailored for both deterministic and stochastic optimization problems. Professor Bollapragada’s research has explored innovative approaches such as progressive batching, adaptive sampling strategies, and the balancing of communication and computation within distributed optimization frameworks. Notably, he investigates techniques like Newton-sketch to reduce computational burden while maintaining solution accuracy.  His Google Scholar profile reflects a dedicated interest in furthering advancements across these core areas of optimization and machine learning research.",
+    "scholar_interests": [
+      "Optimization",
+      "Machine Learning"
+    ],
     "publications": []
   },
   {
@@ -9133,7 +9136,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Francesco%20Maggi%2C%20mathematics%20Directory.jpg",
     "phone": "",
     "office": "PMA 10.124",
-    "ai_review": "Please provide me with the scraped research information about Professor Francesco Maggi! I need the text from the source you linked to in order to write the review for you. Once you paste the information here, I will craft a concise and informative paragraph as requested.",
+    "ai_review": "Please provide me with the scraped research information about Professor Francesco Maggi! I need the text you scraped to write the review for you. Once you paste it here, I’ll craft a concise and comprehensive paragraph summarizing his work suitable for a student.",
     "scholar_interests": [],
     "publications": []
   },
@@ -14491,14 +14494,19 @@
     "name": "Arrasy Rahman",
     "title": "Postdoctoral Research Fellow",
     "email": "arrasy@cs.utexas.edu",
-    "research_summary": "Research Areas: Artificial Intelligence",
+    "research_summary": "Research interests: Reinforcement Learning, Multi-agent Reinforcement Learning, Machine Learning, Ad Hoc Teamwork. Selected work: Dealing with non-stationarity in multi-agent deep reinforcement learning; Scaling multi-agent reinforcement learning with selective parameter sharing; A survey of ad hoc teamwork: Definitions, methods, and open problems; Towards open ad hoc teamwork using graph-based policy learning; Interpretable goal recognition in the presence of occluded factors for autonomous vehicles.",
     "lab_website": "https://raharrasy.github.io/",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=3Z0YZ5QAAAAJ&hl=en",
     "photo_url": "https://www.cs.utexas.edu/sites/default/files/styles/faculty_photo/public/2024-04/IMG_1930.JPG",
     "phone": "",
     "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
+    "ai_review": "Arrasy Rahman’s research within the CSE department centers on the burgeoning field of reinforcement learning, specifically focusing on complex systems involving multiple agents. Their work addresses critical challenges in multi-agent reinforcement learning (MARL), including the effects of non-stationarity and methods for efficient scaling through techniques like selective parameter sharing. Dr. Rahman’s research also investigates ad hoc teamwork, exploring both theoretical definitions and practical approaches utilizing graph-based policy learning. Notably, they have recently turned their attention to interpretable goal recognition within autonomous vehicle contexts, considering occluded factors in decision-making processes. Overall, Professor Rahman's lab is dedicated to advancing the development of intelligent agents capable of coordinated action through a combination of deep reinforcement learning and team-oriented methodologies.",
+    "scholar_interests": [
+      "Reinforcement Learning",
+      "Multi-agent Reinforcement Learning",
+      "Machine Learning",
+      "Ad Hoc Teamwork"
+    ],
     "publications": []
   },
   {

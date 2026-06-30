@@ -3620,14 +3620,19 @@
     "department": "cse",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/kangkook.jee",
-    "research_summary": "",
+    "research_summary": "Research interests: Systems Security, Programming Languages, program analysis, space security. Selected work: Nodoze: Combatting threat alert fatigue with automated provenance triage; You are what you do: Hunting stealthy malware via data provenance analysis.; libdft: Practical dynamic data flow tracking for commodity systems; Towards a timely causality analysis for enterprise security.; High fidelity data reduction for big data security dependency analyses.",
     "lab_website": "https://kangkookjee.io/",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=x-ApqMUAAAAJ&hl=en",
+    "ai_review": "Kangkook Jee’s research within the CSE department centers on enhancing system security through innovative approaches to program analysis and data provenance tracking. His work primarily investigates techniques for combating threat alert fatigue, notably demonstrated in projects like “Nodoze,” which utilizes automated triage of provenance information to address overwhelming alerts.  Furthermore, Professor Jee specializes in hunting stealthy malware by leveraging data provenance analysis – as evidenced by “You are what you do” – and develops practical tools such as libdft for dynamic data flow tracking across commodity systems. Current research includes exploring timely causality analysis for enterprise security alongside high-fidelity data reduction methods to facilitate dependency analyses within big data security contexts, aligning with his strong interests in systems security, programming languages, and space security as reflected in his Google Scholar profile.",
     "photo_url": "https://profiles.utdallas.edu/img/default.png",
     "phone": "972-883-3863",
     "office": "ECS4.908",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Systems Security",
+      "Programming Languages",
+      "program analysis",
+      "space security"
+    ],
     "publications": []
   },
   {
@@ -3710,14 +3715,19 @@
     "department": "chemistry",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/monu.joy",
-    "research_summary": "",
+    "research_summary": "Research interests: X-ray Crystallography, Structural Chemistry, Metal-Organic Framework, Computational Chemistry. Selected work: Exploration of chlorinated thienyl chalcones: A new class of monoamine oxidase-B inhibitors; Synthesis, biochemistry, and computational studies of brominated thienyl chalcones: A new class of reversible MAO‐B inhibitors; Force-induced near-infrared chromism of mechanophore-linked polymers; Monoamine oxidase inhibitory activity of methoxy-substituted chalcones; Perspective design of chalcones for the management of CNS disorders: a mini-review.",
     "lab_website": "https://sites.google.com/site/mycrystchem/contact-me",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=fu4HbBoAAAAJ&hl=en",
+    "ai_review": "Monu Joy’s research program in chemistry focuses on utilizing structural and computational methods to investigate novel therapeutic compounds and materials. Primarily employing X-ray crystallography and computational chemistry techniques, her work centers around the design and characterization of chalcone derivatives, specifically exploring their potential as monoamine oxidase-B (MAO‐B) inhibitors with a demonstrated interest in reversible inhibition.  Her research has spanned synthesizing and biochemically evaluating brominated thienyl chalcones alongside computationally modeling chlorinated thienyl chalcones, investigating their activity against CNS disorders. Furthermore, Professor Joy’s lab investigates force-induced near-infrared chromism in mechanophore-linked polymers, highlighting a multidisciplinary approach to materials science informed by structural analysis.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4399/conversions/3-medium.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "X-ray Crystallography",
+      "Structural Chemistry",
+      "Metal-Organic Framework",
+      "Computational Chemistry"
+    ],
     "publications": []
   },
   {
@@ -3818,14 +3828,19 @@
     "department": "cse",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/imtiaz.karim",
-    "research_summary": "",
+    "research_summary": "Research interests: Network Security, System Security, 5G, Protocol Security. Selected work: 5GReasoner: A property-directed security and privacy analysis framework for 5G cellular network protocol; Noncompliance as deviant behavior: An automated black-box noncompliance checker for 4g lte cellular devices; SPEC5G: A dataset for 5G cellular network protocol analysis; ProChecker: An Automated Security and Privacy Analysis Framework for 4G LTE Protocol Implementations; Blediff: Scalable and property-agnostic noncompliance checking for ble implementations.",
     "lab_website": "https://www.imtiazkarim.net/",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=YqQRjfgAAAAJ&hl=en",
+    "ai_review": "Imtiaz Karim’s research within the CSE department centers on critical security challenges associated with emerging and existing cellular network technologies. His work focuses primarily on protocol security, particularly within the context of 5G networks, utilizing frameworks like 5GReasoner to conduct property-directed analysis for security and privacy vulnerabilities.  Professor Karim has developed automated tools – such as ProChecker, Blediff, and a noncompliance checker named Noncompliance – to systematically identify deviations from expected behavior in 4G LTE implementations and BLE protocols, often employing black-box testing techniques. Furthermore, he contributes significantly to the field through the creation of datasets like SPEC5G, facilitating deeper analysis of 5G network protocol characteristics.  His Google Scholar interests underscore a commitment to rigorous research concerning network security, system security, and specifically, the evolving landscape of 5G protocol security.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4580/conversions/49242356_2222335594472998_7576617348627431424_n-medium.jpg",
     "phone": "+1 (972) 883-4194",
     "office": "ECS3.706",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Network Security",
+      "System Security",
+      "5G",
+      "Protocol Security"
+    ],
     "publications": []
   },
   {
@@ -3872,10 +3887,10 @@
     "department": "mathematics",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/emmett.kendall",
-    "research_summary": "",
+    "research_summary": "Selected work: Beyond time-homogeneity for continuous-time multistate Markov models; Robust inference for geographic regression discontinuity designs: assessing the impact of police precincts; Prior exposure to racial discrimination and patterns of acute parasympathetic nervous system responses to a race‐related stress task among Black adults; Conflict Forecasting via Conformal Prediction for Markov Processes; Identification of physiological shock in intensive care units via Bayesian regime switching models.",
     "lab_website": "https://ebkendall.github.io/",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=gBmwaccAAAAJ&hl=en",
+    "ai_review": "Emmett B. Kendall’s research program within the Department of Mathematics centers on applying statistical modeling techniques to address complex questions across diverse fields. He is particularly recognized for his work developing and utilizing continuous-time multistate Markov models, extending beyond traditional time-homogeneity assumptions to better represent real-world systems, as evidenced by his work on conflict forecasting. Furthermore, Kendall’s research employs robust inference methods, including geographic regression discontinuity designs, alongside Bayesian regime switching models within intensive care unit data analysis to identify physiological shock. Notably, he has also investigated the biological impacts of racial discrimination through examining acute parasympathetic nervous system responses and utilized prior exposure data to understand stress task performance among Black adults.  Ultimately, Kendall’s lab leverages sophisticated statistical approaches – encompassing Markov processes, conformal prediction, and Bayesian methods – to provide rigorous insights into a variety of scientific problems.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4675/conversions/headshot_EK_crop-medium.jpg",
     "phone": "",
     "office": "",
@@ -5412,14 +5427,18 @@
     "department": "mathematics",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/rui.miao",
-    "research_summary": "",
+    "research_summary": "Research interests: Reinforcement Learning, Causal Inference, Functional Data Analysis. Selected work: Association of incident cardiovascular disease with time course and cumulative exposure to multiple risk factors; Proximal learning for individualized treatment regimes under unmeasured confounding; Off-policy evaluation for episodic partially observable markov decision processes under non-parametric models; Spleen tyrosine kinase inhibition restores myeloid homeostasis in COVID-19; ARISE: Agent Reasoning with Intrinsic Skill Evolution in Hierarchical Reinforcement Learning.",
     "lab_website": "https://rui-miao.github.io",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=iT7IURAAAAAJ&hl=en",
+    "ai_review": "Rui Miao’s research within the Department of Mathematics centers around applying advanced statistical and computational techniques to complex biomedical and decision-making problems. Their work primarily investigates reinforcement learning, particularly exploring proximal learning for personalized treatment strategies while accounting for unmeasured confounding factors. Dr. Miao also utilizes causal inference methods to analyze longitudinal data, as evidenced by their study on cardiovascular disease exposure and the development of innovative algorithms like ARISE for hierarchical reinforcement learning with skill evolution. Notably, their research extends into functional data analysis alongside investigations into therapeutic interventions, such as spleen tyrosine kinase inhibition in COVID-19 patients.  Ultimately, Dr. Miao’s lab focuses on developing sophisticated models to address challenging questions across areas including healthcare optimization and agent-based decision making.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/4528/conversions/2025_bio-medium.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Reinforcement Learning",
+      "Causal Inference",
+      "Functional Data Analysis"
+    ],
     "publications": []
   },
   {
@@ -7230,14 +7249,19 @@
     "department": "mechanical",
     "email": "oris@utdallas.edu",
     "profile_url": "https://profiles.utdallas.edu/jruths",
-    "research_summary": "",
+    "research_summary": "Research interests: cps security, control of networks, complex dynamical systems, computational optimal control. Selected work: A survey of physics-based attack detection in cyber-physical systems; Limiting the impact of stealthy attacks on industrial control systems; Control profiles of complex networks; Optimal pulse design in quantum control: A unified computational method; Frictionless atom cooling in harmonic traps: A time-optimal approach.",
     "lab_website": "http://justinruths.com",
-    "google_scholar": "",
-    "ai_review": "",
+    "google_scholar": "https://scholar.google.com/citations?user=bTStxAMAAAAJ&hl=en",
+    "ai_review": "Justin Ruths’ research program within the Mechanical Engineering Department centers on the intersection of control theory and cybersecurity, specifically investigating vulnerabilities in cyber-physical systems (CPS). His work leverages computational optimal control techniques to address challenges such as limiting the impact of stealthy attacks on industrial control systems and developing robust defense strategies for CPS security. Professor Ruths employs a diverse methodological approach, ranging from physics-based attack detection surveys to the design of optimal pulse sequences for quantum control, alongside investigations into complex dynamical systems and network control profiles. Notably, his research includes theoretical advancements like a time-optimal approach for frictionless atom cooling in harmonic traps, demonstrating a broad engagement with both theoretical modeling and experimental applications within these areas.",
     "photo_url": "https://profiles.utdallas.edu/storage/media/1019/conversions/utdallas_48033114_Medium-medium.jpg",
     "phone": "972-883-3857",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "cps security",
+      "control of networks",
+      "complex dynamical systems",
+      "computational optimal control"
+    ],
     "publications": []
   },
   {

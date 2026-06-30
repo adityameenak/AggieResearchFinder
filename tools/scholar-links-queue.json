@@ -20,16 +20,6 @@
 "google_scholar": ""
 },
 {
-"id": "615aace34af5",
-"university": "rice",
-"name": "Francois St-Pierre",
-"title": "Assistant Professor, Neuroscience - Baylor College of Medicine | Assistant Professor, Electrical and Computer Engineering - Rice | University McNair Scholar, Baylor College of Medicine",
-"department": "electrical",
-"profile_url": "https://profiles.rice.edu/faculty/francois-st-pierre",
-"lab_website": "https://www.bcm.edu/people-search/francois-st-pierre-31095",
-"google_scholar": ""
-},
-{
 "id": "157e0ad1561f",
 "university": "rice",
 "name": "Jize (David) Yu",
@@ -160,16 +150,6 @@
 "google_scholar": ""
 },
 {
-"id": "1a7b6aac389d",
-"university": "rice",
-"name": "Andrew Hoffman",
-"title": "Assistant Professor, Earth, Environmental and Planetary Sciences",
-"department": "earth-environmental",
-"profile_url": "https://profiles.rice.edu/faculty/andrew-hoffman",
-"lab_website": "https://hoffmaao.github.io/",
-"google_scholar": ""
-},
-{
 "id": "87af7d6c9bde",
 "university": "tamu",
 "name": "Oksana Shatalov",
@@ -227,16 +207,6 @@
 "department": "chemical",
 "profile_url": "https://che.utexas.edu/person/j-steven-swinnea",
 "lab_website": "https://utexas.academia.edu/Departments/Chemical_Engineering/Documents",
-"google_scholar": ""
-},
-{
-"id": "6e2440e4bb27",
-"university": "ut",
-"name": "Raghavendra  Bollapragada",
-"title": "Distinguished",
-"department": "mechanical",
-"profile_url": "https://www.me.utexas.edu/people/faculty-directory/bollapragada",
-"lab_website": "https://sites.google.com/view/raghub/home",
 "google_scholar": ""
 },
 {
@@ -620,16 +590,6 @@
 "google_scholar": ""
 },
 {
-"id": "224bda574026",
-"university": "ut",
-"name": "Arrasy Rahman",
-"title": "Postdoctoral Research Fellow",
-"department": "cse",
-"profile_url": "https://www.cs.utexas.edu/people/faculty-researchers/arrasy-rahman",
-"lab_website": "https://raharrasy.github.io/",
-"google_scholar": ""
-},
-{
 "id": "1e5f18f1bf42",
 "university": "ut",
 "name": "Jovan Stojkovic",
@@ -810,46 +770,6 @@
 "google_scholar": ""
 },
 {
-"id": "ced0db1d0ad1",
-"university": "utd",
-"name": "Kangkook Jee",
-"title": "Assistant Professor",
-"department": "cse",
-"profile_url": "https://profiles.utdallas.edu/kangkook.jee",
-"lab_website": "https://kangkookjee.io/",
-"google_scholar": ""
-},
-{
-"id": "60fdbb4eda67",
-"university": "utd",
-"name": "Monu Joy",
-"title": "Research Scientist II",
-"department": "chemistry",
-"profile_url": "https://profiles.utdallas.edu/monu.joy",
-"lab_website": "https://sites.google.com/site/mycrystchem/contact-me",
-"google_scholar": ""
-},
-{
-"id": "96309c4293bd",
-"university": "utd",
-"name": "Imtiaz Karim",
-"title": "Assistant Professor",
-"department": "cse",
-"profile_url": "https://profiles.utdallas.edu/imtiaz.karim",
-"lab_website": "https://www.imtiazkarim.net/",
-"google_scholar": ""
-},
-{
-"id": "20dd0de8ebd7",
-"university": "utd",
-"name": "Emmett B. Kendall",
-"title": "Assistant Professor of Statistics",
-"department": "mathematics",
-"profile_url": "https://profiles.utdallas.edu/emmett.kendall",
-"lab_website": "https://ebkendall.github.io/",
-"google_scholar": ""
-},
-{
 "id": "a7ac05d69aee",
 "university": "utd",
 "name": "Ashley Lakoduk",
@@ -930,16 +850,6 @@
 "google_scholar": ""
 },
 {
-"id": "16ff74f86031",
-"university": "utd",
-"name": "Rui Miao",
-"title": "Assistant Professor",
-"department": "mathematics",
-"profile_url": "https://profiles.utdallas.edu/rui.miao",
-"lab_website": "https://rui-miao.github.io",
-"google_scholar": ""
-},
-{
 "id": "ae8d3ffabebc",
 "university": "utd",
 "name": "Reza Moheimani",
@@ -1007,16 +917,6 @@
 "department": "biology",
 "profile_url": "https://profiles.utdallas.edu/scott.rippel",
 "lab_website": "http://www.princetonreview.com/green-guide.aspx",
-"google_scholar": ""
-},
-{
-"id": "8e48b07ec435",
-"university": "utd",
-"name": "Justin Ruths",
-"title": "Assistant Professor",
-"department": "mechanical",
-"profile_url": "https://profiles.utdallas.edu/jruths",
-"lab_website": "http://justinruths.com",
 "google_scholar": ""
 },
 {
