@@ -4,13 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository layout
 
-Three independent components, each with its own dependencies and lifecycle:
+Four independent components, each with its own dependencies and lifecycle:
 
-- `crawler/` — Python + Playwright scrapers that produce `faculty.json` / `faculty.csv`
+- `crawler/` — Python scrapers that produce `faculty[-<code>].json` / `.csv`. Mixed stack: Playwright (TAMU/UT HTML), plain `requests` (Rice JSON:API, UTD), and pydoll (Scholar enrichment, py3.12 `venv312`).
 - `backend/` — FastAPI + SQLAlchemy API (resume parsing, matching, email drafting)
 - `ui/` — Vite + React 18 + Tailwind frontend, served as a multi-school SPA
+- `tools/` — internal, file-based HTML utilities (lab-review, scholar-links) for data triage; **not** deployed.
 
 There is no top-level package manager. Treat each directory as its own project.
+
+**Live now: 4 schools, ~3,834 faculty** — TAMU 1,772 · Rice 607 · UT Austin 913 · UT Dallas 542, all `available: true`. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
 
 ## Common commands
 
@@ -43,9 +46,18 @@ python crawl_rice.py --limit 40 --output /tmp/smoke   # quick validation
 python crawl_rice.py --all                            # disable STEM/Faculty filter
 python crawl_rice.py --keep-emeritus                  # keep emeriti (dropped by default)
 
+# UT Dallas — central HTML directory via crawl_utd.py (separate entry, requests)
+python crawl_utd.py --output faculty-utd
+
 # AI research reviews (ai_review) — runs against any faculty file, in place.
 # Needs a local Ollama server (`ollama serve`) + the model pulled.
 python enrich_ollama.py --file faculty-rice.json --model gemma3:4b
+
+# Google Scholar enrichment for blank profiles (pydoll = real Chrome via CDP,
+# beats Scholar's CAPTCHA on profile URLs). Needs the py3.12 venv:
+#   python3.12 -m venv venv312 && venv312/bin/pip install pydoll-python beautifulsoup4
+python find_lab_scholar.py                                  # harvest scholar links from lab sites → /tmp/lab_scholar_map.json
+./venv312/bin/python enrich_scholar_pydoll.py --file faculty-ut.json --map /tmp/lab_scholar_map.json
 ```
 Output stems are configurable via `--output`. After running per-school crawls, merge their JSON arrays into `ui/public/faculty.json` (see README).
 
@@ -63,6 +75,12 @@ No test suite is configured in any of the three components.
 - **Texas-university playbook (the goal is to keep onboarding more):** (1) find the directory/API; if it's a Drupal/JSON:API like Rice, clone `crawl_rice.py` and remap `field_*` names. (2) Census raw departments + a category/role field first, then build a STEM whitelist + role filter so you ship curated research faculty, not the whole HR directory. (3) Confirm `photo_url`/`email`/`research_summary` completeness lands near TAMU's (~100/99/100%) before merging — that bar is what "refined" means here. (4) Run `enrich_ollama.py --file faculty-<code>.json` for reviews. (5) Add dept labels + (optionally) a brand accent palette.
 
 **Per-school UI rendering.** `App.jsx` mounts `<SchoolApp>` for any `/:schoolCode/*` route. `SchoolApp` wraps the existing pages in `SchoolProvider` + `AppProvider` so every page can call `useSchool()` for branding and `useSchoolPath()` for school-prefixed Link/navigate targets. Invalid school codes redirect to `/` via SchoolProvider's guard. **Don't write absolute Links inside per-school pages** — use `useSchoolPath()` (`to={tx('/search')}`) or it'll break Rice's namespace.
+
+**Per-school theming is CSS-variable driven.** The whole app uses `maroon-*` Tailwind classes whose values come from CSS variables; `SchoolApp` stamps `data-school="<code>"` on `<html>`, and `index.css` has a `[data-school="<code>"]` block per school that overrides `--maroon-*` to that school's palette (tamu=maroon default, rice=blue, ut=orange, utd=green). **Adding a school's theme = add a `[data-school="<code>"]` block in `index.css`** (RGB triples). `schools.js` `accent` + `classes` are the *static* palette used only on the multi-school picker (where all schools render at once).
+
+**Saved + Tracker are one feature ("My List").** Saving a professor IS a tracker entry — `toggleSave(prof)` in `AppContext` creates/deletes an application (status `"Saved"`); `isSaved(id)` checks by `profId`. **AppContext is the single source of truth** for the list (`applications`, `addApp/editApp/removeApp`, `savedCount`); `TrackerPage` ("My List") and the bookmark buttons all go through it so they never desync. Status pipeline: Saved → Interested → Drafting Email → Emailed → Replied → Applied → Interview → Accepted/Rejected/Closed (`trackerStorage.STATUSES`). There is no standalone Saved page (`/saved` redirects to `/tracker`). Match + Discover are a single "Match" nav entry (Discover = upload step → Match = ranked results).
+
+**Search & match rendering.** `splitResearch(prof)` (in `utils/search.js`) is what cards show: it uses **`ai_review` as the preview** (clean prose) and relegates research-area phrases + `scholar_interests` to keyword pills — because `research_summary` is often a run-on of areas, not prose. Junk/heading terms are filtered by `isUsefulTopic` (shared with the topic chips). Topic filter chips are **department-adaptive**: `AppContext.topicChipsFor(dept)` derives them from the selected department's faculty (aero→propulsion, CS→ML). Search scores `scholar_interests` too. **Matching excludes blank profiles** — `matcher.isMatchable(prof)` requires research content (summary or scholar interests); no research → never a match (and the explanation degrades gracefully).
 
 **Data flow.** Each school's crawler writes `faculty[-<code>].json`. These get merged into `ui/public/faculty.json` (one combined file, each record tagged with `university`). On the backend, `_auto_import_faculty()` ingests that combined file into the DB; the row-level `university` field powers `GET /api/faculty?university=<code>` filtering. On the UI, `AppContext` fetches `/faculty.json` once and filters in-memory by `useSchool().code`.
 
@@ -95,7 +113,14 @@ No test suite is configured in any of the three components.
 - **Filtering is load-bearing.** The raw endpoint returns ~4,400 records across every Rice unit (admin offices, residential colleges, alumni, emeriti, humanities, business). `crawl_rice.py` keeps only `field_profile_category == "Faculty"` AND a department that maps to a known STEM slug (`STEM_RULES`), and drops emeriti — yielding ~607 research faculty comparable to the curated TAMU set. `--all` / `--keep-emeritus` disable these.
 - **Department names are filthy.** 241 raw variants with stray whitespace, `&` vs `and`, `Department of …` prefixes, and typos (`MSNE`, `Physics of Astronomy`). `stem_slug()` normalizes then substring-matches `STEM_RULES` (ordered: specific phrases before the bare `mathematics` fallback). New Rice STEM slugs (`biosciences`, `earth-environmental`, `systems-synthetic-biology`, `applied-physics`, `cmor`, `kinesiology`) are registered in `ui/src/utils/search.js` `DEPT_DISPLAY` — add a label there or they render as the raw slug.
 
-**ai_review enrichment.** Reviews are generated post-crawl by `enrich_ollama.py` (local Ollama, `--file <faculty json>`), `enrich.py` (Gemini, needs `GEMINI_API_KEY`), or `enrich_local.py` (no-API templates — low quality, the "faculty member in …" text the other two are built to replace). All are re-runnable and only touch records missing a real review. `enrich_ollama.py` takes `--file` so it works per school; point it at `faculty-rice.json`. None of these run without either Ollama up or an API key, so a fresh crawl ships with `ai_review` empty until enriched.
+**ai_review enrichment.** Reviews are generated post-crawl by `enrich_ollama.py` (local Ollama, `--file <faculty json>`), `enrich.py` (Gemini, needs `GEMINI_API_KEY`), or `enrich_local.py` (no-API templates — low quality, the "faculty member in …" text the other two are built to replace). All are re-runnable and only touch records missing a real review. `enrich_ollama.py` takes `--file` so it works per school. None of these run without either Ollama up or an API key, so a fresh crawl ships with `ai_review` empty until enriched.
+
+**Blank-profile recovery (the research_summary / ai_review gap).** Many profiles ship "thin" (research_summary < 40 chars). Causes and fixes, in order of yield:
+- **Parser misses.** TAMU arts-&-sciences pages put the "Research Interests" prose in a *different wrapper* than the `<h2>`, and `_collect_section_text` used to read only direct siblings → it grabbed a stray label. It now **walks the document in order** (find_all_next, de-duped); a re-extract recovered 256 TAMU summaries. Audit new parsers for the same sibling-only assumption.
+- **Google Scholar (by URL).** For thin profiles that have (or are given) a `google_scholar` link, `enrich_scholar_pydoll.py` scrapes interests + top publications into `scholar_interests` + `research_summary`. It uses **pydoll** (real Chrome via CDP, py3.12 `venv312`) because Scholar CAPTCHAs plain requests/Playwright headless, and SeleniumBase-UC needs Rosetta on Apple Silicon. Scholar *profile pages* go through clean; the *author search* is still CAPTCHA-walled headless, so unknown links can't be auto-found.
+- **Finding links:** `find_lab_scholar.py` harvests Scholar links off lab websites (~17% have one). For the rest, `tools/scholar-links.html` (internal, file-based) lets a human paste links → export a `--map` for `enrich_scholar_pydoll.py`.
+- The genuinely source-sparse remainder (no research text, no lab, no Scholar) can't be filled; cards point to lab/Scholar instead, and matching excludes them.
+- `tools/` also has `lab-review.html` (mark has-lab / no-lab / needs-enrichment). Internal only — not part of the deployed app.
 
 **Matching is interest-first.** `services/matcher.py` weights student-stated interests over resume content (resume contribution is multiplied by 0.35). Fit labels are relative to the top score in the result set, not absolute thresholds — see README "Matching Algorithm" for the exact rules.
 
@@ -116,7 +141,7 @@ Backend deploy entry point is `backend/Procfile` (`uvicorn main:app --host 0.0.0
 
 ## Gotchas
 
-- `backend/tamurf.db`, `backend/uploads/`, `crawler/venv/`, and `crawler/.cache/` are gitignored — never commit them.
+- `backend/tamurf.db`, `backend/uploads/`, `crawler/venv/`, `crawler/venv312/` (pydoll's py3.12 env), `crawler/downloaded_files/`, and `crawler/.cache/` are gitignored — never commit them.
 - The crawler ships a `faculty[-<code>].json` per school in-tree; don't regenerate-and-commit casually. The Rice JSON:API crawl (`crawl_rice.py`) re-runs in ~2 minutes; `ai_review` enrichment over those records via local Ollama takes much longer (tens of minutes) — run it once and reuse.
 - `ui/public/faculty.json` is the *combined* file the UI fetches and the backend imports on startup. After running per-school crawls, you must merge them into this file (see README quick-start).
 - When adding new internal Links in per-school pages, always use `useSchoolPath()` — absolute paths like `to="/search"` will navigate the user out of the school namespace.
