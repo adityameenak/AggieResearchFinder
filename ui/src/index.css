@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 /* ── School accent palette ──────────────────────────────────────
- * `maroon-*` Tailwind classes resolve through these CSS variables
- * (see tailwind.config.js). Defaults are TAMU maroon. SchoolApp sets
- * data-school="<code>" on its wrapper so per-school overrides swap
- * the palette without renaming any classes.
- * RGB triplets are space-separated so Tailwind's <alpha-value>
- * placeholder works for utilities like bg-maroon-700/20.
+ * CSS variables used by dot-texture (custom CSS) and SVG strokes.
+ * IMPORTANT: Tailwind bakes color values into utility classes at
+ * build time, so the variable overrides below do NOT affect
+ * Tailwind's `maroon-*` classes. Those are overridden separately
+ * in the section below via direct class selectors.
  * ──────────────────────────────────────────────────────────────── */
 :root {
   --maroon-50:  253 242 242;
@@ -38,7 +37,6 @@
   --maroon-950: 0 8 23;
 }
 
-/* UT Austin burnt orange (#BF5700) */
 [data-school="ut"] {
   --maroon-50:  253 244 236;
   --maroon-100: 251 228 210;
@@ -53,7 +51,6 @@
   --maroon-950: 55 25 0;
 }
 
-/* UT Dallas green (#154734) */
 [data-school="utd"] {
   --maroon-50:  238 245 241;
   --maroon-100: 212 230 221;
@@ -67,6 +64,171 @@
   --maroon-900: 11 41 30;
   --maroon-950: 6 24 17;
 }
+
+/* ── Per-school Tailwind class overrides ────────────────────────
+ * Because Tailwind bakes literal RGB values into generated classes,
+ * the CSS variable blocks above cannot repaint `maroon-*` utilities.
+ * These selectors use higher specificity (attribute + class) to
+ * override the baked-in values for each school.
+ * ──────────────────────────────────────────────────────────────── */
+
+/* Rice University — #00205B navy blue */
+[data-school="rice"] .bg-maroon-50  { background-color: #eef3fb; }
+[data-school="rice"] .bg-maroon-100 { background-color: #d6e1f3; }
+[data-school="rice"] .bg-maroon-200 { background-color: #a7bee4; }
+[data-school="rice"] .bg-maroon-600,
+[data-school="rice"] .hover\:bg-maroon-600:hover { background-color: #0e336f; }
+[data-school="rice"] .bg-maroon-700,
+[data-school="rice"] .hover\:bg-maroon-700:hover { background-color: #00205B; }
+[data-school="rice"] .bg-maroon-800 { background-color: #001844; }
+[data-school="rice"] .bg-maroon-900 { background-color: #000f2c; }
+[data-school="rice"] .bg-maroon-950 { background-color: #000817; }
+
+[data-school="rice"] .text-maroon-200 { color: #a7bee4; }
+[data-school="rice"] .text-maroon-300 { color: #7197d2; }
+[data-school="rice"] .text-maroon-400 { color: #3f6fbb; }
+[data-school="rice"] .text-maroon-600,
+[data-school="rice"] .hover\:text-maroon-600:hover { color: #0e336f; }
+[data-school="rice"] .text-maroon-700,
+[data-school="rice"] .hover\:text-maroon-700:hover { color: #00205B; }
+[data-school="rice"] .text-maroon-800 { color: #001844; }
+
+[data-school="rice"] .border-maroon-300,
+[data-school="rice"] .hover\:border-maroon-300:hover { border-color: #7197d2; }
+[data-school="rice"] .border-maroon-400,
+[data-school="rice"] .hover\:border-maroon-400:hover { border-color: #3f6fbb; }
+[data-school="rice"] .border-maroon-700 { border-color: #00205B; }
+
+[data-school="rice"] .group:hover .group-hover\:text-maroon-200 { color: #a7bee4; }
+[data-school="rice"] .group:hover .group-hover\:text-maroon-600 { color: #0e336f; }
+
+/* UT Austin — #BF5700 burnt orange */
+[data-school="ut"] .bg-maroon-50  { background-color: #fdf4ec; }
+[data-school="ut"] .bg-maroon-100 { background-color: #fbe4d2; }
+[data-school="ut"] .bg-maroon-200 { background-color: #f6c4a0; }
+[data-school="ut"] .bg-maroon-600,
+[data-school="ut"] .hover\:bg-maroon-600:hover { background-color: #bf5700; }
+[data-school="ut"] .bg-maroon-700,
+[data-school="ut"] .hover\:bg-maroon-700:hover { background-color: #a04900; }
+[data-school="ut"] .bg-maroon-800 { background-color: #7e3a00; }
+[data-school="ut"] .bg-maroon-900 { background-color: #5f2c00; }
+[data-school="ut"] .bg-maroon-950 { background-color: #371900; }
+
+[data-school="ut"] .text-maroon-200 { color: #f6c4a0; }
+[data-school="ut"] .text-maroon-300 { color: #f0a06b; }
+[data-school="ut"] .text-maroon-400 { color: #e87d3c; }
+[data-school="ut"] .text-maroon-600,
+[data-school="ut"] .hover\:text-maroon-600:hover { color: #bf5700; }
+[data-school="ut"] .text-maroon-700,
+[data-school="ut"] .hover\:text-maroon-700:hover { color: #a04900; }
+[data-school="ut"] .text-maroon-800 { color: #7e3a00; }
+
+[data-school="ut"] .border-maroon-300,
+[data-school="ut"] .hover\:border-maroon-300:hover { border-color: #f0a06b; }
+[data-school="ut"] .border-maroon-400,
+[data-school="ut"] .hover\:border-maroon-400:hover { border-color: #e87d3c; }
+[data-school="ut"] .border-maroon-700 { border-color: #a04900; }
+
+[data-school="ut"] .group:hover .group-hover\:text-maroon-200 { color: #f6c4a0; }
+[data-school="ut"] .group:hover .group-hover\:text-maroon-600 { color: #bf5700; }
+
+/* UT Dallas — #154734 forest green */
+[data-school="utd"] .bg-maroon-50  { background-color: #eef5f1; }
+[data-school="utd"] .bg-maroon-100 { background-color: #d4e6dd; }
+[data-school="utd"] .bg-maroon-200 { background-color: #a9cdbb; }
+[data-school="utd"] .bg-maroon-600,
+[data-school="utd"] .hover\:bg-maroon-600:hover { background-color: #1d5a3f; }
+[data-school="utd"] .bg-maroon-700,
+[data-school="utd"] .hover\:bg-maroon-700:hover { background-color: #154734; }
+[data-school="utd"] .bg-maroon-800 { background-color: #103829; }
+[data-school="utd"] .bg-maroon-900 { background-color: #0b291e; }
+[data-school="utd"] .bg-maroon-950 { background-color: #061811; }
+
+[data-school="utd"] .text-maroon-200 { color: #a9cdbb; }
+[data-school="utd"] .text-maroon-300 { color: #79b094; }
+[data-school="utd"] .text-maroon-400 { color: #4a906e; }
+[data-school="utd"] .text-maroon-600,
+[data-school="utd"] .hover\:text-maroon-600:hover { color: #1d5a3f; }
+[data-school="utd"] .text-maroon-700,
+[data-school="utd"] .hover\:text-maroon-700:hover { color: #154734; }
+[data-school="utd"] .text-maroon-800 { color: #103829; }
+
+[data-school="utd"] .border-maroon-300,
+[data-school="utd"] .hover\:border-maroon-300:hover { border-color: #79b094; }
+[data-school="utd"] .border-maroon-400,
+[data-school="utd"] .hover\:border-maroon-400:hover { border-color: #4a906e; }
+[data-school="utd"] .border-maroon-700 { border-color: #154734; }
+
+[data-school="utd"] .group:hover .group-hover\:text-maroon-200 { color: #a9cdbb; }
+[data-school="utd"] .group:hover .group-hover\:text-maroon-600 { color: #1d5a3f; }
+
+/* MIT — #A31F34 cardinal red */
+[data-school="mit"] {
+  --maroon-700: 163 31 52;
+  --maroon-800: 130 25 42;
+}
+[data-school="mit"] .bg-maroon-50  { background-color: #fdf2f4; }
+[data-school="mit"] .bg-maroon-100 { background-color: #fae0e4; }
+[data-school="mit"] .bg-maroon-200 { background-color: #f4b8c2; }
+[data-school="mit"] .bg-maroon-600,
+[data-school="mit"] .hover\:bg-maroon-600:hover { background-color: #8c1a2b; }
+[data-school="mit"] .bg-maroon-700,
+[data-school="mit"] .hover\:bg-maroon-700:hover { background-color: #A31F34; }
+[data-school="mit"] .bg-maroon-800 { background-color: #821929; }
+[data-school="mit"] .bg-maroon-900 { background-color: #5e121e; }
+[data-school="mit"] .bg-maroon-950 { background-color: #380b12; }
+
+[data-school="mit"] .text-maroon-200 { color: #f4b8c2; }
+[data-school="mit"] .text-maroon-300 { color: #e8889a; }
+[data-school="mit"] .text-maroon-400 { color: #d95270; }
+[data-school="mit"] .text-maroon-600,
+[data-school="mit"] .hover\:text-maroon-600:hover { color: #8c1a2b; }
+[data-school="mit"] .text-maroon-700,
+[data-school="mit"] .hover\:text-maroon-700:hover { color: #A31F34; }
+[data-school="mit"] .text-maroon-800 { color: #821929; }
+
+[data-school="mit"] .border-maroon-300,
+[data-school="mit"] .hover\:border-maroon-300:hover { border-color: #e8889a; }
+[data-school="mit"] .border-maroon-400,
+[data-school="mit"] .hover\:border-maroon-400:hover { border-color: #d95270; }
+[data-school="mit"] .border-maroon-700 { border-color: #A31F34; }
+
+[data-school="mit"] .group:hover .group-hover\:text-maroon-200 { color: #f4b8c2; }
+[data-school="mit"] .group:hover .group-hover\:text-maroon-600 { color: #8c1a2b; }
+
+/* Harvard University — #A51C30 crimson */
+[data-school="harvard"] {
+  --maroon-700: 165 28 48;
+  --maroon-800: 130 22 38;
+}
+[data-school="harvard"] .bg-maroon-50  { background-color: #fdf2f3; }
+[data-school="harvard"] .bg-maroon-100 { background-color: #fadde0; }
+[data-school="harvard"] .bg-maroon-200 { background-color: #f4b5bb; }
+[data-school="harvard"] .bg-maroon-600,
+[data-school="harvard"] .hover\:bg-maroon-600:hover { background-color: #8e1826; }
+[data-school="harvard"] .bg-maroon-700,
+[data-school="harvard"] .hover\:bg-maroon-700:hover { background-color: #A51C30; }
+[data-school="harvard"] .bg-maroon-800 { background-color: #821626; }
+[data-school="harvard"] .bg-maroon-900 { background-color: #5e101b; }
+[data-school="harvard"] .bg-maroon-950 { background-color: #380a10; }
+
+[data-school="harvard"] .text-maroon-200 { color: #f4b5bb; }
+[data-school="harvard"] .text-maroon-300 { color: #e88090; }
+[data-school="harvard"] .text-maroon-400 { color: #d94460; }
+[data-school="harvard"] .text-maroon-600,
+[data-school="harvard"] .hover\:text-maroon-600:hover { color: #8e1826; }
+[data-school="harvard"] .text-maroon-700,
+[data-school="harvard"] .hover\:text-maroon-700:hover { color: #A51C30; }
+[data-school="harvard"] .text-maroon-800 { color: #821626; }
+
+[data-school="harvard"] .border-maroon-300,
+[data-school="harvard"] .hover\:border-maroon-300:hover { border-color: #e88090; }
+[data-school="harvard"] .border-maroon-400,
+[data-school="harvard"] .hover\:border-maroon-400:hover { border-color: #d94460; }
+[data-school="harvard"] .border-maroon-700 { border-color: #A51C30; }
+
+[data-school="harvard"] .group:hover .group-hover\:text-maroon-200 { color: #f4b5bb; }
+[data-school="harvard"] .group:hover .group-hover\:text-maroon-600 { color: #8e1826; }
 
 @layer base {
   html {
@@ -86,6 +248,11 @@
 }
 
 @layer utilities {
+  /* SVG compass decoration — uses the active school's accent color via CSS var */
+  .compass-accent {
+    stroke: rgb(var(--maroon-700));
+    fill: none;
+  }
   .font-display {
     font-family: 'Playfair Display', Georgia, serif;
   }

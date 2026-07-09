@@ -1,83 +1,80 @@
-import { Link } from 'react-router-dom'
 import { SCHOOL_LIST } from '../schools'
+import SchoolCard from '../components/SchoolCard'
+import USMap from '../components/USMap'
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-cream-50 flex flex-col">
-      <div className="h-[2.5px] bg-maroon-700" />
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+      {/* Platform accent bar */}
+      <div className="h-[3px] bg-gradient-to-r from-indigo-600 via-violet-500 to-purple-600" />
 
-      <main className="flex-1 flex items-center justify-center px-6 py-20">
+      <main className="flex-1 flex items-start justify-center px-6 py-20">
         <div className="w-full max-w-3xl">
+
+          {/* ── Hero ──────────────────────────────────────────── */}
           <div className="text-center mb-14">
-            <div className="text-[11px] font-semibold text-maroon-700 uppercase tracking-[0.2em] mb-5">
-              For students &amp; researchers at every level
+            <div className="inline-flex items-center gap-2.5 mb-6">
+              <span className="h-px w-5 bg-indigo-400/60" />
+              <span className="text-[11px] font-semibold text-indigo-600 uppercase tracking-[0.2em]">
+                For students &amp; researchers at every level
+              </span>
+              <span className="h-px w-5 bg-indigo-400/60" />
             </div>
             <h1 className="font-display font-bold text-stone-900 leading-[1.03]
                            text-5xl sm:text-6xl md:text-7xl mb-6">
-              Texas <span className="text-maroon-700">STEM</span><br className="sm:hidden" /> Research Finder
+              <span className="text-indigo-600">STEM</span>{' '}Research Finder
             </h1>
-            <p className="text-stone-600 text-lg max-w-xl mx-auto leading-relaxed">
-              Find research labs and faculty advisors across Texas universities —
+            <p className="text-stone-500 text-lg max-w-xl mx-auto leading-relaxed">
+              Find research labs and faculty advisors across universities nationwide —
               search by interest, match your resume, and draft outreach in one click.
             </p>
           </div>
 
-          <div className="text-center text-[11px] font-semibold text-stone-400
-                          uppercase tracking-[0.18em] mb-5">
-            Pick your university
+          {/* ── Map section — flush with page ─────────────────── */}
+          <div className="mb-14">
+
+            {/* Section header */}
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-4 h-px bg-stone-300" />
+                <span className="text-[10px] font-semibold text-stone-400 uppercase tracking-[0.22em]">
+                  Browse by State
+                </span>
+              </div>
+              <h2 className="font-display font-bold text-stone-900 text-xl sm:text-2xl
+                             leading-tight tracking-tight mb-1.5">
+                Explore universities across the United States
+              </h2>
+              <p className="text-sm text-stone-400 leading-relaxed">
+                Hover over a state to see available universities, or click to browse by state.
+              </p>
+            </div>
+
+            {/* Map — no card, sits directly on page background */}
+            <USMap />
+
           </div>
+
+          {/* ── University picker ────────────────────────────── */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-stone-200" />
+            <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-[0.18em]">
+              Or pick directly
+            </span>
+            <div className="flex-1 h-px bg-stone-200" />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {SCHOOL_LIST.map((school) => (
               <SchoolCard key={school.code} school={school} />
             ))}
           </div>
 
-          <p className="text-center text-xs text-stone-500 mt-12">
+          <p className="text-center text-xs text-stone-400 mt-12">
             Don't see your school? More universities are being added — open an issue on GitHub.
           </p>
         </div>
       </main>
     </div>
   )
-}
-
-function SchoolCard({ school }) {
-  const c = school.classes
-  const inner = (
-    <div className={[
-      'group relative rounded-xl border bg-white p-6 transition-all duration-200',
-      school.available
-        ? `border-stone-200 ${c.cardHover} hover:shadow-md cursor-pointer`
-        : 'border-stone-200 opacity-60 cursor-not-allowed',
-    ].join(' ')}>
-      <div className="flex items-baseline gap-1 mb-3">
-        <span className={`font-display italic ${c.brandText} text-[22px] font-bold leading-none`}>
-          {school.brandPrefix}
-        </span>
-        <span className="font-sans font-semibold text-stone-800 text-[14px] tracking-tight">
-          {school.brandSuffix}
-        </span>
-      </div>
-      <div className="text-sm font-medium text-stone-900 mb-1">{school.name}</div>
-      <p className="text-xs text-stone-500 leading-relaxed mb-4">{school.description}</p>
-
-      <div className="flex items-center justify-between">
-        {school.available ? (
-          <span className={`text-xs font-semibold ${c.pillText} group-hover:underline`}>
-            Enter →
-          </span>
-        ) : (
-          <span className="text-xs font-semibold text-stone-400">
-            Coming soon
-          </span>
-        )}
-        <span className="text-[10px] uppercase tracking-wider text-stone-400">
-          /{school.code}
-        </span>
-      </div>
-    </div>
-  )
-
-  if (!school.available) return inner
-  return <Link to={`/${school.code}`} className="block">{inner}</Link>
 }

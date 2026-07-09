@@ -213,6 +213,12 @@ const DEPT_DISPLAY = {
   // UT Dallas-specific STEM departments (see crawler/crawl_utd.py STEM_RULES)
   'systems-engineering': 'Systems Engineering',
   geosciences:          'Geosciences',
+  // Harvard SEAS / MIT-specific
+  environmental:        'Environmental Engineering',
+  'applied-physics':    'Applied Physics',
+  // MIT-specific STEM departments (see crawler/crawl_mit2.py DEPT_MAP)
+  'brain-cognitive-sciences':    'Brain & Cognitive Sciences',
+  'earth-atmospheric-planetary': 'Earth, Atmos. & Planetary Sci.',
 }
 
 export function deptLabel(slug) {

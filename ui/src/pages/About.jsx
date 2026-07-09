@@ -108,7 +108,7 @@ export default function About() {
             className="text-lg text-stone-600 leading-relaxed max-w-2xl"
             style={{ opacity: 0, animation: 'heroFadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s forwards' }}
           >
-            The Texas STEM Research Finder grew out of a simple frustration: finding
+            STEM Research Finder grew out of a simple frustration: finding
             a research mentor shouldn't mean clicking through dozens of department
             pages. We built one place to search faculty across Texas universities by
             what they actually work on — and to make that first email easier to send.
@@ -140,7 +140,7 @@ export default function About() {
               initials="AM"
               name="Aditya Meenakshisundaram"
               role="Chemical Engineering Student, Texas A&M University"
-              bio="Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built the original Aggie Research Finder to help students discover meaningful research opportunities without the friction of the traditional search — work that has since grown into the multi-university Texas STEM Research Finder."
+              bio="Aditya is a chemical engineering student focused on semiconductor materials, energy technologies, and applied research. He built the original Aggie Research Finder to help students discover meaningful research opportunities without the friction of the traditional search — work that has since grown into the multi-university STEM Research Finder."
               linkedinUrl="https://www.linkedin.com/in/adityameenakshi/"
               from="left"
               delay={0}

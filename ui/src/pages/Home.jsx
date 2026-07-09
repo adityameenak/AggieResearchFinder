@@ -35,23 +35,23 @@ function CompassSVG() {
           cx="300"
           cy="300"
           r={r}
-          stroke="#500000"
+          className="compass-accent"
           strokeWidth={r === 290 ? 1 : 0.75}
         />
       ))}
       {/* Cardinal crosshairs */}
-      <line x1="300" y1="8"   x2="300" y2="592" stroke="#500000" strokeWidth="0.6" />
-      <line x1="8"   y1="300" x2="592" y2="300" stroke="#500000" strokeWidth="0.6" />
+      <line x1="300" y1="8"   x2="300" y2="592" className="compass-accent" strokeWidth="0.6" />
+      <line x1="8"   y1="300" x2="592" y2="300" className="compass-accent" strokeWidth="0.6" />
       {/* 45° diagonals */}
-      <line x1="88"  y1="88"  x2="512" y2="512" stroke="#500000" strokeWidth="0.4" opacity="0.6" />
-      <line x1="512" y1="88"  x2="88"  y2="512" stroke="#500000" strokeWidth="0.4" opacity="0.6" />
+      <line x1="88"  y1="88"  x2="512" y2="512" className="compass-accent" strokeWidth="0.4" opacity="0.6" />
+      <line x1="512" y1="88"  x2="88"  y2="512" className="compass-accent" strokeWidth="0.4" opacity="0.6" />
       {/* Tick marks */}
       {ticks.map((t, i) => (
         <line
           key={i}
           x1={t.x1} y1={t.y1}
           x2={t.x2} y2={t.y2}
-          stroke="#500000"
+          className="compass-accent"
           strokeWidth={t.isMajor ? 1.5 : 0.75}
         />
       ))}
