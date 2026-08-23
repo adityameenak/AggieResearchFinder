@@ -44,6 +44,7 @@ function DeptBadge({ dept }) {
 /* ── Match card ────────────────────────────────────────────── */
 function MatchCard({ result, onDraftEmail }) {
   const { toggleSave, isSaved } = useApp()
+  const tx = useSchoolPath()
   const { professor: prof, fit_label, explanation, rank } = result
   const saved   = isSaved(prof.id)
   const snippet = (prof.research_summary ?? '').slice(0, 200)
@@ -74,7 +75,7 @@ function MatchCard({ result, onDraftEmail }) {
       </div>
 
       <div className="px-5 pb-3">
-        <Link to={`/prof/${prof.id}`}
+        <Link to={tx(`/prof/${prof.id}`)}
               className="font-display font-bold text-stone-900 text-[17px] leading-snug
                          hover:text-maroon-700 transition-colors block mb-1">
           {prof.name}
@@ -121,7 +122,7 @@ function MatchCard({ result, onDraftEmail }) {
             </svg>
           </a>
         )}
-        <Link to={`/prof/${prof.id}`}
+        <Link to={tx(`/prof/${prof.id}`)}
               className="text-[11px] px-3 py-1.5 rounded-lg text-stone-400
                          hover:text-maroon-700 hover:bg-cream-200 transition-colors font-medium ml-auto">
           Details →
