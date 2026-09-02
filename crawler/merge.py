@@ -46,6 +46,15 @@ SOURCE_SCHOOL = {
     "faculty-tamu-earth":  "tamu",   # atmospheric sci, geology, geography
 }
 
+# Enrichment fields. These are produced after a crawl (enrich_ollama.py writes
+# ai_review, enrich_scholar_pydoll.py writes scholar_interests/publications), so
+# a fresh crawl always emits them empty. Carried forward from the previous
+# merged dataset rather than lost — otherwise re-crawling one school silently
+# wipes hours of enrichment, which is exactly what happened when Rice and UTD
+# were re-crawled and their ai_review coverage went 85%/65% -> 0%.
+ENRICHED_FIELDS = ("ai_review", "scholar_interests", "publications")
+
+
 # Fields where "longer is better" when merging two records for one person.
 LONGEST_WINS = ("research_summary", "ai_review", "title", "office")
 # Fields where any non-empty value beats an empty one.
@@ -63,6 +72,37 @@ def norm_name(name):
     n = "".join(c for c in n if not unicodedata.combining(c))
     n = re.sub(r"[^a-z\s]", " ", n.lower())
     return " ".join(n.split())
+
+
+def load_previous(path):
+    """Index the last merged dataset by record id, for enrichment carry-forward.
+
+    Ids are md5(profile_url), so they are stable across re-crawls as long as the
+    university does not move the page.
+    """
+    if not path.exists():
+        return {}
+    try:
+        return {r["id"]: r for r in json.loads(path.read_text()) if r.get("id")}
+    except Exception as exc:
+        print(f"  ! could not read {path.name} for carry-forward ({exc})")
+        return {}
+
+
+def carry_forward(records, previous):
+    """Refill enrichment fields that a fresh crawl left empty."""
+    if not previous:
+        return 0
+    restored = 0
+    for r in records:
+        old = previous.get(r.get("id"))
+        if not old:
+            continue
+        for field in ENRICHED_FIELDS:
+            if not r.get(field) and old.get(field):
+                r[field] = old[field]
+                restored += 1
+    return restored
 
 
 def load_sources():
@@ -177,6 +217,12 @@ def main():
     for name, school, n in files:
         print(f"  {name:<26} -> {school:<8} {n:>5}")
     print(f"  {'total':<26}    {'':<8} {len(records):>5}")
+
+    previous = load_previous(OUT_DIR / "faculty.json")
+    restored = carry_forward(records, previous)
+    if restored:
+        print(f"\nCarried forward {restored} enrichment values from the previous "
+              f"dataset ({len(previous)} records indexed).")
 
     unknown = taxonomy.audit_slugs(r.get("department") for r in records)
     if unknown:
