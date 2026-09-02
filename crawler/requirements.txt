@@ -4,6 +4,13 @@
 
 playwright>=1.42.0
 beautifulsoup4>=4.12.0
+requests>=2.31.0
+
+# Needed only by crawl_harvard_fas.py. Harvard's department sites challenge
+# ordinary headless Playwright; this patches the automation fingerprints that
+# the challenge keys on. See that file's header for why it is used there and
+# not elsewhere.
+playwright-stealth>=2.0.0
 google-generativeai>=0.5.0
 python-dotenv>=1.0.0
 

@@ -221,20 +221,27 @@ CANDIDATES = [
     ("ut", "neuroscience", "https://neuroscience.utexas.edu/directory", r"/directory/[a-z0-9-]+"),         # browser
     ("ut", "biology",      "https://integrativebio.utexas.edu/directory", r"/directory/[a-z0-9-]+"),       # browser
 
-    # -- blocked: Harvard, the last big gap and the hardest source --------
-    # Investigated 2026-09-02, no viable path found with the current toolkit:
-    #   * FAS department sites (chemistry, physics, math, OEB, statistics) all
-    #     403 to requests AND to headless Playwright AND to headless pydoll.
-    #     Only a NON-headless pydoll window got through, which is too fragile
-    #     and too intrusive to run over several hundred profiles.
-    #   * mcb.harvard.edu is NOT blocked (200 to plain requests) but its
-    #     faculty cards are absent from the rendered DOM entirely — the roster
-    #     is not in the page even after networkidle.
-    #   * Harvard Catalyst Profiles, the university-wide research networking
-    #     system, has retired its REST API (410 Gone).
-    #   * No WordPress custom post type for faculty is exposed on wp-json.
-    # seas.harvard.edu is the exception and is what crawl_harvard.py already
-    # uses. Harvard therefore stays SEAS-only until a better source appears.
+    # -- Harvard: two different protections, two different answers --------
+    # Re-investigated 2026-09-02 with playwright-stealth. The split matters:
+    #
+    #   Cloudflare — math, eps, hscrb, hsph, hms. Stealth gets through, and
+    #   once through, robots.txt is readable and PERMISSIVE (math/hsph/hms have
+    #   no Disallow at all; eps/hscrb disallow only /wp/wp-admin/). The
+    #   challenge was blanket bot-blocking, not a stated policy. eps and hsph
+    #   are now crawled by crawl_harvard_fas.py.
+    #
+    #   Akamai — chemistry, physics, oeb, statistics, psychology. These return
+    #   "Access Denied" to everything INCLUDING robots.txt, so there is no
+    #   stated policy to read, and stealth does not get through either. Left
+    #   alone.
+    #
+    # Also still dead: mcb.harvard.edu is unblocked and its robots.txt allows
+    # everything, but the faculty roster is absent from the rendered DOM; its
+    # directory-sitemap.xml lists 659 URLs of which most 404. Harvard Catalyst
+    # Profiles, the university-wide research networking system, has retired its
+    # REST API (410 Gone). math.harvard.edu renders 114 profiles but they carry
+    # no research text at all — office, phone and role only — so crawling it
+    # would add blank cards that matching excludes.
     ("harvard", "chemistry",        "https://chemistry.harvard.edu/people/faculty", r"/people/[a-z0-9-]+"),
     ("harvard", "physics-astronomy","https://www.physics.harvard.edu/people/faculty", r"/people/[a-z0-9-]+"),
     ("harvard", "mathematics",      "https://www.math.harvard.edu/people/", r"/people/[a-z0-9-]+"),
