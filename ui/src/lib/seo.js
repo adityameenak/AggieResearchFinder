@@ -21,7 +21,7 @@ export const OG_LOCALE  = 'en_US'
 export const THEME_DEFAULT = '#4f46e5'
 
 /** Total across every school — kept in sync by scripts/prerender.js (warns on drift). */
-export const TOTAL_FACULTY = 5152
+export const TOTAL_FACULTY = 5230
 
 const n = (x) => x.toLocaleString('en-US')
 
@@ -70,7 +70,7 @@ export const SCHOOL_SEO = {
     brand: 'UT Austin Research Finder',
     aka: ['UT Austin Research Finder', 'Longhorn Research Finder',
           'University of Texas Research Finder', 'Longhorn STEM Research Finder'],
-    count: 939,
+    count: 1017,
     nick: 'Longhorn',
     unit: 'UT Austin',
     keywords: [

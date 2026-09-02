@@ -44,6 +44,7 @@ SOURCE_SCHOOL = {
     "faculty-tamu-health": "tamu",
     "faculty-ut-neuro":    "ut",     # neuroscience + integrative biology
     "faculty-tamu-earth":  "tamu",   # atmospheric sci, geology, geography
+    "faculty-ut-education": "ut",    # kinesiology + educational psychology
 }
 
 # Enrichment fields. These are produced after a crawl (enrich_ollama.py writes
