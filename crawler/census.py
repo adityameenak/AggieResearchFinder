@@ -62,7 +62,11 @@ NOT_OFFERED = {
     "ut":      {"etid", "ocean", "dentistry", "veterinary", "applied-physics",
                 "speech-hearing", "materials", "nuclear", "industrial"},
     "tamu":    {"applied-physics", "speech-hearing", "kinesiology"},
-    "mit":     {"neuroscience", "etid", "ocean", "oceanography", "petroleum", "dentistry",
+    # MIT has no department of statistics or of industrial engineering — the
+    # Statistics & Data Science Center and the Operations Research Center are
+    # interdepartmental centres whose faculty sit in EECS, Math, Sloan etc.
+    "mit":     {"statistics", "industrial",
+                "neuroscience", "etid", "ocean", "oceanography", "petroleum", "dentistry",
                 "nursing", "pharmacy", "veterinary", "applied-physics",
                 "speech-hearing", "kinesiology", "public-health"},
     "harvard": {"etid", "ocean", "oceanography", "petroleum", "aerospace",
@@ -217,8 +221,20 @@ CANDIDATES = [
     ("ut", "neuroscience", "https://neuroscience.utexas.edu/directory", r"/directory/[a-z0-9-]+"),         # browser
     ("ut", "biology",      "https://integrativebio.utexas.edu/directory", r"/directory/[a-z0-9-]+"),       # browser
 
-    # -- blocked: Cloudflare, non-headless browser only -------------------
-    # Harvard is the biggest coverage gap and the hardest source we have.
+    # -- blocked: Harvard, the last big gap and the hardest source --------
+    # Investigated 2026-09-02, no viable path found with the current toolkit:
+    #   * FAS department sites (chemistry, physics, math, OEB, statistics) all
+    #     403 to requests AND to headless Playwright AND to headless pydoll.
+    #     Only a NON-headless pydoll window got through, which is too fragile
+    #     and too intrusive to run over several hundred profiles.
+    #   * mcb.harvard.edu is NOT blocked (200 to plain requests) but its
+    #     faculty cards are absent from the rendered DOM entirely — the roster
+    #     is not in the page even after networkidle.
+    #   * Harvard Catalyst Profiles, the university-wide research networking
+    #     system, has retired its REST API (410 Gone).
+    #   * No WordPress custom post type for faculty is exposed on wp-json.
+    # seas.harvard.edu is the exception and is what crawl_harvard.py already
+    # uses. Harvard therefore stays SEAS-only until a better source appears.
     ("harvard", "chemistry",        "https://chemistry.harvard.edu/people/faculty", r"/people/[a-z0-9-]+"),
     ("harvard", "physics-astronomy","https://www.physics.harvard.edu/people/faculty", r"/people/[a-z0-9-]+"),
     ("harvard", "mathematics",      "https://www.math.harvard.edu/people/", r"/people/[a-z0-9-]+"),
