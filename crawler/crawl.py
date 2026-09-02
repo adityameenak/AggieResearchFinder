@@ -224,13 +224,14 @@ _UT_SUBDOMAIN_DEPT = {
     "molecularbiosci": "biosciences",          # Molecular Biosciences
     "integrativebio":  "biosciences",          # Integrative Biology
     "neuroscience":    "neuroscience",
+    "bio":             "biology",              # bio.cns.utexas.edu hosts shared CNS profiles
     "astronomy":       "physics-astronomy",
 }
 
 # CNS hosts whose profiles use the shared central-directory heading theme.
 _UT_CNS_HOSTS = ("math.", "physics.", "chemistry.", "molecularbiosci.",
                  "integrativebio.", "neuroscience.", "astronomy.", "sds.",
-                 "stat.")
+                 "stat.", "bio.")
 
 # CNS dept directories list *everyone* (grad students, staff, finance managers,
 # …), so we keep only records whose title marks them as research/teaching

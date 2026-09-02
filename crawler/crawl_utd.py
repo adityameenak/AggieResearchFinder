@@ -53,6 +53,8 @@ STEM_RULES = [
     ("biomedical engineering", "bioengineering"),
     ("bioengineering", "bioengineering"),
     ("materials science", "materials"),
+    ("material science", "materials"),      # UTD writes it singular
+    ("nanotech", "materials"),
     ("systems engineering", "systems-engineering"),
     ("industrial engineering", "industrial"),
     ("mathematical sciences", "mathematics"),
@@ -71,6 +73,18 @@ STEM_RULES = [
     ("cognitive", "psychological-brain-sciences"),
     ("psychological sciences", "psychological-brain-sciences"),
     ("psychology", "psychological-brain-sciences"),
+    # Health sciences — speech/language/hearing is an audiology and speech
+    # pathology research department, not a service unit.
+    ("speech, language", "speech-hearing"),
+    ("speech and hearing", "speech-hearing"),
+    ("communication disorders", "speech-hearing"),
+    ("audiology", "speech-hearing"),
+    ("public health", "public-health"),
+    ("epidemiology", "public-health"),
+    # Space Sciences is UTD's astronomy/planetary group.
+    ("space sciences", "physics-astronomy"),
+    ("earth systems science", "earth-atmospheric"),
+    ("sustain earth", "earth-atmospheric"),
 ]
 
 _EXT_SKIP = ("utdallas.edu", "scholar.google", "facebook.com", "twitter.com",

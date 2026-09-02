@@ -113,6 +113,14 @@ STEM_RULES = [
     ("psychological sciences", "psychological-brain-sciences"),
     ("mathematics", "mathematics"),
     ("kinesiology", "kinesiology"),
+    # Research centres that employ research faculty. Added after a census of
+    # what the Faculty filter was discarding (see crawler/census.py).
+    ("theoretical biological physics", "physics-astronomy"),
+    ("nanomedicine", "bioengineering"),
+    ("diagnostic and biomedical", "bioengineering"),
+    ("cognitive science", "psychological-brain-sciences"),
+    ("environmental studies", "civil"),
+    ("energy and environment", "civil"),
 ]
 
 

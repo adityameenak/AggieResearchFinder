@@ -58,6 +58,7 @@ CANONICAL = {
     "immunology":       "Immunology & Microbiology",
     "nutrition":        "Nutrition & Food Science",
     "kinesiology":      "Kinesiology & Health",
+    "speech-hearing":   "Speech, Language & Hearing",
 }
 
 # ── Aliases → canonical ──────────────────────────────────────────────────

@@ -72,3 +72,12 @@ https://molecularbiosci.utexas.edu/directory?position%5B0%5D=1-Tenure-Track/Tenu
 #   /people/faculty-researchers/<slug>. /people/faculty-researchers itself
 #   redirects to login, so seed /people.)
 https://www.cs.utexas.edu/people
+
+# [OK] Neuroscience — CNS theme. The listing is client-rendered, so it needs
+#   the Playwright directory collector; profiles resolve to
+#   neuroscience.utexas.edu/directory/<slug> and bio.cns.utexas.edu/directory/<slug>,
+#   both handled by _extract_ut_cns_profile.
+https://neuroscience.utexas.edu/directory
+
+# [OK] Integrative Biology — same CNS theme and same profile shape.
+https://integrativebio.utexas.edu/directory
