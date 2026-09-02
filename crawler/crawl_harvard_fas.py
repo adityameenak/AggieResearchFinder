@@ -16,10 +16,20 @@ differently:
     crawlers may do; the challenge was blocking us indiscriminately, not
     expressing a policy.
 
-  * Akamai (chemistry, physics, oeb, statistics, psychology). These return
-    "Access Denied" to everything including robots.txt, so there is no stated
-    policy to read and stealth does not get through either. They are left
-    alone — see census.py.
+  * Akamai (chemistry, physics, oeb, statistics). "Access Denied" to plain
+    requests, to headless Playwright, to playwright-stealth, and even to a
+    headed real-Chrome channel with a persistent profile. What does work is
+    attaching over CDP to a Chrome the user started themselves
+    (--remote-debugging-port), which is the same technique
+    enrich_scholar_pydoll.py uses for Google Scholar. Their robots.txt then
+    becomes readable too, and is ordinary Drupal boilerplate — /core/,
+    /profiles/, README.txt — with /people/ untouched, exactly like
+    seas.harvard.edu which we already crawl.
+
+    Run these with --cdp:
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+          --remote-debugging-port=9333 --user-data-dir=/tmp/hv-cdp &
+        python crawl_harvard_fas.py --cdp http://localhost:9333
 
 Uses playwright-stealth, so it needs `pip install playwright-stealth`.
 
@@ -64,7 +74,49 @@ SOURCES = {
         "faculty_marker": None,          # the faculty listing is faculty-only
         "research_after": ("Biography",),
     },
+    # Akamai-protected Drupal departments — reachable only over --cdp.
+    # All four share one theme: h1 name, contact icons, "Research Areas" /
+    # "Research Interests", photo under /sites/g/files/.../styles/.
+    "chemistry": {
+        "listing": "https://chemistry.harvard.edu/our-faculty",
+        "link_re": r"/people/[a-z0-9._-]{4,}",
+        "base": "https://chemistry.harvard.edu",
+        "department": "chemistry",
+        "faculty_marker": None,
+        "research_after": ("Research Areas", "Research Interests"),
+    },
+    "physics": {
+        "listing": "https://www.physics.harvard.edu/people/faculty",
+        "link_re": r"/people/[a-z0-9._-]{4,}",
+        "base": "https://www.physics.harvard.edu",
+        "department": "physics-astronomy",
+        "faculty_marker": None,
+        "research_after": ("Research Areas", "Research Interests"),
+    },
+    "oeb": {
+        # Organismic & Evolutionary Biology.
+        "listing": "https://oeb.harvard.edu/people",
+        "link_re": r"/people/[a-z0-9._-]{4,}",
+        "base": "https://oeb.harvard.edu",
+        "department": "biology",
+        "faculty_marker": None,
+        "research_after": ("Research Areas", "Research Interests"),
+    },
+    "statistics": {
+        "listing": "https://statistics.fas.harvard.edu/faculty",
+        "link_re": r"/people/[a-z0-9._-]{4,}",
+        "base": "https://statistics.fas.harvard.edu",
+        "department": "statistics",
+        "faculty_marker": None,
+        "research_after": ("Research Interests", "Research Areas"),
+    },
 }
+
+# These listings mix in staff, lecturers-without-research and administrators,
+# so a title check does the filtering the URL cannot.
+FACULTY_TITLE_RE = re.compile(
+    r"professor|lecturer|senior researcher|principal investigator|"
+    r"research scientist|fellow", re.I)
 
 STUDENT_RE = re.compile(
     r"graduate student|undergraduate|postdoctoral|research assistant|"
@@ -155,8 +207,11 @@ def parse_profile(html, url, cfg):
     photo = ""
     for img in soup.find_all("img", src=True):
         src = img["src"]
-        if re.search(r"/uploads/.*\d{2,4}x\d{2,4}|headshot|portrait", src, re.I):
-            photo = src
+        if re.search(r"/uploads/.*\d{2,4}x\d{2,4}|/styles/.*\d{2,4}x\d{2,4}|"
+                     r"headshot|portrait", src, re.I):
+            # These Drupal sites emit site-relative image paths; the UI needs
+            # absolute URLs or every portrait 404s.
+            photo = src if src.startswith("http") else cfg["base"] + src
             break
 
     lab, scholar = "", ""
@@ -188,14 +243,22 @@ def parse_profile(html, url, cfg):
     }
 
 
-async def crawl(sources, limit):
+async def crawl(sources, limit, cdp=None):
     records = []
     async with Stealth().use_async(async_playwright()) as pw:
-        browser = await pw.chromium.launch(
-            args=["--disable-blink-features=AutomationControlled"])
-        ctx = await browser.new_context(
-            user_agent=UA, viewport={"width": 1280, "height": 900}, locale="en-US")
-        page = await ctx.new_page()
+        if cdp:
+            # Attach to a Chrome the user launched. Akamai rejects every browser
+            # Playwright starts itself, however well disguised; it accepts one
+            # that was already running as a normal session.
+            browser = await pw.chromium.connect_over_cdp(cdp)
+            ctx = browser.contexts[0] if browser.contexts else await browser.new_context()
+            page = ctx.pages[0] if ctx.pages else await ctx.new_page()
+        else:
+            browser = await pw.chromium.launch(
+                args=["--disable-blink-features=AutomationControlled"])
+            ctx = await browser.new_context(
+                user_agent=UA, viewport={"width": 1280, "height": 900}, locale="en-US")
+            page = await ctx.new_page()
 
         for key in sources:
             cfg = SOURCES[key]
@@ -240,7 +303,8 @@ async def crawl(sources, limit):
                     print(f"  [{i}/{len(links)}] kept {kept}, skipped {skipped}")
             print(f"  {key}: kept {kept}, skipped {skipped} (students/staff)")
 
-        await browser.close()
+        if not cdp:              # leave a user-supplied browser running
+            await browser.close()
     return records
 
 
@@ -249,10 +313,13 @@ def main():
     ap.add_argument("--source", choices=sorted(SOURCES), help="one source only")
     ap.add_argument("--limit", type=int, help="cap profiles per source")
     ap.add_argument("--output", default="faculty-harvard-fas")
+    ap.add_argument("--cdp", help="attach to a running Chrome, e.g. "
+                                  "http://localhost:9333 (needed for the "
+                                  "Akamai-protected departments)")
     args = ap.parse_args()
 
     sources = [args.source] if args.source else list(SOURCES)
-    records = asyncio.run(crawl(sources, args.limit))
+    records = asyncio.run(crawl(sources, args.limit, args.cdp))
     if not records:
         sys.exit("No records collected.")
 

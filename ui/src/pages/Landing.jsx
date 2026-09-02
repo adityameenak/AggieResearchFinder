@@ -76,21 +76,33 @@ export default function Landing() {
             ))}
           </div>
 
-          <p className="text-center text-xs text-stone-400 mt-12">
-            Don't see your school? More universities are being added — open an issue on GitHub.
-          </p>
+          {/* Platform-level feedback entry point. Landing has no Footer, and
+              this replaces a line that used to send people to GitHub to file
+              an issue themselves — the form does that for them now. */}
+          <div className="mt-14 rounded-2xl border border-stone-200 bg-white/70
+                          px-6 py-7 text-center">
+            <p className="font-display font-semibold text-stone-900 text-lg mb-1.5">
+              Don't see your school?
+            </p>
+            <p className="text-sm text-stone-500 mb-5 max-w-md mx-auto leading-relaxed">
+              We're adding universities and departments continuously. Tell us which
+              one you need and it goes straight to our tracker.
+            </p>
+            <button
+              onClick={() => setFeedbackOpen(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
+                         bg-gradient-to-r from-indigo-600 to-violet-600 text-white
+                         font-semibold text-sm shadow-sm
+                         hover:from-indigo-500 hover:to-violet-500 transition-all"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                <path d="M3.505 2.365A41.4 41.4 0 0 1 10 1.5c2.216 0 4.39.29 6.495.865A1.75 1.75 0 0 1 17.75 4.05v9.4a1.75 1.75 0 0 1-1.255 1.685A41.4 41.4 0 0 1 10 16a41.4 41.4 0 0 1-6.495-.865A1.75 1.75 0 0 1 2.25 13.45v-9.4c0-.795.534-1.49 1.255-1.685Z" />
+              </svg>
+              Request a school or department
+            </button>
+          </div>
         </div>
       </main>
-    
-      {/* Platform-level feedback entry point — Landing has no Footer. */}
-      <div className="pb-10 text-center">
-        <button
-          onClick={() => setFeedbackOpen(true)}
-          className="text-xs text-stone-400 hover:text-indigo-600 transition-colors"
-        >
-          Missing a school or department? Send feedback
-        </button>
-      </div>
       {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
     </div>
   )

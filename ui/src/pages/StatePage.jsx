@@ -91,12 +91,15 @@ export default function StatePage() {
         </div>
       </main>
     
-      <div className="pb-10 text-center">
+      <div className="pb-12 text-center">
         <button
           onClick={() => setFeedbackOpen(true)}
-          className="text-xs text-stone-400 hover:text-indigo-600 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl
+                     border border-stone-200 bg-white text-stone-700
+                     font-semibold text-sm hover:border-indigo-400
+                     hover:text-indigo-700 transition-colors"
         >
-          Missing a school here? Send feedback
+          Missing a school here? Request it
         </button>
       </div>
       {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}

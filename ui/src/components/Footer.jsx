@@ -61,12 +61,15 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
+              <li className="pt-1">
                 <button
                   onClick={() => setFeedbackOpen(true)}
-                  className="text-sm text-stone-400 hover:text-cream-200
-                             transition-colors duration-150"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold
+                             text-cream-200 hover:text-white transition-colors duration-150"
                 >
+                  <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
+                    <path d="M3.505 2.365A41.4 41.4 0 0 1 10 1.5c2.216 0 4.39.29 6.495.865A1.75 1.75 0 0 1 17.75 4.05v9.4a1.75 1.75 0 0 1-1.255 1.685A41.4 41.4 0 0 1 10 16a41.4 41.4 0 0 1-6.495-.865A1.75 1.75 0 0 1 2.25 13.45v-9.4c0-.795.534-1.49 1.255-1.685Z" />
+                  </svg>
                   Send feedback
                 </button>
               </li>
