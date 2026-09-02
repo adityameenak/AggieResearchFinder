@@ -31,7 +31,9 @@ export function toTitleCase(str) {
 const GENERIC_TERMS = new Set([
   'materials', 'energy', 'inorganic', 'organic', 'physical',
   'analytical', 'modeling', 'theory', 'design', 'systems',
-  'control', 'imaging', 'synthesis', 'analysis', 'simulation',
+  'control', 'synthesis', 'analysis', 'simulation',
+  // 'imaging' was here, but it is a genuine research area in medical imaging,
+  // radiology and biomedical optics — suppressing it hid real topics.
 ])
 
 // Section headings / boilerplate that leak in from scraped profiles and just
@@ -48,6 +50,13 @@ const JUNK_TOPICS = new Set([
   'curriculum vitae', 'cv', 'website', 'web site', 'google scholar', 'scholar',
   'n/a', 'na', 'none', 'tba', 'professor', 'associate professor',
   'assistant professor', 'faculty', 'lecturer', 'department',
+  // Medical/health profiles bring their own heading vocabulary — without
+  // these, "Clinical Interests" and "Board Certification" become top chips.
+  'clinical interests', 'clinical interest', 'clinical focus', 'clinical care',
+  'patient care', 'board certification', 'board certifications', 'certifications',
+  'residency', 'fellowship', 'fellowships', 'internship', 'medical school',
+  'clinical trials', 'specialties', 'specialty', 'conditions treated',
+  'procedures', 'insurance', 'locations', 'licensure', 'credentials',
 ])
 
 /**

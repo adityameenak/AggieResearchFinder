@@ -30,7 +30,12 @@ import { deptLabel } from '../src/utils/search.js'
 
 const ROOT    = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST    = join(ROOT, 'dist')
-const FACULTY = join(ROOT, 'public', 'faculty.json')
+const PUBLIC  = join(ROOT, 'public')
+// The UI fetches per-school files; the combined one stays for the backend
+// importer. Prefer the split files, fall back to combined so a build still
+// works before merge.py has been run.
+const faculty_ = (code) => join(PUBLIC, `faculty-${code}.json`)
+const FACULTY = join(PUBLIC, 'faculty.json')
 const WITH_FACULTY = process.env.PRERENDER_FACULTY !== '0'
 const NOW = new Date().toISOString().slice(0, 10)
 
@@ -144,8 +149,11 @@ function main() {
   // 2. Faculty profile pages — the long-tail surface
   const sitemaps = ['sitemap-pages.xml']
   let profCount = 0
-  if (existsSync(FACULTY)) {
-    const faculty = JSON.parse(readFileSync(FACULTY, 'utf8'))
+  const perSchool = SCHOOL_LIST.every(s => existsSync(faculty_(s.code)))
+  if (perSchool || existsSync(FACULTY)) {
+    const faculty = perSchool
+      ? SCHOOL_LIST.flatMap(s => JSON.parse(readFileSync(faculty_(s.code), 'utf8')))
+      : JSON.parse(readFileSync(FACULTY, 'utf8'))
 
     // Counts in seo.js feed every description; catch drift after a re-crawl.
     const seen = {}
@@ -159,7 +167,7 @@ function main() {
     }
     if (faculty.length !== TOTAL_FACULTY) {
       console.warn(`prerender: WARNING TOTAL_FACULTY is ${TOTAL_FACULTY} but ` +
-                   `faculty.json has ${faculty.length} — update src/lib/seo.js`)
+                   `the dataset has ${faculty.length} — update src/lib/seo.js`)
     }
 
     for (const s of SCHOOL_LIST) {
@@ -179,7 +187,7 @@ function main() {
       }
     }
   } else {
-    console.warn('prerender: public/faculty.json not found — skipping faculty sitemaps')
+    console.warn('prerender: no faculty data in public/ — skipping faculty sitemaps')
   }
 
   // 3. Sitemap index + robots

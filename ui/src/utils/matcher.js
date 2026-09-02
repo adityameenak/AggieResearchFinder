@@ -3,7 +3,7 @@
  * Interest-driven: stated interests are the primary signal.
  * Resume provides a secondary boost (0.35 weight).
  */
-import { tokenize } from './search'
+import { tokenize, deptLabel } from './search'
 
 function countHits(tokens, haystack) {
   let score = 0
@@ -49,13 +49,11 @@ function fitLabel(score, maxScore) {
 }
 
 function buildExplanation(prof, interests) {
-  const dept = {
-    chemical:'Chemical Engineering', mechanical:'Mechanical Engineering',
-    cse:'Computer Science', electrical:'Electrical Engineering',
-    materials:'Materials Science', civil:'Civil Engineering',
-    nuclear:'Nuclear Engineering', industrial:'Industrial Engineering',
-    ocean:'Ocean Engineering', petroleum:'Petroleum Engineering',
-  }[prof.department] || prof.department || 'their department'
+  // Was a local 10-slug map, so every other department showed up in match
+  // explanations as a raw slug ("works in psychological-brain-sciences").
+  const dept = prof.department
+    ? deptLabel(prof.department)
+    : 'their department'
 
   const research = (prof.research_summary || '').slice(0, 130).replace(/\|.*$/, '').trim()
     || (prof.scholar_interests || []).slice(0, 3).join(', ')

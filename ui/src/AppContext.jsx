@@ -7,6 +7,31 @@ import {
 
 const AppContext = createContext(null)
 
+/**
+ * Per-school faculty payloads, cached for the life of the page.
+ *
+ * The dataset used to ship as one ~9.5 MB faculty.json that every visitor
+ * downloaded in full, only for AppContext to throw away 63-97% of it. It's now
+ * split per school by crawler/merge.py. This cache also stops React's
+ * StrictMode double-mount, and school-switching, from re-fetching.
+ */
+const facultyCache = new Map()
+
+function loadFaculty(code) {
+  if (!facultyCache.has(code)) {
+    facultyCache.set(code, fetch(`/faculty-${code}.json`)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
+      .catch(err => {
+        facultyCache.delete(code)   // don't cache a failure
+        throw err
+      }))
+  }
+  return facultyCache.get(code)
+}
+
 export function AppProvider({ children }) {
   const school    = useSchool()
 
@@ -25,11 +50,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     let cancelled = false
     setLoading(true)
-    fetch('/faculty.json')
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`)
-        return r.json()
-      })
+    loadFaculty(school.code)
       .then(data => {
         if (cancelled) return
         const filtered = (Array.isArray(data) ? data : [])
@@ -88,8 +109,12 @@ export function AppProvider({ children }) {
     })
   }
 
-  function isSaved(id) {
-    return applications.some(a => a.profId === id)
+  // `prof` is optional: pass the record and a bookmark saved against an id that
+  // merge.py retired (a joint appointment collapsed into one record) still
+  // resolves, instead of silently showing as un-saved.
+  function isSaved(id, prof) {
+    return applications.some(a =>
+      a.profId === id || (prof?.alias_ids || []).includes(a.profId))
   }
 
   // Toggle a professor in/out of the saved list. Accepts a prof object

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchoolPath } from '../SchoolContext'
-import { highlightSegments, deptLabel, isActiveLab, splitResearch } from '../utils/search'
+import { highlightSegments, deptLabel, isActiveLab, splitResearch, deptStyle } from '../utils/search'
 
 /* ── Highlight renderer ───────────────────────────────────── */
 function Highlight({ text, tokens }) {
@@ -25,36 +25,8 @@ function Highlight({ text, tokens }) {
 }
 
 /* ── Department badge ─────────────────────────────────────── */
-const DEPT_STYLES = {
-  // Engineering
-  aerospace:   { dot: 'bg-indigo-500',  pill: 'bg-indigo-50  text-indigo-800  ring-indigo-200'  },
-  biomedical:  { dot: 'bg-pink-500',    pill: 'bg-pink-50   text-pink-800   ring-pink-200'    },
-  chemical:    { dot: 'bg-amber-500',   pill: 'bg-amber-50  text-amber-800  ring-amber-200'   },
-  civil:       { dot: 'bg-emerald-500', pill: 'bg-emerald-50 text-emerald-800 ring-emerald-200' },
-  cse:         { dot: 'bg-violet-500',  pill: 'bg-violet-50 text-violet-800  ring-violet-200'  },
-  electrical:  { dot: 'bg-blue-500',    pill: 'bg-blue-50   text-blue-800   ring-blue-200'    },
-  etid:        { dot: 'bg-lime-500',    pill: 'bg-lime-50   text-lime-800   ring-lime-200'    },
-  industrial:  { dot: 'bg-orange-500',  pill: 'bg-orange-50 text-orange-800 ring-orange-200'  },
-  materials:   { dot: 'bg-rose-500',    pill: 'bg-rose-50   text-rose-800   ring-rose-200'    },
-  mechanical:  { dot: 'bg-teal-500',    pill: 'bg-teal-50   text-teal-800   ring-teal-200'    },
-  multidisciplinary: { dot: 'bg-fuchsia-500', pill: 'bg-fuchsia-50 text-fuchsia-800 ring-fuchsia-200' },
-  nuclear:     { dot: 'bg-red-500',     pill: 'bg-red-50    text-red-800    ring-red-200'     },
-  ocean:       { dot: 'bg-sky-500',     pill: 'bg-sky-50    text-sky-800    ring-sky-200'     },
-  petroleum:   { dot: 'bg-yellow-500',  pill: 'bg-yellow-50 text-yellow-800 ring-yellow-200'  },
-  // Arts & Sciences
-  biology:     { dot: 'bg-green-500',   pill: 'bg-green-50  text-green-800  ring-green-200'   },
-  chemistry:   { dot: 'bg-cyan-500',    pill: 'bg-cyan-50   text-cyan-800   ring-cyan-200'    },
-  mathematics: { dot: 'bg-purple-500',  pill: 'bg-purple-50 text-purple-800 ring-purple-200'  },
-  'physics-astronomy':  { dot: 'bg-slate-500', pill: 'bg-slate-50  text-slate-800  ring-slate-200'  },
-  statistics:  { dot: 'bg-zinc-500',    pill: 'bg-zinc-50   text-zinc-800   ring-zinc-200'    },
-  'atmos-science':      { dot: 'bg-sky-500',   pill: 'bg-sky-50    text-sky-800    ring-sky-200'    },
-  'geology-geophysics': { dot: 'bg-stone-500', pill: 'bg-stone-50  text-stone-800  ring-stone-200'  },
-  oceanography:         { dot: 'bg-blue-500',  pill: 'bg-blue-50   text-blue-800   ring-blue-200'   },
-  'psychological-brain-sciences': { dot: 'bg-rose-500', pill: 'bg-rose-50 text-rose-800 ring-rose-200' },
-}
-
 function DeptBadge({ dept }) {
-  const s = DEPT_STYLES[dept] ?? { dot: 'bg-stone-400', pill: 'bg-stone-100 text-stone-600 ring-stone-200' }
+  const s = deptStyle(dept)
   return (
     <span
       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px]
@@ -94,7 +66,7 @@ function ExtIcon() {
 export default function ProfCard({ prof, tokens = [] }) {
   const { toggleSave, isSaved } = useApp()
   const tx       = useSchoolPath()
-  const saved    = isSaved(prof.id)
+  const saved    = isSaved(prof.id, prof)
   const { summary, keywords } = splitResearch(prof)
 
   return (

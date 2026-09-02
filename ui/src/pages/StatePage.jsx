@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { SCHOOL_LIST } from '../schools'
 import { formatStateSlug } from '../lib/states'
 import SchoolCard from '../components/SchoolCard'
 import Seo from '../components/Seo'
+import FeedbackModal from '../components/FeedbackModal'
 
 export default function StatePage() {
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
   const { state }    = useParams()
   const stateName    = formatStateSlug(state)
   const schools      = SCHOOL_LIST.filter(s => s.state === state)
@@ -87,6 +90,16 @@ export default function StatePage() {
           )}
         </div>
       </main>
+    
+      <div className="pb-10 text-center">
+        <button
+          onClick={() => setFeedbackOpen(true)}
+          className="text-xs text-stone-400 hover:text-indigo-600 transition-colors"
+        >
+          Missing a school here? Send feedback
+        </button>
+      </div>
+      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
     </div>
   )
 }

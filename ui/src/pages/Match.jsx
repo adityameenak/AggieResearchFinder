@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
-import { deptLabel } from '../utils/search'
+import { deptLabel, deptStyle } from '../utils/search'
 import { matchFaculty } from '../utils/matcher'
 import EmailModal from '../components/EmailModal'
 
@@ -23,16 +23,8 @@ function FitBadge({ label }) {
   )
 }
 
-const DEPT_STYLES = {
-  chemical:'bg-amber-50 text-amber-800 ring-amber-200', civil:'bg-emerald-50 text-emerald-800 ring-emerald-200',
-  cse:'bg-violet-50 text-violet-800 ring-violet-200',   electrical:'bg-blue-50 text-blue-800 ring-blue-200',
-  industrial:'bg-orange-50 text-orange-800 ring-orange-200', materials:'bg-rose-50 text-rose-800 ring-rose-200',
-  mechanical:'bg-teal-50 text-teal-800 ring-teal-200',  nuclear:'bg-red-50 text-red-800 ring-red-200',
-  ocean:'bg-sky-50 text-sky-800 ring-sky-200',          petroleum:'bg-yellow-50 text-yellow-800 ring-yellow-200',
-}
-
 function DeptBadge({ dept }) {
-  const s = DEPT_STYLES[dept] ?? 'bg-stone-100 text-stone-600 ring-stone-200'
+  const s = deptStyle(dept).pill
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px]
                       font-semibold ring-1 ring-inset ${s}`}>
@@ -46,7 +38,7 @@ function MatchCard({ result, onDraftEmail }) {
   const { toggleSave, isSaved } = useApp()
   const tx = useSchoolPath()
   const { professor: prof, fit_label, explanation, rank } = result
-  const saved   = isSaved(prof.id)
+  const saved   = isSaved(prof.id, prof)
   const snippet = (prof.research_summary ?? '').slice(0, 200)
 
   return (

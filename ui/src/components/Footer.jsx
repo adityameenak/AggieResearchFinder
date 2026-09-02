@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSchool, useSchoolPath } from '../SchoolContext'
+import FeedbackModal from './FeedbackModal'
 
 const NAV = [
   { to: '/',         label: 'Home' },
@@ -12,6 +14,7 @@ const NAV = [
 export default function Footer() {
   const school = useSchool()
   const tx     = useSchoolPath()
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
 
   return (
     <footer className="bg-stone-950 border-t border-stone-800">
@@ -59,6 +62,15 @@ export default function Footer() {
                 </li>
               ))}
               <li>
+                <button
+                  onClick={() => setFeedbackOpen(true)}
+                  className="text-sm text-stone-400 hover:text-cream-200
+                             transition-colors duration-150"
+                >
+                  Send feedback
+                </button>
+              </li>
+              <li>
                 <Link
                   to="/"
                   className="text-sm text-stone-500 hover:text-cream-200
@@ -92,6 +104,7 @@ export default function Footer() {
           <span>Not affiliated with {school.name}</span>
         </div>
       </div>
+      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
     </footer>
   )
 }

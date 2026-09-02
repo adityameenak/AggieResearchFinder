@@ -70,24 +70,22 @@ python crawl_rice.py
 ```
 Rice uses a separate entry point (`crawl_rice.py`) because `profiles.rice.edu` exposes a clean JSON:API at `/jsonapi/node/profile` — no HTML scraping required. Pagination is server-honored (`page[offset]`/`page[limit]`).
 
-**Merge per-school datasets into the UI's combined file** (run after any school's crawl):
+**Merge per-school datasets into the files the app reads** (run after any school's crawl):
 ```bash
 cd crawler
-python -c "
-import json
-# Map each per-school file to its university code. The TAMU faculty.json is not
-# self-tagged, so we backfill 'tamu' here; per-school files that already carry a
-# 'university' field (e.g. faculty-rice.json) keep their own value.
-SOURCES = {'faculty.json': 'tamu', 'faculty-rice.json': 'rice', 'faculty-ut.json': 'ut', 'faculty-utd.json': 'utd'}
-combined = []
-for path, uni in SOURCES.items():
-    try: recs = json.load(open(path))
-    except FileNotFoundError: continue
-    for r in recs: r.setdefault('university', uni)
-    combined.extend(recs)
-json.dump(combined, open('../ui/public/faculty.json', 'w'), ensure_ascii=False, indent=2)
-print(f'merged {len(combined)} records')
-"
+python merge.py            # add --dry-run to preview
+```
+`merge.py` globs every `faculty*.json` (so a new school can't be silently
+dropped), canonicalizes department slugs through `taxonomy.py`, merges
+joint-appointment duplicates into one record, and writes both
+`ui/public/faculty.json` (combined — used by the backend importer) and
+`ui/public/faculty-<code>.json` per school, which is what the UI actually
+fetches. It prints the counts to paste into `SCHOOL_SEO` in `ui/src/lib/seo.js`.
+
+**Check data parity across schools** — coverage and card quality per school:
+```bash
+python census.py --audit           # what we have
+python census.py --probe           # what candidate sources would yield
 ```
 
 **Adding another university** — pick the strategy that fits the source:
@@ -114,6 +112,13 @@ In both cases, register the school in `ui/src/schools.js`. The `university` fiel
 | Variable | Default | Description |
 |---|---|---|
 | `VITE_API_BASE_URL` | _(empty)_ | Backend base URL (e.g. `https://api.yourapp.com`). In dev, Vite proxies `/api` → `localhost:8000` automatically. |
+
+### Vercel serverless functions (`ui/api/`, set in the Vercel dashboard)
+
+| Variable | Default | Description |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | _(empty)_ | Used by `/api/parse` and `/api/email`. Blank → template fallbacks. |
+| `GITHUB_TOKEN` | _(empty)_ | Fine-grained PAT with **Issues: write** on the repo, used by `/api/feedback` to file feedback as a GitHub issue. Blank → the feedback still succeeds and the message is written to the function log. |
 
 ---
 

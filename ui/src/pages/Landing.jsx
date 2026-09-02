@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { SCHOOL_LIST } from '../schools'
 import SchoolCard from '../components/SchoolCard'
 import USMap from '../components/USMap'
 import Seo from '../components/Seo'
+import FeedbackModal from '../components/FeedbackModal'
 
 export default function Landing() {
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <Seo />
@@ -77,6 +81,17 @@ export default function Landing() {
           </p>
         </div>
       </main>
+    
+      {/* Platform-level feedback entry point — Landing has no Footer. */}
+      <div className="pb-10 text-center">
+        <button
+          onClick={() => setFeedbackOpen(true)}
+          className="text-xs text-stone-400 hover:text-indigo-600 transition-colors"
+        >
+          Missing a school or department? Send feedback
+        </button>
+      </div>
+      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
     </div>
   )
 }

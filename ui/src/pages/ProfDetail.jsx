@@ -2,42 +2,14 @@ import { useState, useMemo } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
-import { deptLabel } from '../utils/search'
+import { deptLabel, deptStyle } from '../utils/search'
 import EmailModal from '../components/EmailModal'
 import Seo from '../components/Seo'
 import { buildProfMeta } from '../lib/seo'
 
 /* ── Dept badge ───────────────────────────────────────────── */
-const DEPT_STYLES = {
-  // Engineering
-  aerospace:   'bg-indigo-50  text-indigo-800  ring-indigo-200',
-  biomedical:  'bg-pink-50   text-pink-800   ring-pink-200',
-  chemical:    'bg-amber-50  text-amber-800  ring-amber-200',
-  civil:       'bg-emerald-50 text-emerald-800 ring-emerald-200',
-  cse:         'bg-violet-50 text-violet-800  ring-violet-200',
-  electrical:  'bg-blue-50   text-blue-800   ring-blue-200',
-  etid:        'bg-lime-50   text-lime-800   ring-lime-200',
-  industrial:  'bg-orange-50 text-orange-800 ring-orange-200',
-  materials:   'bg-rose-50   text-rose-800   ring-rose-200',
-  mechanical:  'bg-teal-50   text-teal-800   ring-teal-200',
-  multidisciplinary: 'bg-fuchsia-50 text-fuchsia-800 ring-fuchsia-200',
-  nuclear:     'bg-red-50    text-red-800    ring-red-200',
-  ocean:       'bg-sky-50    text-sky-800    ring-sky-200',
-  petroleum:   'bg-yellow-50 text-yellow-800 ring-yellow-200',
-  // Arts & Sciences
-  biology:     'bg-green-50  text-green-800  ring-green-200',
-  chemistry:   'bg-cyan-50   text-cyan-800   ring-cyan-200',
-  mathematics: 'bg-purple-50 text-purple-800 ring-purple-200',
-  'physics-astronomy':  'bg-slate-50  text-slate-800  ring-slate-200',
-  statistics:  'bg-zinc-50   text-zinc-800   ring-zinc-200',
-  'atmos-science':      'bg-sky-50    text-sky-800    ring-sky-200',
-  'geology-geophysics': 'bg-stone-50  text-stone-800  ring-stone-200',
-  oceanography:         'bg-blue-50   text-blue-800   ring-blue-200',
-  'psychological-brain-sciences': 'bg-rose-50 text-rose-800 ring-rose-200',
-}
-
 function DeptBadge({ dept }) {
-  const s = DEPT_STYLES[dept] ?? 'bg-stone-100 text-stone-600 ring-stone-200'
+  const s = deptStyle(dept).pill
   return (
     <span className={`inline-flex items-center px-3 py-1 rounded-lg text-xs
                       font-semibold ring-1 ring-inset ${s}`}>
@@ -80,7 +52,7 @@ export default function ProfDetail() {
   const [emailOpen, setEmailOpen]        = useState(false)
 
   const prof    = faculty.find(f => f.id === id)
-  const saved   = prof ? isSaved(prof.id) : false
+  const saved   = prof ? isSaved(prof.id, prof) : false
 
   // Faculty pages are the long-tail SEO surface ("<professor name> <school>
   // research"), so they get their own title/description and Person schema.

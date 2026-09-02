@@ -177,48 +177,97 @@ export function highlightSegments(text, tokens) {
 // ---------------------------------------------------------------------------
 
 const DEPT_DISPLAY = {
+  // Generated from crawler/taxonomy.py CANONICAL — keep the two in step.
+  // A slug with no entry renders raw, including into indexed page titles,
+  // so add a label whenever taxonomy.CANONICAL grows.
   // Engineering
-  aerospace:   'Aerospace Engineering',
-  biomedical:  'Biomedical Engineering',
-  chemical:    'Chemical Engineering',
-  civil:       'Civil & Environmental',
-  cse:         'Computer Science & Eng.',
-  electrical:  'Electrical & Computer Eng.',
-  etid:        'Engineering Technology',
-  industrial:  'Industrial & Systems',
-  materials:   'Materials Science',
-  mechanical:  'Mechanical Engineering',
-  multidisciplinary: 'Multidisciplinary Eng.',
-  nuclear:     'Nuclear Engineering',
-  ocean:       'Ocean Engineering',
-  petroleum:   'Petroleum Engineering',
-  // Arts & Sciences
-  biology:     'Biology',
-  chemistry:   'Chemistry',
-  mathematics: 'Mathematics',
-  'physics-astronomy':  'Physics & Astronomy',
-  statistics:  'Statistics',
-  'atmos-science':      'Atmospheric Sciences',
-  'geology-geophysics': 'Geology & Geophysics',
-  oceanography:         'Oceanography',
-  'psychological-brain-sciences': 'Psych. & Brain Sciences',
-  // Rice-specific STEM departments (see crawler/crawl_rice.py STEM_RULES)
-  biosciences:          'BioSciences',
-  bioengineering:       'Bioengineering',
-  'earth-environmental': 'Earth & Environmental',
-  'systems-synthetic-biology': 'Systems & Synthetic Biology',
-  'applied-physics':    'Applied Physics',
-  cmor:                 'Computational & Applied Math',
-  kinesiology:          'Kinesiology',
-  // UT Dallas-specific STEM departments (see crawler/crawl_utd.py STEM_RULES)
-  'systems-engineering': 'Systems Engineering',
-  geosciences:          'Geosciences',
-  // Harvard SEAS / MIT-specific
-  environmental:        'Environmental Engineering',
-  'applied-physics':    'Applied Physics',
-  // MIT-specific STEM departments (see crawler/crawl_mit2.py DEPT_MAP)
-  'brain-cognitive-sciences':    'Brain & Cognitive Sciences',
-  'earth-atmospheric-planetary': 'Earth, Atmos. & Planetary Sci.',
+  aerospace:                        'Aerospace Engineering',
+  biomedical:                       'Biomedical Engineering',
+  chemical:                         'Chemical Engineering',
+  civil:                            'Civil & Environmental',
+  cse:                              'Computer Science & Eng.',
+  electrical:                       'Electrical & Computer Eng.',
+  etid:                             'Engineering Technology',
+  industrial:                       'Industrial & Systems',
+  materials:                        'Materials Science',
+  mechanical:                       'Mechanical Engineering',
+  nuclear:                          'Nuclear Engineering',
+  ocean:                            'Ocean Engineering',
+  petroleum:                        'Petroleum Engineering',
+
+  // Natural sciences
+  biology:                          'Biology',
+  chemistry:                        'Chemistry',
+  mathematics:                      'Mathematics',
+  'physics-astronomy':              'Physics & Astronomy',
+  statistics:                       'Statistics',
+  'applied-physics':                'Applied Physics',
+  'earth-atmospheric':              'Earth & Atmospheric Sciences',
+  oceanography:                     'Oceanography',
+  'psychological-brain-sciences':   'Psych. & Brain Sciences',
+
+  // Health & life sciences
+  'public-health':                  'Public Health',
+  medicine:                         'Medicine',
+  nursing:                          'Nursing',
+  pharmacy:                         'Pharmacy',
+  dentistry:                        'Dentistry',
+  veterinary:                       'Veterinary Medicine',
+  neuroscience:                     'Neuroscience',
+  genetics:                         'Genetics & Genomics',
+  immunology:                       'Immunology & Microbiology',
+  nutrition:                        'Nutrition & Food Science',
+  kinesiology:                      'Kinesiology & Health',
+}
+
+
+// ---------------------------------------------------------------------------
+// Department badge styling
+// ---------------------------------------------------------------------------
+// One source for the dept badge colours. ProfCard, ProfDetail and Match each
+// used to keep their own copy, which had drifted — Match knew about 10 slugs,
+// ProfCard about 24, and neither had the MIT/Rice/Harvard ones, so those cards
+// rendered grey. Class strings are written out in full because Tailwind's JIT
+// cannot follow `bg-${color}-50`.
+export const DEPT_STYLES = {
+  aerospace:                        { dot: 'bg-indigo-500', pill: 'bg-indigo-50 text-indigo-800 ring-indigo-200' },
+  biomedical:                       { dot: 'bg-pink-500', pill: 'bg-pink-50 text-pink-800 ring-pink-200' },
+  chemical:                         { dot: 'bg-amber-500', pill: 'bg-amber-50 text-amber-800 ring-amber-200' },
+  civil:                            { dot: 'bg-emerald-500', pill: 'bg-emerald-50 text-emerald-800 ring-emerald-200' },
+  cse:                              { dot: 'bg-violet-500', pill: 'bg-violet-50 text-violet-800 ring-violet-200' },
+  electrical:                       { dot: 'bg-blue-500', pill: 'bg-blue-50 text-blue-800 ring-blue-200' },
+  etid:                             { dot: 'bg-lime-500', pill: 'bg-lime-50 text-lime-800 ring-lime-200' },
+  industrial:                       { dot: 'bg-orange-500', pill: 'bg-orange-50 text-orange-800 ring-orange-200' },
+  materials:                        { dot: 'bg-rose-500', pill: 'bg-rose-50 text-rose-800 ring-rose-200' },
+  mechanical:                       { dot: 'bg-teal-500', pill: 'bg-teal-50 text-teal-800 ring-teal-200' },
+  nuclear:                          { dot: 'bg-red-500', pill: 'bg-red-50 text-red-800 ring-red-200' },
+  ocean:                            { dot: 'bg-sky-500', pill: 'bg-sky-50 text-sky-800 ring-sky-200' },
+  petroleum:                        { dot: 'bg-yellow-500', pill: 'bg-yellow-50 text-yellow-800 ring-yellow-200' },
+  biology:                          { dot: 'bg-green-500', pill: 'bg-green-50 text-green-800 ring-green-200' },
+  chemistry:                        { dot: 'bg-cyan-500', pill: 'bg-cyan-50 text-cyan-800 ring-cyan-200' },
+  mathematics:                      { dot: 'bg-purple-500', pill: 'bg-purple-50 text-purple-800 ring-purple-200' },
+  'physics-astronomy':              { dot: 'bg-slate-500', pill: 'bg-slate-50 text-slate-800 ring-slate-200' },
+  statistics:                       { dot: 'bg-zinc-500', pill: 'bg-zinc-50 text-zinc-800 ring-zinc-200' },
+  'applied-physics':                { dot: 'bg-fuchsia-500', pill: 'bg-fuchsia-50 text-fuchsia-800 ring-fuchsia-200' },
+  'earth-atmospheric':              { dot: 'bg-stone-500', pill: 'bg-stone-50 text-stone-800 ring-stone-200' },
+  oceanography:                     { dot: 'bg-blue-500', pill: 'bg-blue-50 text-blue-800 ring-blue-200' },
+  'psychological-brain-sciences':   { dot: 'bg-rose-500', pill: 'bg-rose-50 text-rose-800 ring-rose-200' },
+  'public-health':                  { dot: 'bg-emerald-500', pill: 'bg-emerald-50 text-emerald-800 ring-emerald-200' },
+  medicine:                         { dot: 'bg-red-500', pill: 'bg-red-50 text-red-800 ring-red-200' },
+  nursing:                          { dot: 'bg-pink-500', pill: 'bg-pink-50 text-pink-800 ring-pink-200' },
+  pharmacy:                         { dot: 'bg-violet-500', pill: 'bg-violet-50 text-violet-800 ring-violet-200' },
+  dentistry:                        { dot: 'bg-cyan-500', pill: 'bg-cyan-50 text-cyan-800 ring-cyan-200' },
+  veterinary:                       { dot: 'bg-lime-500', pill: 'bg-lime-50 text-lime-800 ring-lime-200' },
+  neuroscience:                     { dot: 'bg-fuchsia-500', pill: 'bg-fuchsia-50 text-fuchsia-800 ring-fuchsia-200' },
+  genetics:                         { dot: 'bg-purple-500', pill: 'bg-purple-50 text-purple-800 ring-purple-200' },
+  immunology:                       { dot: 'bg-orange-500', pill: 'bg-orange-50 text-orange-800 ring-orange-200' },
+  nutrition:                        { dot: 'bg-green-500', pill: 'bg-green-50 text-green-800 ring-green-200' },
+  kinesiology:                      { dot: 'bg-teal-500', pill: 'bg-teal-50 text-teal-800 ring-teal-200' },
+}
+
+/** Badge classes for a department slug, with a neutral fallback. */
+export function deptStyle(slug) {
+  return DEPT_STYLES[slug] ?? { dot: 'bg-stone-400', pill: 'bg-stone-100 text-stone-600 ring-stone-200' }
 }
 
 export function deptLabel(slug) {
