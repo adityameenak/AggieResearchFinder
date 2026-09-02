@@ -121,9 +121,115 @@
     "photo_url": "https://artsci.tamu.edu/atmos-science/_files/_images/profile-images/fu-dan-faculty.png",
     "phone": "979-458-3274",
     "office": "Eller O&M 1210I",
-    "ai_review": "",
-    "scholar_interests": [],
-    "publications": []
+    "ai_review": "Dr. Fu is a researcher in Oceanography. Tropical cyclone dynamics and predictability, atmosphere-ocean interactions, high-resolution global and regional earth system numerical modeling, machine learning applications in climate and geosciences. Their Google Scholar profile highlights interests in tropical cyclones, extreme weathers, climate variability, ML/AI.",
+    "scholar_interests": [
+      "tropical cyclones",
+      "extreme weathers",
+      "climate variability",
+      "ML/AI"
+    ],
+    "publications": [
+      {
+        "title": "Projected future changes in tropical cyclones using the CMIP6 HighResMIP multimodel ensemble",
+        "year": "2020",
+        "cited_by": 302
+      },
+      {
+        "title": "An unprecedented set of high‐resolution earth system simulations for understanding multiscale interactions in climate variability and change",
+        "year": "2020",
+        "cited_by": 282
+      },
+      {
+        "title": "Ocean fronts and eddies force atmospheric rivers and heavy precipitation in western North America",
+        "year": "2021",
+        "cited_by": 100
+      },
+      {
+        "title": "Impacts of climate change on future hurricane induced rainfall and flooding in a coastal watershed: A case study on Hurricane Harvey",
+        "year": "2023",
+        "cited_by": 38
+      },
+      {
+        "title": "Intrabasin variability of East Pacific tropical cyclones during ENSO regulated by central American gap winds",
+        "year": "2017",
+        "cited_by": 32
+      },
+      {
+        "title": "The formation mechanism of a spring sea fog event over the Yellow Sea associated with a low-level jet",
+        "year": "2012",
+        "cited_by": 30
+      },
+      {
+        "title": "Central American mountains inhibit eastern North Pacific seasonal tropical cyclone activity",
+        "year": "2021",
+        "cited_by": 27
+      },
+      {
+        "title": "Improved simulations of atmospheric river climatology and variability in high‐resolution CESM",
+        "year": "2022",
+        "cited_by": 15
+      },
+      {
+        "title": "Using convolutional neural network to emulate seasonal tropical cyclone activity",
+        "year": "2023",
+        "cited_by": 14
+      },
+      {
+        "title": "High-resolution tropical channel model simulations of tropical cyclone climatology and intraseasonal-to-interannual variability",
+        "year": "2019",
+        "cited_by": 14
+      },
+      {
+        "title": "Introducing the new regional community earth system model, r-cesm",
+        "year": "2021",
+        "cited_by": 13
+      },
+      {
+        "title": "MESACLIP: A 10-member ensemble of CESM HR RCP 8.5 (2006-2100) simulations",
+        "year": "2024",
+        "cited_by": 7
+      },
+      {
+        "title": "Impact of Climate Simulation Resolutions on Future Energy System Reliability Assessment: A Texas Case Study",
+        "year": "2023",
+        "cited_by": 7
+      },
+      {
+        "title": "Future extreme precipitation amplified by intensified mesoscale moisture convergence",
+        "year": "2025",
+        "cited_by": 6
+      },
+      {
+        "title": "Enhanced Atlantic Meridional Mode predictability in a high-resolution prediction system",
+        "year": "2024",
+        "cited_by": 6
+      },
+      {
+        "title": "Central American mountains inhibit eastern North Pacific seasonal tropical cyclone activity. Nat. Commun., 12, 4422",
+        "year": "2021",
+        "cited_by": 6
+      },
+      {
+        "title": "Intrabasin variability of east Pacific tropical cyclones during ENSO regulated by Central American gap winds. Sci. Rep., 7, 1658",
+        "year": "2017",
+        "cited_by": 6
+      },
+      {
+        "title": "Response of the upper ocean to northeast Pacific atmospheric rivers under climate change",
+        "year": "2024",
+        "cited_by": 4
+      },
+      {
+        "title": "Droughts in wind and solar power: Assessing climate model simulations for a net‐zero energy future",
+        "year": "2024",
+        "cited_by": 3
+      },
+      {
+        "title": "How do climate model resolution and atmospheric moisture affect the simulation of unprecedented extreme events like the 2021 western North American heat wave?",
+        "year": "2024",
+        "cited_by": 3
+      }
+    ]
   },
   {
     "id": "162a7b9b3a84",
@@ -229,7 +335,7 @@
     "photo_url": "https://artsci.tamu.edu/atmos-science/_files/_images/profile-images/ping-yang.jpg",
     "phone": "(979) 845-7679",
     "office": "Eller O&M 906B",
-    "ai_review": "",
+    "ai_review": "Dr. Yang is a researcher in Oceanography. Atmospheric radiative transfer, remote sensing, numerical modeling of the optical properties of nonspherical particles and its applications.",
     "scholar_interests": [],
     "publications": []
   },
@@ -247,7 +353,7 @@
     "photo_url": "https://artsci.tamu.edu/atmos-science/_files/_images/profile-images/r-saravanan.jpg",
     "phone": "(979) 845-0175",
     "office": "Eller O&M 1204GA",
-    "ai_review": "",
+    "ai_review": "Dr. Saravanan is a researcher in Oceanography. Variability and predictability of climate on seasonal to millennial timescales, coupled ocean-atmosphere interaction, large-scale dynamics of the atmosphere and the oceans.",
     "scholar_interests": [],
     "publications": []
   },
@@ -589,7 +695,7 @@
     "photo_url": "https://artsci.tamu.edu/geology-geophysics/_files/_images/_profile-images/marcantonio-franco.jpg",
     "phone": "979-845-9240",
     "office": "Room 130 Halbouty Building",
-    "ai_review": "",
+    "ai_review": "Dr. Marcantonio is a researcher in Oceanography. Radiogenic isotope geochemistry, geochemical proxies of climate change, environmental geochemistry.",
     "scholar_interests": [],
     "publications": []
   },

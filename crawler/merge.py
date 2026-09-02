@@ -210,6 +210,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would happen; write nothing")
+    ap.add_argument("--sync-sources", action="store_true",
+                    help="also write carried-forward enrichment back into the "
+                         "crawler's faculty*.json, so a re-crawled source file "
+                         "doesn't have to be re-enriched from scratch")
     args = ap.parse_args()
 
     print("Loading crawler output:")
@@ -256,6 +260,28 @@ def main():
             path.write_text(json.dumps(rows, ensure_ascii=False, indent=2))
             print(f"      {path.name:<24} {path.stat().st_size / 1e6:>5.1f} MB  "
                   f"{len(rows):>5} records")
+
+    if args.sync_sources and not args.dry_run:
+        # Push enrichment back into the per-school crawler output. Without this
+        # a re-crawled source file stays empty and enrich_ollama.py regenerates
+        # reviews the merged dataset already has.
+        by_id = {r["id"]: r for r in merged}
+        for path in sorted(HERE.glob("faculty*.json")):
+            if path.stem not in SOURCE_SCHOOL:
+                continue
+            rows = json.loads(path.read_text())
+            filled = 0
+            for r in rows:
+                cur = by_id.get(r.get("id"))
+                if not cur:
+                    continue
+                for field in ENRICHED_FIELDS:
+                    if not r.get(field) and cur.get(field):
+                        r[field] = cur[field]
+                        filled += 1
+            if filled:
+                path.write_text(json.dumps(rows, ensure_ascii=False, indent=2))
+                print(f"  synced {filled:>5} enrichment values into {path.name}")
 
     print("\nPaste into SCHOOL_SEO / TOTAL_FACULTY in ui/src/lib/seo.js:")
     for school, rows in sorted(by_school.items(), key=lambda kv: -len(kv[1])):
