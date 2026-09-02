@@ -45,7 +45,11 @@ SOURCE_SCHOOL = {
     "faculty-ut-neuro":    "ut",     # neuroscience + integrative biology
     "faculty-tamu-earth":  "tamu",   # atmospheric sci, geology, geography
     "faculty-ut-education": "ut",    # kinesiology + educational psychology
-    "faculty-harvard-fas": "harvard",  # earth sciences + public health
+    "faculty-harvard-fas":        "harvard",  # earth sciences + public health
+    "faculty-harvard-chem":       "harvard",  # chemistry      (via --cdp)
+    "faculty-harvard-physics":    "harvard",  # physics        (via --cdp)
+    "faculty-harvard-oeb":        "harvard",  # evolutionary biology (via --cdp)
+    "faculty-harvard-statistics": "harvard",  # statistics     (via --cdp)
 }
 
 # Enrichment fields. These are produced after a crawl (enrich_ollama.py writes

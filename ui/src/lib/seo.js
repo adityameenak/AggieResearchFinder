@@ -21,7 +21,7 @@ export const OG_LOCALE  = 'en_US'
 export const THEME_DEFAULT = '#4f46e5'
 
 /** Total across every school — kept in sync by scripts/prerender.js (warns on drift). */
-export const TOTAL_FACULTY = 5270
+export const TOTAL_FACULTY = 5352
 
 const n = (x) => x.toLocaleString('en-US')
 
@@ -112,7 +112,7 @@ export const SCHOOL_SEO = {
     theme: '#A51C30',
     brand: 'Harvard Research Finder',
     aka: ['Harvard Research Finder', 'Harvard Lab Finder', 'Harvard STEM Research Finder'],
-    count: 187,
+    count: 269,
     nick: 'Harvard',
     unit: 'Harvard',
     keywords: [
