@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { SCHOOL_LIST } from '../schools'
 import { formatStateSlug } from '../lib/states'
 import SchoolCard from '../components/SchoolCard'
+import Seo from '../components/Seo'
 
 export default function StatePage() {
   const { state }    = useParams()
@@ -10,6 +11,7 @@ export default function StatePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
+      <Seo />
       <div className="h-[3px] bg-gradient-to-r from-indigo-600 via-violet-500 to-purple-600" />
 
       <main className="flex-1 px-6 py-12">

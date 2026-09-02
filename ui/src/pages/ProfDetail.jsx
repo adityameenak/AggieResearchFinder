@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
 import { deptLabel } from '../utils/search'
 import EmailModal from '../components/EmailModal'
+import Seo from '../components/Seo'
+import { buildProfMeta } from '../lib/seo'
 
 /* ── Dept badge ───────────────────────────────────────────── */
 const DEPT_STYLES = {
@@ -80,6 +82,14 @@ export default function ProfDetail() {
   const prof    = faculty.find(f => f.id === id)
   const saved   = prof ? isSaved(prof.id) : false
 
+  // Faculty pages are the long-tail SEO surface ("<professor name> <school>
+  // research"), so they get their own title/description and Person schema.
+  // Memoized: <Seo> re-applies whenever this object identity changes.
+  const seoMeta = useMemo(
+    () => (prof ? buildProfMeta(prof, school, deptLabel(prof.department)) : null),
+    [prof, school],
+  )
+
   // Read session from localStorage (set by Discover flow)
   const session = (() => {
     try { return JSON.parse(localStorage.getItem(sessionKey) || 'null') } catch { return null }
@@ -119,6 +129,7 @@ export default function ProfDetail() {
 
   return (
     <>
+      {seoMeta && <Seo meta={seoMeta} />}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
 
         {/* Back */}

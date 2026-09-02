@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { SchoolProvider } from './SchoolContext'
 import { AppProvider }    from './AppContext'
 import { getSchool }      from './schools'
+import Seo        from './components/Seo'
 import NavBar     from './components/NavBar'
 import Footer     from './components/Footer'
 import Home       from './pages/Home'
@@ -34,6 +35,7 @@ export default function SchoolApp() {
     <SchoolProvider>
       <AppProvider>
         <div className="min-h-screen flex flex-col">
+          <Seo />
           <NavBar />
           <main className="flex-1">
             <Routes>

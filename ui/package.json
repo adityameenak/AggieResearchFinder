@@ -1,11 +1,12 @@
 {
-  "name": "tamu-research-finder",
+  "name": "stem-research-finder",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && node scripts/prerender.js",
+    "preview": "vite preview",
+    "build:fast": "vite build && PRERENDER_FACULTY=0 node scripts/prerender.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.29.0",

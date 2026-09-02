@@ -1,7 +1,7 @@
 /**
  * Search & ranking utilities for the Texas STEM Research Finder.
  */
-import { isUsefulTopic } from './topics'
+import { isUsefulTopic } from './topics.js'
 
 // ---------------------------------------------------------------------------
 // Tokenization

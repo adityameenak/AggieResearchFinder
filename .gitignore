@@ -19,4 +19,5 @@ backend/*.egg-info/
 backend/.venv/
 backend/venv/
 *.pyc
-*.pyocrawler/downloaded_files/
+*.pyo
+crawler/downloaded_files/

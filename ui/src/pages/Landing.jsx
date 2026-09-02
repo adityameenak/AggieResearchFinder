@@ -1,10 +1,12 @@
 import { SCHOOL_LIST } from '../schools'
 import SchoolCard from '../components/SchoolCard'
 import USMap from '../components/USMap'
+import Seo from '../components/Seo'
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
+      <Seo />
       {/* Platform accent bar */}
       <div className="h-[3px] bg-gradient-to-r from-indigo-600 via-violet-500 to-purple-600" />
 

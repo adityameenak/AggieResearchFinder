@@ -13,7 +13,9 @@ Four independent components, each with its own dependencies and lifecycle:
 
 There is no top-level package manager. Treat each directory as its own project.
 
-**Live now: 4 schools, ~3,834 faculty** — TAMU 1,772 · Rice 607 · UT Austin 913 · UT Dallas 542, all `available: true`. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
+**Live now: 6 schools, 4,838 faculty** — TAMU 1,772 · Rice 607 · UT Austin 913 · UT Dallas 542 · MIT 857 · Harvard 147, all `available: true`. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
+
+The site is live at **stemresearchfinder.tech** (domain registered elsewhere, DNS pointed at Vercel). Push to `main` → Vercel builds `ui/` and deploys.
 
 ## Common commands
 
@@ -82,6 +84,18 @@ No test suite is configured in any of the three components.
 
 **Search & match rendering.** `splitResearch(prof)` (in `utils/search.js`) is what cards show: it uses **`ai_review` as the preview** (clean prose) and relegates research-area phrases + `scholar_interests` to keyword pills — because `research_summary` is often a run-on of areas, not prose. Junk/heading terms are filtered by `isUsefulTopic` (shared with the topic chips). Topic filter chips are **department-adaptive**: `AppContext.topicChipsFor(dept)` derives them from the selected department's faculty (aero→propulsion, CS→ML). Search scores `scholar_interests` too. **Matching excludes blank profiles** — `matcher.isMatchable(prof)` requires research content (summary or scholar interests); no research → never a match (and the explanation degrades gracefully).
 
+**SEO is prerendered, not client-side.** The app is a client-rendered SPA, so every URL would otherwise ship one generic `<head>` and an empty `<body>` across ~4.9k pages. Three pieces fix that, and **all copy lives in `ui/src/lib/seo.js` — edit that, never the markup**:
+
+- `src/lib/seo.js` — the single source of truth. `buildMeta(pathname)` returns title/description/canonical/keywords/OG/theme-color/JSON-LD for any route; `buildProfMeta(prof, school, dept)` does the same for a faculty page. `SCHOOL_SEO` holds each school's search-intent identity: `brand` (the phrase people actually type — "Aggie Research Finder"), `aka` (fed to schema.org `alternateName`), `keywords`, and `count`. `SCHOOL_SECTIONS` templates every `/:code/<section>` page. Titles are budgeted to <=62 chars and descriptions to <=165 so nothing is truncated in results; a school's `brand` is appended to sub-page titles only when it still fits.
+- `scripts/prerender.js` — runs after `vite build` (wired into `npm run build`). Writes a real `dist/<route>/index.html` per route with that route's head plus a crawlable text summary inside `#root` (React discards it on hydration; it exists for bots that don't run JS). Covers 45 static routes **and every faculty profile** — `PRERENDER_FACULTY=0` (or `npm run build:fast`) skips the ~4.8k profile pages for a faster deploy at the cost of their long-tail visibility. Also emits `robots.txt` and a sitemap index. It **warns if `SCHOOL_SEO` counts drift from `faculty.json`** — heed that after a re-crawl.
+- `src/components/Seo.jsx` — re-applies the same metadata on client-side navigation, since prerendered HTML only covers the first paint. Mounted once in `SchoolApp` (before `<main>`, so a page-level override runs last), plus `Landing` and `StatePage`. `ProfDetail` passes a memoized `meta` override so professor pages get their real name and `Person` schema.
+
+Every tag those two own is marked `data-seo`; the prerenderer strips and re-emits them, and `applySeo` updates them in place, so tags never duplicate. **Vercel checks the filesystem before applying the SPA rewrite in `vercel.json`**, which is what makes the prerendered files win over the catch-all.
+
+Because `seo.js` is imported by plain Node, its relative imports need explicit `.js` extensions — that's why `src/utils/search.js` imports `./topics.js`.
+
+**Brand assets are generated, not hand-drawn.** `ui/scripts/gen_icons.py` (Pillow) renders the favicon set, PWA/maskable/apple-touch icons, and a 1200x630 Open Graph card per school in that school's colors, into `ui/public/`. It is **not** run at build time — run it manually and commit the output after a palette or school change. `public/favicon.svg` is the hand-written vector twin of the same mark.
+
 **Data flow.** Each school's crawler writes `faculty[-<code>].json`. These get merged into `ui/public/faculty.json` (one combined file, each record tagged with `university`). On the backend, `_auto_import_faculty()` ingests that combined file into the DB; the row-level `university` field powers `GET /api/faculty?university=<code>` filtering. On the UI, `AppContext` fetches `/faculty.json` once and filters in-memory by `useSchool().code`.
 
 **Mock mode is a first-class feature.** When `ANTHROPIC_API_KEY` is unset, `backend/services/llm.py` sets `MOCK_MODE=True` and the resume parser, matcher, and email drafter fall back to keyword/template implementations. The app stays fully functional. When changing AI features, preserve both code paths — check `MOCK_MODE` and provide a non-LLM fallback. `/api/health` exposes `mock_mode` so callers can tell which mode is active. The Vercel-side `ui/api/parse.js` and `ui/api/email.js` mirror this pattern (template fallback when `ANTHROPIC_API_KEY` is missing).
@@ -146,6 +160,8 @@ Backend deploy entry point is `backend/Procfile` (`uvicorn main:app --host 0.0.0
 - `backend/tamurf.db`, `backend/uploads/`, `crawler/venv/`, `crawler/venv312/` (pydoll's py3.12 env), `crawler/downloaded_files/`, and `crawler/.cache/` are gitignored — never commit them.
 - The crawler ships a `faculty[-<code>].json` per school in-tree; don't regenerate-and-commit casually. The Rice JSON:API crawl (`crawl_rice.py`) re-runs in ~2 minutes; `ai_review` enrichment over those records via local Ollama takes much longer (tens of minutes) — run it once and reuse.
 - `ui/public/faculty.json` is the *combined* file the UI fetches and the backend imports on startup. After running per-school crawls, you must merge them into this file (see README quick-start).
+- Adding a school means adding a `SCHOOL_SEO` entry in `ui/src/lib/seo.js` too, or its pages inherit no brand alias, keywords, or OG card — and add the card to `ui/scripts/gen_icons.py`, then re-run it.
+- `npm run preview` always serves the SPA fallback, so sub-route `<title>`s look generic there. That's a `vite preview` behavior, not a bug — check prerendered output with `npx serve dist`, which resolves files the way Vercel does.
 - When adding new internal Links in per-school pages, always use `useSchoolPath()` — absolute paths like `to="/search"` will navigate the user out of the school namespace.
 - localStorage keys follow the pattern `<schoolCode>_<name>`. Don't write to bare `tamu_*` keys; use `${school.code}_*`.
 - Tailwind classes for school-specific colors must be written out in full (`bg-maroon-700`, `text-rice-blue-700`) — JIT compilation can't follow `bg-${school.accent}-700` interpolation.
