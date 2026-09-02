@@ -21,7 +21,7 @@ export const OG_LOCALE  = 'en_US'
 export const THEME_DEFAULT = '#4f46e5'
 
 /** Total across every school — kept in sync by scripts/prerender.js (warns on drift). */
-export const TOTAL_FACULTY = 4712
+export const TOTAL_FACULTY = 4903
 
 const n = (x) => x.toLocaleString('en-US')
 
@@ -40,7 +40,7 @@ export const SCHOOL_SEO = {
     brand: 'Aggie Research Finder',
     aka: ['Aggie Research Finder', 'TAMU Research Finder', 'Texas A&M Research Finder',
           'Aggie STEM Research Finder'],
-    count: 1766,
+    count: 1957,
     nick: 'Aggie',
     unit: 'Texas A&M',
     keywords: [

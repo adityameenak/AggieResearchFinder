@@ -26,8 +26,6 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-import taxonomy
-
 # Verified working rosters. medicine/nursing/pharmacy/vetmed are deliberately
 # absent: medicine's endpoint holds only placeholder records, nursing and
 # pharmacy don't expose one, and vetmed 403s even with browser-like headers.
@@ -99,6 +97,16 @@ def fetch(session, url):
     return r
 
 
+# Tried in order. Half the health profiles have no "Research Interests"
+# heading at all and put the substance under "Biography" instead — without the
+# fallback, 94 of 191 records shipped blank and were excluded from matching.
+RESEARCH_HEADINGS = [
+    r"research interest|research area|research focus|research statement",
+    r"scholarly interest|scholarly activit|clinical interest|areas? of expertise",
+    r"biography|about",
+]
+
+
 def section_text(soup, pattern):
     """Text under a heading matching `pattern`, up to the next heading.
 
@@ -131,7 +139,11 @@ def parse_profile(session, url):
     soup = BeautifulSoup(r.text, "html.parser")
 
     emails = re.findall(r"[\w.+-]+@[\w.-]*tamu\.edu", r.text)
-    research = section_text(soup, r"research interest|research area|research focus")
+    research = ""
+    for pattern in RESEARCH_HEADINGS:
+        research = section_text(soup, pattern)
+        if len(research) >= 40:
+            break
 
     lab, scholar = "", ""
     for a in soup.find_all("a", href=True):
