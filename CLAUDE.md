@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**See `HANDOFF.md`** for current state: what is running, what is unfinished,
+and the operational traps (re-crawls destroying enrichment, Harvard's CDP
+requirement, paginated listings, the SEAS catch-all).
+
 ## Repository layout
 
 Four independent components, each with its own dependencies and lifecycle:
