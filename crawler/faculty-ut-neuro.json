@@ -13,7 +13,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Alison%20Preston%2C%20neuroscience%20Directory.jpg",
     "phone": "",
     "office": "NHB 3.352",
-    "ai_review": "",
+    "ai_review": "Alison Preston’s research in the neuroscience department centers around elucidating the neural processes that underpin learning and memory within the human brain, specifically investigating the crucial interactions between the hippocampus and frontoparietal cortices. Her lab primarily explores how these networks contribute to the formation of new knowledge throughout adulthood while also examining their developmental role in supporting cognitive skills like problem-solving and reasoning. Utilizing state-of-the-art techniques such as high-resolution functional magnetic resonance imaging (fMRI), Preston’s team investigates changes in brain activity during learning tasks.  Notably, the research spans both adult function and the developmental trajectory of these networks, seeking to understand how childhood and adolescence shape long-term cognitive abilities. Ultimately, Professor Preston's work aims to identify the precise mechanisms that allow us to learn and retain information, contributing significantly to our understanding of human cognition.",
     "scholar_interests": [],
     "publications": []
   },
@@ -31,7 +31,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Lee_full.jpg",
     "phone": "",
     "office": "NHB 3.139",
-    "ai_review": "",
+    "ai_review": "Amy Lee’s research program within neuroscience focuses on elucidating the intricate mechanisms of calcium signaling in neurons using a combination of advanced techniques. Her lab investigates the structure-function relationships of voltage-gated calcium channels (Cav channels), employing methods such as patch-clamp electrophysiology, FRET, and isothermal titration calorimetry to dissect their molecular determinants and protein interactions. Furthermore, Professor Lee is pioneering research into Ca2+ signaling’s role in axonal regeneration, specifically examining the connections between Cav channels, calmodulin-like Ca2+ binding proteins (CaBPs), and sensory neuron recovery through live-cell imaging and single-cell RNA sequencing.  Notably, her work extends to understanding how Cav channels contribute to retinal circuit development alongside other ion channels, representing a multi-faceted approach to investigating neuronal function and repair.",
     "scholar_interests": [],
     "publications": []
   },
@@ -49,7 +49,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Brumback.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Audrey Brumback’s research program in neuroscience centers on understanding the biological mechanisms underlying aging and neurological disorders, particularly focusing on interventions for older adults and communities. Utilizing techniques such as electrophysiology, optogenetics, and chemogenetics, her lab investigates how neuronal activity – specifically learning, memory, and plasticity – is affected by age-related changes and conditions like addiction and dementia. Brumback’s work delves into both cellular and molecular processes within the brain alongside broader cognitive and sensory systems to characterize brain and cognitive functioning. Ultimately, she seeks to uncover critical insights into biological mechanisms of aging and develop targeted clinical care strategies informed by a detailed understanding of these complex interactions.",
     "scholar_interests": [],
     "publications": []
   },
@@ -85,7 +85,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Boris%20Zemelman%2C%20neuroscience%20Directory.jpg",
     "phone": "",
     "office": "NHB 3.116",
-    "ai_review": "",
+    "ai_review": "Boris Zemelman’s research within the neuroscience department centers on elucidating the mechanisms underlying memory formation by investigating the function of hippocampal cell assemblies. His lab employs a murine model, leveraging differences in neuronal classes – including excitatory, inhibitory, and modulatory populations identified through neurochemical markers like calcium binding proteins – to target specific cell types for manipulation. The team utilizes both behavioral experiments alongside novel genetic approaches to probe how these assemblies are defined, accessed, and perturbed during memory tasks. Specifically, they aim to understand how alterations in hippocampal activity affect memory processes and subsequently develops methods to detect and evaluate these changes. Ultimately, Zemelman’s work seeks to unravel the complexities of hippocampal circuitry crucial for learning and long-term memory storage.",
     "scholar_interests": [],
     "publications": []
   },
@@ -121,7 +121,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-07/Screen%20Shot%202024-07-26%20at%2010.00.31%20AM.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Daniel Johnston's research program within the neuroscience department centers on utilizing quantitative biophysical techniques to investigate fundamental aspects of cortical neurons and synaptic function. His lab has made significant contributions to our understanding of hippocampal synaptic transmission, specifically examining voltage-gated ion channels residing within dendrites – a crucial area linked to plasticity, epilepsy, and animal behavior. Johnston’s work is characterized by rigorous experimentation designed to elucidate the biophysical mechanisms governing neuronal communication.  Notably, he has authored the widely cited textbook “Foundations of Cellular Neurophysiology” alongside Sam Wu, reflecting his deep expertise in cellular neurophysiology and providing a foundational resource for the field. Overall, Johnston’s research provides critical insights into how neurons operate at the interface of electrical signaling and synaptic connections.",
     "scholar_interests": [],
     "publications": []
   },
@@ -139,7 +139,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-11/personalImage-square.png",
     "phone": "",
     "office": "NHB 4.354",
-    "ai_review": "",
+    "ai_review": "Eric Senning’s research within the neuroscience department investigates the intricate mechanisms governing ion channel regulation, specifically focusing on nociceptors – sensory neurons responsible for pain perception. His lab explores how peripheral stimuli, such as capsaicinoids, heat, and acid, directly activate TRPV1, a non-selective ion channel expressed in these neurons, thereby modulating their excitability via poly-modal activation. Utilizing the study of DRG nociceptors extending processes to peripheral tissues with molecular receptors, Senning’s work examines the consequences of this activation on neuronal signaling within the dorsal horn of the spinal cord. Ultimately, the research seeks to understand how diverse sensory inputs influence TRPV1 gating and contribute to pain sensation transmission from the periphery to the brain.",
     "scholar_interests": [],
     "publications": []
   },
@@ -157,7 +157,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Seidemann.jpg",
     "phone": "",
     "office": "SEA 4.204",
-    "ai_review": "",
+    "ai_review": "Eyal Seidemann’s research in the neuroscience department investigates the neural mechanisms underlying perceptual decision-making and motor planning within the primate cerebral cortex. Utilizing a sophisticated approach combining optical imaging, genetic tools, and electrophysiology, his lab seeks to directly observe and influence cortical activity during awake, behaving primates engaged in complex tasks. Specifically, Seidemann’s team employs real-time optical recordings of cortical responses alongside behavioral data, then develops computational models to interpret these neural patterns and predict corresponding behavior. These models are subsequently validated through targeted manipulations – including electrical or pharmacological interventions – allowing researchers to test the causal relationship between specific neural activity and observed decisions or movements. Ultimately, this work provides a detailed understanding of how the brain represents and processes information essential for guiding action.",
     "scholar_interests": [],
     "publications": []
   },
@@ -175,7 +175,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-07/Screen%20Shot%202024-07-03%20at%2012.26.24%20PM_1.png",
     "phone": "429-020-0209",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Dr. Franco Pestilli’s research centers on elucidating the complexities of brain networks and white matter connectivity, utilizing computational methods to investigate these areas within the context of cognitive development and aging. His laboratory employs large-scale data analysis, notably through the innovative cloud computing platform brainlife.io, which currently serves a diverse user base and facilitates the study of how brain networks are impacted by disease and developmental changes across the lifespan.  Specifically, Dr. Pestilli’s work explores connections between computational modeling, cognitive processes, sensory systems, and theoretical frameworks for understanding brain function, with particular attention to early life experiences as predictors of aging. Furthermore, he champions openness and standardization within neuroscience research through the development of brainlife.io, fostering transparency and rigor in scientific investigation.",
     "scholar_interests": [],
     "publications": []
   },
@@ -193,7 +193,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/George%20Bittner.jpg",
     "phone": "571-012-9868",
     "office": "PAT 321",
-    "ai_review": "",
+    "ai_review": "George Bittner’s research within the neuroscience department focuses on elucidating the fundamental cellular and molecular processes governing neuronal repair following injury, specifically concentrating on plasmalemma and axonal regeneration. His lab investigates biophysical and biochemical mechanisms by which lesioned neurons attempt to restore their plasmalemma integrity and initiate axon regrowth, with a particular emphasis on the roles of calcium signaling and specific axonal proteins in this process. Notably, Bittner’s team explores innovative approaches utilizing polyethylene glycol (PEG) to facilitate rapid axonal reconnection and functional recovery, alongside detailed investigations into relevant biochemical pathways involved in neuronal repair. Utilizing molecular biology, genetics, and cell/molecular techniques, his work contributes significantly to understanding neurological disease and advancing strategies for promoting long-term axonal regeneration.",
     "scholar_interests": [],
     "publications": []
   },
@@ -211,7 +211,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/George%20Pollak%2C%20neuroscience%20Directory.jpg",
     "phone": "134-144 2010",
     "office": "NHB 3.362",
-    "ai_review": "",
+    "ai_review": "George Pollak’s research within the neuroscience department centers on understanding how the mammalian auditory system processes information and represents external stimuli, particularly focusing on the remarkable adaptations of echolocating bats. His lab investigates the neural circuits involved in transforming sensory input from the auditory system into representations of the surrounding world, with a specific emphasis on species-specific communication signals within the bat’s highly developed hearing system. Utilizing these animals as subjects, Pollak employs experimental techniques to examine how bats decode complex sounds and localize them accurately in three-dimensional space – a process crucial for their survival. His work explores the underlying mechanisms of auditory processing, investigating how neuronal populations represent spatial cues and ultimately contribute to the bat’s sophisticated navigational abilities.",
     "scholar_interests": [],
     "publications": []
   },
@@ -229,7 +229,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Hiroshi%20Nishiyama%2C%20Institute%20for%20Neuroscience%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "NHB 3.151",
-    "ai_review": "",
+    "ai_review": "Hiroshi Nishiyama’s research within the neuroscience department investigates the dynamic processes underlying synaptic plasticity in the mammalian brain, focusing specifically on how connections between neurons are established and modified throughout life. His lab utilizes a range of advanced techniques including electrophysiology, optogenetics, and chemogenetics alongside optical imaging to meticulously examine axonal innervation refinement during development and subsequent reorganization following learning, memory formation, or neurological injury.  Nishiyama’s work explores the cellular and molecular mechanisms governing these processes, utilizing a combination of structural analysis and plasticity measurements to understand how synaptic connections are sculpted. Ultimately, his research aims to illuminate the fundamental principles driving neural circuit remodeling relevant to cognitive function and recovery from brain damage.",
     "scholar_interests": [],
     "publications": []
   },
@@ -247,7 +247,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Hitoshi%20Morikawa%2C%20Institute%20for%20Neuroscience%2C%20Morikawa%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Hitoshi Morikawa’s research within the neuroscience department centers on understanding neural plasticity specifically within the mesostriatal dopaminergic system, focusing on its role in reward-based learning and addiction development. The lab employs sophisticated techniques including brain slice electrophysiology, calcium imaging, and UV photolysis to investigate how calcium signaling regulates neuronal activity and plasticity within this system. Morikawa’s team utilizes behavioral assays like conditioned place preference alongside stereotaxic manipulations of brain areas with pharmacological agents and viruses to establish links between cellular mechanisms and complex behaviors. Their research seeks to elucidate the precise molecular processes driving these responses, particularly concerning daily intermittent reward schedules. Ultimately, the lab aims to connect specific signaling events at the neuronal level to learning and addictive behaviors observed in animal models.",
     "scholar_interests": [],
     "publications": []
   },
@@ -265,7 +265,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Husniye%20Kantarci%20Directory.jpg",
     "phone": "467-023-4423",
     "office": "NHB 4.358",
-    "ai_review": "",
+    "ai_review": "Husniye Kantarci’s research within the neuroscience department focuses on elucidating the intricate relationship between glial cells and neural excitability. Building upon her postdoctoral discovery that Schwann cells secrete prostaglandin E2 (PGE2) to induce excitability in sensory neurons through voltage-gated sodium channel upregulation, her lab now investigates several related areas. Specifically, Kantarci’s team explores how PGE2 derived from glial cells influences neuronal activity both within the peripheral nervous system and potentially the brain, aiming to understand its role in neural diversity and its impact on neurological diseases. Utilizing techniques such as optogenetics and cellular/molecular studies, they are investigating the mechanisms underlying aberrant glial-derived PGE2 production and its contribution to age-related cognitive decline and neurodevelopmental disorders. This work leverages molecular biology and genetics & genomics approaches to dissect complex biological pathways related to brain function and sensation.",
     "scholar_interests": [],
     "publications": []
   },
@@ -283,7 +283,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-09/JLP%20INS%202022%20medium.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Jarrod Lewis-Peacock’s research in the neuroscience department centers on understanding the neural mechanisms underlying human goal-directed behavior, specifically examining the relationship between cognitive control and memory. His lab employs sophisticated neuroimaging techniques, primarily utilizing functional MRI (fMRI) alongside computational analyses such as multivariate pattern analysis, to investigate how the brain supports our ability to achieve objectives. Lewis-Peacock’s work focuses on characterizing core features of human cognition through real-time fMRI data collection and subsequent data modeling.  The research specifically explores learning and memory processes relevant to goal-directed behavior within the context of cognitive systems and sensory processing, aligning with his interest in computational and theoretical approaches to understanding Learning & Memory.",
     "scholar_interests": [],
     "publications": []
   },
@@ -301,7 +301,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Donegan.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Jennifer Donegan’s research in the neuroscience department investigates the long-term effects of stress on neural circuits implicated in psychiatric disorders, primarily schizophrenia. Utilizing a multidisciplinary approach, her lab employs techniques such as neural tracing, in vivo electrophysiology, and opto- and chemo-genetics alongside behavioral assessments to examine how alterations within specific brain networks contribute to symptom manifestation. Specifically, the research focuses on manipulating these circuits through genetic interventions and assessing their impact on relevant behavioral outcomes.  The overarching goal is to identify novel targets for therapeutic intervention by elucidating the precise relationship between lifetime stress exposure, circuit dysfunction, and psychiatric disorders, drawing upon fields including molecular biology, genetics, and electrophysiology. Ultimately, this work seeks to translate findings into more targeted and effective treatment strategies for schizophrenia and related conditions.",
     "scholar_interests": [],
     "publications": []
   },
@@ -319,7 +319,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20Jonathan%20Pierce%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "NMS 5.116",
-    "ai_review": "",
+    "ai_review": "Jonathan Pierce’s research within the neuroscience department investigates the genetic underpinnings of complex behaviors, particularly focusing on how neuronal circuits control movement patterns and contribute to neurological disorders like Parkinson's disease. Utilizing the nematode *C. elegans* as a powerful model system, his lab explores conserved genes that dictate transitions between distinct behavioral states, such as walking and running gaits. Recent work has identified impairments in gait switching within *C. elegans* worms exhibiting symptoms similar to those seen in Parkinson’s patients, suggesting a fundamental genetic basis for the disorder.  Furthermore, Pierce's team is exploring potential therapeutic strategies – independent of dopamine signaling – for addressing gait dysfunction, while also investigating the broader neurological effects of substances like alcohol through molecular and behavioral analyses.",
     "scholar_interests": [],
     "publications": []
   },
@@ -337,7 +337,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/Joseph%20Dunsmoor.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Joseph Dunsmoor’s research in the neuroscience department investigates the complex interplay between emotion, cognition, and memory formation, specifically focusing on how we learn from and recall significant experiences. Utilizing a multidisciplinary approach incorporating Pavlovian conditioning, categorization, and decision-making paradigms alongside immersive virtual reality, his lab employs fMRI and psychophysiological measures to explore fundamental questions regarding emotional generalization and its impact on episodic memory.  Dunsmoor’s work centers on understanding how emotional experiences shape memory processes and whether individuals can effectively regulate the psychological and physiological responses associated with negative events. Notably, the research extends from healthy adult populations towards translational cognitive neuroscience investigations of anxiety regulation in patients exhibiting difficulty managing fear. This innovative approach utilizes computational behavioral methods to examine these phenomena within the human brain imaging context.",
     "scholar_interests": [],
     "publications": []
   },
@@ -355,7 +355,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Kristen%20Harris%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Austin%20Directory.jpg",
     "phone": "448-464 2012",
     "office": "NHB 3.406",
-    "ai_review": "",
+    "ai_review": "Kristen Harris’s research within the neuroscience department investigates the critical role of dendritic spine structure and synaptic plasticity in fundamental brain processes like learning and memory. Her lab primarily focuses on the hippocampus, utilizing electrophysiological recordings to study long-term potentiation (LTP) and long-term depression (LTD), two mechanisms involved in synaptic changes associated with memory formation. Harris’s work specifically examines how alterations in dendritic spine morphology – frequently observed in neurological disorders such as intellectual disability, epilepsy, and stroke – impact these plasticity processes. The research team hypothesizes that competition exists between synaptic modification and a stabilizing homeostatic mechanism to generate new memories. Ultimately, the lab seeks to understand the cellular components governing synaptic structure and function within the hippocampus, contributing to our broader knowledge of how the brain encodes experiences.",
     "scholar_interests": [],
     "publications": []
   },
@@ -373,7 +373,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Colgin.jpg",
     "phone": "398-023-0270",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Laura Colgin’s research in neuroscience centers on investigating the neural mechanisms underlying learning and memory through detailed analyses of brain rhythms. Utilizing multisite recordings – specifically tetrode and Neuropixels technology – from freely behaving rodents, her lab examines how coordinated neuronal activity within the hippocampus and entorhinal cortex reflects synchronized cognitive processes like learning and memory formation. Colgin’s work employs optogenetics and chemogenetics alongside these electrophysiological methods to directly manipulate neuronal populations and assess their impact on behavior. The lab's current focus involves understanding how neuronal coordination represents memories, as well as exploring the link between disruptions in this coordination and impairments observed in rodent models of learning disabilities and memory disorders related to aging. Ultimately, her research contributes to a deeper comprehension of biological mechanisms relevant to cognitive function and age-related neurological conditions.",
     "scholar_interests": [],
     "publications": []
   },
@@ -391,7 +391,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Dobbs.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Lauren Dobbs’s research within the neuroscience department centers on understanding the neurobiological mechanisms underlying substance use disorders and exploring potential interventions through innovative techniques. Her lab employs molecular biology, genetics, and genomics approaches to investigate the cellular and structural changes associated with addiction at a detailed level. Specifically, Dr. Dobbs utilizes electrophysiology, optogenetics, and chemogenetics – allowing her team to precisely manipulate neuronal activity – to dissect behavioral responses and identify key targets for therapeutic development. This translational research focuses on neurological disease/addiction within a broader context of health promotion or disease prevention, leveraging complex systems biology to inform novel treatment strategies.",
     "scholar_interests": [],
     "publications": []
   },
@@ -409,7 +409,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Lief%20Fenno.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Lief Fenno’s research laboratory within the neuroscience department employs innovative molecular and viral techniques to investigate the intricate connections between neuronal circuits and behavior, primarily focusing on substance use disorders and neurological disease. Utilizing his expertise in bioengineering alongside traditional neuroscience methods, Dr. Fenno's lab develops targeted tools – including optogenetics, chemogenetics, and advanced molecular manipulation – to precisely control and observe specific populations of neurons within awake, behaving subjects. Their research leverages optical imaging and cellular/molecular investigations to understand the underlying mechanisms of neurological disorders and potentially inform new health promotion or disease prevention strategies. This work contributes significantly to the field by translating fundamental neuroscience knowledge into tools for investigating brain function in both healthy and diseased states.",
     "scholar_interests": [],
     "publications": []
   },
@@ -427,7 +427,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20Mackenzie%20Howard%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "NHB 2.124",
-    "ai_review": "",
+    "ai_review": "Mackenzie Howard’s research within the neuroscience department investigates the neurological consequences of genetic epilepsy, focusing on the cellular and circuit-level mechanisms linking disease mutations to cognitive impairments. Utilizing genetic mouse models, her lab specifically examines how monogenic epilepsy mutations alter the physiological properties of individual neuron subtypes within cortical microcircuits, subsequently impacting information processing. Employing a combination of in vitro and in vivo techniques – including molecular genetic manipulations alongside electrophysiological recordings, imaging, and behavioral assays – Howard’s work aims to dissect the cascade of effects on activity, synaptic connectivity, and circuit function following initial cellular changes. Ultimately, her research seeks to understand how these disruptions contribute to cognitive deficits such as those observed in sensory integration, movement control, and learning/memory impairments often associated with epilepsy.",
     "scholar_interests": [],
     "publications": []
   },
@@ -445,7 +445,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20Marcel%20Goldschen-Ohm%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "NHB 4.352",
-    "ai_review": "",
+    "ai_review": "Marcel Goldschen’s research within the neuroscience department focuses on elucidating the intricate mechanisms governing ion channel behavior and the effects of drug modulation upon these critical cellular components. The Goldschen-Ohm lab investigates how small molecules interact with ion channels, impacting neuronal signaling involved in both healthy cognitive function and physiological processes like cardiac rhythm. Utilizing techniques including fluorescence spectroscopy, electrophysiology, and biochemistry – often at single-molecule and ensemble levels – the lab explores the dynamic motions of proteins within these channels to understand their activity. Specifically, Dr. Goldschen-Ohm’s work aims to identify therapeutic targets for disorders such as epilepsy and arrhythmias by characterizing the physical processes driving channel function. Ultimately, this research seeks to establish novel strategies for impacting human health through targeted modulation of ion channel dynamics.",
     "scholar_interests": [],
     "publications": []
   },
@@ -463,7 +463,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-07/Screen%20Shot%202024-07-03%20at%2012.05.26%20PM.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Marie Monfils’ research within the neuroscience department centers on understanding the complex mechanisms of fear and social behavior. Her work investigates how persistent manipulations after memory consolidation can permanently reduce fear responses, utilizing behavioral experiments to examine these post-consolidation effects. Simultaneously, she is exploring the biological underpinnings of affiliative kinship and the ways in which information is transmitted socially through animal models. Furthermore, Dr. Monfils’ research incorporates an examination of individual differences in fear attenuation, leveraging this approach to further elucidate the factors influencing memory processes. Overall, her lab utilizes behavioral studies within a learning/memory framework to investigate cognition, sensory systems, and plasticity in both innate and social contexts.",
     "scholar_interests": [],
     "publications": []
   },
@@ -481,7 +481,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Snodderly_4.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Max Snodderly’s research in neuroscience investigates the fundamental mechanisms underlying primate vision, specifically focusing on the visual pathway from the retina through cortical areas. His lab employs a dual approach, combining human studies to quantify retinal macular pigment – a key factor in protecting the fovea from light damage – with animal models utilizing macaque monkeys. Within the monkey experiments, researchers utilize ultrafine electrodes to record neural activity within the lateral geniculate nucleus and visual cortex during behavioral tasks involving precise eye movements and rapid stimulus presentation. This detailed electrophysiological data, coupled with perceptual testing, allows for a comprehensive understanding of individual differences in pigment density and their relationship to foveal anatomy, ultimately aiming to assess potential risk factors for diseases like age-related macular degeneration.",
     "scholar_interests": [],
     "publications": []
   },
@@ -499,7 +499,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20Michael%20Drew%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "WCH 2.222AA",
-    "ai_review": "",
+    "ai_review": "Michael Drew’s research in the neuroscience department investigates the intricate processes underlying memory formation and retrieval within the hippocampus, a key region for generating episodic memories. Utilizing genetically modified mice – enabled by techniques like optogenetics and chemogenetics – his lab explores how fear memories are acquired and subsequently extinguished through extinction learning.  Specifically, Professor Drew's team examines adult hippocampal neurogenesis alongside the molecular mechanisms driving these processes, leveraging cellular and molecular approaches to dissect neural circuit changes involved in memory consolidation and suppression. The laboratory’s focus on manipulating neuronal activity with precise tools allows for a detailed understanding of how the brain encodes and adapts memories at a fundamental level.",
     "scholar_interests": [],
     "publications": []
   },
@@ -517,7 +517,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Mauk.png",
     "phone": "649-663 2006",
     "office": "NHB 3.368",
-    "ai_review": "",
+    "ai_review": "Michael Mauk’s research within the neuroscience department centers on elucidating the mechanisms of learning and plasticity, primarily focusing on the cerebellum and its interactions with the prefrontal cortex. His work employs a dual approach, combining behavioral studies—specifically investigating delay eyelid conditioning in rabbits and mice through reversible lesions and neural recordings—with large-scale computer simulations designed to model cerebellar function. Mauk’s lab investigates how the cerebellum contributes to motor learning by studying patterns of activity during tasks like eyelid conditioning, including both tractable models in rabbits and more complex trace conditioning experiments. Notably, he leverages computer simulation techniques due to the cerebellum's suitability for analysis within this framework, seeking to understand information processing at a fundamental level. Ultimately, Mauk’s research aims to bridge experimental data with computational modeling to reveal the neural basis of motor control and cerebellar function.",
     "scholar_interests": [],
     "publications": []
   },
@@ -535,7 +535,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20Michela%20Marinelli%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "HDB 5.318",
-    "ai_review": "",
+    "ai_review": "Michela Marinelli's research within the neuroscience department investigates the biological underpinnings of addiction, primarily utilizing models that reflect increased vulnerability such as adolescent development, inter-individual differences in susceptibility, and drug-induced responses to stress. Her lab employs a multi-faceted systems approach, integrating molecular analyses – including protein expression studies – with detailed cellular investigations employing in vivo and ex vivo electrophysiology to examine neuronal activity and synaptic transmission. Furthermore, the research incorporates anatomical techniques like optogenetics alongside functional neuroanatomy and behavioral self-administration assays. This comprehensive methodology aims to elucidate the complex mechanisms driving addiction and ultimately inform the development of more effective treatment strategies by examining these processes at multiple levels of analysis.",
     "scholar_interests": [],
     "publications": []
   },
@@ -553,7 +553,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20Nace%20Golding%2C%20neuroscience%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "NHB 3.342",
-    "ai_review": "",
+    "ai_review": "Nace Golding’s research within the neuroscience department centers on elucidating the intricate computations occurring within the auditory system, specifically examining the role of dendritic processing in neuronal responses. Focusing on the binaural circuitry – chosen for its clear wiring and precise timing requirements – Golding investigates how the brain processes relative sound arrival times between the two ears using microsecond-level precision. The lab’s primary interest lies in synaptic integration within auditory neurons, exploring the interplay between voltage-gated ion channels and dendritic morphology to determine how these interactions drive action potential generation. Through detailed investigations of neuronal biophysical properties, Golding’s work contributes significantly to understanding the fundamental mechanisms underlying sensory function and development within the auditory neural circuits.",
     "scholar_interests": [],
     "publications": []
   },
@@ -571,7 +571,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Institute%20for%20Neuroscience%2C%20neuroscience%2C%20Nicholas%20Priebe%2C%20Priebe%2C%20The%20University%20of%20Texas%20at%20Asutin%20Directory.jpg",
     "phone": "",
     "office": "NHB 2.112",
-    "ai_review": "",
+    "ai_review": "Nicholas Priebe’s research in the neuroscience department investigates the fundamental mechanisms driving sensory processing within the primary somatosensory cortex. Utilizing both in vivo electrophysiology and imaging techniques, his lab explores how neuronal response properties are systematically altered as sensory information travels from the periphery to cortical areas, ultimately shaping our perception of the world. Specifically, Priebe’s work focuses on understanding the cortical circuitry responsible for extracting complex features like motion, orientation, and depth—primarily through examining visual cortex – from incoming subcortical signals. This research aims to decipher the computations that allow the brain to transform sensory inputs into meaningful representations, contributing to a broader understanding of how the human cortex generates appropriate motor outputs and processes information about the environment. His investigations are motivated by the significant expansion of cerebral cortex and its critical role in perception and action.",
     "scholar_interests": [],
     "publications": []
   },
@@ -589,7 +589,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/Nigel%20Atkinson.jpg",
     "phone": "369-376 2007",
     "office": "PAT 228",
-    "ai_review": "",
+    "ai_review": "Professor Nigel Atkinson’s research within the neuroscience department investigates the molecular basis of tolerance to addictive substances, primarily focusing on alcohol dependence using the fruit fly, *Drosophila*, as a model system. His lab employs genetic and molecular biology techniques to dissect how the Drosophila nervous system adapts to chronic alcohol exposure, specifically examining alterations in histone modification patterns that drive long-term behavioral changes. Notably, Atkinson’s team has identified the BK-type Ca2+-activated K+ channel gene as a key regulator of tolerance induction, demonstrating that its increased expression following sedation leads to a withdrawal phenotype upon drug removal and utilizing techniques to map drug-responsive DNA elements. Through this detailed investigation, Professor Atkinson seeks to understand the fundamental mechanisms by which organisms develop tolerance and potentially identify targets for addiction treatment.",
     "scholar_interests": [],
     "publications": []
   },
@@ -625,7 +625,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Aldrich_4.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Richard Aldrich’s research within the neuroscience department centers on the fundamental role of ion channels in biological signaling. His work investigates these specialized protein structures – including sodium, calcium, and potassium channels – which are critical for converting external stimuli into electrical signals within neurons and other cell types. Employing a focus on mechanisms of function and regulation, Aldrich’s lab specifically explores how ion channel activity is influenced by calcium ions and their contribution to diverse physiological processes such as heartbeat control, muscle contraction, and hormone release. Through detailed study of these channels' selectivity and responsiveness to stimuli like neurotransmitters or membrane voltage changes, Aldrich aims to illuminate the intricate pathways governing nervous system function.",
     "scholar_interests": [],
     "publications": []
   },
@@ -643,7 +643,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Robert%20Messing.jpg",
     "phone": "650-678-7010",
     "office": "HDB 5.320",
-    "ai_review": "",
+    "ai_review": "Robert Messing’s research within the neuroscience department centers on elucidating the molecular mechanisms underlying drug abuse and co-occurring disorders like anxiety and pain. His lab employs a multifaceted approach, utilizing gene targeting, transgenic expression, and RNA interference alongside behavioral pharmacology and electrophysiology to investigate how drugs of abuse alter neural circuits. Specifically, the Messing Lab has identified key regulators of ethanol intoxication and self-administration, including protein kinase C epsilon, N-type voltage-dependent calcium channels, and the type 1 equilibrative nucleoside transporter in mice. Current research heavily focuses on the therapeutic potential of inhibiting protein kinase C epsilon as a treatment strategy for pain, anxiety, and alcohol addiction. This work represents a significant contribution to understanding the neurobiological basis of addiction and informing the development of novel pharmacological interventions.",
     "scholar_interests": [],
     "publications": []
   },
@@ -661,7 +661,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Mayfield.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Roy Mayfield’s research within the neuroscience department centers on elucidating the molecular and cellular underpinnings of drug abuse and addiction. His lab employs genomic and proteomic analyses to investigate how drugs of abuse induce changes in gene and protein expression within the central nervous system. Specifically, Dr. Mayfield's work focuses on identifying novel drug targets and potential biomarkers through examining alterations at a molecular level, including detailed investigations into gene structure and regulatory mechanisms. This research aligns with his broader interests in neuroscience, substance use disorders, and utilizes methods encompassing molecular biology, genetics, and cellular studies to understand neurological disease/addiction. Ultimately, Dr. Mayfield’s team seeks to translate these findings into opportunities for drug discovery.",
     "scholar_interests": [],
     "publications": []
   },
@@ -679,7 +679,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/neuroscience%2C%20Susanne%20Ressl%2C%20The%20University%20of%20Texas%20at%20Austin%20Directory.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Susanne Ressl’s research in the Neuroscience department centers on elucidating the intricate roles of proteins within cellular function, employing a multidisciplinary approach that combines biophysics, biochemistry, structural biology, and cell biology techniques. The lab primarily investigates how secreted and membrane-associated proteins contribute to synaptic organization and communication, utilizing structural neuroscience methods to examine molecular interactions crucial for synapse stability and plasticity. Specifically, the research explores the physical and chemical properties of these proteins across various scales—from atomic structures to cellular contexts—to understand their impact on brain function.  Given that disruptions in these protein interactions are implicated in cognitive and neuropsychiatric disorders, the lab’s work has significant translational potential, aiming to provide fundamental insights into synaptic mechanisms relevant to neurological disease.",
     "scholar_interests": [],
     "publications": []
   },
@@ -697,7 +697,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/neuroscience%2C%20Thibaud%20Taillefumier%20Directory.jpg",
     "phone": "",
     "office": "PMA 10.148",
-    "ai_review": "",
+    "ai_review": "Thibaud Taillefumier’s research in theoretical neuroscience employs mathematical modeling to investigate the complex behavior of neural networks. Utilizing techniques from optimization theory and stochastic dynamics, his work explores how collective properties arise within these networks, drawing connections between information theory and non-equilibrium thermodynamics. Specifically, Taillefumier applies computational approaches to understand neural computations and identify potential design principles for efficient neural systems. His research bridges neuroscience with fields like AI for Health and Computational Science, leveraging probability and statistics alongside applied mathematics to analyze dynamic processes within biological networks. Ultimately, his lab seeks to unravel the fundamental mechanisms underlying information processing in the brain.",
     "scholar_interests": [],
     "publications": []
   },
@@ -715,7 +715,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Xuexin%20Wei%20Directory.jpg",
     "phone": "",
     "office": "NHB 3.354",
-    "ai_review": "",
+    "ai_review": "Xuexin Wei’s research lab within neuroscience investigates the neural mechanisms underlying adaptive behavior, primarily focusing on vision and navigation through a multi-faceted approach combining computational modeling with experimental data analysis. The group employs both bottom-up techniques – constructing constrained mechanistic models from experimental findings – and top-down normative modeling to explore topics such as visual physiology, perception, and the link between neural geometry and behavioral outcomes. Specifically, researchers utilize probabilistic models of neural population responses and leverage deep learning methodologies to understand cognitive computations within the brain.  Wei’s lab bridges computational neuroscience with statistics and artificial intelligence, seeking insights into generalization processes both in biological systems and artificial intelligence architectures.",
     "scholar_interests": [],
     "publications": []
   },
@@ -733,7 +733,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-06/Koltz%20square%20cropped%20UT%20field%20station%20_0.png",
     "phone": "558-023-0189",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Amanda Koltz’s research within the Biosciences department investigates the complex relationships between global environmental changes, biodiversity, and ecosystem health. Her lab focuses on understanding how biological communities respond to shifts in their environment, particularly concerning changing species interactions and their subsequent impacts on energy and nutrient cycling within ecosystems. Utilizing widely distributed, sensitive organisms – often with significant influence on key ecosystem services – Koltz’s team employs ecological methods to examine these responses to climate change and other global stressors. Specifically, her work delves into the broader field of Ecology and Global Change Biology, seeking to determine how biodiversity adapts in a changing world. Ultimately, Koltz's research aims to provide insights into the consequences of environmental alterations on vital ecosystem functions.",
     "scholar_interests": [],
     "publications": []
   },
@@ -751,7 +751,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/Amelia%20Wolf.jpg",
     "phone": "",
     "office": "PAT 423",
-    "ai_review": "",
+    "ai_review": "Amelia Wolf’s research within the Biosciences department centers on the intersection of ecology and global change biology, with a strong focus on plant biology and biodiversity studies. Her work investigates ecological processes across diverse landscapes, primarily utilizing approaches in biodiversity assessment and long-term monitoring to understand how environmental shifts impact plant communities. Specifically, Professor Wolf's lab conducts research examining the effects of changing conditions – such as climate variability and habitat alteration – on species distributions and ecosystem function. A recurring theme within her investigations is the study of biodiversity patterns and their implications for sustainability, often employing field observations alongside analytical techniques to assess ecological relationships. Ultimately, her research contributes valuable insights into the resilience and vulnerability of plant-based ecosystems in a rapidly changing world.",
     "scholar_interests": [],
     "publications": []
   },
@@ -769,7 +769,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Annette%20Ostling%2C%20integrative%20biology%20Directory.jpg",
     "phone": "080-011-0151",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Annette Ostling’s research within the Biosciences department investigates the complex mechanisms underlying biodiversity patterns, particularly focusing on how competition between species allows for surprisingly high levels of coexistence in natural communities. Utilizing theoretical development and mathematical/computational modeling – increasingly supplemented by empirical data analysis – her lab examines factors influencing community structure and diversity, with a specific emphasis on identifying linkages between theory and observation. Ostling’s research primarily targets the coexistence dynamics of tree species within forest ecosystems, seeking to understand how competition shapes these interactions and ultimately drives observed patterns. Her work contributes broadly to understanding competitive coexistence while striving for increasingly integrated theoretical and experimental approaches.",
     "scholar_interests": [],
     "publications": []
   },
@@ -787,7 +787,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/Arbel%20Harpak.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Arbel Harpak’s research within the Biosciences department investigates the evolutionary origins of genetic variation, focusing on how natural selection acts upon heritable differences among individuals and populations. Utilizing modelling techniques alongside large-scale statistical inference, the lab analyzes genomic data to decipher the mechanisms generating and shaping this variation – particularly concerning traits like disease susceptibility and fitness. Leveraging two decades of accumulated data, Harpak’s work aims to bridge the gap in our understanding of how genetic variation arises and evolves, ultimately contributing to improved genotype-to-phenotype mapping.  The lab's specific interests include exploring complex trait inheritance patterns, suggesting a focus on quantitative genetics and population genomic approaches.",
     "scholar_interests": [],
     "publications": []
   },
@@ -805,7 +805,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-08/RYB_headshot.jpg",
     "phone": "",
     "office": "PAT 607A",
-    "ai_review": "",
+    "ai_review": "Becca Young’s research within the Biosciences department centers on evolutionary processes at the cellular and molecular level, frequently exploring connections between biodiversity, ecology, and sustainability. Her work leverages genomic and genetic analyses to investigate developmental and behavioral patterns across diverse species, primarily focusing on evolutionary biology.  Specifically, Professor Young utilizes a combination of experimental approaches and bioinformatics techniques to examine how genes and development contribute to adaptation within ecological contexts. A significant portion of her research investigates the interplay between cellular mechanisms, organismal behavior, and broader environmental pressures, reflecting an interest in understanding evolutionary change through a multi-faceted lens. Ultimately, her lab seeks to illuminate the genetic underpinnings of biodiversity and resilience in evolving ecosystems.",
     "scholar_interests": [],
     "publications": []
   },
@@ -841,7 +841,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Brian%20Sedio_20190823-student_welcome-286%20.JPG",
     "phone": "",
     "office": "PAT 424",
-    "ai_review": "",
+    "ai_review": "Brian Sedio's research within the Biosciences department investigates the complex factors driving biodiversity patterns in forest ecosystems, employing an interdisciplinary approach that combines analytical chemistry, ecology, and evolutionary theory. His lab focuses on understanding how plant-insect and plant-pathogen interactions maintain species richness across geographically diverse forest communities, utilizing cutting-edge metabolomics to analyze secondary metabolite profiles within plants. Specifically, Sedio’s team investigates whether chemical defenses – or “chemical niches” – limit the spread of herbivores and pathogens, ultimately shaping evolutionary diversification among plant lineages through competitive coexistence mechanisms.  The research leverages historical biogeographic data alongside contemporary community ecology studies conducted in a network of forested sites to test these hypotheses regarding the role of plant chemistry in structuring forest communities.",
     "scholar_interests": [],
     "publications": []
   },
@@ -859,7 +859,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Botero-Carlos_0.jpeg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Carlos Botero’s research within the Biosciences department centers on understanding evolutionary processes and their impact across diverse ecosystems, primarily through an interdisciplinary approach encompassing behavioral neuroscience and genomics. His lab investigates evolution and biodiversity patterns using methodologies including comparative biology, phylogenetics, and ecological studies, often focusing on the intersection of climate change and biological systems. Botero’s work leverages genomic and genetic analyses to explore evolutionary adaptations and development alongside broader investigations into ecology and global change biology. Specifically, his research delves into behavioral responses within species in relation to environmental shifts, contributing to a deeper understanding of how organisms respond to changing conditions and the underlying biological mechanisms driving these reactions.",
     "scholar_interests": [],
     "publications": []
   },
@@ -877,7 +877,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-04/4096-2730-small.jpg",
     "phone": "",
     "office": "PAT 506A",
-    "ai_review": "",
+    "ai_review": "Caroline Farrior’s research in the Biosciences department investigates the complex interactions shaping plant community variation across diverse environmental gradients. Her work centers on scaling from individual plant physiology – specifically examining allocation patterns of leaves, wood, and fine-roots influenced by factors like light, rainfall, and nitrogen availability – to broader community-level and landscape-scale feedbacks. Farrior utilizes a combined theoretical and empirical approach, constructing simplified models to test hypotheses regarding these mechanisms while simultaneously developing more sophisticated simulation models for validation and quantitative prediction. This research aims to understand how plant responses to environmental constraints, particularly in the context of elevated atmospheric CO2, ultimately contribute to community dynamics and resilience. Ultimately, her lab seeks to quantify the critical relationships between plant physiology, competition, and ecosystem-level processes.",
     "scholar_interests": [],
     "publications": []
   },
@@ -895,7 +895,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-02/Claus%20O%20Wilke%20Directory.jpg",
     "phone": "",
     "office": "MBB 3.232",
-    "ai_review": "",
+    "ai_review": "Claus Wilke’s research program within the Biosciences department centers on computational evolutionary biology, employing bioinformatics and biostatistics to investigate fundamental questions in molecular evolution. The lab primarily focuses on theoretical and computational analyses of viral evolution, seeking to understand the forces shaping viral diversity and adaptation through genomic investigations. Furthermore, Professor Wilke's group explores biophysical mechanisms driving protein evolution alongside broader systems biology approaches, including bacterial physiology and metabolic modeling. Leveraging collaborations with experimental groups, the lab utilizes genomics and genetic data to advance knowledge in areas like microbial ecology and microbiomes, ultimately contributing to a deeper understanding of evolutionary processes at multiple scales.",
     "scholar_interests": [],
     "publications": []
   },
@@ -913,7 +913,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Craig%20Linder%2C%20integrative%20biology%20Directory.jpg",
     "phone": "285-303 2000",
     "office": "BIO 110A",
-    "ai_review": "",
+    "ai_review": "Craig Linder’s research within the Biosciences department investigates fundamental questions concerning plant evolution and genetic architecture, primarily focusing on angiosperm seed-oil composition and its evolutionary drivers. Utilizing a combined approach of modern molecular techniques, computer modeling, and traditional experimental methods, Dr. Linder explores selective pressures that have shaped the diverse range of oil types found in seeds, particularly examining the balance between saturated and unsaturated fats.  He is currently engaged in collaborative simulations with Dr. Rieseberg to assess selection’s impact on hybrid and introgression-driven populations, alongside employing *Brassica rapa* as a model system to study genetic maternal effects on seed fitness.  Notably, his work contributes to understanding the phylogenetic context of complex traits through a comparative evolutionary lens.  Students seeking research opportunities should be aware that projects will likely diverge from Dr. Linder’s specific focus areas, though he welcomes diverse interests within plant genetics.",
     "scholar_interests": [],
     "publications": []
   },
@@ -931,7 +931,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-03/cannatella.jpg",
     "phone": "",
     "office": "PAT 121A",
-    "ai_review": "",
+    "ai_review": "David Cannatella’s research within the Biosciences department centers on exploring evolutionary dynamics across diverse lineages, primarily focusing on amphibians and, specifically, Neotropical frogs. His lab employs phylogenetic methods, including phylogenomics and bioinformatics analyses, to investigate patterns of biodiversity, natural history, and signal evolution – particularly concerning mating calls – within these groups. Research also encompasses behavioral ecology, examining the interactions between signals and behavior in poison frogs. As Department Chair and Associate Director of the UT Biodiversity Center, Cannatella’s work contributes significantly to broader conservation efforts and comparative biology studies rooted in evolutionary principles.",
     "scholar_interests": [],
     "publications": []
   },
@@ -949,7 +949,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-10/David%20Hillis%20Directory_0.jpg",
     "phone": "864-015-1469",
     "office": "PAT 132",
-    "ai_review": "",
+    "ai_review": "David Hillis’s research in the Biosciences department centers around applying evolutionary biology to understand patterns of molecular diversity, utilizing approaches ranging from phylogenetic analyses to experimental evolution studies. His lab investigates fundamental questions across diverse fields, including viral epidemiology and the origins of life, employing techniques such as *in vitro* manipulation of viruses and high-resolution phylogenetic analysis of conserved genes. Specifically, Hillis’s research focuses on elucidating the molecular processes driving gene innovation and maintenance within multigene families through computational modeling using supercomputers to simulate evolutionary dynamics. Furthermore, his work contributes significantly to methodological advancements in phylogenetic reconstruction, aiming to refine techniques for estimating evolutionary relationships from molecular sequence data. Ultimately, Professor Hillis's lab investigates how evolution shapes biodiversity and ecological patterns while also developing innovative approaches to study evolutionary processes computationally.",
     "scholar_interests": [],
     "publications": []
   },
@@ -967,7 +967,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Edward%20Theriot%2C%20integrative%20biology%20Directory.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Edward Theriot’s research within the Biosciences department centers on the evolutionary history of diatoms, specifically focusing on the Thalassiosiraceae family—a group prominently found in both marine and freshwater environments. His work investigates significant shifts in diatom distribution, notably a major invasion into freshwater ecosystems approximately 20 million years ago, alongside recurring extinction and radiation events linked to glacial cycles. Currently, Professor Theriot’s lab is actively investigating speciation within the *Stephanodiscus* genus following the last ice age, employing a multidisciplinary approach combining molecular analyses with morphological, physiological, and paleontological investigations – all in response to climate-driven limnological changes. Leveraging a fully equipped DNA laboratory and shared facilities, his research seeks to understand diatom diversification through an integrated examination of these diverse data streams.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1003,7 +1003,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Felicity%20Muth%2C%20integrative%20biology%20Directory.jpg",
     "phone": "",
     "office": "PAT 524",
-    "ai_review": "",
+    "ai_review": "Felicity Muth’s research within the University of Texas at Austin’s Biosciences department centers on the critical intersection of biodiversity, ecology, and sustainability. Her work primarily investigates the ecological dynamics of insect communities, particularly focusing on their responses to environmental change and land-use patterns. Utilizing a combination of field observations and experimental manipulations—including studying insect diversity in restored prairie habitats—Dr. Muth seeks to understand how landscape restoration efforts impact long-term ecosystem resilience. Specifically, her research explores the relationships between pollinator populations, plant communities, and the overall health of degraded landscapes. Ultimately, her investigations contribute valuable insights into sustainable land management practices and conservation strategies.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1021,7 +1021,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-09/yatskievych.jpg",
     "phone": "512-471-5904",
     "office": "MAI 127",
-    "ai_review": "",
+    "ai_review": "George Yatskievych’s research within the Biosciences department centers on a broad range of botanical investigations, primarily focusing on floristics, plant systematics, and plant conservation. His work leverages herbarium collections – particularly his significant contribution to the Flora of Missouri project – to systematically study plant diversity, abundance, and geographic distribution across varying scales, from local parks to entire continents. Utilizing established methods within plant systematics, Yatskievych’s research employs detailed species identification and documentation through herbaria, contributing crucial data for both academic research and conservation efforts. His long-standing career has been dedicated to developing and utilizing these resources, establishing them as vital tools for voucher specimens and supporting a diverse range of scientific inquiries.  Ultimately, Professor Yatskievych’s lab is deeply involved in documenting and understanding plant life through meticulous specimen collection and analysis.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1039,7 +1039,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-06/DSCN2331_H%26N.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Harry Greene’s research within the Biosciences department centers on a broad investigation into vertebrate behavior, ecology, and evolution, with a particular focus on snakes, primates, and other predatory animals. His work explores critical aspects of animal life histories such as feeding strategies, defensive behaviors, and the complex relationships between species – particularly concerning human-wildlife interactions. Greene employs comparative biology and phylogenetic techniques to understand evolutionary adaptations within these groups, often examining how ecological pressures drive behavioral changes and influence conservation efforts. Driven by interests in biodiversity, sustainability, and evolution, his research contributes significantly to understanding apex predator dynamics and informing coexistence strategies.  Ultimately, Professor Greene’s lab investigates the multifaceted biological processes shaping vertebrate populations and their environments.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1075,7 +1075,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Hans%20Hofmann%2C%20integrative%20biologyDirectory.jpg",
     "phone": "071-021-0149",
     "office": "PAT 141",
-    "ai_review": "",
+    "ai_review": "Dr. Johann (Hans) Hofmann’s research within the Biosciences department investigates the evolutionary underpinnings of social behavior, primarily utilizing African cichlid fishes due to their remarkable adaptive radiations. His laboratory employs a multidisciplinary approach combining ecological fieldwork in East African lakes with detailed molecular analyses, including gene expression profiling and hormonal manipulation experiments on species like *Astatotilapia burtoni*. Furthermore, Dr. Hofmann’s team utilizes neuroanatomical techniques alongside advanced microscopy and bioinformatics tools to examine the genetic basis of social traits such as dominance hierarchies and sex roles. Current research focuses specifically on identifying genes controlling these behaviors in mouthbrooders while also undertaking comparative analyses of social organization evolution across diverse cichlid lineages.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1093,7 +1093,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/integrative%20biology%2C%20Jose%20Panero%2C%20Panero%20Directory.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Dr. Jose Panero’s research within the Biosciences department centers on plant systematics, specifically investigating the distribution, diversity, and evolutionary relationships of flowering plants, particularly those within the Asteraceae family – commonly known as sunflowers. His lab utilizes a combination of traditional taxonomic methods alongside molecular techniques to elucidate phylogenetic connections among Neotropical members of this group. A significant portion of his work also involves documenting the floristic richness of the southwestern United States and Mexico through contributions to the University of Texas Herbarium. Dr. Panero’s research leverages comparative biology and phylogenetics to understand patterns of biodiversity and ecological evolution within plant lineages, representing a strong focus on evolutionary biology and plant biology.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1111,7 +1111,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Justin%20Havird.jpg",
     "phone": "",
     "office": "NMS 4.312",
-    "ai_review": "",
+    "ai_review": "Justin Havird’s research within the Biosciences department centers on understanding complex ecological relationships through a multidisciplinary approach encompassing plant biology, microbial ecology, and genomics. His lab investigates biodiversity and sustainability issues primarily focusing on utilizing comparative biology and phylogenetic methods to explore the evolution and function of plants and their associated microbes. A significant portion of his work examines microbiomes – particularly those linked to disease – within diverse environments, leveraging genomic techniques to characterize microbial communities and their interactions with host organisms. Havird’s research explicitly addresses global change biology by studying how environmental shifts impact plant-microbe dynamics, often employing ecological fieldwork alongside advanced genetic analyses to inform conservation strategies.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1129,7 +1129,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/integrative%20biology%2C%20Kelly%20Zamudio%20Directory.jpg",
     "phone": "",
     "office": "PAT 128",
-    "ai_review": "",
+    "ai_review": "Kelly Zamudio’s research within the Biosciences department centers around understanding evolutionary processes through a multidisciplinary approach combining field data with molecular genetics. Her work primarily investigates population biology, focusing on the connections between geographic genetic variation and the ecological and life history traits of organisms, particularly in reptiles and amphibians. Specifically, she examines mating systems, dispersal patterns, and demography using laboratory analyses alongside extensive fieldwork to address questions related to evolutionary genetics at various levels – from populations to species. Zamudio’s research also applies these fundamental insights to conservation efforts, investigating the impact of anthropogenic landscape changes and emerging diseases on population genetic diversity. Ultimately, her lab seeks to leverage evolutionary principles for informing strategies aimed at preserving biodiversity in a changing world.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1147,7 +1147,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-08/Lauren%20Gates%20Photo%20HiRes.jpg",
     "phone": "591-026-0435",
     "office": "NHB 3.134",
-    "ai_review": "",
+    "ai_review": "Lauren Ancel Meyers' research focuses on leveraging computational methods to proactively address infectious disease outbreaks, collaborating closely with governmental agencies like the CDC through her recently established epiENGAGE Center. Her lab employs sophisticated epidemiological modeling and data analysis techniques to forecast the spread of diseases such as Ebola, Zika, influenza, and COVID-19, ultimately aiming to improve detection and control strategies.  Prior to this, Professor Meyers’ work centered on developing quantitative approaches to understand disease dynamics, and she has significantly contributed to modernizing outbreak forecasting infrastructure nationwide.  Beyond her research, she is deeply involved in educating the next generation of researchers through undergraduate and graduate programs at UT Austin, particularly emphasizing data science and its application to public health challenges. Notably, she was instrumental in establishing and leading UT’s Department of Statistics and Data Sciences.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1165,7 +1165,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/integrative%20biology%2C%20Lawrence%20Gilbert%20Directory.jpg",
     "phone": "530-007-9177",
     "office": "PAT 440",
-    "ai_review": "",
+    "ai_review": "Lawrence Gilbert’s research within the Biosciences department focuses on elucidating the complex interplay of evolution and ecology, primarily through investigations into diverse tropical food webs. His lab employs experimental population dynamics alongside developmental genetics to study coevolved traits between insects and plants, notably examining mimetic color patterns in Heliconius butterflies across multiple sites including Corcovado Park, Costa Rica. Gilbert’s research seeks to understand the mechanisms driving rainforest biodiversity, specifically addressing why certain species persist within low-density populations alongside their congeners. Utilizing field studies and laboratory experiments, his work spans from analyzing insect-plant interactions to applying evolutionary ecological principles for conservation efforts in both natural ecosystems and agroecosystems.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1183,7 +1183,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-07/Marina%20fishing.jpg",
     "phone": "",
     "office": "PAT 505",
-    "ai_review": "",
+    "ai_review": "Marina Hutchins’ research within the Biosciences department centers squarely on evolutionary biology, with a sustained focus on the processes of evolution itself. Her work investigates evolutionary patterns across diverse fields, employing comparative phylogenetic analyses and genomic approaches to understand how evolutionary change occurs. Specifically, Professor Hutchins examines instances of rapid adaptation and diversification, often utilizing fossil data alongside modern species comparisons.  Her lab’s research aims to illuminate the mechanisms driving evolutionary innovation and test hypotheses regarding the role of natural selection in shaping biological diversity. Ultimately, Hutchins’ investigations contribute significantly to a deeper understanding of the fundamental principles governing life's history on Earth.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1201,7 +1201,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-06/Kirkpatrick%2020084437%20v2.jpg",
     "phone": "",
     "office": "PAT 651",
-    "ai_review": "",
+    "ai_review": "Mark Kirkpatrick’s research within the Biosciences department investigates fundamental questions regarding the evolutionary origins of biodiversity, primarily focusing on chromosome evolution and speciation processes. Utilizing mathematical modeling and developing statistical tools, his lab explores hypotheses concerning chromosomal rearrangements, differences in chromosome number across species, and the role of sexually antagonistic selection as drivers of these changes.  Kirkpatrick’s work integrates theoretical approaches with experimental studies conducted by students and postdocs to address complex questions such as how reproductive isolation evolves and why certain taxa repeatedly re-evolve sex chromosomes. Recent research has specifically examined selection pressures impacting chromosome evolution in relation to local ecological conditions, representing a significant contribution to understanding the mechanistic forces behind genomic diversity. Ultimately, Kirkpatrick’s lab seeks to bridge theoretical modeling with empirical investigation to illuminate the evolutionary dynamics shaping the chromosomal landscape of life.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1219,7 +1219,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/Melissa%20Kemp%20Directory.jpg",
     "phone": "",
     "office": "PAT 102",
-    "ai_review": "",
+    "ai_review": "Melissa Kemp’s research within the Biosciences department centers on evolutionary processes and their impact on biodiversity and global ecological systems. Her work primarily focuses on evolutionary biology, utilizing ecological and global change biology frameworks to investigate how species respond to environmental shifts. Specifically, Professor Kemp investigates patterns of evolution and diversification within diverse taxa, often employing observational studies and comparative analyses to understand adaptation and resilience.  A core element of her research is examining the intersection of evolutionary processes with broader sustainability concerns, seeking to illuminate how biodiversity contributes to ecosystem stability. Ultimately, her lab’s investigations contribute to a deeper understanding of ecological relationships shaped by evolution over time.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1237,7 +1237,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/Michael%20Ryan.jpg",
     "phone": "411-419 2007",
     "office": "PAT 107",
-    "ai_review": "",
+    "ai_review": "Michael Ryan’s research within the Biosciences department centers on the fascinating intersection of animal behavior, specifically focusing on sexual selection and communication strategies in amphibians like frogs and fish. His work investigates how these behaviors have evolved through natural selection, often examining the mechanisms underlying mate attraction – such as vocalizations and visual displays – alongside their broader evolutionary impacts. Dr. Ryan employs behavioral observation and potentially neuroscientific techniques to explore these connections, seeking to understand the neurological underpinnings of communication signals. Ultimately, his lab’s research endeavors to integrate a mechanistic understanding of signaling with the long-term consequences of sexual selection within diverse aquatic species.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1255,7 +1255,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/integrative%20biology%2C%20Mikhail%20Matz%20Directory.jpg",
     "phone": "",
     "office": "PAT 432",
-    "ai_review": "",
+    "ai_review": "Mikhail Matz’s research within the Biosciences department focuses on elucidating the adaptive mechanisms of reef-building coral populations in the face of environmental change and climate stressors. Utilizing an interdisciplinary approach, his lab employs ecological methods alongside classical quantitative genetics and genomics techniques, including genome-wide genotyping and gene expression analysis, to investigate coral adaptation. Specifically, Matz’s work examines coral demography – assessing population sizes and migration patterns – through genomic data combined with coalescent-based analyses. Furthermore, the lab is dedicated to developing novel laboratory and bioinformatic methodologies specifically tailored for the genomics of non-model organisms, reflecting a strong commitment to computational biology and evolutionary research within the broader fields of ecology and global change biology.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1273,7 +1273,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/integrative%20biology%2C%20Molly%20Cummings%20Directory.jpg",
     "phone": "071-020-0136",
     "office": "PAT 502",
-    "ai_review": "",
+    "ai_review": "Molly Cummings’s research within the Biosciences department investigates the evolutionary drivers of diversity in animal communication traits, employing an integrative approach that combines multiple methodologies. Her work centers on understanding both external environmental pressures and internal biological mechanisms shaping these traits, specifically through behavioral experiments conducted in laboratory settings alongside environmental measurements. Cummings’s research spans three key areas: exploring neural mechanisms underlying mate choice, studying polarization camouflage and its communicative functions, and examining the evolution of conspicuous signaling behaviors. Utilizing a combination of ecological analyses, neuroscientific techniques, and molecular approaches, her lab seeks to illuminate the sources and targets of selection influencing the remarkable variety observed in animal communication systems.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1291,7 +1291,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2022-12/Nancy%20Moran.jpg",
     "phone": "",
     "office": "NMS 4.232A",
-    "ai_review": "",
+    "ai_review": "Nancy Moran’s research program sits at the intersection of evolutionary biology and several key disciplines including genetics, microbiology, and entomology, focusing specifically on the evolution of host-associated microorganisms. Her work investigates genome evolution within bacterial symbionts of insects, utilizing genomic and genetic approaches to understand how these relationships shape biodiversity and ecological interactions. Moran’s lab employs comparative genomics and phylogenetic analyses to explore the evolutionary consequences of symbiotic associations across diverse insect species. Ultimately, her research seeks to illuminate the role of microbial symbiosis in driving biological diversity and its impact on broader ecological dynamics.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1309,7 +1309,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-01/faceshot%20square.jpg",
     "phone": "512-922-0353",
     "office": "PAT 303",
-    "ai_review": "",
+    "ai_review": "Norma Fowler’s research program within the Biosciences department investigates critical ecological processes across plant populations and communities, primarily focusing on central Texas savannas and woodlands. Her work centers around understanding the dynamics of plant populations – specifically their spatial structure and regulation – alongside the impacts of disturbances like fire and herbivory on plant community ecology. Notably, Fowler’s lab has dedicated significant effort to addressing invasive non-native grasses and conducting conservation biology research, exemplified by projects safeguarding endangered species such as the bracted twistflower. Utilizing a range of methods including population studies and field experiments, her team contributes directly to managing woodland and savanna preserves while advancing knowledge within biodiversity, ecology, and sustainability.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1327,7 +1327,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-06/Profile_Picture_PhuongDao_2_0.png",
     "phone": "",
     "office": "PAT 528",
-    "ai_review": "",
+    "ai_review": "Phuong Dao’s research program sits at the intersection of plant ecology and remote sensing science, focusing on understanding how plants respond to disturbances and utilize chemical defenses. As a biosciences professor, she employs a highly interdisciplinary approach, integrating multi-source remote sensing data with geospatial analysis alongside genetic and molecular techniques to investigate plant health and function at the species level. Dao’s lab utilizes biological modeling and machine learning algorithms to analyze large datasets generated from these methods, specifically examining plant responses to climate change and disturbances. Her research primarily centers on biodiversity, ecology, and sustainability within the broader context of global change biology, leveraging computational tools for image analysis and predictive modeling.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1345,7 +1345,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-08/sjha-WFC-headshot_0.jpg",
     "phone": "",
     "office": "NMS 4.306",
-    "ai_review": "",
+    "ai_review": "Shalene Jha’s research within the Biosciences department focuses on understanding the impacts of human-altered landscapes on biodiversity and ecological processes. Her work centers around landscape genetics, population ecology, and conservation biology, specifically examining how global land use change affects gene flow and foraging behaviors in plants and animals. Dr. Jha conducts field research across diverse locations including California, Texas, Panama, and Mexico to investigate these relationships within human-modified ecosystems. Utilizing landscape genetic techniques and population ecological models, her lab investigates the vulnerability of plant and animal populations facing habitat fragmentation and changing land use patterns. Ultimately, her research contributes to conservation strategies informed by a detailed understanding of how species respond to altered landscapes.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1363,7 +1363,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-09/sianta%20copy.jpg",
     "phone": "",
     "office": "BIO 201",
-    "ai_review": "",
+    "ai_review": "Professor Shelley Sianta’s research within the Biosciences department centers on understanding complex ecological relationships through an interdisciplinary approach encompassing evolutionary biology and global change ecology. Her work primarily investigates biodiversity and sustainability issues, often employing comparative biology and phylogenetic analyses to explore patterns of adaptation and distribution across plant species. Specifically, she utilizes genomics and genetics alongside developmental studies to investigate how plants respond to environmental pressures and contribute to broader questions concerning ecological resilience.  A significant portion of her research focuses on utilizing a combination of fieldwork and laboratory techniques to examine the interplay between evolutionary processes and global-scale shifts in ecosystems, ultimately contributing to our knowledge of plant biology within a comparative context.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1381,7 +1381,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2024-08/Steve%20Phelps-3%20Directory.jpg",
     "phone": "",
     "office": "PAT 22",
-    "ai_review": "",
+    "ai_review": "Steven Phelps’s research laboratory within the Biosciences department investigates the complex interplay between neuronal gene expression, behavior, and evolutionary adaptation using a combination of innovative approaches. Primarily focused on rodent models – including prairie voles and singing mice – the lab employs computational modeling alongside detailed molecular analyses of gene expression to understand variation in social behaviors such as attachment and mate choice.  Notably, Phelps’s team conducts extensive field studies across the U.S. and Central America, often utilizing behavioral experiments and field playbacks to examine phenomena like advertisement song production and perception. Furthermore, they leverage population genetic analysis to investigate the evolutionary origins of these behaviors, contributing significantly to our understanding of evolution within behavior and neuroscience.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1399,7 +1399,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2023-01/integrative%20biology%2C%20Thomas%20Juenger%20Directory.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Thomas Juenger’s research within the Biosciences department investigates the complex relationships between ecological pressures and evolutionary change in plant populations, primarily focusing on phenotypic evolution. His lab centers around identifying genes responsible for drought adaptation using genomic analyses of diverse *Arabidopsis thaliana* ecotypes sourced globally, driven by a desire to understand how environmental variation shapes plant physiology. Juenger’s research also extends to examining plant-animal interactions, notably through long-term studies of pollination and herbivory in scarlet gilia populations, alongside emerging work on the genomics and physiology of biofuel crops like switchgrass and false brome. A key theme throughout his lab's investigations is the dynamic interplay between genetic variation and functional adaptation within natural systems.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1417,7 +1417,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-08/timothy-keitt.jpg",
     "phone": "512-471-5004",
     "office": "PAT 626",
-    "ai_review": "",
+    "ai_review": "Timothy Keitt’s research within the Biosciences department centers on applying computational methods to understand complex ecological systems across diverse scales, from local environments to global climate change impacts. His lab leverages large datasets and advanced techniques including statistics, big data analysis, and machine learning to investigate issues related to biodiversity, ecology, and sustainability. Specifically, Professor Keitt’s work often involves modeling ecosystem responses to climate change and utilizing AI for computational science applications within health and ecological contexts. With a strong foundation in Ecology and Global Change Biology and Computational Biology, his research contributes significantly to addressing critical challenges in environmental science through sophisticated data-driven approaches. Further details regarding his ongoing projects can be found on the Keitt Lab website.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1435,7 +1435,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-12/travis%20in%20iceland%20smallb.jpg",
     "phone": "267-018-1042",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Travis LaDuc’s research within the Biosciences department centers on the biodiversity and natural history of reptiles and amphibians primarily found within Texas. Utilizing the extensive Biodiversity Collections, he conducts detailed investigations into the demography and habitat use patterns of several species, including *Nerodia erythrogaster*, *Kinosternon flavescens*, and *Holbrookia lacerata*. His current projects involve tracking these populations across diverse locations, from the University of Texas campus to Jeff Davis County, employing observational methods to understand their natural history behaviors. Furthermore, LaDuc integrates his research with educational outreach through field courses and contributes to the study of preserved specimen collections, offering a unique approach to understanding reptile and amphibian ecology in Texas.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1453,7 +1453,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-02/Mueller-Ulrich-at-BFL.jpg",
     "phone": "",
     "office": "PAT 629",
-    "ai_review": "",
+    "ai_review": "Ulrich Mueller’s research program investigates the evolutionary dynamics of complex interactions between organisms, primarily focusing on social conflict, cooperation, and mutualistic relationships. His lab employs an interdisciplinary approach, integrating behavioral ecology, genomics, microbiology, and systematics to study systems such as the fascinating coevolution between fungus-growing ants and their associated fungi, alongside plant-rhizosphere microbe symbioses. Specifically, the group examines patterns of co-cladogenesis and symbiont specificity within these interactions, leveraging genomic data to understand the evolutionary processes driving them.  Mueller’s work extends beyond ants to include other social insects like bees and spiders, reflecting a broad interest in understanding the evolution of sociality and mutualism across diverse taxa. Ultimately, the lab seeks to unravel the genetic and ecological mechanisms underpinning these enduring biological partnerships.",
     "scholar_interests": [],
     "publications": []
   },
@@ -1471,7 +1471,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-03/unnamed_0.jpg",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Vagheesh M. Narasimhan’s research program sits at the forefront of computational biology, investigating complex biological questions through an interdisciplinary approach combining genomics, computer science, and statistics. His work primarily focuses on leveraging big data and machine learning techniques to address challenges in health promotion and disease prevention, particularly within evolutionary biology and genetics. Specifically, Professor Narasimhan applies computational methods to analyze genomic datasets, aiming to understand the evolution of biological systems and develop predictive models for human health. Utilizing statistical analysis and potentially AI algorithms, his lab investigates areas such as genomics, genetics and development, with a keen interest in applying these tools to computational medicine and advancing our understanding of disease mechanisms.",
     "scholar_interests": [],
     "publications": []
   }
