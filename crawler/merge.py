@@ -42,6 +42,8 @@ SOURCE_SCHOOL = {
     "faculty-mit2":    "mit",
     "faculty-harvard": "harvard",
     "faculty-tamu-health": "tamu",
+    "faculty-ut-neuro":    "ut",     # neuroscience + integrative biology
+    "faculty-tamu-earth":  "tamu",   # atmospheric sci, geology, geography
 }
 
 # Fields where "longer is better" when merging two records for one person.

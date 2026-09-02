@@ -63,11 +63,16 @@ https://artsci.tamu.edu/physics-astronomy/contact/profiles/index.html
 # Statistics
 https://artsci.tamu.edu/statistics/contact/profiles/index.html
 
-# Atmospheric Sciences (no profile links found)
-# https://artsci.tamu.edu/atmos-science/contact/profiles/index.html
+# Atmospheric Sciences — the /contact/profiles/index.html path 404s for this
+# department; its roster lives at /contact/faculty.html and links out to the
+# same /contact/profiles/<slug>.html pages.
+https://artsci.tamu.edu/atmos-science/contact/faculty.html
 
-# Geology & Geophysics (no profile links found)
-# https://artsci.tamu.edu/geology-geophysics/contact/profiles/index.html
+# Geology & Geophysics — same story as atmospheric sciences.
+https://artsci.tamu.edu/geology-geophysics/contact/faculty.html
+
+# Geography
+https://artsci.tamu.edu/geography/contact/faculty.html
 
 # Oceanography
 https://artsci.tamu.edu/oceanography/contact/profiles/index.html

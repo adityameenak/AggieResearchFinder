@@ -225,6 +225,7 @@ _UT_SUBDOMAIN_DEPT = {
     "integrativebio":  "biosciences",          # Integrative Biology
     "neuroscience":    "neuroscience",
     "bio":             "biology",              # bio.cns.utexas.edu hosts shared CNS profiles
+    "dellmed":         "medicine",             # Dell Medical School
     "astronomy":       "physics-astronomy",
 }
 
@@ -1143,6 +1144,19 @@ def _extract_ut_cs_profile(html: str, profile_url: str) -> dict:
     }
 
 
+# Most arts-&-sciences departments render "Alan Pepper", but some (atmospheric
+# sciences, geology) render "Pepper, Alan". Left alone, the reversed form shows
+# up on cards and in prerendered page titles.
+_SURNAME_FIRST_RE = re.compile(
+    r"^([A-Z][\w'’\-.]+(?: [A-Z][\w'’\-.]+){0,2}), ([A-Z][\w'’\-.]+(?: .+)?)$")
+
+
+def _flip_surname_first(name: str) -> str:
+    """Turn 'Pepper, Alan' into 'Alan Pepper'; leave anything else alone."""
+    m = _SURNAME_FIRST_RE.match((name or "").strip())
+    return f"{m.group(2)} {m.group(1)}" if m else (name or "").strip()
+
+
 def _extract_artsci_profile(html: str, profile_url: str) -> dict:
     """Parse an Arts & Sciences faculty profile page."""
     soup = BeautifulSoup(html, "html.parser")
@@ -1151,7 +1165,7 @@ def _extract_artsci_profile(html: str, profile_url: str) -> dict:
     name = ""
     h1 = soup.find("h1")
     if h1:
-        name = h1.get_text(" ", strip=True)
+        name = _flip_surname_first(h1.get_text(" ", strip=True))
 
     # ---- Title / rank -------------------------------------------------------
     title = ""

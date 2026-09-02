@@ -33,6 +33,30 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 
 SCHOOLS = ["tamu", "rice", "ut", "utd", "mit", "harvard"]
 
+# Departments a school genuinely does not have, so the gap count means
+# "we failed to crawl this" rather than "this university doesn't teach it".
+# Without this the audit scores Rice for lacking a veterinary school and MIT for
+# lacking petroleum engineering, which makes the parity number meaningless.
+# Only list a department after checking the university actually has no such
+# programme — if in doubt leave it out and let it show as a gap.
+NOT_OFFERED = {
+    "rice":    {"aerospace", "etid", "industrial", "nuclear", "ocean",
+                "oceanography", "petroleum", "dentistry", "medicine", "nursing",
+                "pharmacy", "veterinary", "public-health", "speech-hearing",
+                "applied-physics"},
+    "utd":     {"etid", "ocean", "oceanography", "petroleum", "nuclear",
+                "dentistry", "medicine", "nursing", "pharmacy", "veterinary",
+                "applied-physics", "kinesiology"},
+    "ut":      {"etid", "ocean", "dentistry", "veterinary", "applied-physics",
+                "speech-hearing"},
+    "tamu":    {"applied-physics", "speech-hearing", "kinesiology"},
+    "mit":     {"etid", "ocean", "oceanography", "petroleum", "dentistry",
+                "nursing", "pharmacy", "veterinary", "applied-physics",
+                "speech-hearing", "kinesiology", "public-health"},
+    "harvard": {"etid", "ocean", "oceanography", "petroleum", "aerospace",
+                "nuclear", "veterinary", "speech-hearing", "kinesiology"},
+}
+
 # ── Card-quality checks — the "gold standard" definition ─────────────────
 # A card is only as good as these fields; `research` and `ai_review` are what
 # the card body actually renders (see splitResearch in ui/src/utils/search.js).
@@ -84,15 +108,21 @@ def audit(path):
     print("-" * (32 + 8 * len(schools)))
     gaps = collections.Counter()
     for d in present:
-        row = "".join(f"{dept_of[s][d]:>8}" if dept_of[s][d] else f"{'-':>8}"
-                      for s in schools)
-        print(f"{taxonomy.label(d)[:31]:<32}{row}")
+        cells = []
         for s in schools:
-            if not dept_of[s][d]:
+            if dept_of[s][d]:
+                cells.append(f"{dept_of[s][d]:>8}")
+            elif d in NOT_OFFERED.get(s, ()):
+                cells.append(f"{'n/a':>8}")      # school has no such department
+            else:
+                cells.append(f"{'-':>8}")        # real gap: we should crawl it
                 gaps[s] += 1
+        print(f"{taxonomy.label(d)[:31]:<32}" + "".join(cells))
     print("-" * (32 + 8 * len(schools)))
-    print(f"{'MISSING (of %d)' % len(present):<32}" +
+    print(f"{'GAPS (crawlable, missing)':<32}" +
           "".join(f"{gaps[s]:>8}" for s in schools))
+    print("  '-' = we have no records and the school does have the department.")
+    print("  'n/a' = the university does not offer it (census.NOT_OFFERED).")
 
     unknown = taxonomy.audit_slugs(d for c in dept_of.values() for d in c)
     if unknown:
@@ -153,6 +183,21 @@ CANDIDATES = [
     ("tamu", "dentistry",     "https://dentistry.tamu.edu/_json-data/json-profile-data.json", None),       # JSON, 106 faculty
     ("mit",  "statistics",    "https://idss.mit.edu/people/", r"/staff/[a-z0-9-]+|/people/[a-z0-9-]+"),    # rendered, ~101
     ("ut",   "medicine",      "https://dellmed.utexas.edu/directory", r"/directory/[a-z0-9-]+"),           # rendered, ~21
+
+    # -- UT Austin remaining gaps, probed 2026-09-02 ----------------------
+    # Kinesiology is the biggest single win left in Texas, but it needs work:
+    # education.utexas.edu profiles are /faculty/<slug> with UNDERSCORES, which
+    # neither _UT_PROFILE_RE (no /faculty/ shape, no underscores in the slug
+    # pattern) nor any existing parser handles.
+    ("ut", "kinesiology", "https://education.utexas.edu/departments/kinesiology-health-education/faculty", r"/faculty/[a-z0-9._-]{3,}"),
+    # Dell Med: /directory/<slug> already matches _UT_PROFILE_RE and the host is
+    # mapped; the profile theme is unverified.
+    ("ut", "medicine", "https://dellmed.utexas.edu/directory", r"/directory/[a-z0-9-]+"),
+    # These 404 at the obvious paths — the real roster URLs still need finding:
+    #   Jackson School of Geosciences  jsg.utexas.edu
+    #   Psychology                     liberalarts.utexas.edu/psychology
+    #   Marine Science                 utmsi.utexas.edu
+    #   Texas Materials Institute      tmi.utexas.edu
 
     # -- viable, needs a browser -----------------------------------------
     # Both resolve to bio.cns.utexas.edu/directory/<slug>, which the existing

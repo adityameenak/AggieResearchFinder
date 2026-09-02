@@ -218,8 +218,8 @@ const DEPT_DISPLAY = {
   immunology:                       'Immunology & Microbiology',
   nutrition:                        'Nutrition & Food Science',
   kinesiology:                      'Kinesiology & Health',
+  'speech-hearing':                 'Speech, Language & Hearing',
 }
-
 
 // ---------------------------------------------------------------------------
 // Department badge styling
@@ -263,6 +263,7 @@ export const DEPT_STYLES = {
   immunology:                       { dot: 'bg-orange-500', pill: 'bg-orange-50 text-orange-800 ring-orange-200' },
   nutrition:                        { dot: 'bg-green-500', pill: 'bg-green-50 text-green-800 ring-green-200' },
   kinesiology:                      { dot: 'bg-teal-500', pill: 'bg-teal-50 text-teal-800 ring-teal-200' },
+  'speech-hearing':                 { dot: 'bg-sky-500', pill: 'bg-sky-50 text-sky-800 ring-sky-200' },
 }
 
 /** Badge classes for a department slug, with a neutral fallback. */

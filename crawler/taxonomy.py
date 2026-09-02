@@ -79,6 +79,10 @@ ALIASES = {
     "geosciences":              "earth-atmospheric",
     # Rice Earth, Environmental & Planetary Sciences.
     "earth-environmental":      "earth-atmospheric",
+    # A&M splits earth science across three arts-&-sciences departments.
+    "atmos-science":            "earth-atmospheric",
+    "geology-geophysics":       "earth-atmospheric",
+    "geography":                "earth-atmospheric",
     # Harvard SEAS "Environmental Science & Engineering" is the environmental
     # half of what other schools bundle into civil & environmental.
     "environmental":            "civil",
