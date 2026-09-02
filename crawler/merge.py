@@ -45,8 +45,11 @@ SOURCE_SCHOOL = {
     "faculty-ut-neuro":    "ut",     # neuroscience + integrative biology
     "faculty-tamu-earth":  "tamu",   # atmospheric sci, geology, geography
     "faculty-ut-education": "ut",    # kinesiology + educational psychology
+    "faculty-ut-extra":     "ut",    # Jackson School geosciences + Dell Med
     "faculty-harvard-fas":        "harvard",  # earth sciences + public health
-    "faculty-harvard-chem":       "harvard",  # chemistry      (via --cdp)
+    "faculty-harvard-chemistry":  "harvard",  # chemistry      (via --cdp)
+    "faculty-harvard-psychology": "harvard",  # psychology     (via --cdp)
+    "faculty-harvard-hsdm":       "harvard",  # dental school  (via --cdp)
     "faculty-harvard-physics":    "harvard",  # physics        (via --cdp)
     "faculty-harvard-oeb":        "harvard",  # evolutionary biology (via --cdp)
     "faculty-harvard-statistics": "harvard",  # statistics     (via --cdp)

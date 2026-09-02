@@ -59,17 +59,21 @@ NOT_OFFERED = {
     # programs inside them (Texas Materials Institute, and two programs in the
     # Walker Dept of Mechanical Engineering), not departments — so their faculty
     # correctly appear under their home department instead.
-    "ut":      {"etid", "ocean", "dentistry", "veterinary", "applied-physics",
+    "ut":      {"public-health", "etid", "ocean", "dentistry", "veterinary", "applied-physics",
                 "speech-hearing", "materials", "nuclear", "industrial"},
     "tamu":    {"applied-physics", "speech-hearing", "kinesiology"},
     # MIT has no department of statistics or of industrial engineering — the
     # Statistics & Data Science Center and the Operations Research Center are
     # interdepartmental centres whose faculty sit in EECS, Math, Sloan etc.
-    "mit":     {"statistics", "industrial",
+    "mit":     {"medicine", "statistics", "industrial",
                 "neuroscience", "etid", "ocean", "oceanography", "petroleum", "dentistry",
                 "nursing", "pharmacy", "veterinary", "applied-physics",
                 "speech-hearing", "kinesiology", "public-health"},
-    "harvard": {"etid", "ocean", "oceanography", "petroleum", "aerospace",
+    # Harvard SEAS has no chemical or industrial engineering department, and
+    # its mechanical engineering is one joint department with materials science
+    # ("Materials Science & Mechanical Engineering"), which we map to materials.
+    "harvard": {"chemical", "industrial", "mechanical",
+                "etid", "ocean", "oceanography", "petroleum", "aerospace",
                 "nuclear", "veterinary", "speech-hearing", "kinesiology"},
 }
 
@@ -234,6 +238,14 @@ CANDIDATES = [
     #   "Access Denied" to everything INCLUDING robots.txt, so there is no
     #   stated policy to read, and stealth does not get through either. Left
     #   alone.
+    #
+    # HMS basic-science departments, re-probed 2026-09-02 with CDP working.
+    # hms.harvard.edu/departments/<x>/faculty is 404 for every department; they
+    # live on their own subdomains, and those yield very little:
+    #   immunology.hms 5, micro.hms 8, cellbio/bcmp/genetics.hms 1 each,
+    #   neuro.hms 0. dbmi.hms has 88 but its theme exposes no title line, so
+    #   faculty cannot be told from students and staff without another
+    #   department-specific parser. Not worth it for ~15-20 confirmed faculty.
     #
     # Also still dead: mcb.harvard.edu is unblocked and its robots.txt allows
     # everything, but the faculty roster is absent from the rendered DOM; its

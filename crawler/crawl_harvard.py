@@ -43,11 +43,19 @@ HEADERS = {
 SEAS_DEPT_MAP = [
     ("computational science",  "cse"),
     ("computer science",       "cse"),
+    # SEAS writes "Electrical & Computer Engineering", which does not contain
+    # "electrical engineering" — so these faculty were falling through to the
+    # cse catch-all below and shipping mislabelled as computer science.
+    ("electrical & computer",  "electrical"),
+    ("electrical and computer", "electrical"),
     ("electrical engineering", "electrical"),
+    ("electrical",             "electrical"),
     ("applied physics",        "applied-physics"),
     ("materials science",      "materials"),
     ("mechanical engineering", "mechanical"),
     ("materials and mechanical", "mechanical"),
+    ("materials science & mechanical", "mechanical"),
+    ("mechanical",             "mechanical"),
     ("applied mathematics",    "mathematics"),
     ("mathematics",            "mathematics"),
     ("bioengineering",         "bioengineering"),
