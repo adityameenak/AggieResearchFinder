@@ -248,6 +248,15 @@ CANDIDATES = [
     ("harvard", "medicine",         "https://hms.harvard.edu/departments/genetics/people", r"/people/[a-z0-9-]+"),
     ("harvard", "biology",          "https://www.mcb.harvard.edu/faculty/faculty-profiles/", r"/people/[a-z0-9-]+"),
 
+    # UT Dallas blank cards (198 of 607) are NOT a parser gap. Confirmed three
+    # ways 2026-09-02: the research/publications sections are absent from the
+    # raw HTML, absent from the rendered DOM after networkidle in a real
+    # browser, and the only endpoint (profiles.utdallas.edu/tags/api) is a
+    # CSRF-guarded Laravel tag search, not profile data. Those people simply
+    # have no research text published. Of the 198, only 44 carry a lab website
+    # and 1 a Scholar link, so the documented Scholar recovery ladder would
+    # yield roughly a dozen records — not worth the machinery.
+
     # -- dead ends: no per-person pages found -----------------------------
     ("tamu", "medicine",   "https://medicine.tamu.edu/_json-data/json-profile-data.json", None),  # placeholder data only
     ("tamu", "nursing",    "https://nursing.tamu.edu/faculty-staff/index.html", r"/faculty-staff/[a-z0-9._-]+\.html"),

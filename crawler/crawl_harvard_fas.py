@@ -95,12 +95,29 @@ SOURCES = {
     },
     "oeb": {
         # Organismic & Evolutionary Biology.
-        "listing": "https://oeb.harvard.edu/people",
+        "listing": "https://oeb.harvard.edu/people/faculty",
         "link_re": r"/people/[a-z0-9._-]{4,}",
         "base": "https://oeb.harvard.edu",
         "department": "biology",
         "faculty_marker": None,
         "research_after": ("Research Areas", "Research Interests"),
+    },
+    "psychology": {
+        "listing": "https://psychology.fas.harvard.edu/faculty",
+        "link_re": r"/people/[a-z0-9._-]{4,}",
+        "base": "https://psychology.fas.harvard.edu",
+        "department": "psychological-brain-sciences",
+        "faculty_marker": None,
+        "research_after": ("Research Interests", "Research Areas"),
+    },
+    "hsdm": {
+        # Harvard School of Dental Medicine. 12 per page, 12 pages.
+        "listing": "https://hsdm.harvard.edu/hsdm-directory",
+        "link_re": r"/people/[a-z0-9._-]{4,}",
+        "base": "https://hsdm.harvard.edu",
+        "department": "dentistry",
+        "faculty_marker": None,
+        "research_after": ("Research Interests", "Research Areas", "Biography"),
     },
     "statistics": {
         "listing": "https://statistics.fas.harvard.edu/faculty",
@@ -117,6 +134,28 @@ SOURCES = {
 FACULTY_TITLE_RE = re.compile(
     r"professor|lecturer|senior researcher|principal investigator|"
     r"research scientist|fellow", re.I)
+
+# These listings link to category landing pages beside people ("Administration
+# & Finance", "Faculty Assistants / Lab Administrators"). They carry an <h1>
+# just like a person page, so only a name check rejects them.
+_NON_PERSON_RE = re.compile(
+    r"&|/|\b(administration|administrator|assistants?|staff|office|group|"
+    r"finance|affiliates|emeriti|lecturers|postdocs|students|directory|"
+    r"people|faculty|scholars)\b", re.I)
+
+# Contact blocks render Material icon names as literal words.
+_CONTACT_NOISE = re.compile(
+    r"location_on|smartphone|laptop_windows|email|mail_outline|print|@", re.I)
+
+# A title line should read like an academic role.
+_TITLE_RE = re.compile(
+    r"professor|lecturer|instructor|fellow|scientist|researcher|dean|chair|"
+    r"director|preceptor|associate|curator", re.I)
+
+# Keep research and teaching faculty; drop administrators and lab managers.
+FACULTY_TITLE_RE = re.compile(
+    r"professor|lecturer|instructor|senior researcher|research scientist|"
+    r"principal investigator|preceptor|curator", re.I)
 
 STUDENT_RE = re.compile(
     r"graduate student|undergraduate|postdoctoral|research assistant|"
@@ -159,14 +198,30 @@ def parse_profile(html, url, cfg):
         name = re.split(r"\s*[|\-–]\s*", clean(t.get_text()))[0] if t else ""
     if not name or len(name) > 80:
         return None
+    if _NON_PERSON_RE.search(name):
+        return None
 
-    # Title: the run of text between the name and the first research heading.
+    # Title. On these Drupal themes it is the first short text block after the
+    # <h1> ("Edgar Pierce Professor of Psychology"). Splitting the whole page
+    # text on the research heading, which is what this did first, left 48 of 52
+    # physics records with no title, because contact icons sit between the two.
     title = ""
-    after_name = text.split(name, 2)[-1] if name in text else text
-    for marker in cfg["research_after"]:
-        if marker in after_name:
-            title = clean(after_name.split(marker)[0])
-            break
+    if h1:
+        for el in h1.find_all_next(limit=40):
+            if el.name not in ("p", "div", "span", "h2", "h3"):
+                continue
+            t = clean(el.get_text(" ", strip=True))
+            if not t or t == name or len(t) > 200 or _CONTACT_NOISE.search(t):
+                continue
+            if _TITLE_RE.search(t):
+                title = t
+                break
+    if not title:
+        tail = text.split(name, 2)[-1] if name in text else text
+        for marker in cfg["research_after"]:
+            if marker in tail:
+                title = clean(tail.split(marker)[0])
+                break
     title = re.sub(r"^(Faculty|Staff)\s+", "", title).strip()[:300]
 
     # Research: prefer the real heading in the DOM. A plain text search finds
@@ -184,8 +239,12 @@ def parse_profile(html, url, cfg):
                     t = clean(el.get_text(" ", strip=True))
                     if t and t not in body:
                         body.append(t)
-            if body:
-                research = " | ".join(body)[:1500]
+            # Require real length: several of these themes have a sidebar
+            # "Research Areas" heading whose body is two filter links, which
+            # would otherwise be accepted and stop the search.
+            candidate = " | ".join(body)[:1500]
+            if len(candidate) >= 40:
+                research = candidate
                 break
     if not research:
         for marker in cfg["research_after"]:
@@ -194,7 +253,8 @@ def parse_profile(html, url, cfg):
                 research = clean(text[i:])[:1500]
                 break
     if not research:
-        research = clean(after_name)[:1500]
+        tail = text.split(name, 2)[-1] if name in text else text
+        research = clean(tail)[:1500]
 
     # The Chan School template carries no explicit title line, but its
     # biography opens with one ("… is a Professor of Epidemiology and …").
@@ -213,6 +273,11 @@ def parse_profile(html, url, cfg):
             # absolute URLs or every portrait 404s.
             photo = src if src.startswith("http") else cfg["base"] + src
             break
+
+    # Without this, department administrators and lab managers come through
+    # looking like faculty.
+    if not FACULTY_TITLE_RE.search(title):
+        return None
 
     lab, scholar = "", ""
     for a in soup.find_all("a", href=True):
@@ -272,8 +337,24 @@ async def crawl(sources, limit, cdp=None):
                 print("  ! listing blocked — skipped")
                 continue
 
-            links = sorted({m for m in re.findall(r'href="([^"#?]+)"', html)
-                            if re.search(cfg["link_re"], m)})
+            # Walk ?page=N until a page adds nothing. Harmless for the
+            # sources that aren't paginated — they stop after one extra fetch.
+            # Without it OEB returned 12 of 65 and the dental school 12 of 144.
+            def profile_links(page_html):
+                return {m for m in re.findall(r'href="([^"#?]+)"', page_html)
+                        if re.search(cfg["link_re"], m)}
+
+            found = profile_links(html)
+            for page_no in range(1, 15):
+                try:
+                    more = profile_links(
+                        await get(page, f'{cfg["listing"]}?page={page_no}'))
+                except Exception:
+                    break
+                if not more - found:
+                    break
+                found |= more
+            links = sorted(found)
             links = [l if l.startswith("http") else cfg["base"] + l for l in links]
             links = [l for l in links if not l.rstrip("/").endswith(
                 ("people", "faculty", "profile"))]
