@@ -40,17 +40,29 @@ SCHOOLS = ["tamu", "rice", "ut", "utd", "mit", "harvard"]
 # Only list a department after checking the university actually has no such
 # programme — if in doubt leave it out and let it show as a gap.
 NOT_OFFERED = {
-    "rice":    {"aerospace", "etid", "industrial", "nuclear", "ocean",
+    # Rice has no neuroscience department; that research sits in Psychological
+    # Sciences and BioSciences.
+    "rice":    {"neuroscience", "aerospace", "etid", "industrial", "nuclear", "ocean",
                 "oceanography", "petroleum", "dentistry", "medicine", "nursing",
                 "pharmacy", "veterinary", "public-health", "speech-hearing",
                 "applied-physics"},
+    # UTD's Jonsson School is bioengineering, CS, ECE, materials, mechanical and
+    # systems engineering — no aerospace, chemical or civil department. Its
+    # statistics faculty sit inside Mathematical Sciences rather than a
+    # department of their own.
     "utd":     {"etid", "ocean", "oceanography", "petroleum", "nuclear",
                 "dentistry", "medicine", "nursing", "pharmacy", "veterinary",
-                "applied-physics", "kinesiology"},
+                "applied-physics", "kinesiology", "aerospace", "chemical",
+                "civil", "statistics", "neuroscience"},
+    # UT Austin's Cockrell School has seven departments. Materials science,
+    # nuclear engineering and operations research/industrial engineering are
+    # programs inside them (Texas Materials Institute, and two programs in the
+    # Walker Dept of Mechanical Engineering), not departments — so their faculty
+    # correctly appear under their home department instead.
     "ut":      {"etid", "ocean", "dentistry", "veterinary", "applied-physics",
-                "speech-hearing"},
+                "speech-hearing", "materials", "nuclear", "industrial"},
     "tamu":    {"applied-physics", "speech-hearing", "kinesiology"},
-    "mit":     {"etid", "ocean", "oceanography", "petroleum", "dentistry",
+    "mit":     {"neuroscience", "etid", "ocean", "oceanography", "petroleum", "dentistry",
                 "nursing", "pharmacy", "veterinary", "applied-physics",
                 "speech-hearing", "kinesiology", "public-health"},
     "harvard": {"etid", "ocean", "oceanography", "petroleum", "aerospace",
