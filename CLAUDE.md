@@ -17,7 +17,7 @@ Four independent components, each with its own dependencies and lifecycle:
 
 There is no top-level package manager. Treat each directory as its own project.
 
-**Live now: 6 schools, 4,838 faculty** — TAMU 1,772 · Rice 607 · UT Austin 913 · UT Dallas 542 · MIT 857 · Harvard 147, all `available: true`. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
+**Live now: 6 schools, 5,260 faculty** — TAMU 1,676 · Rice 618 · UT Austin 1,147 · UT Dallas 606 · MIT 792 · Harvard 421, all `available: true`. Counts are post-curation (`merge.py` drops students, postdocs and admin staff); re-read them from `merge.py`'s output after any crawl rather than trusting this line. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
 
 The site is live at **stemresearchfinder.tech** (domain registered elsewhere, DNS pointed at Vercel). Push to `main` → Vercel builds `ui/` and deploys.
 
@@ -153,6 +153,21 @@ Because `seo.js` is imported by plain Node, its relative imports need explicit `
 - **Finding links:** `find_lab_scholar.py` harvests Scholar links off lab websites (~17% have one). For the rest, `tools/scholar-links.html` (internal, file-based) lets a human paste links → export a `--map` for `enrich_scholar_pydoll.py`.
 - The genuinely source-sparse remainder (no research text, no lab, no Scholar) can't be filled; cards point to lab/Scholar instead, and matching excludes them.
 - `tools/` also has `lab-review.html` (mark has-lab / no-lab / needs-enrichment). Internal only — not part of the deployed app.
+
+**`publications` is an optional enrichment output, not part of the crawl schema.**
+It reads TAMU 601/1676 and exactly 0 everywhere else, which looks like a
+TAMU-only field and was recorded as undecided for a while. It is not
+school-specific by design: no crawler ever writes it, and the only producer is
+`enrich_scholar_pydoll.py`, which has only ever been run against TAMU. The
+giveaway is MIT — 321 `scholar_interests` and 0 `publications`, because MIT's
+interests come from its department pages rather than from a Scholar pass. So
+any school gets publications the moment the Scholar ladder is run on it.
+
+Treat it as optional everywhere: **never require it, never gate a feature on
+it, and do not report its coverage as a data-quality gap.** `ProfDetail` is the
+only reader, and it now fetches `ui/public/pubs/<id>.json` on demand rather than
+carrying the field in the list payload — `merge.py` splits it out and leaves
+`pub_count` on the record so a professor with none costs no request.
 
 **Matching is interest-first.** `services/matcher.py` weights student-stated interests over resume content (resume contribution is multiplied by 0.35). Fit labels are relative to the top score in the result set, not absolute thresholds — see README "Matching Algorithm" for the exact rules.
 

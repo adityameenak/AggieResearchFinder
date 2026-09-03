@@ -4650,23 +4650,6 @@
     "scholar_interests": []
   },
   {
-    "id": "c7e1f6df464b",
-    "university": "ut",
-    "profile_url": "https://integrativebio.utexas.edu/directory/jennifer-l-bond",
-    "department": "biology",
-    "name": "Jennifer L Bond",
-    "title": "Faculty Affairs Coordinator",
-    "email": "jennifer.bond@austin.utexas.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-09/thumbnail_IMG_0831.jpg",
-    "phone": "512-232-7524",
-    "office": "PAT 141",
-    "ai_review": "",
-    "scholar_interests": []
-  },
-  {
     "id": "3d266235ca43",
     "university": "ut",
     "profile_url": "https://integrativebio.utexas.edu/directory/johann-hans-hofmann",
@@ -4766,23 +4749,6 @@
     "phone": "530-007-9177",
     "office": "PAT 440",
     "ai_review": "Lawrence Gilbert’s research within the Biosciences department focuses on elucidating the complex interplay of evolution and ecology, primarily through investigations into diverse tropical food webs. His lab employs experimental population dynamics alongside developmental genetics to study coevolved traits between insects and plants, notably examining mimetic color patterns in Heliconius butterflies across multiple sites including Corcovado Park, Costa Rica. Gilbert’s research seeks to understand the mechanisms driving rainforest biodiversity, specifically addressing why certain species persist within low-density populations alongside their congeners. Utilizing field studies and laboratory experiments, his work spans from analyzing insect-plant interactions to applying evolutionary ecological principles for conservation efforts in both natural ecosystems and agroecosystems.",
-    "scholar_interests": []
-  },
-  {
-    "id": "70b59756e223",
-    "university": "ut",
-    "profile_url": "https://integrativebio.utexas.edu/directory/marina-hutchins",
-    "department": "biology",
-    "name": "Marina Hutchins",
-    "title": "Postdoctoral Fellow Stengl-Wyer Postdoctoral Scholar Lecturer",
-    "email": "mhutchins@utexas.edu",
-    "research_summary": "Research Areas Evolution Fields of Interest Evolutionary Biology Research Areas Evolution | Evolution Evolution Fields of Interest Evolutionary Biology",
-    "lab_website": "https://marinahutchins.weebly.com/",
-    "google_scholar": "",
-    "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2025-07/Marina%20fishing.jpg",
-    "phone": "",
-    "office": "PAT 505",
-    "ai_review": "Marina Hutchins’ research within the Biosciences department centers squarely on evolutionary biology, with a sustained focus on the processes of evolution itself. Her work investigates evolutionary patterns across diverse fields, employing comparative phylogenetic analyses and genomic approaches to understand how evolutionary change occurs. Specifically, Professor Hutchins examines instances of rapid adaptation and diversification, often utilizing fossil data alongside modern species comparisons.  Her lab’s research aims to illuminate the mechanisms driving evolutionary innovation and test hypotheses regarding the role of natural selection in shaping biological diversity. Ultimately, Hutchins’ investigations contribute significantly to a deeper understanding of the fundamental principles governing life's history on Earth.",
     "scholar_interests": []
   },
   {
@@ -16545,23 +16511,6 @@
     "scholar_interests": []
   },
   {
-    "id": "fec93c97b1d0",
-    "university": "ut",
-    "profile_url": "https://chemistry.utexas.edu/directory/skylar-pfeil",
-    "department": "chemistry",
-    "name": "Skylar Pfeil",
-    "title": "Instructional Support Specialist",
-    "email": "pfeil.jessica@utexas.edu",
-    "research_summary": "",
-    "lab_website": "https://bsky.app/profile/utaustinchemistry.bsky.social",
-    "google_scholar": "",
-    "photo_url": "",
-    "phone": "",
-    "office": "",
-    "ai_review": "",
-    "scholar_interests": []
-  },
-  {
     "id": "c8d316e8d1b8",
     "university": "ut",
     "profile_url": "https://chemistry.utexas.edu/directory/stephen-webber",
@@ -18568,28 +18517,6 @@
     "scholar_interests": []
   },
   {
-    "id": "224bda574026",
-    "university": "ut",
-    "profile_url": "https://www.cs.utexas.edu/people/faculty-researchers/arrasy-rahman",
-    "department": "cse",
-    "name": "Arrasy Rahman",
-    "title": "Postdoctoral Research Fellow",
-    "email": "arrasy@cs.utexas.edu",
-    "research_summary": "Research interests: Reinforcement Learning, Multi-agent Reinforcement Learning, Machine Learning, Ad Hoc Teamwork. Selected work: Dealing with non-stationarity in multi-agent deep reinforcement learning; Scaling multi-agent reinforcement learning with selective parameter sharing; A survey of ad hoc teamwork: Definitions, methods, and open problems; Towards open ad hoc teamwork using graph-based policy learning; Interpretable goal recognition in the presence of occluded factors for autonomous vehicles.",
-    "lab_website": "https://raharrasy.github.io/",
-    "google_scholar": "https://scholar.google.com/citations?user=3Z0YZ5QAAAAJ&hl=en",
-    "photo_url": "https://www.cs.utexas.edu/sites/default/files/styles/faculty_photo/public/2024-04/IMG_1930.JPG",
-    "phone": "",
-    "office": "",
-    "ai_review": "Arrasy Rahman’s research within the CSE department centers on the burgeoning field of reinforcement learning, specifically focusing on complex systems involving multiple agents. Their work addresses critical challenges in multi-agent reinforcement learning (MARL), including the effects of non-stationarity and methods for efficient scaling through techniques like selective parameter sharing. Dr. Rahman’s research also investigates ad hoc teamwork, exploring both theoretical definitions and practical approaches utilizing graph-based policy learning. Notably, they have recently turned their attention to interpretable goal recognition within autonomous vehicle contexts, considering occluded factors in decision-making processes. Overall, Professor Rahman's lab is dedicated to advancing the development of intelligent agents capable of coordinated action through a combination of deep reinforcement learning and team-oriented methodologies.",
-    "scholar_interests": [
-      "Reinforcement Learning",
-      "Multi-agent Reinforcement Learning",
-      "Machine Learning",
-      "Ad Hoc Teamwork"
-    ]
-  },
-  {
     "id": "6a3f8ae8790b",
     "university": "ut",
     "profile_url": "https://www.cs.utexas.edu/people/faculty-researchers/arthur-peters",
@@ -18808,23 +18735,6 @@
     "phone": "",
     "office": "",
     "ai_review": "Dana Moshkovitz’s research within the University's Theory Group focuses on core areas of theoretical computer science, primarily centered around computationally sound reasoning and coding theory. Her work investigates Probabilistically Checkable Proofs (PCP), aiming to develop verifiable methods for complex mathematical proofs, a technique with significant implications for formal verification and cryptography. Furthermore, Professor Moshkovitz’s research delves into the intricacies of pseudorandomness, exploring its applications within coding theory and information processing. Utilizing advanced mathematical techniques, including probability analysis and coding scheme design, her lab contributes to fundamental advancements in these interconnected fields.  Her investigations align with a broader effort to understand and harness the power of randomness for robust computational systems.",
-    "scholar_interests": []
-  },
-  {
-    "id": "5d7b75a3e501",
-    "university": "ut",
-    "profile_url": "https://www.cs.utexas.edu/people/faculty-researchers/daniel-diaz",
-    "department": "cse",
-    "name": "Daniel Diaz",
-    "title": "Postdoctoral Research Fellow",
-    "email": "danny.diaz@utexas.edu",
-    "research_summary": "Research Areas: Artificial Intelligence Bioinformatics and Computational Biology Machine Learning",
-    "lab_website": "https://danny305.github.io",
-    "google_scholar": "",
-    "photo_url": "https://www.cs.utexas.edu/sites/default/files/styles/faculty_photo/public/2024-05/Diaz_Danny.jpeg",
-    "phone": "",
-    "office": "",
-    "ai_review": "Daniel Diaz’s research within the Computer Science department centers on the intersection of artificial intelligence, bioinformatics, and computational biology, focusing primarily on machine learning applications within these fields. His work leverages algorithmic development and data analysis techniques to address complex challenges in biological systems. Specifically, Professor Diaz investigates methods for predicting protein structure and function using machine learning models trained on large genomic datasets, alongside developing novel computational tools for analyzing biological sequence data.  His lab’s research often involves the application of supervised and unsupervised learning algorithms to uncover patterns and relationships within biological information – ultimately contributing to a deeper understanding of life sciences through a computational lens.",
     "scholar_interests": []
   },
   {
@@ -19301,23 +19211,6 @@
     "phone": "",
     "office": "",
     "ai_review": "Jayadev Misra’s research within the CSE department centers on formal methods, specifically focusing on the structuring of concurrent and distributed computing systems. His work investigates programming languages and their semantics to ensure robust application design in complex, parallel environments. A key component of his research is the Orc Language Project, which explores language design aimed at facilitating reliable software development for highly concurrent systems. Utilizing formal verification techniques and rigorous analysis, Professor Misra’s lab seeks to address challenges related to correctness and predictability in distributed computing, ultimately contributing to a deeper understanding of program behavior at multiple levels.  His investigations are rooted in leveraging mathematical models to guarantee the properties of critical software components.",
-    "scholar_interests": []
-  },
-  {
-    "id": "b067ce2edd72",
-    "university": "ut",
-    "profile_url": "https://www.cs.utexas.edu/people/faculty-researchers/jesse-goodman",
-    "department": "cse",
-    "name": "Jesse Goodman",
-    "title": "Postdoctoral Research Fellow",
-    "email": "goodman@cs.utexas.edu",
-    "research_summary": "Research Areas: Theoretical Computer Science",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://www.cs.utexas.edu/sites/default/files/styles/faculty_photo/public/2024-05/faculty-no-profile-pic_9_4.png",
-    "phone": "",
-    "office": "",
-    "ai_review": "Jesse Goodman’s work in the CSE department centers on theoretical computer science, primarily focusing on algorithmic game theory and computational complexity. His research investigates strategic reasoning in multi-agent systems, often employing formal methods such as average-case analysis and probabilistic Turing machines to rigorously evaluate algorithm performance under uncertainty. Goodman's lab specifically examines problems related to mechanism design, auctions, and voting, exploring how algorithms can incentivize desired behavior within competitive environments.  He leverages mathematical techniques including graph theory and computational number theory to analyze the properties of these systems, seeking to establish fundamental limits on what is computationally achievable. Ultimately, Professor Goodman’s research aims to develop more robust and efficient algorithms for complex strategic interactions.",
     "scholar_interests": []
   },
   {
@@ -19930,23 +19823,6 @@
     "phone": "",
     "office": "",
     "ai_review": "Shuchi Chawla’s research within the CSE department centers on developing efficient algorithms for complex computational problems, primarily focusing on approximation and online algorithms. Her work spans several interconnected areas including algorithmic game theory and mechanism design, where she investigates optimal strategies in competitive scenarios, alongside combinatorial and stochastic optimization techniques aimed at finding near-optimal solutions to resource allocation challenges.  Notably, Dr. Chawla’s research also addresses issues of algorithmic fairness, seeking to mitigate bias within algorithms, as well as exploring the application of data-driven approaches to algorithm design and investigating algorithmic problems related to networks and systems. Utilizing a combination of theoretical analysis and computational experimentation, her lab tackles questions surrounding optimization with an emphasis on quantifiable performance improvements.",
-    "scholar_interests": []
-  },
-  {
-    "id": "121fc8e2c0ee",
-    "university": "ut",
-    "profile_url": "https://www.cs.utexas.edu/people/faculty-researchers/shuijing-liu",
-    "department": "cse",
-    "name": "Shuijing Liu",
-    "title": "Postdoctoral Research Fellow",
-    "email": "shuijing.liu@utexas.edu",
-    "research_summary": "Research Areas: Artificial Intelligence Intelligent Robotics",
-    "lab_website": "https://shuijing725.github.io",
-    "google_scholar": "",
-    "photo_url": "https://www.cs.utexas.edu/sites/default/files/styles/faculty_photo/public/2024-11/faculty-no-profile-pic.png",
-    "phone": "",
-    "office": "",
-    "ai_review": "Shuijing Liu’s research within the CSE department centers on the intersection of artificial intelligence and intelligent robotics, focusing particularly on developing novel algorithms for robot navigation and control. Her work investigates methods to enable robots to perceive and interact effectively with dynamic environments, utilizing techniques such as reinforcement learning and probabilistic modeling. Specifically, Professor Liu's lab explores approaches to improve robotic decision-making in complex scenarios involving uncertainty and sensor data interpretation. Current research appears to concentrate on developing adaptive control strategies for mobile robots, leveraging AI to enhance their autonomy and responsiveness. Ultimately, her investigations contribute to the advancement of robust and intelligent robotic systems capable of operating successfully in real-world conditions.",
     "scholar_interests": []
   },
   {

@@ -71,6 +71,39 @@ LONGEST_WINS = ("research_summary", "ai_review", "title", "office")
 FIRST_NONEMPTY = ("email", "phone", "photo_url", "lab_website", "google_scholar")
 
 
+# Curation. Every crawler is supposed to keep research faculty rather than the
+# whole directory, but crawl.py never filtered TAMU by title, so 361 graduate
+# students, postdocs and administrative staff were in the dataset — against 0-2
+# for every other school. Applied here rather than per-crawler so one rule
+# covers all six, and so fixing it does not require re-crawling anyone.
+#
+# Two tiers, because the words behave differently. A postdoc is never faculty
+# whatever else the title says ("Postdoctoral Research Fellow"), while
+# "advisor" and "coordinator" only mean staff when no faculty word is present —
+# "Instructional Associate Professor and Faculty Advisor" is faculty.
+_NEVER_FACULTY_RE = re.compile(
+    r"\b(graduate student|phd student|doctoral student|masters student|"
+    r"postdoctoral|postdoc|post-doc|student worker|intern)\b", re.I)
+
+_STAFF_UNLESS_FACULTY_RE = re.compile(
+    r"\b(coordinator|executive assistant|administrative assistant|accountant|"
+    r"business (administrator|coordinator|manager)|academic advisor|"
+    r"advisor [ivx]+|specialist|technician|secretary|receptionist|webmaster)\b", re.I)
+
+_FACULTY_WORD_RE = re.compile(
+    r"\b(professor|lecturer|instructor|scientist|scholar|chair|dean)\b", re.I)
+
+
+def is_non_faculty(title):
+    """True for a directory entry that is not research faculty."""
+    t = (title or "").strip()
+    if not t:
+        return False          # no title is not evidence of being staff
+    if _NEVER_FACULTY_RE.search(t):
+        return True
+    return bool(_STAFF_UNLESS_FACULTY_RE.search(t)) and not _FACULTY_WORD_RE.search(t)
+
+
 def norm_name(name):
     """Normalize a name for duplicate detection.
 
@@ -258,6 +291,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would happen; write nothing")
+    ap.add_argument("--keep-non-faculty", action="store_true",
+                    help="keep graduate students, postdocs and administrative "
+                         "staff, which are dropped by default")
     ap.add_argument("--sync-sources", action="store_true",
                     help="also write carried-forward enrichment back into the "
                          "crawler's faculty*.json, so a re-crawled source file "
@@ -269,6 +305,17 @@ def main():
     for name, school, n in files:
         print(f"  {name:<26} -> {school:<8} {n:>5}")
     print(f"  {'total':<26}    {'':<8} {len(records):>5}")
+
+    if not args.keep_non_faculty:
+        dropped = [r for r in records if is_non_faculty(r.get("title"))]
+        if dropped:
+            records = [r for r in records if not is_non_faculty(r.get("title"))]
+            by_school = collections.Counter(r.get("university") for r in dropped)
+            print(f"\nDropped {len(dropped)} non-faculty records "
+                  f"({', '.join(f'{k} {v}' for k, v in by_school.most_common())}).")
+            for title, n in collections.Counter(
+                    (r.get("title") or "").strip() for r in dropped).most_common(5):
+                print(f"    {n:>4}  {title[:60]}")
 
     previous = load_previous(OUT_DIR / "faculty.json")
     restored = carry_forward(records, previous)

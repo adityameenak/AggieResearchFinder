@@ -5035,23 +5035,6 @@
     "scholar_interests": []
   },
   {
-    "id": "e4e899ad4b4b",
-    "university": "mit",
-    "name": "Patrick S. Doyle",
-    "title": "Robert T Haslam (1911) Professor in Chemical Engineering, Postdoctoral Officer",
-    "department": "chemical",
-    "email": "pdoyle@mit.edu",
-    "profile_url": "https://cheme.mit.edu/profile/patrick-s-doyle/",
-    "research_summary": "microfluidics, complex fluids, polymer physics, rheology and transport phenomena",
-    "lab_website": "http://doylegroup.mit.edu/",
-    "google_scholar": "",
-    "ai_review": "Patrick S. Doyle’s research within the Chemical Department centers on the intricate behaviors of complex fluids using microfluidic techniques. His work investigates fundamental polymer physics through rigorous rheological studies, examining flow-dependent properties and transport phenomena in these materials. Specifically, Professor Doyle leverages microfluidic devices to create controlled environments for studying the dynamics of complex fluid systems, allowing for detailed investigations into their viscosity, elasticity, and response to external forces.  His lab’s research focuses on characterizing novel polymer formulations and understanding how fluid structure influences flow behavior at small scales, ultimately contributing to advancements in fields ranging from materials science to biomedical applications.",
-    "photo_url": "https://cheme.mit.edu/wp-content/uploads/2017/01/ChemE_Pat_Doyle_079-432x400.png",
-    "phone": "",
-    "office": "",
-    "scholar_interests": []
-  },
-  {
     "id": "bfec95319d12",
     "university": "mit",
     "name": "Javit Drake",
@@ -5636,36 +5619,6 @@
     "phone": "",
     "office": "",
     "scholar_interests": []
-  },
-  {
-    "id": "83e92dc33f75",
-    "university": "mit",
-    "name": "Tal Cohen",
-    "title": "Associate Professor, Postdoctoral Chair",
-    "department": "civil",
-    "email": "talco@mit.edu",
-    "profile_url": "https://cee.mit.edu/people_individual/tal-cohen/",
-    "research_summary": "Research interests: Nonlinear Solid Mechanics, Material Growth, Material Instabilities",
-    "lab_website": "https://tal-cohen.mit.edu/",
-    "google_scholar": "https://scholar.google.com/citations?user=oOXVSYIAAAAJ&hl=en",
-    "ai_review": "Tal Cohen’s research within the Mechanical Engineering department centers on the fascinating field of nonlinear solid mechanics, focusing particularly on material growth and associated instabilities. His work investigates complex behaviors in solids subjected to non-linear forces, utilizing computational modeling and analysis techniques to examine phenomena such as material growth patterns and the onset of instability. Professor Cohen's Google Scholar profile reflects a sustained interest in these areas, indicating a significant body of published research dedicated to understanding and predicting these intricate mechanical responses. Specifically, his investigations likely involve simulations and potentially experimental validation exploring how materials evolve under stress and when they transition into unstable configurations. Ultimately, his lab’s work contributes valuable insights into the mechanics of materials undergoing non-linear transformations.",
-    "photo_url": "https://cee.mit.edu/wp-content/uploads/2021/05/160915_TAL_COHEN_1649-e1626892874907.jpg",
-    "phone": "",
-    "office": "",
-    "scholar_interests": [
-      "Nonlinear Solid Mechanics",
-      "Material Growth",
-      "Material Instabilities"
-    ],
-    "also_departments": [
-      "mechanical"
-    ],
-    "also_profile_urls": [
-      "https://meche.mit.edu/people/faculty/talco@mit.edu"
-    ],
-    "alias_ids": [
-      "abef8a39d42e"
-    ]
   },
   {
     "id": "a33ba4b678e3",
@@ -9815,23 +9768,6 @@
     "scholar_interests": []
   },
   {
-    "id": "10a36806a652",
-    "university": "mit",
-    "name": "Alexander T. Radosevich",
-    "title": "Professor of Chemistry Postdoc Officer",
-    "department": "chemistry",
-    "email": "aradosev@mit.edu",
-    "profile_url": "https://chemistry.mit.edu/profile/alexander-t-radosevich/",
-    "research_summary": "Research in the Radosevich group centers on the invention of new homogeneous catalysts and reagents based on inexpensive and earth-abundant elements of the p-block.",
-    "lab_website": "http://web.mit.edu/radosevichlab/",
-    "google_scholar": "",
-    "ai_review": "Alexander T. Radosevich’s research within the Chemistry department focuses on the design and synthesis of innovative catalytic systems utilizing readily available, earth-abundant elements from the p-block – specifically silicon, phosphorus, and sulfur. His group specializes in developing novel homogeneous catalysts and reagents for a range of chemical transformations, leveraging the unique reactivity profiles of these materials. Research efforts predominantly involve mechanistic studies employing techniques such as NMR spectroscopy and computational modeling to understand reaction pathways and optimize catalyst performance. Ultimately, Radosevich’s lab aims to establish more sustainable and economically viable routes to complex molecules through the strategic application of p-block element chemistry.",
-    "photo_url": "https://chemistry.mit.edu/wp-content/uploads/2018/08/Radosevich_Feature_Justin_Knight_2017.jpg",
-    "phone": "",
-    "office": "",
-    "scholar_interests": []
-  },
-  {
     "id": "49b2ab1bfc99",
     "university": "mit",
     "name": "Ronald T. Raines",
@@ -12424,6 +12360,27 @@
     ]
   },
   {
+    "id": "abef8a39d42e",
+    "university": "mit",
+    "name": "Tal Cohen",
+    "title": "Associate Professor",
+    "department": "mechanical",
+    "email": "talco@mit.edu",
+    "profile_url": "https://meche.mit.edu/people/faculty/talco@mit.edu",
+    "research_summary": "Research interests: Nonlinear Solid Mechanics, Material Growth, Material Instabilities",
+    "lab_website": "http://tal-cohen.wixsite.com/website",
+    "google_scholar": "",
+    "ai_review": "Tal Cohen’s research within the Mechanical Engineering department centers on the fascinating field of nonlinear solid mechanics, focusing particularly on material growth and associated instabilities. His work investigates complex behaviors in solids subjected to non-linear forces, utilizing computational modeling and analysis techniques to examine phenomena such as material growth patterns and the onset of instability. Professor Cohen's Google Scholar profile reflects a sustained interest in these areas, indicating a significant body of published research dedicated to understanding and predicting these intricate mechanical responses. Specifically, his investigations likely involve simulations and potentially experimental validation exploring how materials evolve under stress and when they transition into unstable configurations. Ultimately, his lab’s work contributes valuable insights into the mechanics of materials undergoing non-linear transformations.",
+    "photo_url": "https://meche.mit.edu/sites/default/files/styles/hero/public/Tal%20Cohen%20_01_1.jpg?itok=GgWcwEJz",
+    "phone": "",
+    "office": "",
+    "scholar_interests": [
+      "Nonlinear Solid Mechanics",
+      "Material Growth",
+      "Material Instabilities"
+    ]
+  },
+  {
     "id": "8806e7fdccf0",
     "university": "mit",
     "name": "Martin Culpepper",
@@ -13812,26 +13769,6 @@
     "scholar_interests": [
       "Analysis & PDEs",
       "Geometry"
-    ]
-  },
-  {
-    "id": "c04bf81369f1",
-    "university": "mit",
-    "name": "Jörn Dunkel",
-    "title": "MathWorks Professor; Professor of Mathematics; Postdoc Officer",
-    "department": "mathematics",
-    "email": "dunkel@math.mit.edu",
-    "profile_url": "https://math.mit.edu/directory/profile.html?pid=1498",
-    "research_summary": "Jörn Dunkel joined the mathematics faculty as Assistant Professor in 2013. He was promoted to Associate Professor in 2018, received tenure in 2020, and was promoted to Full Professor in 2022. In 2023 he was appointed MathWorks Professor of Mathematics, succeeding Gil Strang. Jörn's current research focuses on studying self-organization processes in complex biological and physical systems, from bacterial biofilms and embryonic tissues to brain dynamics and global trade networks. To this end, his group is developing and investigating mathematical models that describe and predict the dynamical behavior of non-equilibrium systems. Jörn holds Diplomas in Physics (2004) and Mathematics (2005) from the Humboldt University Berlin. He completed his PhD in Statistical Physics under Peter Hänggi at the Universität Augsburg in 2008. After two years of postdoctoral research at the Rudolf-Peierls Centre for Theoretical Physics in the University of Oxford, he spent three years as a Research Associate at DAMTP in the University of Cambridge. Jörn was elected to a Junior Research Fellowship in Physics at Mansfield College, University of Oxford in 2008, and was named Research Fellow at Murray Edward",
-    "lab_website": "http://math.mit.edu/~dunkel/",
-    "google_scholar": "",
-    "ai_review": "Jörn Dunkel is a Full Professor within the Department of Mathematics at [University Name], specializing in the mathematical modeling of complex systems across diverse fields. His research investigates self-organization processes observed in biological and physical phenomena, including bacterial biofilms, embryonic development, brain dynamics, and global trade networks. Utilizing dynamical systems theory and developing sophisticated mathematical models, Dunkel’s lab aims to predict and understand the behavior of non-equilibrium systems – often employing computational approaches informed by his background in statistical physics.  Prior to his appointment, he held postdoctoral positions at Oxford University focusing on theoretical physics and has a strong interest in the mathematics of data, reflecting his methodological approach. His academic trajectory reflects a rigorous training combining physics and mathematics, culminating in significant contributions to the mathematical analysis of complex adaptive systems.",
-    "photo_url": "https://math.mit.edu/images/profile/dunkel_jorn.jpg",
-    "phone": "",
-    "office": "",
-    "scholar_interests": [
-      "Physical Applied Mathematics",
-      "Mathematics of Data"
     ]
   },
   {
