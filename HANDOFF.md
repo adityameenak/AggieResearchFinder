@@ -28,64 +28,62 @@ we failed to crawl from one the university does not have.
 
 ## Unfinished
 
-### 1. AI reviews are paused mid-run
+### 1. AI reviews — done, except 83 that cannot be done this way
 
-**371 records need a review**, counted with `enrich_ollama.py`'s own
-`needs_review()` — not 283. It is what the cards render as their preview, so
-those cards read worse than the rest.
+**All 371 were generated on 2026-09-02** against Ollama on the Windows GPU box
+(gemma3:4b, ~100% GPU, 89.7 tok/s, whole run under 20 minutes — not the
+~3 records/min the old note assumed).
 
-The earlier figure missed `faculty.json` (TAMU), where **86 records carry a
-`"Please provide..."` Gemini placeholder** — mostly statistics (62) and
-oceanography (18). Those never appeared in the resume list, so they would have
-stayed broken however many times the loop below was run. `faculty.json` is
-first in the list now.
+Result: **288 genuine reviews, 83 refusals.** Coverage moved Harvard 53% → 94%,
+UT 81% → 88%, overall 85% → 88%. TAMU reads 95% → 91% because the 83 refusals
+used to be counted as reviews; the lower number is the honest one.
 
-Stopped at `faculty-ut-extra.json` record 54 of 137. To resume:
+**The 83 are a TAMU parser bug, not an enrichment gap.** Their
+`research_summary` is scraped navigation chrome —
+
+    "Research Faculty Instructional Faculty Emeritus Faculty Joint Appointm…"
+    "Research Areas Seminars Lecture Series Close the Research menu"
+
+— so the model is handed a menu and correctly answers that it has nothing to
+work with. This is why they were `"Please provide…"` placeholders before: the
+earlier Gemini run hit the identical wall and its refusal got saved as the
+review. **Running any enrichment against them again will produce the same
+refusal.** The fix is upstream, in whatever TAMU parser wrote a menu into
+`research_summary` — the sibling-walking problem CLAUDE.md describes under
+blank-profile recovery, in a spot where it was not fixed.
+
+`enrich_ollama.py` now refuses to make that mistake again:
+
+- `is_refusal()` rejects a model response that asks for input instead of
+  answering, so it is never written into `ai_review`. Previously anything over
+  50 characters was accepted, which is how a 277-character "Please provide me
+  with the scraped research information" ended up rendering on search cards.
+- `is_junk_summary()` makes `needs_review()` skip records whose source is menu
+  text, so they stop consuming GPU time on every run.
+- The `enrich_local.py` template check now matches its actual sentence, **"As a
+  faculty member in"**, instead of the bare phrase `"faculty member in"`. The
+  loose version also matched good output — gemma3 naturally writes "X, a faculty
+  member in the Department of Y" — so 37 correct ut-extra reviews were already
+  queued to be regenerated forever.
+
+The 84 refusal texts already in the dataset were cleared. **That takes two
+passes:** clearing them in `crawler/faculty*.json` alone is undone by the next
+merge, because `carry_forward()` refills an empty field from the previous
+`ui/public/faculty.json` and cannot tell a deliberate clear from a value lost in
+a re-crawl. Clear both sides, then merge.
+
+To re-run enrichment against a GPU box:
 
 ```bash
 cd crawler
-for f in faculty faculty-ut-extra faculty-harvard-hsdm faculty-harvard-oeb \
-         faculty-harvard-psychology faculty-harvard faculty-harvard-chemistry \
-         faculty-harvard-statistics; do
-  ./.venv/bin/python enrich_ollama.py --file $f.json
-done
+cloudflared access tcp --hostname ollama.<domain> --url localhost:11435 \
+  --service-token-id "$CF_ACCESS_CLIENT_ID" \
+  --service-token-secret "$CF_ACCESS_CLIENT_SECRET" &
+OLLAMA_HOST=http://localhost:11435 ./.venv/bin/python enrich_ollama.py --file <file>.json
 ./.venv/bin/python merge.py --sync-sources
-cd ../ui && npm run build
 ```
 
-The model does not have to run on this Mac — this one has no GPU and no Ollama
-installed. `enrich_ollama.py` now takes `--host`/`$OLLAMA_HOST`, so the run can
-be pointed at the Windows box. **`HANDOFF-ollama-windows.md` is the setup doc
-for that machine** — Ollama on loopback, a cloudflared tunnel, and a Cloudflare
-Access service token, so nothing is exposed unauthenticated.
-
-```bash
-OLLAMA_HOST=http://<windows-ip>:11434 ./.venv/bin/python enrich_ollama.py --file faculty.json
-```
-
-It preflights the host and the model tag before starting, so a wrong address or
-an unpulled model fails in one second instead of once per record for an hour.
-
-Per-file counts as of 2026-09-02:
-
-| file | needs review |
-|---|---|
-| faculty-harvard-hsdm | 109 |
-| faculty-ut-extra | 87 |
-| faculty (TAMU placeholders) | 86 |
-| faculty-harvard-oeb | 38 |
-| faculty-harvard-psychology | 27 |
-| faculty-harvard | 15 |
-| faculty-harvard-chemistry | 4 |
-| faculty-harvard-statistics | 3 |
-| faculty-ut | 1 |
-
-A further ~500 records are blank but have less than 40 characters of
-`research_summary`, so `needs_review()` skips them — no amount of enrichment
-fixes those. They are the UTD blank-card population in §3.
-
-`enrich_ollama.py` is re-runnable and only touches records missing a real
-review, so re-running a partially-done file is safe. Roughly 3 records/minute.
+`HANDOFF-ollama-windows.md` covers the Windows side.
 
 ### 2. Remaining department gaps — all investigated, all documented
 

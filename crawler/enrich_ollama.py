@@ -61,6 +61,40 @@ def preflight(host, model):
     return True
 
 
+# Scraped menu chrome that some department parsers captured as research text.
+# A record whose research_summary is one of these cannot be enriched: the model
+# is given a navigation menu and correctly answers that it has nothing to work
+# with. Feeding them to the GPU forever is the loop this guards against.
+JUNK_SUMMARY = (
+    "Instructional Faculty",
+    "Close the",
+    "Research Areas Seminars",
+    "Faculty & Research menu",
+    "Emeritus Faculty",
+)
+
+# The model asking for input rather than answering. Left unchecked these land in
+# ai_review and render on the search cards, which is where the pre-existing
+# "Please provide me with the scraped research information…" text came from.
+REFUSALS = (
+    "please provide",
+    "i need that text",
+    "i need the text",
+    "could you please provide",
+    "i don't have any information",
+    "no research information",
+)
+
+
+def is_junk_summary(summary):
+    return any(j in (summary or "") for j in JUNK_SUMMARY)
+
+
+def is_refusal(text):
+    head = (text or "")[:200].lower()
+    return any(r in head for r in REFUSALS)
+
+
 def needs_review(rec):
     """Check if a record needs an AI review (re-)generated."""
     review = rec.get("ai_review", "")
@@ -70,12 +104,20 @@ def needs_review(rec):
     if len(summary) < 40:
         return False
 
+    # Menu text is not source material, however long it is.
+    if is_junk_summary(summary):
+        return False
+
     # No review at all
     if not review:
         return True
 
-    # Formulaic template review from enrich_local.py
-    if "faculty member in" in review[:80]:
+    # Formulaic template review from enrich_local.py, which writes the exact
+    # sentence "As a faculty member in <dept>, Dr. <name> works in…". Matching
+    # the bare phrase "faculty member in" also caught good model output — gemma3
+    # naturally writes "X, a faculty member in the Department of Y" — so every
+    # run regenerated reviews that were already fine.
+    if "As a faculty member in" in review:
         return True
 
     # Bad Gemini placeholder
@@ -124,6 +166,11 @@ def generate_review(rec, model=MODEL, url=None):
         text = resp.json().get("response", "").strip()
         # Basic sanity check
         if len(text) < 50:
+            return None
+        # A refusal is not a review. Returning None leaves the record untouched
+        # and counts as an error, rather than writing the model's request for
+        # input into the dataset.
+        if is_refusal(text):
             return None
         return text
     except Exception as exc:

@@ -285,6 +285,23 @@ Work down it. Each line assumes the ones above it passed.
 Check 5 failing open is the one that matters. The others fail closed and cost
 you time; that one costs you a GPU.
 
+**All six verified working 2026-09-02** against `ollama.akvaithi.page`: 100% GPU
+(2.9/2.9 GB in VRAM), 89.7 tok/s, and 371 reviews generated in under 20 minutes.
+
+Two things learned doing it that this doc did not say:
+
+- **A service token that is present but wrong is indistinguishable from a broken
+  policy.** Access returns a byte-identical 403 page for "bad secret" and "no
+  matching policy". Hours went into auditing a policy that was correct all
+  along, because the secret had been transcribed from a screenshot and `0` was
+  read as `O` in three places. **Copy the secret with the dashboard's copy
+  button — never retype it, never read it off an image.**
+- **Once the token is right, a plain HTTPS request to the hostname returns 200
+  with a zero-byte body**, not an error. That is Access admitting you while the
+  `tcp://` ingress has no HTTP reply to give — the response carries a
+  `CF_Authorization` JWT whose `common_name` is the service token. It is a
+  success signal, not a failure.
+
 ---
 
 ## Troubleshooting
