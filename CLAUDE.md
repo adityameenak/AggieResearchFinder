@@ -56,12 +56,20 @@ python crawl_rice.py --keep-emeritus                  # keep emeriti (dropped by
 python crawl_utd.py --output faculty-utd
 
 # AI research reviews (ai_review) — runs against any faculty file, in place.
-# Needs a local Ollama server (`ollama serve`) + the model pulled.
+# The model does NOT have to be local: --host / $OLLAMA_HOST points anywhere.
 python enrich_ollama.py --file faculty-rice.json --model gemma3:4b
+OLLAMA_HOST=http://<gpu-box>:11434 python enrich_ollama.py --file faculty.json
+# It preflights host + model tag, so a wrong address fails in a second rather
+# than erroring once per record for an hour. See HANDOFF-ollama-windows.md for
+# reaching a GPU box over a cloudflared tunnel behind Cloudflare Access.
 
 # Google Scholar enrichment for blank profiles (pydoll = real Chrome via CDP,
-# beats Scholar's CAPTCHA on profile URLs). Needs the py3.12 venv:
-#   python3.12 -m venv venv312 && venv312/bin/pip install pydoll-python beautifulsoup4
+# beats Scholar's CAPTCHA on profile URLs). Needs the py3.12 venv — pydoll is
+# deliberately NOT in requirements.txt, which is a 3.11 env:
+#   uv venv --python 3.12 venv312
+#   uv pip install --python venv312/bin/python -r requirements-scholar.txt
+# pydoll needs a real Chrome. If none is installed, Playwright ships one:
+export CHROME_BINARY="$HOME/Library/Caches/ms-playwright/chromium-1234/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
 python find_lab_scholar.py                                  # harvest scholar links from lab sites → /tmp/lab_scholar_map.json
 ./venv312/bin/python enrich_scholar_pydoll.py --file faculty-ut.json --map /tmp/lab_scholar_map.json
 ```
@@ -89,6 +97,18 @@ No test suite is configured in any of the three components.
 **Search & match rendering.** `splitResearch(prof)` (in `utils/search.js`) is what cards show: it uses **`ai_review` as the preview** (clean prose) and relegates research-area phrases + `scholar_interests` to keyword pills — because `research_summary` is often a run-on of areas, not prose. Junk/heading terms are filtered by `isUsefulTopic` (shared with the topic chips). Topic filter chips are **department-adaptive**: `AppContext.topicChipsFor(dept)` derives them from the selected department's faculty (aero→propulsion, CS→ML). Search scores `scholar_interests` too. **Matching excludes blank profiles** — `matcher.isMatchable(prof)` requires research content (summary or scholar interests); no research → never a match (and the explanation degrades gracefully).
 
 **One canonical department vocabulary.** Each crawler was written against one university's own naming, so the same discipline had different slugs per school — Rice/UT said `biosciences` where A&M/UTD/MIT said `biology`, MIT said `brain-cognitive-sciences` for psychology, and four schools each had their own earth-science slug. Filtering "Bioengineering" at A&M returned nothing because A&M emits `biomedical`. **`crawler/taxonomy.py` is now the authority**: `CANONICAL` is the slug→label list, `ALIASES` maps each crawler's naming onto it, and `merge.py` applies it to every record. `ui/src/utils/search.js` `DEPT_DISPLAY` is generated from `CANONICAL` — keep the two in step, and note a slug with no label renders raw *into indexed page titles*. `DEPT_STYLES`/`deptStyle()` in the same file is now the single badge-colour source; ProfCard, ProfDetail and Match each used to keep a private copy, which is why MIT/Rice/Harvard departments rendered grey.
+
+**`merge.py` is the curation gate, not just a merger.** It drops records that
+are not research faculty — graduate students, postdocs, administrative staff —
+because `crawl.py` never filtered TAMU by title and 363 of them were in the
+dataset against 0–7 for every other school. `is_non_faculty()` works in two
+tiers, because the words behave differently: `_NEVER_FACULTY_RE` (postdoc, PhD
+student) disqualifies whatever else the title says, so "Postdoctoral Research
+Fellow" goes; `_STAFF_UNLESS_FACULTY_RE` (coordinator, advisor, specialist) only
+disqualifies when no faculty word is present, so "Instructional Associate
+Professor and Faculty Advisor" stays. `--keep-non-faculty` opts out. **A blank
+title is never treated as staff.** This is why quality percentages jumped in
+September 2026 — the denominator was wrong, not the data.
 
 **`crawler/merge.py` is the only supported way to build the app's data.** The README used to carry a copy-paste snippet with a hard-coded source map that had drifted — it silently dropped `faculty-mit*.json` and `faculty-harvard.json` (1,004 records). `merge.py` globs `faculty*.json` instead, canonicalizes slugs, dedupes, and writes **both** `ui/public/faculty.json` (combined; the backend importer and `find_lab_scholar.py` still read it) **and `ui/public/faculty-<code>.json` per school, which is what the UI fetches.**
 
@@ -145,10 +165,15 @@ Because `seo.js` is imported by plain Node, its relative imports need explicit `
 - **Filtering is load-bearing.** The raw endpoint returns ~4,400 records across every Rice unit (admin offices, residential colleges, alumni, emeriti, humanities, business). `crawl_rice.py` keeps only `field_profile_category == "Faculty"` AND a department that maps to a known STEM slug (`STEM_RULES`), and drops emeriti — yielding ~607 research faculty comparable to the curated TAMU set. `--all` / `--keep-emeritus` disable these.
 - **Department names are filthy.** 241 raw variants with stray whitespace, `&` vs `and`, `Department of …` prefixes, and typos (`MSNE`, `Physics of Astronomy`). `stem_slug()` normalizes then substring-matches `STEM_RULES` (ordered: specific phrases before the bare `mathematics` fallback). New Rice STEM slugs (`biosciences`, `earth-environmental`, `systems-synthetic-biology`, `applied-physics`, `cmor`, `kinesiology`) are registered in `ui/src/utils/search.js` `DEPT_DISPLAY` — add a label there or they render as the raw slug.
 
+**`enrich_ollama.py` rejects bad model output; do not weaken these.** `is_refusal()` drops a response that asks for input instead of answering — the sanity check used to be "longer than 50 characters", so a 277-character "Please provide me with the scraped research information about Professor X" was written into `ai_review` and rendered on search cards. `is_junk_summary()` makes `needs_review()` skip records whose source is menu text, so they stop consuming GPU on every run. And the `enrich_local.py` template check matches its literal sentence **"As a faculty member in"**: the older bare `"faculty member in"` also matched good output, because gemma3 naturally writes "X, a faculty member in the Department of Y", which queued 37 correct reviews for regeneration on every future run. **Model refusals are self-perpetuating without this** — the earlier Gemini pass saved its own refusals as reviews, and `needs_review()` then flagged them forever.
+
+**Keep one model for the whole corpus.** ~4,600 reviews were written by `gemma3:4b`. Switching models makes card previews change voice depending on which school you browse, so a bigger model is a decision to regenerate all 5,260 records, not a per-run choice.
+
 **ai_review enrichment.** Reviews are generated post-crawl by `enrich_ollama.py` (local Ollama, `--file <faculty json>`), `enrich.py` (Gemini, needs `GEMINI_API_KEY`), or `enrich_local.py` (no-API templates — low quality, the "faculty member in …" text the other two are built to replace). All are re-runnable and only touch records missing a real review. `enrich_ollama.py` takes `--file` so it works per school. None of these run without either Ollama up or an API key, so a fresh crawl ships with `ai_review` empty until enriched.
 
 **Blank-profile recovery (the research_summary / ai_review gap).** Many profiles ship "thin" (research_summary < 40 chars). Causes and fixes, in order of yield:
 - **Parser misses.** TAMU arts-&-sciences pages put the "Research Interests" prose in a *different wrapper* than the `<h2>`, and `_collect_section_text` used to read only direct siblings → it grabbed a stray label. It now **walks the document in order** (find_all_next, de-duped); a re-extract recovered 256 TAMU summaries. Audit new parsers for the same sibling-only assumption.
+- **Site navigation masquerading as content.** Strategy 2 of `_extract_research_summary` did `soup.find(class_=re.compile("research"))`, and `find()` returns the *first* document-order match — which on artsci.tamu.edu is `<div class="megamenu megamenu--two-column research">`, rendered before `<main>`. **443 records (22% of TAMU) carried the site's Research mega-menu as their research summary**, and because that field feeds the search keyword pills and `matcher.py`, the menu text was in the search index and the match scores too. Guards now in `crawl.py`, and **any new parser needs the same three**: `_in_chrome()` (walks outward but **stops at `<main>`** — an earlier version checked nav-ish class names on every ancestor and matched `<div class="main-wrapper has-sidebar">`, discarding every good summary on the site); `_looks_like_menu()`; and `_looks_like_contact()`, which rejects the `research-next-to-photo` contact panel. `_CHROME_CLASS_RE` matches as a **substring** because `\bmenu\b` does not match `megamenu`. Strategy 2 now scores all candidates and prefers prose rather than taking the first. `_BIO_HEADING_RE` adds a `Biography` fallback, worth +31 records. **Known false negative:** prose living *inside* the contact panel is discarded (Jack Waas, chemistry) — a full artsci re-crawl would lose it.
 - **Google Scholar (by URL).** For thin profiles that have (or are given) a `google_scholar` link, `enrich_scholar_pydoll.py` scrapes interests + top publications into `scholar_interests` + `research_summary`. It uses **pydoll** (real Chrome via CDP, py3.12 `venv312`) because Scholar CAPTCHAs plain requests/Playwright headless, and SeleniumBase-UC needs Rosetta on Apple Silicon. Scholar *profile pages* go through clean; the *author search* is still CAPTCHA-walled headless, so unknown links can't be auto-found.
 - **Finding links:** `find_lab_scholar.py` harvests Scholar links off lab websites (~17% have one). For the rest, `tools/scholar-links.html` (internal, file-based) lets a human paste links → export a `--map` for `enrich_scholar_pydoll.py`.
 - The genuinely source-sparse remainder (no research text, no lab, no Scholar) can't be filled; cards point to lab/Scholar instead, and matching excludes them.
@@ -184,11 +209,20 @@ carrying the field in the list payload — `merge.py` splits it out and leaves
 `crawler/.env` (optional):
 - `GEMINI_API_KEY` — if set, crawler generates AI research reviews via Gemini. Disables itself on first failure for the rest of the run.
 
+Environment variables read by the enrichment scripts (no `.env` needed):
+- `OLLAMA_HOST` — where `enrich_ollama.py` sends generation. Defaults to `http://localhost:11434`; accepts a bare host, `host:port`, or a full URL.
+- `CHROME_BINARY` — Chrome/Chromium for `enrich_scholar_pydoll.py`, for machines with no system Chrome.
+
 Backend deploy entry point is `backend/Procfile` (`uvicorn main:app --host 0.0.0.0 --port $PORT`).
 
 ## Gotchas
 
-- `backend/tamurf.db`, `backend/uploads/`, `crawler/venv/`, `crawler/venv312/` (pydoll's py3.12 env), `crawler/downloaded_files/`, and `crawler/.cache/` are gitignored — never commit them.
+- `backend/tamurf.db`, `backend/uploads/`, `crawler/venv/`, `crawler/venv312/` (pydoll's py3.12 env), `crawler/.venv/`, `crawler/downloaded_files/`, and `crawler/.cache/` are gitignored — never commit them.
+- **Clearing an enriched field takes two passes.** `merge.py`'s `carry_forward()` refills an empty `ai_review`/`scholar_interests`/`publications` from the previous `ui/public/faculty.json` and **cannot tell a deliberate clear from a value lost to a re-crawl**. Blanking bad values in `crawler/faculty*.json` alone is silently undone by the next merge. Clear both sides, then merge.
+- **`cryptography` is pinned `<49` in `crawler/requirements.txt`.** 49+ ships no macOS x86_64 wheel, so the install tries to build from source through maturin/cargo and fails on an Intel Mac. `google-generativeai` is what drags it in.
+- **A fresh macOS checkout may have neither Node nor a usable Python.** This machine needed Node installed to `~/.local/node` (not on `PATH` by default — `export PATH="$HOME/.local/node/bin:$PATH"`, or `npm` dies with `env: node: No such file or directory`) and Python 3.11 via `uv` (the system Python is 3.9; the repo needs 3.11+). There is no system Chrome either — see `CHROME_BINARY`.
+- **Reaching a remote Ollama, 403 vs 530.** With a valid Cloudflare Access service token, **403 means Access refused you** (policy or credentials) and **530 means Access passed you and the origin is unreachable** (the GPU box asleep, or `cloudflared` not running). Cloudflare returns a byte-identical 403 page for a bad secret and for no matching policy, so those two are indistinguishable from outside — copy service-token secrets with the dashboard's copy button, never retype them or read them off a screenshot.
+- **Feedback triage runs under launchd, not in a Claude session.** `tools/triage-cron.sh` every 3 hours via `~/Library/LaunchAgents/tech.stemresearchfinder.triage.plist`. `triage.py` is deterministic and runs free on every tick; `claude -p` is invoked **only when the open-issue count is non-zero**. `git push` is absent from its `--allowed-tools`. Logs: `~/Library/Logs/srf-triage.log`.
 - The crawler ships a `faculty[-<code>].json` per school in-tree; don't regenerate-and-commit casually. The Rice JSON:API crawl (`crawl_rice.py`) re-runs in ~2 minutes; `ai_review` enrichment over those records via local Ollama takes much longer (tens of minutes) — run it once and reuse.
 - `ui/public/faculty.json` is the *combined* file the UI fetches and the backend imports on startup. After running per-school crawls, you must merge them into this file (see README quick-start).
 - Adding a school means adding a `taxonomy.py` mapping for its department names, a `SCHOOL_SEO` entry in `ui/src/lib/seo.js` too, or its pages inherit no brand alias, keywords, or OG card — and add the card to `ui/scripts/gen_icons.py`, then re-run it.
