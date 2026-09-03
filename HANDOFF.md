@@ -317,8 +317,28 @@ to the reporter, while "UT oceanography has no records" is crawler work. The
 script separates them so a triage pass does not keep proposing work that
 `census.py` already recorded as a dead end.
 
-As of 2026-09-02 there are **no open feedback issues** — the only three ever
+As of 2026-09-03 there are **no open feedback issues** — the only three ever
 filed are the closed setup tests (#10, #11, #12).
+
+**Scheduled runs.** `tools/triage-cron.sh` runs it every 3 hours under launchd
+(`~/Library/LaunchAgents/tech.stemresearchfinder.triage.plist`), independent of
+any interactive Claude session — an in-session cron dies when the session exits.
+
+The script only spends money when there is something to spend it on:
+`triage.py` is deterministic and runs on every tick for free, and `claude -p` is
+invoked **only when the open-issue count is non-zero**. Waking a model every
+three hours to be told "0 open issues" costs tokens and returns nothing. A
+malformed report parses as 0, so the failure mode is "does nothing", not "runs
+the model blind".
+
+`git push` is deliberately absent from the run's `--allowed-tools`, on top of
+the prompt forbidding it, so an unattended triage cannot publish anything.
+
+```bash
+tail -f ~/Library/Logs/srf-triage.log                 # what it has been doing
+launchctl kickstart -k gui/$(id -u)/tech.stemresearchfinder.triage   # fire now
+launchctl unload ~/Library/LaunchAgents/tech.stemresearchfinder.triage.plist  # stop
+```
 
 ---
 
