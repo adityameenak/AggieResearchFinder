@@ -158,8 +158,41 @@ is simply unattempted.
   is a CSRF-guarded Laravel tag search. Of the 198, 44 have a lab website and 1
   a Scholar link, so the documented Scholar ladder would recover about a dozen.
 - **Harvard 83% photos, UT 90%.** Inherited from the newer Drupal parsers.
-- **`scholar_interests` is 1–3% at Rice, UT and UTD** versus 41% at MIT. Would
-  need `find_lab_scholar.py` → `enrich_scholar_pydoll.py` runs.
+- **`scholar_interests` is 1–3% at Rice, UT and UTD** versus 41% at MIT. The
+  ladder was run on 2026-09-02 and **the ceiling is much lower than this line
+  implies — about 43 records, not hundreds.**
+
+  Of 705 thin profiles, only **23** carried a Scholar link already.
+  `find_lab_scholar.py` scanned the 216 that have a lab website and found
+  **20** more (9%, against the ~17% quoted elsewhere in this repo). Everything
+  else has no link and no automatic way to get one, because Scholar's author
+  *search* is CAPTCHA-walled — only profile pages fetch cleanly. So the gap is
+  not an unrun job; it is a missing-identifier problem, and `tools/scholar-links.html`
+  (a human pasting links) is the only route to the remaining ~660.
+
+  All 43 were scraped successfully with no CAPTCHA. UTD research coverage
+  65% → 68%, Harvard 94% → 95%, `scholar_interests` overall 19% → 20%.
+
+  **26 of those newly-enriched records still have no `ai_review`.** They now
+  carry real research text from Scholar, so they are ready for a review the
+  moment the GPU box is up; the run was cut short when the Windows tunnel went
+  down mid-pass. Resume with the loop in §1. A useful diagnostic learned here:
+  with the service token, **403 means Access is refusing you and 530 means
+  Access let you through but the origin is unreachable** — 530 is the Windows
+  box being asleep or `cloudflared` not running, not a credentials problem.
+
+  **`enrich_scholar_pydoll.py` needed a fix to run at all:** it assumed a
+  system Chrome install, and this Mac has none. It now takes `--browser` /
+  `$CHROME_BINARY`, and Playwright's bundled build works:
+
+  ```bash
+  export CHROME_BINARY="$HOME/Library/Caches/ms-playwright/chromium-1234/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+  ./venv312/bin/python find_lab_scholar.py          # writes /tmp/lab_scholar_map.json
+  ./venv312/bin/python enrich_scholar_pydoll.py --file faculty-utd.json --map /tmp/lab_scholar_map.json
+  ```
+
+  The py3.12 env is `crawler/venv312`; `requirements-scholar.txt` installs it.
+  `pydoll` is deliberately not in `requirements.txt` — that env is 3.11.
 
 ### 4. Not started
 

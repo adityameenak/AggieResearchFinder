@@ -15633,14 +15633,18 @@
     "name": "Leqi Liu",
     "title": "Assistant Professor",
     "email": "leqi.liu@mccombs.utexas.edu",
-    "research_summary": "Research Areas: Machine Learning",
+    "research_summary": "Research interests: Artificial Intelligence, Machine Learning, Reinforcement Learning. Selected work: Analyzing Personality through Social Media Profile Picture Choice; Personalized Language Modeling from Personalized Human Feedback; A Taxonomy of Human and ML Strengths in Decision-Making to Investigate Human-ML Complementarity; Action-sufficient state representation learning for control with structural constraints; Off-policy risk assessment in contextual bandits.",
     "lab_website": "https://leqiliu.github.io/",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=zmbW4iUAAAAJ&hl=en",
     "photo_url": "https://www.cs.utexas.edu/sites/default/files/styles/faculty_photo/public/2026-02/faculty-no-profile-pic_0.png",
     "phone": "",
     "office": "",
     "ai_review": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Reinforcement Learning"
+    ],
     "publications": []
   },
   {

@@ -72659,14 +72659,18 @@
     "name": "Galen Dorpalen-Barry",
     "title": "Assistant Professor",
     "email": "dorpalen-barry@tamu.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: mathematics, combinatorics, algebraic combinatorics. Selected work: Enumerating parking completions using join and split; The Poincaré‐extended ab ab‐index; Equivariant cohomology and conditional oriented matroids; The Varchenko-Gel'fand ring of a cone; Whitney numbers for poset cones.",
     "lab_website": "https://galen.dorpalen-barry.org/",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=fiZV6fsAAAAJ&hl=en",
     "photo_url": "https://artsci.tamu.edu/_files/_images/_profile-images/headshot.jpg",
     "phone": "",
     "office": "Blocker 641G",
     "ai_review": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "mathematics",
+      "combinatorics",
+      "algebraic combinatorics"
+    ],
     "publications": []
   },
   {
@@ -74954,14 +74958,18 @@
     "name": "Xueyin Wang",
     "title": "Visiting Assistant Professor",
     "email": "xueyin@tamu.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Spectral theory, Dynamical systems, Mathematical physics. Selected work: Optimizing sheddable and shiftable residential electricity consumption by incentivized peak and off-peak credit function approach; Polynomial decay of the gap length for Ck quasi-periodic Schrödinger operators and spectral application; Winding number, density of states, and acceleration; Spectrum of Hatano–Nelson model with strictly ergodic potentials; Isospectrum of non-self-adjoint almost-periodic Schrödinger operators.",
     "lab_website": "https://sites.google.com/view/xueyin-wang/home",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=hDyP_x4AAAAJ&hl=en",
     "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/wang_xueyin.png",
     "phone": "",
     "office": "Blocker 609A",
     "ai_review": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Spectral theory",
+      "Dynamical systems",
+      "Mathematical physics"
+    ],
     "publications": []
   },
   {
@@ -75533,7 +75541,7 @@
     "name": "Baishan Hu",
     "title": "Research Assistant Professor",
     "email": "baishanhu4phys@gmail.com",
-    "research_summary": "",
+    "research_summary": "Research interests: Ab initio nuclear structure and reactions, Beyond the Standard Model (BSM), Dark matter. Selected work: Ab initio predictions link the neutron skin of 208Pb to nuclear forces; White paper: from bound states to the continuum; Ab initiono-core Gamow shell-model calculations of multineutron systems; Half-lives of cluster radioactivity with a generalized liquid-drop model; Physics of exotic nuclei.",
     "lab_website": "https://baishanhu.github.io/",
     "google_scholar": "https://scholar.google.com/citations?user=h1UW7HwAAAAJ",
     "photo_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/_files/profile-images/baishan-hu-headshot.jpg",
@@ -79027,14 +79035,16 @@
     "name": "David E. Jones",
     "title": "Graduate Committee Faculty (Adjunct Appointment)",
     "email": "dav.jones2000@gmail.com",
-    "research_summary": "",
+    "research_summary": "Research interests: Statistics. Selected work: Toward Extremely Precise Radial Velocities. II. A Tool for Using Multivariate Gaussian Processes to Model Stellar Activity; The AMIGA sample of isolated galaxies-XIII. The HI content of an almost “nurture free” sample; Warp bridge sampling: The next generation; Improving Exoplanet Detection Power: Multivariate Gaussian Process Models for Stellar Activity; Disentangling Overlapping Astronomical Sources using Spatial and Spectral Information.",
     "lab_website": "https://david-jones-statistics.github.io/",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=w3RSTv8AAAAJ&hl=en",
     "photo_url": "https://artsci.tamu.edu/statistics/_files/_images/_profile-images/jones-david-e..jpg",
     "phone": "",
     "office": "Google LLC",
     "ai_review": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Statistics"
+    ],
     "publications": []
   },
   {
@@ -79418,14 +79428,20 @@
     "name": "Xiaoqing (Jade) Wang",
     "title": "Assistant Professor",
     "email": "jadewang@tamu.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Biostatistics, Deep Learning, Spatial Transcriptomics, Neuroimaging, Text Data. Selected work: Natural language processing and machine learning methods to characterize unstructured patient-reported outcomes: validation study; Alzheimer's disease classification through imaging genetic data with IGnet; Impact of the COVID‐19 pandemic on pediatric oncology providers globally: a mixed‐methods study; Resilient health care in global pediatric oncology during the COVID‐19 pandemic; Total hip arthroplasty in adolescents and young adults for management of advanced corticosteroid-induced osteonecrosis secondary to treatment for hematologic malignancies.",
     "lab_website": "https://jadexq.github.io/",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=h28zpxUAAAAJ&hl=en",
     "photo_url": "https://artsci.tamu.edu/statistics/_files/_images/_profile-images/jade-wang.png",
     "phone": "(979) 845-3141",
     "office": "Blocker 406D",
     "ai_review": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Biostatistics",
+      "Deep Learning",
+      "Spatial Transcriptomics",
+      "Neuroimaging",
+      "Text Data"
+    ],
     "publications": []
   },
   {
@@ -81254,7 +81270,7 @@
     "name": "Yoonsung Jung",
     "title": "Instructional Associate Professor",
     "email": "yojung@tamu.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Design of Experiment, Big Data Analysis, Machine Learning, Data Mining, Statistical Consulting. Selected work: A copula method for modeling directional dependence of genes; Mixture of D-vine copulas for modeling dependence; Size distribution and rate of dust generated during grain elevator handling; Complexes of lutein with bovine and caprine caseins and their impact on lutein chemical stability in emulsion systems: Effect of arabinogalactan; New approach of directional dependence in exchange markets using generalized FGM copula function.",
     "lab_website": "https://sites.google.com/view/yoonsungjung/home",
     "google_scholar": "https://scholar.google.com/citations?user=SjTUuT8AAAAJ&hl",
     "photo_url": "https://artsci.tamu.edu/statistics/_files/_images/_profile-images/yoonsung_20jung_201024.jpg",
@@ -81262,11 +81278,11 @@
     "office": "Blocker 245A",
     "ai_review": "",
     "scholar_interests": [
-      "Statistics",
-      "data sciences",
-      "data mining",
-      "machine learning",
-      "statistical consulting"
+      "Design of Experiment",
+      "Big Data Analysis",
+      "Machine Learning",
+      "Data Mining",
+      "Statistical Consulting"
     ],
     "publications": [
       {
@@ -83649,7 +83665,7 @@
     "name": "Marcus Ogle",
     "title": "Associate Director - GCOOS",
     "email": "marcus.ogle@tamu.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Oceanography, Meteorology. Selected work: Origins ofKarenia brevisharmful algal blooms along the Texas coast; Long range current measurement from a surface buoy in the Gulf of Mexico; Four years of metocean support to the Shell Stones field: from asset integrity to collaborative research; Physical mechanisms driving harmful algal blooms along the Texas coast; Closing the Gaps: A Public/Private Partnership for Coastal HF Radar Coverage along the Louisiana Coast.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=W2ISgKQAAAAJ&hl",
     "photo_url": "https://artsci.tamu.edu/oceanography/_files/_images/_profile-images/marcusogle_1.png",

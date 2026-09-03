@@ -11,7 +11,7 @@ Run with the python3.12 venv (pydoll needs 3.10+):
   ./venv312/bin/python enrich_scholar_pydoll.py --file faculty-ut.json
   ./venv312/bin/python enrich_scholar_pydoll.py --file faculty.json --map /tmp/links.json
 """
-import argparse, asyncio, json, re
+import argparse, asyncio, json, os, re
 from pathlib import Path
 from bs4 import BeautifulSoup
 from pydoll.browser import Chrome
@@ -33,7 +33,7 @@ def parse(html):
     return {"interests": interests, "pubs": pubs}
 
 
-async def run(path, supplied):
+async def run(path, supplied, browser_binary=None):
     d = json.loads(path.read_text(encoding="utf-8"))
     targets = []
     for r in d:
@@ -45,6 +45,12 @@ async def run(path, supplied):
         return 0
 
     o = ChromiumOptions()
+    # pydoll drives a real Chrome. This machine may not have one installed, but
+    # Playwright ships a full build ("Google Chrome for Testing") that works
+    # just as well — $CHROME_BINARY or --browser points at it.
+    binary = browser_binary or os.environ.get("CHROME_BINARY")
+    if binary:
+        o.binary_location = binary
     o.add_argument("--headless=new"); o.add_argument("--no-sandbox")
     o.add_argument("--window-size=1280,900")
     filled = 0
@@ -92,9 +98,12 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--file", required=True)
     ap.add_argument("--map")
+    ap.add_argument("--browser", default=os.environ.get("CHROME_BINARY"),
+                    help="path to a Chrome/Chromium binary (default: $CHROME_BINARY, "
+                         "else whatever pydoll finds installed)")
     args = ap.parse_args()
     supplied = json.loads(Path(args.map).read_text()) if args.map else {}
-    asyncio.run(run(Path(args.file), supplied))
+    asyncio.run(run(Path(args.file), supplied, args.browser))
 
 
 if __name__ == "__main__":

@@ -781,14 +781,16 @@
     "department": "public-health",
     "email": "khowell1@tamu.edu",
     "profile_url": "https://public-health.tamu.edu/directory/kristen-howell.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Chronic disease epidemiology. Selected work: The International Association for the Study of Lung Cancer global survey on molecular testing in lung cancer; Identifying barriers to evidence-based care for sickle cell disease: results from the Sickle Cell Disease Implementation Consortium cross-sectional survey of healthcare …; Transition care continuity promotes long‐term retention in adult care among young adults with sickle cell disease; Gaps during pediatric to adult care transfer escalate acute resource utilization in sickle cell disease; Assessment of transition readiness to predict health care utilization during transition to adult care in sickle cell disease.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?hl=en&user=xGxZu8QAAAAJ",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/public-health/images/bio-howell1.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Chronic disease epidemiology"
+    ],
     "publications": []
   },
   {
@@ -1555,14 +1557,18 @@
     "department": "dentistry",
     "email": "ylu@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/yongbo-lu.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Molecular and cell biology, biomineralization, dental and skeletal development. Selected work: Loss of DMP1 causes rickets and osteomalacia and identifies a role for osteocytes in mineral metabolism; DMP1-targeted Cre expression in odontoblasts and osteocytes; E11/gp38 selective expression in osteocytes: regulation by mechanical strain and role in dendrite elongation; Deletion of dentin matrix protein-1 leads to a partial failure of maturation of predentin into dentin, hypomineralization, and expanded cavities of pulp and root canal during …; The Dentin matrix protein 1 (Dmp1) is specifically expressed in mineralized, but not soft, tissues during development.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=Q_joaZQAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/dentistry/images/yongbo-lu-600x600.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Molecular and cell biology",
+      "biomineralization",
+      "dental and skeletal development"
+    ],
     "publications": []
   },
   {
@@ -1645,14 +1651,19 @@
     "department": "dentistry",
     "email": "xliu1@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/xiaohua-liu.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Biomaterials, Dental Materials, Dental and Craniofacial Tissue Engineering, Nanomedicine. Selected work: Polymeric scaffolds for bone tissue engineering; Advancing biomaterials of human origin for tissue engineering; Biomimetic nanofibrous gelatin/apatite composite scaffolds for bone tissue engineering; Phase separation, pore structure, and properties of nanofibrous gelatin scaffolds; Tissue clearing of both hard and soft tissue organs with the PEGASOS method.",
     "lab_website": "",
     "google_scholar": "http://scholar.google.com/citations?user=PQmfou8AAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/dentistry/images/xiaohua-liu-300x3001.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Biomaterials",
+      "Dental Materials",
+      "Dental and Craniofacial Tissue Engineering",
+      "Nanomedicine"
+    ],
     "publications": []
   },
   {
@@ -1663,14 +1674,16 @@
     "department": "dentistry",
     "email": "xfwang@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/xiaofang-wang.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Bone and Tooth development. Selected work: Inactivation of a novel FGF23 regulator, FAM20C, leads to hypophosphatemic rickets in mice; The rescue of dentin matrix protein 1 (DMP1)-deficient tooth defects by the transgenic expression of dentin sialophosphoprotein (DSPP) indicates that DSPP is a downstream …; Transferrin receptor 1-mediated iron uptake regulates bone mass in mice via osteoclast mitochondria and cytoskeleton.; Expression of FAM20C in the osteogenesis and odontogenesis of mouse; FAM20C plays an essential role in the formation of murine teeth.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?view_op=list_works&hl=en&authuser=1&hl=en&user=sTmnPNsAAAAJ&pagesize=80&authuser=1 ",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/dentistry/images/xiaofang-wang-600x600.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Bone and Tooth development"
+    ],
     "publications": []
   },
   {
@@ -2041,7 +2054,7 @@
     "department": "dentistry",
     "email": "qian.wang@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/qian-wang.html",
-    "research_summary": "",
+    "research_summary": "Selected work: Modeling elastic properties in finite‐element analysis: how much precision is needed to produce an accurate model?; The feeding biomechanics and dietary ecology of Australopithecus africanus; U-Series dating of Liujiang hominid site in Guangxi, Southern China; An overview of emergency communication networks; Material properties of the dentate maxilla.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=sXUj16IAAAAJ&hl=en",
     "ai_review": "",
@@ -2095,14 +2108,19 @@
     "department": "dentistry",
     "email": "pkramer@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/phillip-kramer.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Marine Conservation, Coral Reefs, Caribbean, Geochemistry. Selected work: Caribbean corals in crisis: record thermal stress, bleaching, and mortality in 2005; Reefs at Risk in the Caribbean; Multi-site evaluation of IKONOS data for classification of tropical coral reef environments; Synthesis of coral reef health indicators for the western Atlantic: Results of the AGRRA program(1997-2000); Coral reefs for coastal protection: A new methodological approach and engineering case study in Grenada.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=nR6E3sIAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/dentistry/images/phillip-kramer-300x300.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Marine Conservation",
+      "Coral Reefs",
+      "Caribbean",
+      "Geochemistry"
+    ],
     "publications": []
   },
   {
@@ -2275,14 +2293,18 @@
     "department": "dentistry",
     "email": "umorin@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/mikhail-umorin.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Neuroscience of Pain, Gross Anatomy, Biostatistics. Selected work: Spontaneous Orofacial Pain Determination in Rats; Nrxn3 reduces myofascial nociceptive pain; REPLY: TMJ Concepts Patient-Fitted TMJ Reconstruction Prosthesis System: Results from an FDA Post-Market Surveillance Prospective Cohort Study; Effect of the leaded-glasses as an exomass object on cone beam computed tomography (CBCT) images; TMJ Concepts patient-Fitted temporomandibular joint reconstruction prosthesis system: Results from a Food and Drug Administration Postmarket Surveillance Prospective Cohort study.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?hl=en&user=h9nN3xgAAAAJ&view_op=list_works&sortby=pubdate",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/dentistry/images/mikhail-umorin-600x600.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Neuroscience of Pain",
+      "Gross Anatomy",
+      "Biostatistics"
+    ],
     "publications": []
   },
   {
@@ -2347,14 +2369,19 @@
     "department": "dentistry",
     "email": "kesterke@tamu.edu",
     "profile_url": "https://dentistry.tamu.edu/directory/matthew-kesterke.html",
-    "research_summary": "",
+    "research_summary": "Research interests: Geometric Morphometrics, Surgical Planning, craniofacial growth and development, palatal expansion. Selected work: Craniofacial injuries seen with the introduction of bicycle-share electric scooters in an urban setting; The 3D facial norms database: Part 1. A web-based craniofacial anthropometric and image repository for the clinical and research community; Using the 3D Facial Norms Database to investigate craniofacial sexual dimorphism in healthy children, adolescents, and adults; Differences in finished case quality between Invisalign and traditional fixed appliances; Comparison of tensile bond strength of denture reline materials on denture bases fabricated with CAD-CAM technology.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=y7GRIioAAAAJ&hl=en&oi=ao",
     "ai_review": "",
     "photo_url": "https://bios.health.tamu.edu.prod.sites-marcom.cloud.tamu.edu/dentistry/images/matthew-j-kesterke-600x600.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Geometric Morphometrics",
+      "Surgical Planning",
+      "craniofacial growth and development",
+      "palatal expansion"
+    ],
     "publications": []
   },
   {

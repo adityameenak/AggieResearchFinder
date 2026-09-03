@@ -850,14 +850,18 @@
     "department": "physics-astronomy",
     "email": "gcmorris@central.uh.edu",
     "profile_url": "https://profiles.rice.edu/faculty/greg-morrison",
-    "research_summary": "",
+    "research_summary": "Research interests: Biophysics, Polymer Physics, Complex Systems. Selected work: Theoretical perspectives on protein folding; Kinetics of loop formation in polymer chains; How accurate are polymer models in the analysis of Förster resonance energy transfer experiments on proteins?; Disambiguation of patent inventors and assignees using high-resolution geolocation data; Force-dependent hopping rates of RNA hairpins can be estimated from accurate measurement of the folding landscapes.",
     "lab_website": "https://www.uh.edu/nsm/physics/people/profiles/greg-morrison/",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=vOZZeY8AAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "https://profiles.rice.edu/sites/g/files/bxs3881/files/2020-09/Morrison.jpg",
     "phone": "(713) 743-9344",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "Biophysics",
+      "Polymer Physics",
+      "Complex Systems"
+    ]
   },
   {
     "id": "75bdc48937c9",
@@ -1241,9 +1245,9 @@
     "department": "electrical",
     "email": "stpierre@bcm.edu",
     "profile_url": "https://profiles.rice.edu/faculty/francois-st-pierre",
-    "research_summary": "",
+    "research_summary": "Research interests: Neurophotonics, bioengineering, systems & synthetic biology. Selected work: Improving FRET dynamic range with bright green and red fluorescent proteins; High-fidelity optical reporting of neuronal electrical activity with an ultrafast fluorescent voltage sensor; Ultrafast two-photon imaging of a high-gain voltage indicator in awake behaving mice; Subcellular imaging of voltage and calcium signals reveals neural processing in vivo; One-step cloning and chromosomal integration of DNA.",
     "lab_website": "https://www.bcm.edu/people-search/francois-st-pierre-31095",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=lK136qQAAAAJ&hl=en",
     "ai_review": "Francois St-Pierre’s research program within the Electrical Engineering department investigates the intersection of neurophotonics, bioengineering, and synthetic biology to understand fundamental neural processes. His work centers on developing advanced optical methods for monitoring neuronal activity in vivo, notably through the creation of ultrafast fluorescent voltage sensors utilizing bright green and red fluorescent proteins. Specifically, he employs techniques such as two-photon imaging and subcellular imaging to investigate voltage and calcium signaling dynamics within awake mice, allowing for high-fidelity reporting of electrical activity. Furthermore, Professor St-Pierre’s lab utilizes innovative approaches like one-step cloning and chromosomal integration of DNA to engineer synthetic biological circuits directly within neuronal cells – reflecting a commitment to systems-level investigations of neural function.",
     "photo_url": "https://profiles.rice.edu/sites/g/files/bxs3881/files/2020-07/Francois.jpeg",
     "phone": "281-888-8468",

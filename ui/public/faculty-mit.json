@@ -13360,14 +13360,20 @@
     "department": "mechanical",
     "email": "russt@mit.edu",
     "profile_url": "https://meche.mit.edu/people/faculty/russt@mit.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Robotics, Control, Optimization, Non-smooth mechanics, Perception. Selected work: Openvla: An open-source vision-language-action model; Diffusion policy: Visuomotor policy learning via action diffusion; Efficient bipedal robots based on passive-dynamic walkers; Evaluating robustness of neural networks with mixed integer programming; Optimization-based locomotion planning, estimation, and control design for the atlas humanoid robot.",
     "lab_website": "http://groups.csail.mit.edu/locomotion/index.html",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=nxNkEiYAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "Robotics",
+      "Control",
+      "Optimization",
+      "Non-smooth mechanics",
+      "Perception"
+    ]
   },
   {
     "id": "0d65ebaf7447",

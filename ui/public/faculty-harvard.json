@@ -5595,14 +5595,19 @@
     "department": "cse",
     "email": "dam@seas.harvard.edu",
     "profile_url": "https://seas.harvard.edu/person/david-alvarez-melis",
-    "research_summary": "",
+    "research_summary": "Research interests: Machine Learning, Optimal Transport, Natural Language Processing, Interpretability. Selected work: Towards robust interpretability with self-explaining neural networks; On the robustness of interpretability methods; Gromov-Wasserstein alignment of word embedding spaces; Geometric Dataset Distances via Optimal Transport; A causal framework for explaining the predictions of black-box sequence-to-sequence models.",
     "lab_website": "https://dmelis.github.io",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=XsxZrYYAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "Machine Learning",
+      "Optimal Transport",
+      "Natural Language Processing",
+      "Interpretability"
+    ]
   },
   {
     "id": "5299df929fc9",
@@ -5612,14 +5617,18 @@
     "department": "cse",
     "email": "namin@seas.harvard.edu",
     "profile_url": "https://seas.harvard.edu/person/nada-amin",
-    "research_summary": "",
+    "research_summary": "Research interests: Programming Languages, Formal Verification, Artificial Intelligence. Selected work: Cytoscape: a software environment for integrated models of biomolecular interaction networks; A software environment for integrated models of biomolecular interaction networks., 2003, 13; The Essence of Dependent Object Types; Optimizing data structures in high-level programs: New directions for extensible compilers based on staging; Biolink Model: A universal schema for knowledge graphs in clinical, biomedical, and translational science.",
     "lab_website": "https://namin.seas.harvard.edu",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=9cGEmcgAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "Programming Languages",
+      "Formal Verification",
+      "Artificial Intelligence"
+    ]
   },
   {
     "id": "c3922d3f07ce",
@@ -5930,14 +5939,16 @@
     "department": "cse",
     "email": "sitan@seas.harvard.edu",
     "profile_url": "https://seas.harvard.edu/person/sitan-chen",
-    "research_summary": "",
+    "research_summary": "Research interests: quantum information. Selected work: Solving quantum statistical mechanics with variational autoregressive networks and quantum circuits; Non-Hermitian skin effect in a one-dimensional interacting Bose gas; Boundary condition independence of non-Hermitian Hamiltonian dynamics; Rényi entropy dynamics and Lindblad spectrum for open quantum systems; Liouvillian skin effect in a one-dimensional open many-body quantum system with generalized boundary conditions.",
     "lab_website": "https://sitanchen.com",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=mF2irR8AAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "quantum information"
+    ]
   },
   {
     "id": "bb3528fddc60",
@@ -7091,14 +7102,17 @@
     "department": "cse",
     "email": "samurphy@fas.harvard.edu",
     "profile_url": "https://seas.harvard.edu/person/susan-murphy",
-    "research_summary": "",
+    "research_summary": "Research interests: Sequential decision making in Mobile Health, Statistical Reinforcement Learning. Selected work: Just-in-time adaptive interventions (JITAIs) in mobile health: key components and design principles for ongoing health behavior support; The prevention and treatment of missing data in clinical trials; Optimal dynamic treatment regimes; Mobile health technology evaluation: the mHealth evidence workshop; The multiphase optimization strategy (MOST) and the sequential multiple assignment randomized trial (SMART): new methods for more potent eHealth interventions.",
     "lab_website": "https://people.seas.harvard.edu/~samurphy",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=q-DPFdUAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "https://seas.harvard.edu/sites/default/files/styles/headshot_1x/public/images/Directory/Murphy_200x300.jpg?itok=ZQOfdrg4",
     "phone": "",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "Sequential decision making in Mobile Health",
+      "Statistical Reinforcement Learning"
+    ]
   },
   {
     "id": "b6110e5b4b5c",
@@ -8088,14 +8102,18 @@
     "department": "cse",
     "email": "qwang@seas.harvard.edu",
     "profile_url": "https://seas.harvard.edu/person/qianqian-wang",
-    "research_summary": "",
+    "research_summary": "Research interests: Computer Vision, Machine Learning, Computer Graphics. Selected work: Ibrnet: Learning multi-view image-based rendering; Neural body: Implicit neural representations with structured latent codes for novel view synthesis of dynamic humans; Animatable neural radiance fields for modeling dynamic human bodies; Emergent correspondence from image diffusion; Physg: Inverse rendering with spherical gaussians for physics-based material editing and relighting.",
     "lab_website": "https://qianqianwang68.github.io",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=VdmfIeUAAAAJ&hl=en",
     "ai_review": "",
     "photo_url": "",
     "phone": "",
     "office": "",
-    "scholar_interests": []
+    "scholar_interests": [
+      "Computer Vision",
+      "Machine Learning",
+      "Computer Graphics"
+    ]
   },
   {
     "id": "fadb35ec880c",

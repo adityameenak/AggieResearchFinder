@@ -61,14 +61,17 @@
     "name": "Blake Bordelon",
     "title": "Assistant Professor of Neuroscience Principal Faculty, Oden Institute",
     "email": "blake.bordelon@austin.utexas.edu",
-    "research_summary": "",
+    "research_summary": "Research interests: Machine Learning, Theoretical Neuroscience. Selected work: Spectral bias and task-model alignment explain generalization in kernel regression and infinitely wide neural networks; Spectrum dependent learning curves in kernel regression and wide neural networks; Scaling laws for precision; Self-consistent dynamical field theory of kernel evolution in wide neural networks; Neural networks as kernel learners: The silent alignment effect.",
     "lab_website": "https://blakebordelon.github.io",
-    "google_scholar": "",
+    "google_scholar": "https://scholar.google.com/citations?user=yeQ8_pgAAAAJ&hl=en",
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-06/Screenshot%202026-06-12%20at%203.10.27%E2%80%AFPM.png",
     "phone": "",
     "office": "",
     "ai_review": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Machine Learning",
+      "Theoretical Neuroscience"
+    ],
     "publications": []
   },
   {
