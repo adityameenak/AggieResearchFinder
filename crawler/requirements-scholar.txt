@@ -1,0 +1,17 @@
+# Google Scholar enrichment — a SEPARATE environment from requirements.txt.
+#
+# enrich_scholar_pydoll.py drives a real Chrome over CDP with pydoll, because
+# Scholar CAPTCHAs plain requests and headless Playwright. pydoll needs Python
+# 3.12, while the crawler venv is 3.11, so the two cannot share one env.
+#
+#   uv venv --python 3.12 venv312
+#   uv pip install --python venv312/bin/python -r requirements-scholar.txt
+#   ./venv312/bin/python enrich_scholar_pydoll.py
+#
+# Scholar *profile pages* go through clean; the *author search* is still
+# CAPTCHA-walled headless, so find_lab_scholar.py cannot auto-discover unknown
+# profile links — see CLAUDE.md.
+
+pydoll-python>=2.0.0
+beautifulsoup4>=4.12.0
+requests>=2.31.0

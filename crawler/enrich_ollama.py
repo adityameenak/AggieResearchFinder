@@ -8,14 +8,57 @@ Usage:
   python enrich_ollama.py                      # default: faculty.json (TAMU)
   python enrich_ollama.py --file faculty-rice.json
   python enrich_ollama.py --file faculty-rice.json --model gemma3:4b
+
+The model does not have to run on this machine. Point --host (or OLLAMA_HOST)
+at a box with a real GPU and the run goes there instead:
+
+  OLLAMA_HOST=http://192.168.1.42:11434 python enrich_ollama.py --file faculty-ut-extra.json
+  python enrich_ollama.py --host http://192.168.1.42:11434 --model gemma3:12b
+
+That machine needs OLLAMA_HOST=0.0.0.0 set for its own server, or it only
+listens on its loopback and refuses everything from the network.
 """
-import argparse, json, sys, time
+import argparse, json, os, sys, time
 from pathlib import Path
 import requests
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
+DEFAULT_HOST = "http://localhost:11434"
 MODEL = "gemma3:4b"
 SAVE_EVERY = 25
+
+
+def api_url(host):
+    """Accept a bare host, a host:port, or a full URL — all mean the same thing."""
+    host = (host or DEFAULT_HOST).strip().rstrip("/")
+    if not host.startswith(("http://", "https://")):
+        host = f"http://{host}"
+    if ":" not in host.split("//", 1)[1]:
+        host = f"{host}:11434"
+    return f"{host}/api/generate"
+
+
+def preflight(host, model):
+    """Fail loudly before a long run rather than once per record.
+
+    A remote box that is up but hasn't pulled the model gives an error on every
+    single request, so a 371-record run would otherwise take an hour to report
+    that nothing was ever going to work.
+    """
+    tags = api_url(host).replace("/api/generate", "/api/tags")
+    try:
+        resp = requests.get(tags, timeout=10)
+        resp.raise_for_status()
+    except Exception as exc:
+        print(f"Error: no Ollama at {host} ({type(exc).__name__}: {str(exc)[:120]})")
+        print("  local:  ollama serve")
+        print("  remote: set OLLAMA_HOST=0.0.0.0 on that machine and open port 11434")
+        return False
+    have = [m.get("name", "") for m in resp.json().get("models", [])]
+    if model not in have and model.split(":")[0] not in [h.split(":")[0] for h in have]:
+        print(f"Error: {host} has no model {model!r}. Installed: {', '.join(have) or '(none)'}")
+        print(f"  on that machine: ollama pull {model}")
+        return False
+    return True
 
 
 def needs_review(rec):
@@ -46,7 +89,7 @@ def needs_review(rec):
     return False
 
 
-def generate_review(rec, model=MODEL):
+def generate_review(rec, model=MODEL, url=None):
     """Call Ollama to generate a research review."""
     cleaned = rec.get("research_summary", "").replace("|", ", ").strip()[:1000]
     name = rec["name"]
@@ -73,7 +116,7 @@ def generate_review(rec, model=MODEL):
 
     try:
         resp = requests.post(
-            OLLAMA_URL,
+            url or api_url(None),
             json={"model": model, "prompt": prompt, "stream": False},
             timeout=120,
         )
@@ -94,7 +137,15 @@ def main():
     ap.add_argument("--file", default="faculty.json",
                     help="Faculty JSON file to enrich in place (default: faculty.json).")
     ap.add_argument("--model", default=MODEL, help=f"Ollama model tag (default: {MODEL}).")
+    ap.add_argument("--host", default=os.environ.get("OLLAMA_HOST", DEFAULT_HOST),
+                    help="Ollama server, e.g. http://192.168.1.42:11434 "
+                         "(default: $OLLAMA_HOST or localhost).")
     args = ap.parse_args()
+
+    url = api_url(args.host)
+    if not preflight(args.host, args.model):
+        sys.exit(1)
+    print(f"Using {url} with model {args.model}")
 
     faculty_json = Path(args.file)
     if not faculty_json.is_absolute():
@@ -118,7 +169,7 @@ def main():
 
     for idx, (rec_idx, rec) in enumerate(candidates):
         name = rec.get("name", "???")
-        review = generate_review(rec, args.model)
+        review = generate_review(rec, args.model, url)
 
         if review:
             data[rec_idx]["ai_review"] = review

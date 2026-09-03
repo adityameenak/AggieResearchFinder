@@ -30,22 +30,59 @@ we failed to crawl from one the university does not have.
 
 ### 1. AI reviews are paused mid-run
 
-**283 records have no `ai_review`.** This is the only outstanding task. It is
-what the cards render as their preview, so those cards read worse than the rest.
+**371 records need a review**, counted with `enrich_ollama.py`'s own
+`needs_review()` — not 283. It is what the cards render as their preview, so
+those cards read worse than the rest.
+
+The earlier figure missed `faculty.json` (TAMU), where **86 records carry a
+`"Please provide..."` Gemini placeholder** — mostly statistics (62) and
+oceanography (18). Those never appeared in the resume list, so they would have
+stayed broken however many times the loop below was run. `faculty.json` is
+first in the list now.
 
 Stopped at `faculty-ut-extra.json` record 54 of 137. To resume:
 
 ```bash
 cd crawler
-ollama serve &                      # if not already running
-for f in faculty-ut-extra faculty-harvard-hsdm faculty-harvard-oeb \
+for f in faculty faculty-ut-extra faculty-harvard-hsdm faculty-harvard-oeb \
          faculty-harvard-psychology faculty-harvard faculty-harvard-chemistry \
          faculty-harvard-statistics; do
-  ./venv/bin/python enrich_ollama.py --file $f.json
+  ./.venv/bin/python enrich_ollama.py --file $f.json
 done
-python merge.py --sync-sources
+./.venv/bin/python merge.py --sync-sources
 cd ../ui && npm run build
 ```
+
+The model does not have to run on this Mac — this one has no GPU and no Ollama
+installed. `enrich_ollama.py` now takes `--host`/`$OLLAMA_HOST`, so the run can
+be pointed at the Windows box. **`HANDOFF-ollama-windows.md` is the setup doc
+for that machine** — Ollama on loopback, a cloudflared tunnel, and a Cloudflare
+Access service token, so nothing is exposed unauthenticated.
+
+```bash
+OLLAMA_HOST=http://<windows-ip>:11434 ./.venv/bin/python enrich_ollama.py --file faculty.json
+```
+
+It preflights the host and the model tag before starting, so a wrong address or
+an unpulled model fails in one second instead of once per record for an hour.
+
+Per-file counts as of 2026-09-02:
+
+| file | needs review |
+|---|---|
+| faculty-harvard-hsdm | 109 |
+| faculty-ut-extra | 87 |
+| faculty (TAMU placeholders) | 86 |
+| faculty-harvard-oeb | 38 |
+| faculty-harvard-psychology | 27 |
+| faculty-harvard | 15 |
+| faculty-harvard-chemistry | 4 |
+| faculty-harvard-statistics | 3 |
+| faculty-ut | 1 |
+
+A further ~500 records are blank but have less than 40 characters of
+`research_summary`, so `needs_review()` skips them — no amount of enrichment
+fixes those. They are the UTD blank-card population in §3.
 
 `enrich_ollama.py` is re-runnable and only touches records missing a real
 review, so re-running a partially-done file is safe. Roughly 3 records/minute.
@@ -76,9 +113,17 @@ is simply unattempted.
 
 - **`publications` is TAMU-only** (35%, 0% elsewhere). Decide whether it is
   part of the standard or a TAMU bonus — right now it is undocumented.
-- **Core Web Vitals.** The per-school split took the worst case from 2.15 MB to
-  0.95 MB gzipped, but TAMU is still ~1 MB. Splitting `publications` out of the
-  list payload would take it to ~430 KB; only `ProfDetail` reads that field.
+- ~~**Core Web Vitals.**~~ Done 2026-09-02. `publications` is out of the list
+  payload: `merge.py` writes `ui/public/pubs/<id>.json` per professor and puts
+  `pub_count` on the record, and `ProfDetail` fetches that file only when the
+  count is non-zero. TAMU's worst case went **1.00 MB → 0.58 MB gzipped**; 614
+  files, 2.5 KB each. The combined `ui/public/faculty.json` still carries
+  publications inline, because the backend importer and `find_lab_scholar.py`
+  read it as the whole dataset.
+
+  The estimate above said ~430 KB. The real floor is 0.58 MB — `ai_review`
+  (1.09 MB raw) is the next-largest field and it stays, because the cards
+  render it.
 
 ---
 
@@ -163,6 +208,32 @@ user still sees success and the payload goes to the Vercel function log
 issues stop arriving.
 
 Issues are public. The form says so, but that is the only guard.
+
+---
+
+## Feedback triage
+
+`tools/triage.py` reads the open issues the feedback box files and does the
+lookups by hand-checking them against the dataset: is that professor actually
+present, is that department one the university does not have (`census.NOT_OFFERED`)
+versus one we failed to collect, and what does the record behind that page URL
+currently hold. It only reads — it never edits the dataset and never touches
+GitHub.
+
+```bash
+cd tools
+../crawler/.venv/bin/python triage.py                  # open issues
+../crawler/.venv/bin/python triage.py --state all      # include closed
+../crawler/.venv/bin/python triage.py --out report.md
+```
+
+The distinction that matters: "Rice has no neuroscience department" is a reply
+to the reporter, while "UT oceanography has no records" is crawler work. The
+script separates them so a triage pass does not keep proposing work that
+`census.py` already recorded as a dead end.
+
+As of 2026-09-02 there are **no open feedback issues** — the only three ever
+filed are the closed setup tests (#10, #11, #12).
 
 ---
 

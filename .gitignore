@@ -21,3 +21,5 @@ backend/venv/
 *.pyc
 *.pyo
 crawler/downloaded_files/
+crawler/.venv/
+tools/triage-report.md

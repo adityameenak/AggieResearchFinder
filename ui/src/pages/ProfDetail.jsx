@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
@@ -6,6 +6,29 @@ import { deptLabel, deptStyle } from '../utils/search'
 import EmailModal from '../components/EmailModal'
 import Seo from '../components/Seo'
 import { buildProfMeta } from '../lib/seo'
+
+/**
+ * Publications live in their own file per professor, not in the list payload
+ * that AppContext fetches — they were 1.5 MB of TAMU's 5.1 MB and only this
+ * page renders them. Cached for the life of the page like the faculty payload,
+ * so going back and forth between professors doesn't refetch.
+ */
+const pubsCache = new Map()
+
+function loadPubs(id) {
+  if (!pubsCache.has(id)) {
+    pubsCache.set(id, fetch(`/pubs/${id}.json`)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
+      })
+      .catch(() => {
+        pubsCache.delete(id)   // don't cache a failure
+        return []              // the rest of the page is unaffected
+      }))
+  }
+  return pubsCache.get(id)
+}
 
 /* ── Dept badge ───────────────────────────────────────────── */
 function DeptBadge({ dept }) {
@@ -61,6 +84,16 @@ export default function ProfDetail() {
     () => (prof ? buildProfMeta(prof, school, deptLabel(prof.department)) : null),
     [prof, school],
   )
+
+  // Fetched, not read off `prof`: see loadPubs. `pub_count` is written by
+  // merge.py, so a professor with no publications never issues the request.
+  const [pubs, setPubs] = useState([])
+  useEffect(() => {
+    if (!prof?.pub_count) { setPubs([]); return }
+    let cancelled = false
+    loadPubs(prof.id).then(p => { if (!cancelled) setPubs(Array.isArray(p) ? p : []) })
+    return () => { cancelled = true }
+  }, [prof?.id, prof?.pub_count])
 
   // Read session from localStorage (set by Discover flow)
   const session = (() => {
@@ -203,14 +236,14 @@ export default function ProfDetail() {
             )}
 
             {/* Top Publications */}
-            {prof.publications && prof.publications.length > 0 && (
+            {pubs.length > 0 && (
               <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
                 <div className="text-[11px] font-semibold text-stone-400 uppercase
                                 tracking-[0.14em] mb-5">
                   Top Publications
                 </div>
                 <div className="space-y-3">
-                  {prof.publications.slice(0, 10).map((pub, i) => (
+                  {pubs.slice(0, 10).map((pub, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <span className="text-[11px] text-stone-400 font-mono mt-0.5 flex-shrink-0 w-5 text-right">
                         {i + 1}.

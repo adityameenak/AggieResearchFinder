@@ -30,6 +30,7 @@ import taxonomy
 
 HERE = Path(__file__).parent
 OUT_DIR = HERE.parent / "ui" / "public"
+PUBS_DIR = OUT_DIR / "pubs"
 
 # Which crawler output belongs to which school. Filenames are matched by stem,
 # so faculty-mit.json and faculty-mit2.json both land under "mit".
@@ -215,6 +216,44 @@ def dedupe(records):
     return merged, collapsed
 
 
+def strip_pubs(rec):
+    """The list-payload view of a record: publications replaced by their count.
+
+    Only ProfDetail renders publications, but they were riding in every list
+    payload — 1.5 MB of TAMU's 5.1 MB, downloaded by every visitor to reach a
+    search page. `pub_count` is what the detail page checks before deciding to
+    fetch, so a professor with none costs no request.
+    """
+    out = {k: v for k, v in rec.items() if k != "publications"}
+    n = len(rec.get("publications") or [])
+    if n:
+        out["pub_count"] = n
+    return out
+
+
+def write_publications(records, out_dir=PUBS_DIR):
+    """Write one file per professor who has publications; remove ones who don't.
+
+    Sweeping the stale files matters: a re-crawl that drops a professor's
+    publications would otherwise leave the old file served forever, and the
+    record losing its pub_count means nothing would ever ask for it again.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    stale = {f.name for f in out_dir.glob("*.json")}
+    written = 0
+    for r in records:
+        pubs = r.get("publications") or []
+        if not pubs:
+            continue
+        name = f"{r['id']}.json"
+        (out_dir / name).write_text(json.dumps(pubs, ensure_ascii=False))
+        stale.discard(name)
+        written += 1
+    for name in stale:
+        (out_dir / name).unlink()
+    return written, len(stale)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true",
@@ -264,11 +303,19 @@ def main():
         combined.write_text(json.dumps(merged, ensure_ascii=False, indent=2))
         print(f"\nWrote {combined.relative_to(HERE.parent)} "
               f"({combined.stat().st_size / 1e6:.1f} MB, {len(merged)} records)")
+        # The combined file above keeps publications inline — the backend
+        # importer and find_lab_scholar.py both read it as the whole dataset.
+        # The per-school files are what the browser fetches, so they don't.
         for school, rows in sorted(by_school.items()):
             path = OUT_DIR / f"faculty-{school}.json"
-            path.write_text(json.dumps(rows, ensure_ascii=False, indent=2))
+            path.write_text(json.dumps([strip_pubs(r) for r in rows],
+                                       ensure_ascii=False, indent=2))
             print(f"      {path.name:<24} {path.stat().st_size / 1e6:>5.1f} MB  "
                   f"{len(rows):>5} records")
+
+        written, removed = write_publications(merged)
+        print(f"      {'pubs/':<24} {written:>5} files"
+              + (f", {removed} stale removed" if removed else ""))
 
     if args.sync_sources and not args.dry_run:
         # Push enrichment back into the per-school crawler output. Without this

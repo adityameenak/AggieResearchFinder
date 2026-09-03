@@ -14,5 +14,14 @@ playwright-stealth>=2.0.0
 google-generativeai>=0.5.0
 python-dotenv>=1.0.0
 
+# google-generativeai pulls google-auth -> cryptography. cryptography 49+ ships
+# no macOS x86_64 wheel, so pip tries to build it from source through
+# maturin/cargo and fails on an Intel Mac. 48.0.1 is the last version with a
+# wheel for that platform.
+cryptography<49
+
+# Google Scholar enrichment (enrich_scholar_pydoll.py) is NOT installed by this
+# file: pydoll needs Python 3.12 and this env is 3.11. See requirements-scholar.txt.
+
 # Optional – faster HTML parsing (drop-in for html.parser)
 # lxml>=5.0.0
