@@ -36,7 +36,15 @@ function scoreProf(prof, interestTokens, resumeTokens) {
     if (research.toLowerCase().includes(t)) primary += 2
   }
 
-  const secondary = countHits(resumeTokens, research) * 0.35
+  // Resume is a secondary *boost*, not an independent signal. Its raw hit sum
+  // grows with resume length and can dwarf the interest score, so a geology
+  // professor whose bio shares generic words ("materials", "energy") with the
+  // resume would outrank real matches for "batteries". Cap it at the interest
+  // score so stated interests always dominate — a professor with no interest
+  // relevance gets no resume boost at all. Uncapped only when no interests
+  // were given and the resume is the only signal.
+  let secondary = countHits(resumeTokens, research) * 0.35
+  if (interestTokens.length) secondary = Math.min(secondary, primary)
   return primary + secondary
 }
 
@@ -76,8 +84,10 @@ export function matchFaculty(faculty, interests, resumeProfile, topN = 20) {
   // Never match against profiles with no research info — they can't be a fit.
   const matchable = faculty.filter(isMatchable)
   let scored = matchable.map(prof => ({ prof, score: scoreProf(prof, iTokens, rTokens) }))
+  // No fallback to "everyone at score 1": that returned the first 20 faculty
+  // in file order (a wall of one department) all labelled Strong Fit whenever
+  // the query had zero hits. An empty list lets the page show "No matches".
   scored = scored.filter(x => x.score > 0)
-  if (!scored.length) scored = matchable.map(prof => ({ prof, score: 1 }))
 
   scored.sort((a, b) => b.score - a.score)
   scored = scored.slice(0, topN)

@@ -160,8 +160,13 @@ Matching is **interest-driven** — the student's stated interests dominate. Res
 1. Tokenize the student's stated interests
 2. Score each professor:
    - `interest_score` = keyword overlap(interests, research_summary + name + dept)
-   - `resume_score` = keyword overlap(resume themes + skills, research_summary) × 0.35
+   - `resume_score` = keyword overlap(resume themes + skills, research_summary) × 0.35,
+     **capped at `interest_score`** when interests are given — so the resume can reorder
+     interest matches but never outrank them, and a professor with no interest relevance
+     gets no resume boost at all (uncapped only when no interests were entered)
    - `total = interest_score + resume_score`
+   - Professors with `total = 0` are dropped; a query with no hits returns an empty list
+     (the UI shows "No matches") rather than falling back to everyone at equal score
 3. Rank by total score, assign fit labels:
    - **Strong Fit** — score ≥ 60% of top result
    - **Exploratory Fit** — score ≥ 25% of top result

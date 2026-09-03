@@ -56,8 +56,15 @@ def score_professor(prof: dict, interest_tokens: list[str], resume_tokens: list[
         if token in research.lower():
             primary += 2
 
-    # Secondary: resume inferred tokens vs research summary only (0.35 weight)
+    # Secondary: resume inferred tokens vs research summary only (0.35 weight).
+    # A boost, not an independent signal: its raw hit sum grows with resume
+    # length and can dwarf the interest score, ranking professors with zero
+    # relevance to the stated interests above real matches. Cap it at the
+    # interest score so interests always dominate; uncapped only when no
+    # interests were given and the resume is the only signal.
     secondary = _count_token_hits(resume_tokens, research) * 0.35
+    if interest_tokens:
+        secondary = min(secondary, primary)
 
     return primary + secondary
 
@@ -163,10 +170,9 @@ def match_faculty(
         if s >= min_score:
             scored.append((s, prof))
 
-    if not scored:
-        # If nothing matched, return all faculty with equal score
-        scored = [(1.0, p) for p in faculty]
-
+    # No fallback to "everyone at score 1": that returned the first N faculty
+    # in table order (a wall of one department) all labelled strong_fit
+    # whenever the query had zero hits. An empty list is the honest answer.
     scored.sort(key=lambda x: x[0], reverse=True)
     scored = scored[:top_n]
     max_score = scored[0][0] if scored else 1.0
