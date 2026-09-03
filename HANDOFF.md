@@ -85,6 +85,60 @@ OLLAMA_HOST=http://localhost:11435 ./.venv/bin/python enrich_ollama.py --file <f
 
 `HANDOFF-ollama-windows.md` covers the Windows side.
 
+### 1b. The artsci navigation-menu bug (fixed 2026-09-02)
+
+**443 TAMU records — 22% of the school — had a navigation menu as their
+`research_summary`.** `_extract_research_summary()` Strategy 2 did
+
+```python
+el = soup.find(class_=re.compile("research", re.I))
+```
+
+and `find()` returns the first match in document order. On artsci.tamu.edu that
+is `<div class="megamenu megamenu--two-column research">`, rendered before
+`<main>`. Every profile on that site got the Research mega-menu instead of the
+person's research, which is where `"Close the Research menu"` came from.
+
+It was not confined to one field. `research_summary` feeds the search keyword
+pills and `matcher.py`, so the menu text was in the search index and the match
+scores; and 360 of the 443 carried an `enrich_local.py` review written *from*
+that menu — "Dr. Clair is a researcher in Biology. Research Overview Biology
+Course-based Experience (CUREs) Seminars…" — rendering as their card preview.
+
+The fix, in `crawl.py`:
+
+- `_in_chrome()` walks outward but **stops at `<main>`**. An earlier attempt
+  checked nav-ish class names on every ancestor and matched
+  `<div class="main-wrapper has-sidebar">`, which discarded every good summary
+  on the site. Layout words are deliberately not in the pattern.
+- `_CHROME_CLASS_RE` matches as a **substring**: the wrapper is `megamenu`, and
+  `\bmenu\b` does not match it.
+- Strategy 2 gathers every candidate and picks the best, preferring prose. Several
+  wrappers on one page carry a research-ish id and only one is the summary.
+- `_looks_like_contact()` rejects the `research-next-to-photo` contact panel.
+- `_BIO_HEADING_RE` adds a `Biography` fallback — worth +31 records by itself,
+  mostly graduate students who describe their work there and have no Research
+  heading.
+
+**Known false negative.** Jack Waas (chemistry) has genuine research prose
+*inside* the contact panel, and `_looks_like_contact()` throws it away. The
+repair was applied only to records whose stored summary was junk, so he is
+untouched today — but **a full re-crawl of artsci would lose him** and anyone
+laid out like him. Worth handling before the next full TAMU crawl.
+
+**The coverage numbers went down, and that is the point.** TAMU research
+95% → 79%, `ai_review` 91% → 79%, blank 5% → 21%. The old figures counted menu
+text as research. 114 of the 443 had real prose recoverable and were re-enriched;
+the other 329 are genuinely empty pages.
+
+**Which exposes a separate problem.** Sampling those 329 turns up "Executive
+Assistant II", "Senior Administrative Coordinator II", postdocs and graduate
+students — pages with ~140 characters of name and email. **Administrative staff
+are in a research-faculty dataset.** `crawl.py`'s title filter for artsci is not
+doing what `FACULTY_TITLE_RE` does for MIT. Fixing that would drop the record
+count and raise every quality percentage at once, because the denominator is
+wrong. Not attempted here.
+
 ### 2. Remaining department gaps — all investigated, all documented
 
 Each has its reason recorded in `census.py` alongside the probe results. None

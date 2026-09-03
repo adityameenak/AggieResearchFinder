@@ -455,6 +455,66 @@ _LAB_LINK_RE = re.compile(
 )
 
 
+# Site navigation that looks like content to an attribute search. artsci.tamu.edu
+# renders a "Research" mega-menu whose wrapper carries a research-ish class, and
+# it appears before <main>, so `soup.find(class_=re.compile("research"))` returned
+# the menu on 443 profiles — every one of them ending up with "Close the Research
+# menu" as its research summary.
+# Substring, not word-boundary: the offending wrapper is class="megamenu", where
+# \bmenu\b does not match. Layout words like "sidebar" are deliberately absent —
+# artsci wraps real content in <div class="main-wrapper has-sidebar">.
+_CHROME_CLASS_RE = re.compile(
+    r"(nav|menu|drawer|offcanvas|breadcrumb|skip-link|site-header|site-footer)", re.I)
+
+# What a harvested menu reads like, as a last line of defence for layouts the
+# ancestor check does not recognise.
+_MENU_TEXT_RE = re.compile(
+    r"(close the .{0,30}menu|skip to (main|content)|toggle navigation)", re.I)
+
+
+_BIO_HEADING_RE = re.compile(r"^(biography|bio|about( me)?|profile)$", re.I)
+
+
+def _in_chrome(el) -> bool:
+    """True if *el* sits inside site navigation rather than page content.
+
+    Walks outward and stops at <main>: anything inside the page's main content
+    is content by definition, whatever the layout classes above it say.
+    """
+    for parent in el.parents:
+        if parent.name in ("main", "article") or parent.get("role") == "main":
+            return False
+        if parent.name in ("nav", "header", "footer"):
+            return True
+        if parent.get("role") in ("navigation", "banner", "contentinfo"):
+            return True
+        for attr in (" ".join(parent.get("class") or []), parent.get("id") or ""):
+            if attr and _CHROME_CLASS_RE.search(attr):
+                return True
+    return False
+
+
+# artsci wraps the contact panel in <div class="profile research-next-to-photo">,
+# a layout class that the "research" attribute search matches. The panel holds a
+# title and contact details, never research prose.
+_CONTACT_RE = re.compile(r"(phone|email|office|fax|linkedin)\s*:", re.I)
+
+
+def _looks_like_contact(text: str) -> bool:
+    """True for a contact panel: a real summary does not open with a phone number."""
+    return bool(_CONTACT_RE.search(text[:200]))
+
+
+def _looks_like_menu(text: str) -> bool:
+    """True for text that is site navigation rather than a summary.
+
+    Deliberately narrow. An earlier version also rejected anything without a
+    full stop, which threw away legitimate keyword-list summaries ("Energy |
+    Inorganic | Materials | Nanoscience").
+    """
+    return not text or bool(_MENU_TEXT_RE.search(text))
+
+
 def _collect_section_text(heading_tag, soup) -> str:
     """Gather text after *heading_tag* until the next heading.
 
@@ -473,6 +533,8 @@ def _collect_section_text(heading_tag, soup) -> str:
             continue
         if any(id(anc) in taken for anc in el.parents):
             continue  # parent already captured this text
+        if _in_chrome(el):
+            continue
         t = el.get_text(" ", strip=True)
         if t:
             parts.append(t)
@@ -489,18 +551,45 @@ def _extract_research_summary(soup) -> str:
     # Strategy 1: heading followed by body text
     for heading in soup.find_all(["h2", "h3", "h4", "h5", "strong", "b"]):
         text = heading.get_text(strip=True)
-        if _RESEARCH_HEADING_RE.match(text):
+        if _RESEARCH_HEADING_RE.match(text) and not _in_chrome(heading):
             research_summary = _collect_section_text(heading, soup)
-            if research_summary:
+            if (research_summary and not _looks_like_menu(research_summary)
+                    and not _looks_like_contact(research_summary)):
                 break
+            research_summary = ""
 
     # Strategy 2: id/class attributes containing "research" etc.
     if not research_summary:
         for attr_val in ("research", "research-interests", "research-areas", "expertise"):
-            el = (soup.find(id=re.compile(attr_val, re.I)) or
-                  soup.find(class_=re.compile(attr_val, re.I)))
-            if el:
-                research_summary = re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()[:1200]
+            matches = (soup.find_all(id=re.compile(attr_val, re.I)) +
+                       soup.find_all(class_=re.compile(attr_val, re.I)))
+            cands = []
+            for el in matches:
+                own = " ".join(el.get("class") or []) + " " + (el.get("id") or "")
+                if _in_chrome(el) or _CHROME_CLASS_RE.search(own):
+                    continue
+                text = re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()[:1200]
+                if text and not _looks_like_menu(text) and not _looks_like_contact(text):
+                    cands.append(text)
+            if cands:
+                # Prefer prose over a bare list of links: several wrappers on the
+                # same page carry a research-ish id, and only one is the summary.
+                prose = [t for t in cands if "." in t]
+                research_summary = max(prose or cands, key=len)
+                break
+
+    # Strategy 2b: a "Biography" section. Lower priority than anything research-
+    # specific, but on artsci many people (graduate students especially) write
+    # their research there and have no Research heading at all.
+    if not research_summary:
+        for heading in soup.find_all(["h2", "h3", "h4", "h5", "strong", "b"]):
+            if not _BIO_HEADING_RE.match(heading.get_text(strip=True)):
+                continue
+            if _in_chrome(heading):
+                continue
+            text = _collect_section_text(heading, soup)
+            if len(text) > 60 and not _looks_like_menu(text) and not _looks_like_contact(text):
+                research_summary = text
                 break
 
     # Strategy 3: Drupal / CMS field wrappers common on TAMU sites
@@ -508,9 +597,11 @@ def _extract_research_summary(soup) -> str:
         for wrapper_cls in ("field-name-body", "field-body", "field--name-body",
                             "content-area", "profile-body"):
             el = soup.find(class_=re.compile(wrapper_cls, re.I))
-            if el:
-                research_summary = re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()[:1200]
-                if len(research_summary) > 80:
+            if el and not _in_chrome(el):
+                text = re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()[:1200]
+                if (len(text) > 80 and not _looks_like_menu(text)
+                        and not _looks_like_contact(text)):
+                    research_summary = text
                     break
 
     # Strategy 4: longest <p> on the page (best-effort fallback)
@@ -518,7 +609,7 @@ def _extract_research_summary(soup) -> str:
         candidates = [
             re.sub(r"\s+", " ", p.get_text(" ", strip=True)).strip()
             for p in soup.find_all("p")
-            if len(p.get_text(strip=True)) > 100
+            if len(p.get_text(strip=True)) > 100 and not _in_chrome(p)
         ]
         if candidates:
             research_summary = max(candidates, key=len)[:1200]
