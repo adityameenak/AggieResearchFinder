@@ -4,6 +4,7 @@ import { extractTopicsFromFaculty, loadSearchCounts, saveSearchCounts, mergeTopi
 import {
   getApplications, createApplication, updateApplication, deleteApplication,
 } from './utils/trackerStorage'
+import { getStudentEmail } from './utils/studentEmail'
 
 const AppContext = createContext(null)
 
@@ -117,6 +118,28 @@ export function AppProvider({ children }) {
       a.profId === id || (prof?.alias_ids || []).includes(a.profId))
   }
 
+  // Tracker fields derived from a faculty record. Shared by every path that
+  // creates an entry from a professor so they never drift apart.
+  // `emailUsed` is the *student's* address (the form modal labels it that way
+  // and hints `you@<school>.edu`) — it used to be filled with the professor's
+  // email by mistake.
+  function profToFields(p) {
+    return {
+      profId:        p.id,
+      professorName: p.name || '',
+      department:    p.department || '',
+      researchArea:  (p.scholar_interests || []).slice(0, 3).join(', '),
+      sourceLink:    p.profile_url || '',
+      emailUsed:     getStudentEmail(school.code),
+    }
+  }
+
+  function findAppForProf(prof) {
+    const id = prof?.id
+    return applications.find(a =>
+      a.profId === id || (prof?.alias_ids || []).includes(a.profId))
+  }
+
   // Toggle a professor in/out of the saved list. Accepts a prof object
   // (preferred — captures name/dept/links) or a bare id (back-compat).
   function toggleSave(prof) {
@@ -127,17 +150,43 @@ export function AppProvider({ children }) {
       deleteApplication(existing.id, school.code)
     } else {
       const p = typeof prof === 'object' && prof ? prof : {}
-      createApplication({
-        profId:        id,
-        professorName: p.name || '',
-        department:    p.department || '',
-        researchArea:  (p.scholar_interests || []).slice(0, 3).join(', '),
-        sourceLink:    p.profile_url || '',
-        emailUsed:     p.email || '',
-        status:        'Saved',
-      }, school.code)
+      createApplication({ ...profToFields(p), profId: id, status: 'Saved' }, school.code)
     }
     refreshApps()
+  }
+
+  // The email modal just handed a draft to the student's mail client. Record
+  // that on the list: create the entry if needed, set status Emailed, stamp
+  // emailedAt. Returns what `undoEmailed` needs to roll it back.
+  function markEmailed(prof, { studentEmail } = {}) {
+    if (!prof?.id) return null
+    const now   = new Date().toISOString()
+    const email = (studentEmail || '').trim() || getStudentEmail(school.code)
+    const existing = findAppForProf(prof)
+    let info
+    if (existing) {
+      updateApplication(existing.id, {
+        status: 'Emailed', emailedAt: now, ...(email && { emailUsed: email }),
+      }, school.code)
+      info = { id: existing.id, previousStatus: existing.status, created: false }
+    } else {
+      const app = createApplication({
+        ...profToFields(prof), emailUsed: email, status: 'Emailed', emailedAt: now,
+      }, school.code)
+      info = { id: app.id, previousStatus: null, created: true }
+    }
+    refreshApps()
+    return info
+  }
+
+  // "Still drafting": the entry stays on the list, but the status goes back to
+  // what it was (or Drafting Email for a brand-new entry) and the stamp clears.
+  // Returns the status that was set so the caller can show it.
+  function undoEmailed({ id, previousStatus, created }) {
+    const status = created ? 'Drafting Email' : (previousStatus || 'Drafting Email')
+    updateApplication(id, { status, emailedAt: '' }, school.code)
+    refreshApps()
+    return status
   }
 
   // CRUD used by the My List page (kept here so all mutations flow through one
@@ -151,7 +200,7 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider value={{
       faculty, departments, loading, error,
-      applications, savedCount, isSaved, toggleSave,
+      applications, savedCount, isSaved, toggleSave, markEmailed, undoEmailed,
       addApp, editApp, removeApp, refreshApps,
       topicChips, topicChipsFor, recordSearch,
     }}>

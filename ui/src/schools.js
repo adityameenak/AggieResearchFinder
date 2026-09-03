@@ -6,6 +6,11 @@
  * picker where all schools render at once). App-wide theming is separate: the
  * per-school app uses `maroon-*` classes repainted by `[data-school="<code>"]`
  * CSS-variable overrides in index.css — add a block there for each school.
+ *
+ * `mailProvider` ('google' | 'microsoft') is a best guess at the school's
+ * student email platform; it only chooses which compose button the email
+ * modal emphasises — all providers are always offered. `emailDomain` is the
+ * placeholder hint for the student's school address.
  */
 export const SCHOOLS = {
   tamu: {
@@ -29,6 +34,8 @@ export const SCHOOLS = {
     description: 'Discover STEM research labs across Texas A&M, powered by AI matching.',
     state: 'texas',
     city:  'College Station',
+    mailProvider: 'google',
+    emailDomain:  'tamu.edu',
     available: true,
   },
   rice: {
@@ -50,6 +57,8 @@ export const SCHOOLS = {
     description: 'Discover STEM research labs across Rice, powered by AI matching.',
     state: 'texas',
     city:  'Houston',
+    mailProvider: 'google',
+    emailDomain:  'rice.edu',
     available: true,
   },
   ut: {
@@ -72,6 +81,8 @@ export const SCHOOLS = {
     // Live: all 13 STEM departments crawled (Cockrell engineering + CNS).
     state: 'texas',
     city:  'Austin',
+    mailProvider: 'microsoft',
+    emailDomain:  'utexas.edu',
     available: true,
   },
   utd: {
@@ -93,6 +104,8 @@ export const SCHOOLS = {
     description: 'Discover STEM research labs across UT Dallas, powered by AI matching.',
     state: 'texas',
     city:  'Richardson',
+    mailProvider: 'microsoft',
+    emailDomain:  'utdallas.edu',
     available: true,
   },
   mit: {
@@ -114,6 +127,8 @@ export const SCHOOLS = {
     description: 'Discover STEM research labs across MIT, powered by AI matching.',
     state: 'massachusetts',
     city:  'Cambridge',
+    mailProvider: 'microsoft',
+    emailDomain:  'mit.edu',
     available: true,
   },
   harvard: {
@@ -135,6 +150,8 @@ export const SCHOOLS = {
     description: 'Discover STEM research labs across Harvard SEAS, powered by AI matching.',
     state: 'massachusetts',
     city:  'Cambridge',
+    mailProvider: 'google',
+    emailDomain:  'harvard.edu',
     available: true,
   },
 }

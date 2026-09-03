@@ -62,7 +62,13 @@ export function getApplications(schoolCode = DEFAULT_SCHOOL) {
 }
 
 export function saveApplications(apps, schoolCode = DEFAULT_SCHOOL) {
-  localStorage.setItem(storageKey(schoolCode), JSON.stringify(apps))
+  try {
+    localStorage.setItem(storageKey(schoolCode), JSON.stringify(apps))
+  } catch (e) {
+    // Quota exceeded / private browsing. Callers (including the email modal's
+    // send click) must not blow up because the list couldn't be persisted.
+    console.warn('[tracker] could not save applications:', e)
+  }
 }
 
 /** Create a new application. Returns the created record. */
@@ -79,6 +85,7 @@ export function createApplication(fields, schoolCode = DEFAULT_SCHOOL) {
     lastUpdated:   now,
     followUpDate:  '',
     emailUsed:     '',
+    emailedAt:     '',   // ISO timestamp set when the email modal opens a compose window
     notes:         '',
     sourceLink:    '',
     pinned:        false,
@@ -112,13 +119,13 @@ export function deleteApplication(id, schoolCode = DEFAULT_SCHOOL) {
 export function exportToCSV(apps) {
   const headers = [
     'Professor Name', 'Lab Name', 'Department', 'Research Area',
-    'Status', 'Date Applied', 'Follow-Up Date', 'Email Used',
+    'Status', 'Date Applied', 'Follow-Up Date', 'Email Used', 'Emailed At',
     'Notes', 'Source Link', 'Last Updated',
   ]
   const esc = v => `"${String(v ?? '').replace(/"/g, '""').replace(/[\r\n]+/g, ' ')}"`
   const rows = apps.map(a => [
     a.professorName, a.labName, a.department, a.researchArea,
-    a.status, a.dateApplied, a.followUpDate, a.emailUsed,
+    a.status, a.dateApplied, a.followUpDate, a.emailUsed, a.emailedAt,
     a.notes, a.sourceLink, a.lastUpdated,
   ].map(esc).join(','))
   const csv  = [headers.join(','), ...rows].join('\r\n')
@@ -184,6 +191,7 @@ export function seedDemoData(schoolCode = DEFAULT_SCHOOL) {
       dateApplied:   offset(-30),
       followUpDate:  offset(-2),
       emailUsed:     `student@${schoolCode}.edu`,
+      emailedAt:     ts(16),
       notes:         'No response after 2 weeks. Sent a polite follow-up email on 3/5.',
       sourceLink:    '',
       pinned:        false,

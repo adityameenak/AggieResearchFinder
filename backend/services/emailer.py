@@ -16,6 +16,7 @@ Rules:
 - Mention the student's relevant background naturally (do not list every skill).
 - Express genuine curiosity and ask about opportunities — do not presume acceptance.
 - Do NOT use phrases like "I am deeply passionate" or "I would be honored".
+- State once, naturally, that the student's resume is attached.
 - End with a clear, polite call to action.
 
 Format your response exactly as:
@@ -146,7 +147,8 @@ def generate_draft(
         f"Student stated interests: {interests}\n"
         f"Student inferred themes: {themes}\n"
         f"Student skills: {skills}\n\n"
-        f"The student attends {school_name} — sign off with that university name.\n\n"
+        f"The student attends {school_name} — sign off with that university name.\n"
+        "The student's resume will be attached to this email.\n\n"
         f"{TONE_NOTES.get(tone, TONE_NOTES['professional'])}\n\n"
         "Write the email now."
     )

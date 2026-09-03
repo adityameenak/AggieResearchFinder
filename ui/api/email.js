@@ -39,7 +39,7 @@ const TONES = {
 }
 
 const SYSTEM = `You are helping a university student write a professional cold-outreach email to a professor about research opportunities.
-Rules: sound like a real student (not a template), be concise (3-4 short paragraphs), reference specific research topics, mention relevant background naturally, ask about opportunities rather than presuming acceptance, avoid clichés like "deeply passionate".
+Rules: sound like a real student (not a template), be concise (3-4 short paragraphs), reference specific research topics, mention relevant background naturally, ask about opportunities rather than presuming acceptance, avoid clichés like "deeply passionate". State once, naturally, that the student's resume is attached (e.g. "I've attached my resume").
 Format exactly as:
 Subject: [subject line]
 
@@ -51,7 +51,7 @@ async function llmDraft(prof, resumeProfile, interests, tone, apiKey, schoolName
   const skills  = (resumeProfile?.technical_skills || []).slice(0, 5).join(', ') || 'various tools'
   const themes  = (resumeProfile?.inferred_themes  || []).slice(0, 4).join(', ') || interests
 
-  const prompt = `Professor: Prof. ${prof.name}\nTitle: ${prof.title || ''}\nDepartment: ${prof.department || ''}\nResearch: ${(prof.research_summary || '').slice(0, 400)}\n\nStudent: ${resumeProfile?.name || 'Student'}, ${resumeProfile?.year || ''} ${resumeProfile?.major || 'Engineering student'} at ${schoolName}\nInterests: ${interests}\nThemes from resume: ${themes}\nSkills: ${skills}\n\nTone: ${TONES[tone] || TONES.professional}\n\nThe student attends ${schoolName} — sign off with that university name.\n\nWrite the email now.`
+  const prompt = `Professor: Prof. ${prof.name}\nTitle: ${prof.title || ''}\nDepartment: ${prof.department || ''}\nResearch: ${(prof.research_summary || '').slice(0, 400)}\n\nStudent: ${resumeProfile?.name || 'Student'}, ${resumeProfile?.year || ''} ${resumeProfile?.major || 'Engineering student'} at ${schoolName}\nInterests: ${interests}\nThemes from resume: ${themes}\nSkills: ${skills}\n\nTone: ${TONES[tone] || TONES.professional}\n\nThe student attends ${schoolName} — sign off with that university name.\nThe student's resume will be attached to this email.\n\nWrite the email now.`
 
   const msg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',

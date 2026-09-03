@@ -22,8 +22,14 @@ export default function ApplicationCard({ app, onEdit, onDelete, onUpdate }) {
   const followDays = daysUntilFollowUp(app.followUpDate)
   const isFollowUpUrgent = followDays !== null && followDays <= 3
 
+  // Keep the "Emailed <date>" stamp honest when status is edited by hand:
+  // moving to Emailed stamps it (if not already), moving back before the
+  // email step clears it.
   function handleStatusSelect(s) {
-    onUpdate(app.id, { status: s })
+    const updates = { status: s }
+    if (s === 'Emailed' && !app.emailedAt) updates.emailedAt = new Date().toISOString()
+    if (['Saved', 'Interested', 'Drafting Email'].includes(s)) updates.emailedAt = ''
+    onUpdate(app.id, updates)
     setStatusOpen(false)
   }
 
@@ -85,6 +91,7 @@ export default function ApplicationCard({ app, onEdit, onDelete, onUpdate }) {
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3 text-[11px] text-stone-400">
           {app.department && <span>{deptLabel(app.department)}</span>}
           {app.researchArea && <span className="truncate max-w-[200px]">{app.researchArea}</span>}
+          {app.emailedAt && <span>Emailed {fmtDate(app.emailedAt)}</span>}
           {app.dateApplied && <span>Applied {fmtDate(app.dateApplied)}</span>}
           {app.followUpDate && !isFollowUpUrgent && <span>Follow-up {fmtDate(app.followUpDate)}</span>}
           {isFollowUpUrgent && <FollowUpReminder followUpDate={app.followUpDate} showDate />}
