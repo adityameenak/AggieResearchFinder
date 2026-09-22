@@ -162,7 +162,10 @@ export default function McpPage() {
         </div>
       </main>
 
-      <FeedbackModal open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
+      {/* FeedbackModal has no `open` prop — the caller gates it, as on Landing
+          and StatePage. Passing open={...} mounted it unconditionally, so the
+          modal covered the whole page. */}
+      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
     </div>
   )
 }
