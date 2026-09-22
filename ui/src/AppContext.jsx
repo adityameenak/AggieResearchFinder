@@ -1,8 +1,8 @@
-import { createContext, useContext, useState, useEffect, useMemo } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react'
 import { useSchool } from './SchoolContext'
 import { extractTopicsFromFaculty, loadSearchCounts, saveSearchCounts, mergeTopics } from './utils/topics'
 import {
-  getApplications, createApplication, updateApplication, deleteApplication,
+  getApplications, saveApplications, createApplication, updateApplication, deleteApplication,
 } from './utils/trackerStorage'
 import { getStudentEmail } from './utils/studentEmail'
 
@@ -48,9 +48,14 @@ export function AppProvider({ children }) {
   useEffect(() => { setApplications(getApplications(school.code)) }, [school.code])
   function refreshApps() { setApplications(getApplications(school.code)) }
 
+  // Bumped by retry() to re-run the fetch after a failure.
+  const [attempt, setAttempt] = useState(0)
+  const retry = useCallback(() => setAttempt(n => n + 1), [])
+
   useEffect(() => {
     let cancelled = false
     setLoading(true)
+    setError(null)   // a failure on one school must not follow you to the next
     loadFaculty(school.code)
       .then(data => {
         if (cancelled) return
@@ -65,12 +70,12 @@ export function AppProvider({ children }) {
         setLoading(false)
       })
     return () => { cancelled = true }
-  }, [school.code])
+  }, [school.code, attempt])
 
   // Derived: unique sorted department slugs from loaded data
-  const departments = [...new Set(
+  const departments = useMemo(() => [...new Set(
     faculty.map(f => f.department).filter(Boolean)
-  )].sort()
+  )].sort(), [faculty])
 
   // Adaptive topic chips: data-derived defaults + search behavior boost
   const [searchCounts, setSearchCounts] = useState(() => loadSearchCounts(school.code))
@@ -140,14 +145,46 @@ export function AppProvider({ children }) {
       a.profId === id || (prof?.alias_ids || []).includes(a.profId))
   }
 
+  // The last entry removed from the list, so it can be put back. A bookmark
+  // click used to delete an entry at any status — Emailed, Interview — with its
+  // notes, and nothing but the tracker page's own delete button asked first.
+  // Every removal now goes through here and UndoToast offers it back.
+  const [lastRemoved, setLastRemoved] = useState(null)
+  useEffect(() => { setLastRemoved(null) }, [school.code])
+
+  function removeWithUndo(app) {
+    const all = getApplications(school.code)
+    const index = all.findIndex(a => a.id === app.id)
+    deleteApplication(app.id, school.code)
+    setLastRemoved({ app, index, key: Date.now() })
+  }
+
+  function undoRemove() {
+    if (!lastRemoved) return
+    const all = getApplications(school.code)
+    if (!all.some(a => a.id === lastRemoved.app.id)) {
+      all.splice(Math.max(0, Math.min(lastRemoved.index, all.length)), 0, lastRemoved.app)
+      saveApplications(all, school.code)
+    }
+    setLastRemoved(null)
+    refreshApps()
+  }
+
+  const dismissUndo = useCallback(() => setLastRemoved(null), [])
+
   // Toggle a professor in/out of the saved list. Accepts a prof object
   // (preferred — captures name/dept/links) or a bare id (back-compat).
+  // Looks the entry up through alias_ids like isSaved does: matching on the
+  // live id alone made a bookmark saved under a retired id show as saved, then
+  // create a duplicate when clicked.
   function toggleSave(prof) {
     const id = typeof prof === 'string' ? prof : prof?.id
     if (!id) return
-    const existing = applications.find(a => a.profId === id)
+    const existing = typeof prof === 'object' && prof
+      ? findAppForProf(prof)
+      : applications.find(a => a.profId === id)
     if (existing) {
-      deleteApplication(existing.id, school.code)
+      removeWithUndo(existing)
     } else {
       const p = typeof prof === 'object' && prof ? prof : {}
       createApplication({ ...profToFields(p), profId: id, status: 'Saved' }, school.code)
@@ -193,14 +230,19 @@ export function AppProvider({ children }) {
   // place and the saved-state stays consistent everywhere).
   function addApp(fields)        { createApplication(fields, school.code); refreshApps() }
   function editApp(id, updates)  { updateApplication(id, updates, school.code); refreshApps() }
-  function removeApp(id)         { deleteApplication(id, school.code); refreshApps() }
+  function removeApp(id) {
+    const app = applications.find(a => a.id === id)
+    if (app) removeWithUndo(app); else deleteApplication(id, school.code)
+    refreshApps()
+  }
 
   const savedCount = applications.length
 
   return (
     <AppContext.Provider value={{
-      faculty, departments, loading, error,
+      faculty, departments, loading, error, retry,
       applications, savedCount, isSaved, toggleSave, markEmailed, undoEmailed,
+      lastRemoved, undoRemove, dismissUndo,
       addApp, editApp, removeApp, refreshApps,
       topicChips, topicChipsFor, recordSearch,
     }}>

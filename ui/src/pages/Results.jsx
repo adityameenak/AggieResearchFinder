@@ -16,10 +16,43 @@ function SearchIcon({ className = 'w-5 h-5' }) {
   )
 }
 
+/* ── Toggle switch ───────────────────────────────────────── */
+// The input is visually hidden, so the track carries the keyboard focus ring —
+// without it a keyboard user could not see which switch was focused.
+function Toggle({ checked, onChange, label, hint, className = '' }) {
+  return (
+    <label className={`flex items-start gap-3 cursor-pointer group ${className}`}>
+      <div className="relative mt-0.5 flex-shrink-0">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={e => onChange(e.target.checked)}
+          className="sr-only peer"
+        />
+        <div className="w-9 h-5 bg-cream-300 rounded-full peer-checked:bg-maroon-700
+                        transition-colors duration-200 border border-cream-400
+                        peer-checked:border-maroon-700 peer-focus-visible:ring-2
+                        peer-focus-visible:ring-maroon-700/40 peer-focus-visible:ring-offset-1" />
+        <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full
+                        shadow-sm transition-transform duration-200
+                        peer-checked:translate-x-4" />
+      </div>
+      <div>
+        <div className="text-sm font-medium text-stone-700 leading-tight
+                        group-hover:text-stone-900 transition-colors">
+          {label}
+        </div>
+        <div className="text-[11px] text-stone-400 mt-0.5 leading-relaxed">{hint}</div>
+      </div>
+    </label>
+  )
+}
+
 /* ── Filter panel (shared across sidebar + mobile) ────────── */
-function FilterPanel({ dept, setDept, hasResearchOnly, setHasResearchOnly,
-                       activeLabsOnly, hasActive, clearAll, departments, query,
-                       onDeptChange, onResearchChange, onActiveLabsChange }) {
+function FilterPanel({ dept, hasResearchOnly, activeLabsOnly, researchOnly,
+                       hasActive, clearAll, departments,
+                       onDeptChange, onResearchChange, onActiveLabsChange,
+                       onResearchFacultyChange }) {
   return (
     <div className="space-y-5">
 
@@ -58,57 +91,26 @@ function FilterPanel({ dept, setDept, hasResearchOnly, setHasResearchOnly,
                            uppercase tracking-[0.12em] mb-2">
           Content
         </label>
-        <label className="flex items-start gap-3 cursor-pointer group">
-          <div className="relative mt-0.5 flex-shrink-0">
-            <input
-              type="checkbox"
-              checked={hasResearchOnly}
-              onChange={e => onResearchChange(e.target.checked)}
-              className="sr-only peer"
-            />
-            <div className="w-9 h-5 bg-cream-300 rounded-full peer-checked:bg-maroon-700
-                            transition-colors duration-200 border border-cream-400
-                            peer-checked:border-maroon-700" />
-            <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full
-                            shadow-sm transition-transform duration-200
-                            peer-checked:translate-x-4" />
-          </div>
-          <div>
-            <div className="text-sm font-medium text-stone-700 leading-tight
-                            group-hover:text-stone-900 transition-colors">
-              Has research summary
-            </div>
-            <div className="text-[11px] text-stone-400 mt-0.5 leading-relaxed">
-              Only show faculty with published research info
-            </div>
-          </div>
-        </label>
-
-        <label className="flex items-start gap-3 cursor-pointer group mt-3">
-          <div className="relative mt-0.5 flex-shrink-0">
-            <input
-              type="checkbox"
-              checked={activeLabsOnly}
-              onChange={e => onActiveLabsChange(e.target.checked)}
-              className="sr-only peer"
-            />
-            <div className="w-9 h-5 bg-cream-300 rounded-full peer-checked:bg-maroon-700
-                            transition-colors duration-200 border border-cream-400
-                            peer-checked:border-maroon-700" />
-            <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full
-                            shadow-sm transition-transform duration-200
-                            peer-checked:translate-x-4" />
-          </div>
-          <div>
-            <div className="text-sm font-medium text-stone-700 leading-tight
-                            group-hover:text-stone-900 transition-colors">
-              Active labs only
-            </div>
-            <div className="text-[11px] text-stone-400 mt-0.5 leading-relaxed">
-              Has a lab website or Google Scholar — a likely-funded research group
-            </div>
-          </div>
-        </label>
+        <Toggle
+          checked={hasResearchOnly}
+          onChange={onResearchChange}
+          label="Has research info"
+          hint="Only show faculty whose research we could describe"
+        />
+        <Toggle
+          className="mt-3"
+          checked={activeLabsOnly}
+          onChange={onActiveLabsChange}
+          label="Active labs only"
+          hint="Has a lab website or Google Scholar — a likely-funded research group"
+        />
+        <Toggle
+          className="mt-3"
+          checked={researchOnly}
+          onChange={onResearchFacultyChange}
+          label="Research faculty only"
+          hint="Hide emeritus, teaching, adjunct and visiting appointments"
+        />
       </div>
 
       {/* Active indicator + clear */}
@@ -200,7 +202,7 @@ function Pagination({ currentPage, totalPages, goToPage }) {
 const PAGE_SIZE = 24
 
 export default function Search() {
-  const { faculty, departments, loading, topicChips, topicChipsFor, recordSearch } = useApp()
+  const { faculty, departments, loading, error, topicChips, topicChipsFor, recordSearch } = useApp()
   const school = useSchool()
   const [searchParams, setSearchParams] = useSearchParams()
   const inputRef = useRef(null)
@@ -210,13 +212,18 @@ export default function Search() {
   const deptParam = searchParams.get('dept')         ?? ''
   const hasRes    = searchParams.get('hasResearch') === '1'
   const activeParam = searchParams.get('active') === '1'
+  const researchParam = searchParams.get('research') === '1'
+  const sortParam = searchParams.get('sort') === 'name' ? 'name' : ''
   const chipsParam = searchParams.get('chips')       ?? ''
-  const pageParam = parseInt(searchParams.get('page') ?? '1', 10)
+  // ?page=abc parsed to NaN and rendered an empty grid with no empty state.
+  const rawPage   = parseInt(searchParams.get('page') ?? '1', 10)
+  const pageParam = Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1
 
   const [query,           setQuery]           = useState(qParam)
   const [dept,            setDept]            = useState(deptParam)
   const [hasResearchOnly, setHasResearchOnly] = useState(hasRes)
   const [activeLabsOnly,  setActiveLabsOnly]  = useState(activeParam)
+  const [researchOnly,    setResearchOnly]    = useState(researchParam)
   const [selectedChips,   setSelectedChips]   = useState(() => new Set(chipsParam ? chipsParam.split(',') : []))
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
@@ -225,8 +232,9 @@ export default function Search() {
     setDept(deptParam)
     setHasResearchOnly(hasRes)
     setActiveLabsOnly(activeParam)
+    setResearchOnly(researchParam)
     setSelectedChips(new Set(chipsParam ? chipsParam.split(',') : []))
-  }, [qParam, deptParam, hasRes, activeParam, chipsParam, pageParam])
+  }, [qParam, deptParam, hasRes, activeParam, researchParam, chipsParam, pageParam])
 
   /* Combine free-text query with selected chip terms */
   const combinedQuery = useMemo(() => {
@@ -241,8 +249,11 @@ export default function Search() {
 
   const tokens  = useMemo(() => tokenize(combinedQuery), [combinedQuery])
   const results = useMemo(
-    () => searchAndRank(faculty, combinedQuery, { department: deptParam, hasResearchOnly: hasRes, activeLabsOnly: activeParam }),
-    [faculty, combinedQuery, deptParam, hasRes, activeParam],
+    () => searchAndRank(faculty, combinedQuery, {
+      department: deptParam, hasResearchOnly: hasRes, activeLabsOnly: activeParam,
+      researchFacultyOnly: researchParam, sort: sortParam,
+    }),
+    [faculty, combinedQuery, deptParam, hasRes, activeParam, researchParam, sortParam],
   )
 
   // Topic chips adapt to the selected department (more specific filters).
@@ -255,32 +266,43 @@ export default function Search() {
   const currentPage = Math.min(Math.max(1, pageParam), totalPages)
   const pagedResults = results.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
 
-  function push(nextQ, nextDept, nextHasRes, nextChips = selectedChips, nextPage = 1,
-                nextActive = activeLabsOnly) {
+  // Write the search state to the URL, so a search can be shared and the back
+  // button works. Takes only what changed; everything else keeps its current
+  // value and the page resets to 1 unless given. A new search, a department or
+  // a page is a history entry; flipping a toggle or chip replaces the current one.
+  function push(changes = {}, { replace = false } = {}) {
+    const n = {
+      q: query, dept, hasRes: hasResearchOnly, active: activeLabsOnly,
+      research: researchOnly, chips: selectedChips, sort: sortParam, page: 1,
+      ...changes,
+    }
     const p = new URLSearchParams()
-    if (nextQ.trim())      p.set('q',          nextQ.trim())
-    if (nextDept)          p.set('dept',        nextDept)
-    if (nextHasRes)        p.set('hasResearch', '1')
-    if (nextActive)        p.set('active',      '1')
-    if (nextChips.size > 0) p.set('chips',      [...nextChips].join(','))
-    if (nextPage > 1)      p.set('page',        String(nextPage))
-    setSearchParams(p, { replace: true })
-  }
-
-  function onActiveLabsChange(checked) {
-    setActiveLabsOnly(checked)
-    push(query, dept, hasResearchOnly, selectedChips, 1, checked)
+    if (n.q.trim())        p.set('q',           n.q.trim())
+    if (n.dept)            p.set('dept',        n.dept)
+    if (n.hasRes)          p.set('hasResearch', '1')
+    if (n.active)          p.set('active',      '1')
+    if (n.research)        p.set('research',    '1')
+    if (n.chips.size > 0)  p.set('chips',       [...n.chips].join(','))
+    if (n.sort)            p.set('sort',        n.sort)
+    if (n.page > 1)        p.set('page',        String(n.page))
+    setSearchParams(p, { replace })
   }
 
   function goToPage(page) {
-    push(query, dept, hasResearchOnly, selectedChips, page)
+    push({ page })
     topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   function onSubmit(e) {
     e?.preventDefault()
     if (query.trim()) recordSearch(query)
-    push(query, dept, hasResearchOnly)
+    push()
+  }
+
+  function clearQuery() {
+    setQuery('')
+    push({ q: '' }, { replace: true })   // clearing the box used to leave the results filtered
+    inputRef.current?.focus()
   }
 
   function toggleChip(q) {
@@ -288,8 +310,15 @@ export default function Search() {
     if (next.has(q)) next.delete(q)
     else next.add(q)
     setSelectedChips(next)
-    push(query, dept, hasResearchOnly, next)
+    push({ chips: next }, { replace: true })
     inputRef.current?.focus()
+  }
+
+  const filterHandlers = {
+    onDeptChange:            v => { setDept(v); push({ dept: v }) },
+    onResearchChange:        v => { setHasResearchOnly(v); push({ hasRes: v }, { replace: true }) },
+    onActiveLabsChange:      v => { setActiveLabsOnly(v); push({ active: v }, { replace: true }) },
+    onResearchFacultyChange: v => { setResearchOnly(v); push({ research: v }, { replace: true }) },
   }
 
   function clearAll() {
@@ -297,13 +326,14 @@ export default function Search() {
     setDept('')
     setHasResearchOnly(false)
     setActiveLabsOnly(false)
+    setResearchOnly(false)
     setSelectedChips(new Set())
-    setSearchParams({}, { replace: true })
+    setSearchParams({})
     inputRef.current?.focus()
   }
 
-  const hasActive = qParam || deptParam || hasRes || activeParam || chipsParam || pageParam > 1
-  const activeFilterCount = [deptParam, hasRes, activeParam, chipsParam].filter(Boolean).length
+  const hasActive = qParam || deptParam || hasRes || activeParam || researchParam || chipsParam || pageParam > 1
+  const activeFilterCount = [deptParam, hasRes, activeParam, researchParam, chipsParam].filter(Boolean).length
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-54px)] bg-cream-100">
@@ -329,7 +359,9 @@ export default function Search() {
           </h1>
           <p className="text-[15px] text-stone-500 mb-7">
             Explore{' '}
-            <span className="font-semibold text-stone-700">{faculty.length || 553}</span>
+            <span className="font-semibold text-stone-700">
+              {loading || error ? '—' : faculty.length.toLocaleString('en-US')}
+            </span>
             {' '}researchers across {departments.length || 'all'} STEM departments at {school.shortName}.
           </p>
 
@@ -358,7 +390,7 @@ export default function Search() {
               {query && (
                 <button
                   type="button"
-                  onClick={() => setQuery('')}
+                  onClick={clearQuery}
                   className="px-3 text-stone-300 hover:text-stone-500 transition-colors
                              flex-shrink-0"
                   aria-label="Clear query"
@@ -393,6 +425,7 @@ export default function Search() {
                     key={q}
                     type="button"
                     onClick={() => toggleChip(q)}
+                    aria-pressed={active}
                     className={`text-xs px-3.5 py-1.5 rounded-full border
                                transition-all duration-150 shadow-sm
                                hover:scale-[1.03] active:scale-[0.98]
@@ -424,15 +457,10 @@ export default function Search() {
                   Filters
                 </div>
                 <FilterPanel
-                  dept={dept} setDept={setDept}
-                  hasResearchOnly={hasResearchOnly}
-                  setHasResearchOnly={setHasResearchOnly}
-                  activeLabsOnly={activeLabsOnly}
+                  dept={dept} hasResearchOnly={hasResearchOnly}
+                  activeLabsOnly={activeLabsOnly} researchOnly={researchOnly}
                   hasActive={hasActive} clearAll={clearAll}
-                  departments={departments} query={query}
-                  onDeptChange={v => { setDept(v); push(query, v, hasResearchOnly) }}
-                  onResearchChange={v => { setHasResearchOnly(v); push(query, dept, v) }}
-                  onActiveLabsChange={onActiveLabsChange}
+                  departments={departments} {...filterHandlers}
                 />
               </div>
 
@@ -459,6 +487,7 @@ export default function Search() {
               <div className="flex items-center gap-3 flex-wrap">
                 <button
                   onClick={() => setMobileFiltersOpen(o => !o)}
+                  aria-expanded={mobileFiltersOpen}
                   className={`flex items-center gap-2 text-sm px-4 py-2 rounded-xl border
                               transition-colors font-medium ${
                     hasActive
@@ -488,15 +517,10 @@ export default function Search() {
               {mobileFiltersOpen && (
                 <div className="mt-3 bg-cream-50 rounded-2xl border border-cream-300 p-5">
                   <FilterPanel
-                    dept={dept} setDept={setDept}
-                    hasResearchOnly={hasResearchOnly}
-                    setHasResearchOnly={setHasResearchOnly}
-                    activeLabsOnly={activeLabsOnly}
+                    dept={dept} hasResearchOnly={hasResearchOnly}
+                    activeLabsOnly={activeLabsOnly} researchOnly={researchOnly}
                     hasActive={hasActive} clearAll={clearAll}
-                    departments={departments} query={query}
-                    onDeptChange={v => { setDept(v); push(query, v, hasResearchOnly) }}
-                    onResearchChange={v => { setHasResearchOnly(v); push(query, dept, v) }}
-                    onActiveLabsChange={onActiveLabsChange}
+                    departments={departments} {...filterHandlers}
                   />
                 </div>
               )}
@@ -504,7 +528,7 @@ export default function Search() {
 
             {/* Results toolbar */}
             {!loading && (
-              <div className="flex items-center justify-between mb-6 pb-4
+              <div className="flex items-center justify-between flex-wrap gap-3 mb-6 pb-4
                               border-b border-cream-300">
                 <div className="text-sm text-stone-500">
                   {results.length === 0 ? (
@@ -529,11 +553,21 @@ export default function Search() {
                     </>
                   )}
                 </div>
-                {combinedQuery && results.length > 0 && (
-                  <span className="text-[11px] text-stone-400 font-medium
-                                   uppercase tracking-[0.1em]">
-                    Ranked by relevance
-                  </span>
+                {results.length > 1 && (
+                  <label className="flex items-center gap-2 text-[11px] text-stone-400
+                                    font-medium uppercase tracking-[0.1em]">
+                    Sort
+                    <select
+                      value={sortParam}
+                      onChange={e => push({ sort: e.target.value })}
+                      className="text-xs normal-case tracking-normal font-medium text-stone-700
+                                 border border-cream-400 rounded-lg px-2 py-1 bg-cream-50
+                                 focus:outline-none focus:ring-2 focus:ring-maroon-700/30"
+                    >
+                      <option value="">{combinedQuery ? 'Relevance' : 'Most complete profiles'}</option>
+                      <option value="name">Name (A–Z)</option>
+                    </select>
+                  </label>
                 )}
               </div>
             )}
@@ -574,7 +608,7 @@ export default function Search() {
             )}
 
             {/* Empty state */}
-            {!loading && results.length === 0 && (
+            {!loading && !error && results.length === 0 && (
               <div className="flex flex-col items-center justify-center py-28 text-center">
                 <div
                   className="w-16 h-16 rounded-full bg-cream-200 border border-cream-300
@@ -603,7 +637,7 @@ export default function Search() {
             )}
 
             {/* Browse-all footer nudge */}
-            {!loading && !qParam && !deptParam && !hasRes && !chipsParam && results.length > 0 && results.length <= PAGE_SIZE && (
+            {!loading && !hasActive && results.length > 0 && results.length <= PAGE_SIZE && (
               <p className="text-center text-xs text-stone-400 mt-10 pb-2">
                 Showing all{' '}
                 <span className="font-semibold">{results.length}</span>{' '}

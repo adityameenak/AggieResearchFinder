@@ -35,7 +35,11 @@ export function profBrief(prof) {
   return compact({
     id: prof.id,
     name: prof.name,
-    title: prof.title,
+    // The rank phrase; the full title can be a paragraph of endowed chairs.
+    title: prof.title_short || prof.title,
+    // Only when it isn't an ordinary research appointment — an agent drafting
+    // outreach for a lab position needs to know a professor is emeritus.
+    appointment: prof.rank_type && prof.rank_type !== 'research' ? prof.rank_type : undefined,
     school: schoolName(prof.university),
     school_code: prof.university,
     department: prof.department ? deptLabel(prof.department) : '',
@@ -56,6 +60,8 @@ export function profBrief(prof) {
 export function profFull(prof, publications = []) {
   return compact({
     ...profBrief(prof),
+    title: prof.title,
+    credentials: prof.credentials,
     phone: prof.phone,
     office: prof.office,
     photo_url: prof.photo_url,

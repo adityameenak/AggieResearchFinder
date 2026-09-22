@@ -67,7 +67,7 @@
     "photo_url": "https://directory.cns.utexas.edu/sites/default/files/2026-06/Screenshot%202026-06-12%20at%203.10.27%E2%80%AFPM.png",
     "phone": "",
     "office": "",
-    "ai_review": "",
+    "ai_review": "Blake Bordelon’s research in the neuroscience department centers on the intersection of machine learning and theoretical neuroscience, primarily investigating the mechanisms underlying generalization in complex neural networks. His work utilizes techniques like kernel regression and infinitely wide networks to explore phenomena such as spectral bias and task-model alignment, demonstrating how these factors contribute to improved performance across diverse datasets. Specifically, Bordelon has investigated spectrum-dependent learning curves and scaling laws within these network architectures, alongside developing a self-consistent dynamical field theory to model kernel evolution. Notably, he’s also examined the “silent alignment effect,” suggesting that neural networks can implicitly learn kernels to solve problems without explicit task-specific training. This research leverages computational modeling and theoretical analysis to provide novel insights into the learning dynamics within large neural systems.",
     "scholar_interests": [
       "Machine Learning",
       "Theoretical Neuroscience"

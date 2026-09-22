@@ -1,6 +1,6 @@
 # Handoff
 
-State of the project as of **2026-09-03**. `CLAUDE.md` covers architecture and
+State of the project as of **2026-09-22**. `CLAUDE.md` covers architecture and
 the rules that must not be broken; this covers what is running, what is
 unfinished, and the things that will bite you.
 
@@ -10,59 +10,48 @@ unfinished, and the things that will bite you.
 
 Live at **stemresearchfinder.tech** (Vercel, auto-deploys from `main`).
 
-**5,260 faculty across 6 universities.**
+**5,218 faculty across 6 universities.** Percentages count only *valid* values
+(see `crawler/quality.py`), so they are lower than before 2026-09-22 in places —
+that drop was a correction, not a regression:
 
 | school | records | photo | email | research | ai_review | interests | blank |
 |---|---|---|---|---|---|---|---|
-| TAMU | 1,676 | 100% | 99% | 89% | 87% | 34% | 12% |
-| UT Austin | 1,147 | 90% | 95% | 90% | 88% | 3% | 12% |
-| MIT | 792 | 98% | 100% | 97% | 97% | 41% | 3% |
-| Rice | 618 | 97% | 96% | 87% | 85% | 1% | 15% |
-| UT Dallas | 606 | 100% | 100% | 68% | 68% | 2% | 32% |
-| Harvard | 421 | 84% | 95% | 95% | 94% | 26% | 5% |
+| TAMU | 1,674 | 96% | 98% | 82% | 87% | 34% | 17% |
+| UT Austin | 1,134 | 88% | 95% | 89% | 89% | 3% | 11% |
+| MIT | 773 | 78% | 100% | 97% | 97% | 41% | 3% |
+| Rice | 618 | 97% | 95% | 85% | 86% | 1% | 15% |
+| UT Dallas | 606 | 86% | 98% | 68% | 68% | 2% | 32% |
+| Harvard | 413 | 71% | 83% | 95% | 95% | 27% | 5% |
 
-Run `python census.py --audit` for the live figure. **Do not compare these
-against notes written before 2026-09-03** — the record count dropped from 5,641
-when `merge.py` started dropping non-faculty, and TAMU's research coverage moved
-twice in one day (down when 443 navigation-menu summaries were removed, up when
-382 students and staff were). Both moves were corrections.
+`python census.py --audit --quality` for the live figures. `--quality` must read
+0 in every cell; `merge.py` runs `quality.clean()` on every merge.
 
-Department gaps: **TAMU 2, Rice 0, UT 1, UTD 0, MIT 0, Harvard 2** — all
-investigated, all recorded in `census.py`. None is simply unattempted.
+### The 2026-09-22 quality pass
 
----
+- **UT Dallas outreach went to the research office.** 603 of 606 records had
+  the site footer's `oris@utdallas.edu`. Real addresses were recovered from the
+  profile's ROT13-obfuscated anchor (591), and `crawl_utd.py` now skips the footer.
+  MIT biology's `bexec@` (72) was recovered by surname match. Harvard dental's
+  44 `clinical_affairs@` are blanked — HSDM is Akamai-protected (403) and needs
+  the CDP browser session below to recover.
+- **Filler removed**: 379 placeholder photos/logos, 617 non-lab "lab websites",
+  114 navigation-menu summaries, 22 TAMU Health footers, 28 mojibake fields, 51
+  junk reviews; honorifics/degrees moved from `name` to `credentials`.
+- **UT mechanical engineering** moved to the Cockrell theme; all 65 titles read
+  "Distinguished". Re-extracted. 6 listing pages scraped as people were dropped.
+- **34 people were listed twice** under name variants; merged by shared personal email.
+- **New fields**: `credentials`, `title_short` (cards), `rank_type`
+  (research/teaching/emeritus/adjunct/visiting — badged in the UI, down-weighted
+  in matching, filterable).
+- 71 AI reviews regenerated; 1 still errors (`needs_review` reports it).
 
-## The one open task
+### Open items
 
-### 26 records need an `ai_review`
-
-They have real research text (scraped from Google Scholar on 2026-09-02) and are
-ready for a review. The pass was cut short when the Windows GPU box's tunnel
-dropped mid-run.
-
-```bash
-cd crawler
-cloudflared access tcp --hostname ollama.akvaithi.page --url localhost:11435 \
-  --service-token-id "$CF_ACCESS_CLIENT_ID" \
-  --service-token-secret "$CF_ACCESS_CLIENT_SECRET" &
-curl -s http://localhost:11435/api/tags          # expect the model list
-
-for f in faculty faculty-tamu-health faculty-harvard faculty-ut faculty-mit2 \
-         faculty-rice faculty-ut-neuro faculty-utd; do
-  OLLAMA_HOST=http://localhost:11435 ./.venv/bin/python -u enrich_ollama.py --file $f.json
-done
-./.venv/bin/python merge.py --sync-sources
-./.venv/bin/python census.py --audit
-cd ../ui && npm run build
-```
-
-Roughly a minute of GPU time. `HANDOFF-ollama-windows.md` is the setup doc for
-that machine; `gemma3:4b` and nothing else (see CLAUDE.md on model consistency).
-
-**If it fails, read the status code before touching the Access config.** With a
-valid service token, **403** means Access refused you and **530** means Access
-passed you and the origin is unreachable — 530 is the Windows box asleep or
-`cloudflared` not running, and no amount of policy editing will fix it.
+- **`crawler/stale_profiles.json`** lists 16 records whose profile page now 404s —
+  probably people who left. Review by hand; nothing was deleted.
+- **Harvard HSDM emails** need a CDP run (see "Akamai" below).
+- A site-wide dead-profile check has only been run on the pages re-extracted
+  this pass; `reextract.py --host <host> --all --dry-run` does it per host.
 
 ---
 
@@ -99,9 +88,10 @@ Confirmed three ways: absent from raw HTML, absent from the rendered DOM after
 | UT | Oceanography | Marine Science Institute is client-rendered and returned 0 KB even in a browser |
 | Harvard | Medicine, Neuroscience | HMS department URLs 404; its subdomains yield 5, 8, 1, 1, 0. Biomedical Informatics has 88 people but publishes no title line, so faculty cannot be separated from students |
 
-### Harvard photos 84%, UT 90%
+### Harvard photos 71%, MIT 78%
 
-Inherited from the newer Drupal parsers. Not investigated.
+Mostly placeholders that `quality.py` now refuses to count (MIT EECS logo ×104,
+a Harvard shield ×55). There is no real photo behind them to recover.
 
 ---
 
@@ -231,24 +221,6 @@ verified for imports, prompt assembly and the three grounding tiers, but its var
 one run against `vercel dev` or a preview deploy with the key present. Do that before claiming the
 complaint is fixed.
 
-## Known data bug: 23 TAMU Health records carry their site footer
-
-`list_topics` for TAMU surfaced `Risk, Fraud & Misconduct Hotline`, a mojibake copyright line, and
-`Dentistry / Medicine / Nursing / Pharmacy` all at exactly the same count — the signature of one
-nav+footer block copied into many records. 23 records (`public-health`, `dentistry`) have the TAMU
-Health site chrome inside `research_summary`; `Zhou Chen, DDS` is one.
-
-This is the same class of bug as the artsci navigation-menu leak that hit 443 records (CLAUDE.md).
-**It is not fixed** — only the symptom is contained, by `CHROME_PATTERNS` in `ui/src/utils/topics.js`
-keeping the chrome out of topic chips. The underlying summaries are still wrong, so those 23 records
-have a junk `research_summary` and any `ai_review` generated from it is suspect. Fixing it means
-repairing the parser in the tamu-health crawler and re-extracting those records — and per the
-re-crawl warning above, clearing an enriched field needs two passes.
-
-Note the counts are small and the departments are real, so do **not** just delete
-`Dentistry`/`Medicine` from the topic filter: those words are legitimate, they are only ranking
-because of the leak.
-
 ## The feedback box
 
 `ui/api/feedback.js` files each submission as a GitHub issue on
@@ -301,6 +273,16 @@ filed are the closed setup tests (#10, #11, #12).
 ---
 
 ## Routine tasks
+
+**Fix a parser, then repair only affected records** (never a full re-crawl):
+```bash
+python reextract.py --host engineering.tamu.edu --blank research_summary --dry-run
+```
+
+**Reaching the GPU box**: the `ollama.akvaithi.page` ingress passes Access but
+returned an empty body on 2026-09-22. Go over ZeroTier instead:
+`ssh -O forward -L 11437:127.0.0.1:11434 win` then `OLLAMA_HOST=http://127.0.0.1:11437`.
+(`127.0.0.1`, not `localhost` — Ollama on Windows listens on IPv4 only.)
 
 **After any crawl:**
 ```bash

@@ -21,7 +21,7 @@ them as endpoints).
 
 There is no top-level package manager. Treat each directory as its own project.
 
-**Live now: 6 schools, 5,260 faculty** — TAMU 1,676 · Rice 618 · UT Austin 1,147 · UT Dallas 606 · MIT 792 · Harvard 421, all `available: true`. Counts are post-curation (`merge.py` drops students, postdocs and admin staff); re-read them from `merge.py`'s output after any crawl rather than trusting this line. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
+**Live now: 6 schools, 5,218 faculty** — TAMU 1,674 · Rice 618 · UT Austin 1,134 · UT Dallas 606 · MIT 773 · Harvard 413, all `available: true`. Counts are post-curation (`merge.py` drops students, postdocs and admin staff); re-read them from `merge.py`'s output after any crawl rather than trusting this line. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
 
 The site is live at **stemresearchfinder.tech** (domain registered elsewhere, DNS pointed at Vercel). Push to `main` → Vercel builds `ui/` and deploys.
 
@@ -113,6 +113,10 @@ disqualifies when no faculty word is present, so "Instructional Associate
 Professor and Faculty Advisor" stays. `--keep-non-faculty` opts out. **A blank
 title is never treated as staff.** This is why quality percentages jumped in
 September 2026 — the denominator was wrong, not the data.
+
+**`crawler/quality.py` defines a valid value, and `merge.py` enforces it.** Detectors for shared office mailboxes, placeholder photos (any URL on 3+ records), non-lab links, navigation-menu summaries, the TAMU Health footer, mojibake, junk reviews, honorifics and non-titles. `quality.clean()` runs **after `carry_forward()` and after dedupe** — after carry-forward so it is idempotent (no two-pass clearing), after dedupe so one person listed by three departments doesn't have their own email counted as "shared". It derives `credentials`, `title_short` and `rank_type`. `census.py` counts only valid values, and `census.py --quality` must read 0. `enrich_ollama.needs_review` uses the same detectors. Never duplicate these rules in the UI — the data is the source of truth. `reextract.py` repairs selected records after a parser fix instead of a full re-crawl, and logs 404 profiles to `stale_profiles.json` for human review.
+
+`rank_type` is shown as a badge, down-weighted in `matcher.js` (`RANK_WEIGHT`), and filterable ("Research faculty only"). `researchText()` in `search.js` is the one definition of a professor's research text: summary first, `ai_review` only when the summary is blank.
 
 **`crawler/merge.py` is the only supported way to build the app's data.** The README used to carry a copy-paste snippet with a hard-coded source map that had drifted — it silently dropped `faculty-mit*.json` and `faculty-harvard.json` (1,004 records). `merge.py` globs `faculty*.json` instead, canonicalizes slugs, dedupes, and writes **both** `ui/public/faculty.json` (combined; the backend importer and `find_lab_scholar.py` still read it) **and `ui/public/faculty-<code>.json` per school, which is what the UI fetches.**
 

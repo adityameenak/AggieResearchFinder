@@ -21,7 +21,7 @@ export const OG_LOCALE  = 'en_US'
 export const THEME_DEFAULT = '#4f46e5'
 
 /** Total across every school — kept in sync by scripts/prerender.js (warns on drift). */
-export const TOTAL_FACULTY = 5260
+export const TOTAL_FACULTY = 5218
 
 const n = (x) => x.toLocaleString('en-US')
 
@@ -40,7 +40,7 @@ export const SCHOOL_SEO = {
     brand: 'Aggie Research Finder',
     aka: ['Aggie Research Finder', 'TAMU Research Finder', 'Texas A&M Research Finder',
           'Aggie STEM Research Finder'],
-    count: 1676,
+    count: 1674,
     nick: 'Aggie',
     unit: 'Texas A&M',
     keywords: [
@@ -70,7 +70,7 @@ export const SCHOOL_SEO = {
     brand: 'UT Austin Research Finder',
     aka: ['UT Austin Research Finder', 'Longhorn Research Finder',
           'University of Texas Research Finder', 'Longhorn STEM Research Finder'],
-    count: 1147,
+    count: 1134,
     nick: 'Longhorn',
     unit: 'UT Austin',
     keywords: [
@@ -99,7 +99,7 @@ export const SCHOOL_SEO = {
     theme: '#A31F34',
     brand: 'MIT Research Finder',
     aka: ['MIT Research Finder', 'MIT Lab Finder', 'MIT STEM Research Finder'],
-    count: 792,
+    count: 773,
     nick: 'MIT',
     unit: 'MIT',
     keywords: [
@@ -112,7 +112,7 @@ export const SCHOOL_SEO = {
     theme: '#A51C30',
     brand: 'Harvard Research Finder',
     aka: ['Harvard Research Finder', 'Harvard Lab Finder', 'Harvard STEM Research Finder'],
-    count: 421,
+    count: 413,
     nick: 'Harvard',
     unit: 'Harvard',
     keywords: [

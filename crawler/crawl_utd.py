@@ -20,6 +20,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import codecs
 import csv
 import hashlib
 import json
@@ -150,6 +151,17 @@ def collect_profile_slugs(s: requests.Session, limit: int = 0) -> list[str]:
     return slugs
 
 
+def _decode_utd_email(soup) -> str:
+    a = soup.find("a", attrs={"data-evaluate": "profile-eml"})
+    token = (a.get("id") or "") if a else ""
+    if "\u2604" not in token:
+        return ""
+    domain, _, user = token.partition("\u2604")
+    user = user.lstrip("\ufe0f")
+    addr = f"{codecs.decode(user, 'rot13')}@{codecs.decode(domain, 'rot13')}"
+    return addr if re.fullmatch(r"[\w.+-]+@[\w-]+(\.[\w-]+)+", addr) else ""
+
+
 def parse_profile(html: str, url: str, stem_only: bool) -> Optional[dict]:
     soup = BeautifulSoup(html, "html.parser")
 
@@ -179,11 +191,27 @@ def parse_profile(html: str, url: str, stem_only: bool) -> Optional[dict]:
     department = slug or re.sub(r"[^a-z0-9]+", "-",
                                 dept_raw.lower()).strip("-") or "unknown"
 
-    # Email
+    # Email. The first mailto: on a profile is usually the site footer's
+    # "contact the Office of Research" link (oris@utdallas.edu?subject=Profiles),
+    # which was taken as the professor's address on 603 of 606 records. Skip
+    # anything in the footer or carrying that subject line.
     email = ""
-    a = soup.find("a", href=lambda h: h and h.startswith("mailto:"))
-    if a:
-        email = a["href"].replace("mailto:", "").split("?")[0].strip()
+    for a in soup.find_all("a", href=lambda h: h and h.startswith("mailto:")):
+        href = a["href"]
+        if "subject=Profiles" in href or a.find_parent(["footer", "nav"]):
+            continue
+        addr = href.replace("mailto:", "").split("?")[0].strip()
+        if addr.lower().startswith("oris@"):
+            continue
+        email = addr
+        break
+    # The professor's own address is rendered by a script from an obfuscated
+    # anchor: <a data-evaluate="profile-eml" id="hgqnyynf.rqh☄️ureir">, which is
+    # ROT13 of "<domain>☄️<user>" — herve@utdallas.edu. It is the address every
+    # visitor sees on the page; MIT Math's base64 data-email is handled the same
+    # way in crawl_mit2.py.
+    if not email:
+        email = _decode_utd_email(soup)
 
     # Contact block text → phone + office
     contact_txt = ""

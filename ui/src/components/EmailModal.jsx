@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useSchool, useSchoolPath } from '../SchoolContext'
 import { useApp } from '../AppContext'
 import { buildComposeLinks, openCompose, bodyTooLong } from '../utils/mailLinks'
 import { getStudentEmail, setStudentEmail } from '../utils/studentEmail'
 import { fmtDate } from '../utils/trackerStorage'
+import { useDialog } from '../utils/useDialog'
 
 const TONES = [
   { id: 'professional', label: 'Professional' },
@@ -95,9 +96,21 @@ export default function EmailModal({ prof, session, onClose }) {
   const [sentInfo,     setSentInfo]     = useState(null)   // { id, previousStatus, created, viaLabel, at }
   const [undoneTo,     setUndoneTo]     = useState(null)   // status set by "Still drafting"
 
+  const panelRef = useDialog(onClose)   // Escape, focus trap, scroll lock
+
+  // An address the student found themselves, for the ~1 in 7 professors with
+  // no direct email in the data (office mailboxes are removed by merge.py).
+  const [toInput, setToInput] = useState('')
+
   useEffect(() => { generate('professional', 'standard') }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Each request gets a number; only the latest may write state. Switching
+  // tone then length quickly used to let the slower, older response land last
+  // and overwrite the draft the student actually asked for.
+  const requestSeq = useRef(0)
+
   async function generate(selectedTone, selectedLength) {
+    const seq = ++requestSeq.current
     setLoading(true)
     setError(null)
     try {
@@ -118,12 +131,13 @@ export default function EmailModal({ prof, session, onClose }) {
         throw new Error(err.error || `Server error ${res.status}`)
       }
       const data = await res.json()
+      if (seq !== requestSeq.current) return
       setDraft(data)
       setBodyEdit(data.body)
     } catch (e) {
-      setError(e.message)
+      if (seq === requestSeq.current) setError(e.message)
     } finally {
-      setLoading(false)
+      if (seq === requestSeq.current) setLoading(false)
     }
   }
 
@@ -153,9 +167,15 @@ export default function EmailModal({ prof, session, onClose }) {
   }
 
   async function copy() {
-    await navigator.clipboard.writeText(`Subject: ${draft.subject}\n\n${bodyEdit}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      await navigator.clipboard.writeText(`Subject: ${draft.subject}\n\n${bodyEdit}`)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard access is refused on insecure origins and in some embedded
+      // browsers; say so instead of failing silently.
+      setError('Couldn’t copy automatically — select the text and copy it by hand.')
+    }
   }
 
   function handleStudentEmail(value) {
@@ -179,9 +199,10 @@ export default function EmailModal({ prof, session, onClose }) {
 
   const canSend      = Boolean(draft) && !loading
   const hasRecipient = Boolean((prof.email || '').trim())
+  const recipient    = hasRecipient ? prof.email.trim() : toInput.trim()
   const composeLinks = draft
     ? buildComposeLinks({
-        to: prof.email, subject: draft.subject, body: bodyEdit,
+        to: recipient, subject: draft.subject, body: bodyEdit,
         provider: school.mailProvider, studentEmail,
       })
     : []
@@ -192,7 +213,9 @@ export default function EmailModal({ prof, session, onClose }) {
                  bg-stone-950/60 backdrop-blur-sm px-4 py-6"
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
-      <div className="w-full max-w-2xl bg-cream-50 rounded-2xl border border-cream-300
+      <div ref={panelRef} role="dialog" aria-modal="true" aria-labelledby="email-modal-title"
+           tabIndex={-1}
+           className="w-full max-w-2xl bg-cream-50 rounded-2xl border border-cream-300
                       shadow-2xl shadow-stone-950/30 flex flex-col max-h-[90vh] overflow-hidden">
 
         {/* Header */}
@@ -203,12 +226,13 @@ export default function EmailModal({ prof, session, onClose }) {
                             tracking-[0.14em] mb-0.5">
               {STEP_EYEBROW[step]}
             </div>
-            <h2 className="font-display font-bold text-stone-900 text-lg leading-snug truncate">
+            <h2 id="email-modal-title"
+                className="font-display font-bold text-stone-900 text-lg leading-snug truncate">
               {prof.name}
             </h2>
             <p className="text-xs text-stone-400 mt-0.5">{prof.title || prof.department}</p>
           </div>
-          <button onClick={onClose}
+          <button onClick={onClose} aria-label="Close"
                   className="flex-shrink-0 p-2 rounded-xl text-stone-400 hover:text-stone-700
                              hover:bg-cream-200 transition-colors">
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -315,14 +339,29 @@ export default function EmailModal({ prof, session, onClose }) {
                     {prof.email}
                   </div>
                 ) : (
-                  <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-                    No email address on file for this professor. Copy the draft and find their
-                    address on{' '}
-                    {prof.profile_url
-                      ? <a href={prof.profile_url} target="_blank" rel="noopener noreferrer"
-                           className="font-semibold underline underline-offset-2">their profile page</a>
-                      : 'their department page'}.
-                  </div>
+                  <>
+                    <input
+                      id="prof-email"
+                      type="email"
+                      value={toInput}
+                      onChange={e => setToInput(e.target.value)}
+                      placeholder="Paste their address"
+                      aria-describedby="prof-email-hint"
+                      className={inputCls}
+                    />
+                    <p id="prof-email-hint" className="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                      We don’t have a direct address for this professor — only a shared
+                      office inbox was published, and we leave those out. Find theirs on{' '}
+                      {prof.profile_url
+                        ? <a href={prof.profile_url} target="_blank" rel="noopener noreferrer"
+                             className="font-semibold text-maroon-700 underline underline-offset-2">their profile page</a>
+                        : 'their department page'}
+                      {prof.lab_website
+                        ? <> or <a href={prof.lab_website} target="_blank" rel="noopener noreferrer"
+                                   className="font-semibold text-maroon-700 underline underline-offset-2">lab site</a></>
+                        : ''}, or leave this blank and fill it in your mail app.
+                    </p>
+                  </>
                 )}
               </div>
 
@@ -377,7 +416,6 @@ export default function EmailModal({ prof, session, onClose }) {
                   <button
                     key={link.id}
                     onClick={() => handleOpen(link)}
-                    disabled={!hasRecipient}
                     className={link.primary
                       ? `w-full flex items-center justify-center gap-2 px-5 py-3 bg-maroon-700
                          text-cream-100 text-sm font-semibold rounded-xl hover:bg-maroon-600

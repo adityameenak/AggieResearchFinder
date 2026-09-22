@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSchool } from '../../SchoolContext'
 import { STATUSES } from '../../utils/trackerStorage'
+import { useDialog } from '../../utils/useDialog'
 
 const EMPTY = {
   professorName: '',
@@ -76,12 +77,7 @@ export default function ApplicationFormModal({ initial = null, prefill = null, o
     return () => clearTimeout(t)
   }, [])
 
-  // Close on Escape
-  useEffect(() => {
-    function onKey(e) { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
+  const panelRef = useDialog(onClose)   // Escape, focus trap, scroll lock
 
   function set(field, value) {
     setForm(f => ({ ...f, [field]: value }))
@@ -115,6 +111,11 @@ export default function ApplicationFormModal({ initial = null, prefill = null, o
     >
       {/* Panel */}
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="appform-title"
+        tabIndex={-1}
         className="w-full sm:max-w-2xl max-h-[95dvh] bg-white rounded-t-2xl sm:rounded-2xl
                    shadow-2xl shadow-stone-900/25 flex flex-col overflow-hidden
                    animate-[modalSlideUp_0.22s_cubic-bezier(0.16,1,0.3,1)_forwards]"
@@ -122,7 +123,7 @@ export default function ApplicationFormModal({ initial = null, prefill = null, o
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-stone-100">
           <div>
-            <h2 className="font-display font-bold text-stone-900 text-lg leading-none">
+            <h2 id="appform-title" className="font-display font-bold text-stone-900 text-lg leading-none">
               {isEdit ? 'Edit Application' : 'Track New Application'}
             </h2>
             <p className="text-[12px] text-stone-400 mt-1">

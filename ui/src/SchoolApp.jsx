@@ -6,6 +6,8 @@ import { getSchool }      from './schools'
 import Seo        from './components/Seo'
 import NavBar     from './components/NavBar'
 import Footer     from './components/Footer'
+import LoadError  from './components/LoadError'
+import UndoToast  from './components/UndoToast'
 import Home       from './pages/Home'
 import Results    from './pages/Results'
 import ProfDetail from './pages/ProfDetail'
@@ -38,6 +40,7 @@ export default function SchoolApp() {
           <Seo />
           <NavBar />
           <main className="flex-1">
+            <LoadError />
             <Routes>
               <Route index           element={<Home />}       />
               <Route path="search"   element={<Results />}    />
@@ -52,6 +55,7 @@ export default function SchoolApp() {
             </Routes>
           </main>
           <Footer />
+          <UndoToast />
         </div>
       </AppProvider>
     </SchoolProvider>

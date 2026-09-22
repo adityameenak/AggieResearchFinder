@@ -12,12 +12,16 @@ What it does, in order:
   2. canonicalizes department slugs through taxonomy.py, so all schools share
      one vocabulary
   3. merges joint-appointment duplicates (one person, two department
-     directories, two profile URLs, two ids) into a single record
-  4. writes ui/public/faculty.json          — combined, still read by the
+     directories, two profile URLs, two ids) into a single record — by name,
+     then by a personal email address the two records share
+  4. strips filler through quality.clean(): shared office mailboxes,
+     placeholder photos, non-lab links, navigation menus, junk reviews,
+     mojibake, honorifics; derives credentials / title_short / rank_type
+  5. writes ui/public/faculty.json          — combined, still read by the
                                                backend importer and
                                                find_lab_scholar.py
      and   ui/public/faculty-<code>.json    — per school, what the UI fetches
-  5. prints the counts to paste into SCHOOL_SEO in ui/src/lib/seo.js
+  6. prints the counts to paste into SCHOOL_SEO in ui/src/lib/seo.js
 
 Usage:
   python merge.py
@@ -26,6 +30,7 @@ Usage:
 import argparse, collections, json, re, unicodedata
 from pathlib import Path
 
+import quality
 import taxonomy
 
 HERE = Path(__file__).parent
@@ -109,9 +114,10 @@ def norm_name(name):
 
     Strips accents, punctuation and case so "José Álvarez" and "Jose Alvarez"
     collide, which is what we want — these are the same person listed by two
-    departments with inconsistent typography.
+    departments with inconsistent typography. Honorifics, degrees and
+    "Last, First" order go first, so "Dr. Ping Yang" and "Yang, Ping" collide too.
     """
-    n = unicodedata.normalize("NFKD", name or "")
+    n = unicodedata.normalize("NFKD", quality.split_name(name)[0])
     n = "".join(c for c in n if not unicodedata.combining(c))
     n = re.sub(r"[^a-z\s]", " ", n.lower())
     return " ".join(n.split())
@@ -215,15 +221,17 @@ def merge_group(group):
         if merged:
             primary[field] = merged
 
-    primary["also_departments"] = sorted(
-        {r["department"] for r in rest if r.get("department")
-         and r["department"] != primary.get("department")})
-    primary["also_profile_urls"] = [r["profile_url"] for r in rest
-                                    if r.get("profile_url")
-                                    and r["profile_url"] != primary.get("profile_url")]
+    # Union with what earlier merges already recorded: the email pass merges
+    # records the name pass produced, and overwriting would lose those aliases.
+    depts = {d for r in group for d in [r.get("department"), *(r.get("also_departments") or [])] if d}
+    primary["also_departments"] = sorted(depts - {primary.get("department")})
+    urls = [u for r in group for u in [r.get("profile_url"), *(r.get("also_profile_urls") or [])] if u]
+    primary["also_profile_urls"] = list(dict.fromkeys(
+        u for u in urls if u != primary.get("profile_url")))
     # Retired ids. AppContext.isSaved() checks these so a bookmark saved against
     # the dropped record still resolves instead of silently un-saving itself.
-    primary["alias_ids"] = [r["id"] for r in rest if r.get("id")]
+    ids = [i for r in group for i in [r.get("id"), *(r.get("alias_ids") or [])] if i]
+    primary["alias_ids"] = list(dict.fromkeys(i for i in ids if i != primary.get("id")))
     return primary
 
 
@@ -247,6 +255,48 @@ def dedupe(records):
             merged.append(merge_group(group))
             collapsed += len(group) - 1
     return merged, collapsed
+
+
+def _surname(name):
+    parts = norm_name(name).split()
+    return parts[-1] if parts else ""
+
+
+def dedupe_by_email(records):
+    """Second pass: one personal address on two records is one person.
+
+    The name pass misses spelling variants — "Ed Boyden" / "Edward Stuart
+    Boyden", "Alex" / "Alexandru Damian" — which left 33 people listed twice.
+    Only personal addresses are considered (quality.is_shared_email excludes
+    office mailboxes, which is why the name pass never used email at all), and
+    only pairs whose surnames agree are merged. A pair whose surnames disagree
+    is a crawler assigning one person's address to a colleague (Brian Farrell
+    carried meade@); the address is removed from the record it doesn't name.
+    Returns (records, merged_count, reassigned_count).
+    """
+    counts = quality.value_counts(records)
+    groups = collections.defaultdict(list)
+    for r in records:
+        e = (r.get("email") or "").strip().lower()
+        if e and not quality.is_shared_email(e, counts):
+            groups[(r.get("university"), e)].append(r)
+
+    out_ids, merged_recs, collapsed, wrong = set(), [], 0, 0
+    for (_, email), group in groups.items():
+        if len(group) < 2:
+            continue
+        if len({_surname(r.get("name")) for r in group}) == 1:
+            merged_recs.append(merge_group(group))
+            out_ids.update(id(r) for r in group)
+            collapsed += len(group) - 1
+            continue
+        local = re.sub(r"[^a-z]", "", email.split("@")[0])
+        for r in group:
+            if _surname(r.get("name")) not in local:
+                r["email"] = ""
+                wrong += 1
+    kept = [r for r in records if id(r) not in out_ids] + merged_recs
+    return kept, collapsed, wrong
 
 
 def strip_pubs(rec):
@@ -307,9 +357,11 @@ def main():
     print(f"  {'total':<26}    {'':<8} {len(records):>5}")
 
     if not args.keep_non_faculty:
-        dropped = [r for r in records if is_non_faculty(r.get("title"))]
+        def drop(r):
+            return is_non_faculty(r.get("title")) or quality.is_not_a_person(r.get("name"))
+        dropped = [r for r in records if drop(r)]
         if dropped:
-            records = [r for r in records if not is_non_faculty(r.get("title"))]
+            records = [r for r in records if not drop(r)]
             by_school = collections.Counter(r.get("university") for r in dropped)
             print(f"\nDropped {len(dropped)} non-faculty records "
                   f"({', '.join(f'{k} {v}' for k, v in by_school.most_common())}).")
@@ -331,6 +383,16 @@ def main():
     merged, collapsed = dedupe(records)
     print(f"\nDeduped {collapsed} surplus records "
           f"({len(records)} -> {len(merged)}).")
+    merged, by_email, reassigned = dedupe_by_email(merged)
+    print(f"Deduped {by_email} more by shared personal email; removed "
+          f"{reassigned} addresses that named a different person.")
+
+    # After dedupe, so a person listed by three departments doesn't have their
+    # own address counted three times and mistaken for an office mailbox.
+    cleaned = quality.clean(merged)
+    if cleaned:
+        print("\nquality.clean() removed filler: " +
+              ", ".join(f"{k} {v}" for k, v in cleaned.most_common()))
 
     # Guard against a merge that silently eats records or reuses a live id.
     live = {r["id"] for r in merged}

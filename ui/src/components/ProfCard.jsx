@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchoolPath } from '../SchoolContext'
-import { highlightSegments, deptLabel, isActiveLab, splitResearch, deptStyle } from '../utils/search'
+import { highlightSegments, isActiveLab, splitResearch } from '../utils/search'
+import { BookmarkIcon, ExtIcon, DeptBadge, RankBadge, Avatar } from './ProfBits'
 
 /* ── Highlight renderer ───────────────────────────────────── */
 function Highlight({ text, tokens }) {
@@ -21,44 +22,6 @@ function Highlight({ text, tokens }) {
         )
       )}
     </span>
-  )
-}
-
-/* ── Department badge ─────────────────────────────────────── */
-function DeptBadge({ dept }) {
-  const s = deptStyle(dept)
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px]
-                  font-semibold ring-1 ring-inset leading-none ${s.pill}`}
-    >
-      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${s.dot}`} />
-      {deptLabel(dept)}
-    </span>
-  )
-}
-
-/* ── Bookmark icon ────────────────────────────────────────── */
-function BookmarkIcon({ filled }) {
-  return filled ? (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-[15px] h-[15px]">
-      <path d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4V4z" />
-    </svg>
-  ) : (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"
-         className="w-[15px] h-[15px]">
-      <path d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4V4z" />
-    </svg>
-  )
-}
-
-/* ── External link icon ───────────────────────────────────── */
-function ExtIcon() {
-  return (
-    <svg viewBox="0 0 12 12" fill="currentColor" className="w-2.5 h-2.5 opacity-60 flex-shrink-0">
-      <path d="M3.5 3a.5.5 0 0 0 0 1H7.29L2.15 9.15a.5.5 0 1 0 .7.7L8 4.71V8.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-.5-.5h-5Z" />
-    </svg>
   )
 }
 
@@ -93,10 +56,13 @@ export default function ProfCard({ prof, tokens = [] }) {
               Active lab
             </span>
           )}
+          <RankBadge rank={prof.rank_type} />
         </div>
         <button
           onClick={() => toggleSave(prof)}
-          title={saved ? 'Remove from saved' : 'Save professor'}
+          aria-label={saved ? `Remove ${prof.name} from My List` : `Save ${prof.name} to My List`}
+          aria-pressed={saved}
+          title={saved ? 'Remove from My List' : 'Save to My List'}
           className={`flex-shrink-0 p-1.5 rounded-lg transition-all duration-150
                       active:scale-90 ${
             saved
@@ -110,20 +76,7 @@ export default function ProfCard({ prof, tokens = [] }) {
 
       {/* ── Name + title ─────────────────────────────────────── */}
       <div className="px-5 pb-4 flex items-start gap-3">
-        {prof.photo_url ? (
-          <img
-            src={prof.photo_url}
-            alt=""
-            className="w-11 h-11 rounded-full object-cover flex-shrink-0 ring-1 ring-cream-300"
-          />
-        ) : (
-          <div className="w-11 h-11 rounded-full bg-cream-200 border border-cream-300
-                          flex items-center justify-center flex-shrink-0">
-            <span className="text-sm font-semibold text-stone-400">
-              {(prof.name || '?')[0]}
-            </span>
-          </div>
-        )}
+        <Avatar prof={prof} />
         <div className="min-w-0">
           <Link
             to={tx(`/prof/${prof.id}`)}
@@ -132,9 +85,12 @@ export default function ProfCard({ prof, tokens = [] }) {
           >
             <Highlight text={prof.name} tokens={tokens} />
           </Link>
-          {prof.title && (
-            <p className="text-[12px] text-stone-400 leading-snug line-clamp-2 italic">
-              {prof.title}
+          {/* title_short (merge.py) is the rank phrase; the full title can be
+              a paragraph of endowed chairs and centre directorships. */}
+          {(prof.title_short || prof.title) && (
+            <p className="text-[12px] text-stone-400 leading-snug line-clamp-2 italic"
+               title={prof.title !== prof.title_short ? prof.title : undefined}>
+              {prof.title_short || prof.title}
             </p>
           )}
         </div>

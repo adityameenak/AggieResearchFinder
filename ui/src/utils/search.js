@@ -75,6 +75,25 @@ export function scoreProfessor(prof, tokens) {
  * Keywords come from the " | "-joined research-area tail + scholar_interests,
  * junk-filtered.
  */
+/**
+ * The text a professor's research is judged by — for matching, for the "has
+ * research" filter, and for isMatchable. `research_summary` first; `ai_review`
+ * only when the summary is blank, which is how a record keeps its match
+ * eligibility after merge.py strips a summary that was scraped navigation (97
+ * TAMU engineering records had good reviews behind a "Research Research
+ * Facilities…" summary). Using the review only as a fallback keeps rankings
+ * for every other record exactly as they were.
+ */
+export function researchText(prof) {
+  const summary = (prof.research_summary || '').trim()
+  const base = summary || ((prof.ai_review || '').trim().length >= 40 ? prof.ai_review.trim() : '')
+  return `${base} ${(prof.scholar_interests || []).join(' ')}`.trim()
+}
+
+export function hasResearch(prof) {
+  return researchText(prof).length > 0
+}
+
 export function splitResearch(prof) {
   const parts = (prof.research_summary || '').split('|').map(s => s.trim()).filter(Boolean)
 
@@ -128,7 +147,10 @@ export function searchAndRank(faculty, query, filters = {}) {
 
   let results = faculty.filter(prof => {
     if (filters.department && prof.department !== filters.department) return false
-    if (filters.hasResearchOnly && !(prof.research_summary || '').trim()) return false
+    // Same test as matcher.isMatchable — a professor with only an ai_review or
+    // Scholar interests used to be hidden by this filter.
+    if (filters.hasResearchOnly && !hasResearch(prof)) return false
+    if (filters.researchFacultyOnly && prof.rank_type && prof.rank_type !== 'research') return false
     // "Active labs": proxy for an active, often-funded research group.
     if (filters.activeLabsOnly && !isActiveLab(prof)) return false
     return true
@@ -138,13 +160,44 @@ export function searchAndRank(faculty, query, filters = {}) {
     results = results
       .map(prof => ({ ...prof, _score: scoreProfessor(prof, tokens) }))
       .filter(prof => prof._score > 0)
-      .sort((a, b) => b._score - a._score)
+      .sort((a, b) => b._score - a._score || profileCompleteness(b) - profileCompleteness(a))
   } else {
-    // No query: return all filtered results with equal score
-    results = results.map(prof => ({ ...prof, _score: 1 }))
+    // No query: best-documented profiles first. This used to be file order,
+    // which put whole departments of blank cards on page one.
+    results = results
+      .map(prof => ({ ...prof, _score: 1 }))
+      .sort((a, b) => profileCompleteness(b) - profileCompleteness(a) || byName(a, b))
   }
 
+  if (filters.sort === 'name') results.sort(byName)
   return results
+}
+
+/**
+ * How much a card can tell a student — the default browse order and the
+ * tie-break for equal relevance. Research content dominates; an active
+ * research appointment outranks emeritus/teaching at equal content.
+ */
+export function profileCompleteness(prof) {
+  return (
+    ((prof.ai_review || '').trim() ? 4 : 0)
+    + ((prof.research_summary || '').trim() || (prof.scholar_interests || []).length ? 3 : 0)
+    + (prof.photo_url ? 1 : 0)
+    + (prof.email ? 1 : 0)
+    + (prof.lab_website || prof.google_scholar ? 1 : 0)
+    + (!prof.rank_type || prof.rank_type === 'research' ? 2 : 0)
+  )
+}
+
+// Surname order, the way a directory reads. Names are cleaned by merge.py, so
+// the last token is the surname.
+function surnameKey(name) {
+  const parts = (name || '').trim().split(/\s+/)
+  return `${parts[parts.length - 1] || ''} ${name || ''}`.toLowerCase()
+}
+
+function byName(a, b) {
+  return surnameKey(a.name).localeCompare(surnameKey(b.name))
 }
 
 // ---------------------------------------------------------------------------

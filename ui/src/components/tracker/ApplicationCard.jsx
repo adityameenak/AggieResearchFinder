@@ -1,22 +1,15 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useSchoolPath } from '../../SchoolContext'
+// The shared vocabulary. A private TAMU-era map here rendered newer schools'
+// departments (public-health, neuroscience…) as raw or mis-capitalised slugs.
+import { deptLabel } from '../../utils/search'
 import { fmtDate, relativeTime, statusConfig, STATUSES, daysUntilFollowUp } from '../../utils/trackerStorage'
 import StatusBadge from './StatusBadge'
 import FollowUpReminder from './FollowUpReminder'
 
-const DEPT_LABELS = {
-  aerospace: 'Aerospace', biomedical: 'Biomedical', chemical: 'Chemical',
-  civil: 'Civil', cse: 'Computer Science', electrical: 'Electrical',
-  etid: 'Eng. Technology', industrial: 'Industrial', materials: 'Materials',
-  mechanical: 'Mechanical', multidisciplinary: 'Multidisciplinary', nuclear: 'Nuclear',
-  ocean: 'Ocean', petroleum: 'Petroleum', biology: 'Biology',
-  chemistry: 'Chemistry', mathematics: 'Mathematics', 'physics-astronomy': 'Physics & Astronomy',
-  statistics: 'Statistics', 'atmos-science': 'Atmospheric Science',
-  'geology-geophysics': 'Geology & Geophysics', oceanography: 'Oceanography',
-  'psychological-brain-sciences': 'Psych & Brain Sciences',
-}
-function deptLabel(d) { return DEPT_LABELS[d] ?? (d ? d.charAt(0).toUpperCase() + d.slice(1) : '') }
-
 export default function ApplicationCard({ app, onEdit, onDelete, onUpdate }) {
+  const tx = useSchoolPath()
   const [statusOpen, setStatusOpen] = useState(false)
   const cfg = statusConfig(app.status)
   const followDays = daysUntilFollowUp(app.followUpDate)
@@ -46,7 +39,11 @@ export default function ApplicationCard({ app, onEdit, onDelete, onUpdate }) {
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="min-w-0">
             <h3 className="font-semibold text-stone-900 text-[15px] leading-snug">
-              {app.professorName || <span className="text-stone-400 italic">Unknown Professor</span>}
+              {app.profId && app.professorName ? (
+                <Link to={tx(`/prof/${app.profId}`)} className="hover:text-maroon-700 transition-colors">
+                  {app.professorName}
+                </Link>
+              ) : app.professorName || <span className="text-stone-400 italic">Unknown Professor</span>}
             </h3>
             {app.labName && (
               <p className="text-[12px] text-stone-500 mt-0.5">{app.labName}</p>
@@ -134,9 +131,8 @@ export default function ApplicationCard({ app, onEdit, onDelete, onUpdate }) {
           )}
 
           <button
-            onClick={() => {
-              if (window.confirm(`Delete application for ${app.professorName}?`)) onDelete(app.id)
-            }}
+            // No confirm dialog: removal is undoable from the toast (UndoToast).
+            onClick={() => onDelete(app.id)}
             className="inline-flex items-center gap-1.5 text-[11px] px-3 py-1.5
                        rounded-lg border border-stone-200 text-red-400
                        hover:border-red-200 hover:bg-red-50 transition-colors font-medium ml-auto"

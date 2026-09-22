@@ -25,6 +25,7 @@ import * as z from 'zod/v4'
 import { TOOLS } from './_lib/tools.js'
 import { originFrom, SCHOOL_CODES } from './_lib/data.js'
 import { check as rateCheck } from './_lib/ratelimit.js'
+import { TOTAL_FACULTY } from '../src/lib/seo.js'
 
 // An all-schools cold search is six sequential fetches; the 10s default is too
 // tight. Memory stays at the 1024 MB default *because* the search is
@@ -157,7 +158,7 @@ async function buildServer(origin) {
     { name: 'stem-research-finder', version: '1.0.0' },
     {
       instructions: [
-        'Search 5,260 STEM research faculty across six universities (Texas A&M, Rice, UT Austin, UT Dallas, MIT, Harvard)',
+        `Search ${TOTAL_FACULTY.toLocaleString('en-US')} STEM research faculty across six universities (Texas A&M, Rice, UT Austin, UT Dallas, MIT, Harvard)`,
         'to help a student find a research group and reach out to it.',
         '',
         'Typical flow: list_schools → list_topics or list_departments to learn the vocabulary →',

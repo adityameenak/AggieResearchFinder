@@ -112,14 +112,19 @@ def section_text(soup, pattern):
 
     Walks the document in order rather than reading direct siblings only —
     the sibling-only assumption is what silently cost the TAMU arts-&-sciences
-    parser 256 research summaries.
+    parser 256 research summaries. The walk stops at site chrome: the last
+    section on a page has no following heading, so it used to run on into the
+    pipe-joined site footer ("Texas A&M Health | Dentistry | … Hotline"),
+    which was in 22 research summaries.
     """
     for hd in soup.find_all(["h2", "h3", "h4"]):
         if not re.search(pattern, hd.get_text(" ", strip=True), re.I):
             continue
         out = []
         for el in hd.find_all_next():
-            if el.name in ("h1", "h2", "h3", "h4"):
+            if el.name in ("h1", "h2", "h3", "h4", "footer"):
+                break
+            if el.find_parent(["footer", "nav"]):
                 break
             if el.name in ("p", "li"):
                 t = clean(el.get_text(" ", strip=True))
@@ -136,9 +141,12 @@ def parse_profile(session, url):
         r = fetch(session, url)
     except Exception as exc:
         return {"error": str(exc)}
-    soup = BeautifulSoup(r.text, "html.parser")
+    # r.content, not r.text: without a charset header requests decodes as
+    # Latin-1, which produced the "Â©" / "Ã©" mojibake in 27 TAMU Health records.
+    html = r.content.decode("utf-8", "replace")
+    soup = BeautifulSoup(html, "html.parser")
 
-    emails = re.findall(r"[\w.+-]+@[\w.-]*tamu\.edu", r.text)
+    emails = re.findall(r"[\w.+-]+@[\w.-]*tamu\.edu", html)
     research = ""
     for pattern in RESEARCH_HEADINGS:
         research = section_text(soup, pattern)

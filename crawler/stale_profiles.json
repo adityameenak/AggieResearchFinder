@@ -1,0 +1,130 @@
+[
+  {
+    "id": "801f8a9b55d4",
+    "name": "Adjunct Faculty",
+    "university": "ut",
+    "department": "mechanical",
+    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/adjunct-faculty",
+    "status": 404
+  },
+  {
+    "id": "7db2e8d72db7",
+    "name": "Affiliated Faculty",
+    "university": "ut",
+    "department": "mechanical",
+    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/affiliated-faculty",
+    "status": 404
+  },
+  {
+    "id": "5d9483df7412",
+    "name": "Farshid  Alambeigi",
+    "university": "ut",
+    "department": "mechanical",
+    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/alambeigi",
+    "status": 404
+  },
+  {
+    "id": "2b02f59571e9",
+    "name": "Emeritus Faculty",
+    "university": "ut",
+    "department": "mechanical",
+    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/emeritus-faculty",
+    "status": 404
+  },
+  {
+    "id": "1d30f0b9e76a",
+    "name": "Carmelo  Sferrazza",
+    "university": "ut",
+    "department": "mechanical",
+    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/sferrazza",
+    "status": 404
+  },
+  {
+    "id": "77fe4c68b662",
+    "name": "Franck Diaz-Garelli",
+    "university": "tamu",
+    "department": "biomedical",
+    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/diaz-garelli-franck.html",
+    "status": 404
+  },
+  {
+    "id": "c823f1e2eacd",
+    "name": "Derek Southard",
+    "university": "tamu",
+    "department": "biomedical",
+    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/southard-derek.html",
+    "status": 404
+  },
+  {
+    "id": "18f3773d9b2a",
+    "name": "Jack Rodden",
+    "university": "tamu",
+    "department": "chemical",
+    "profile_url": "https://engineering.tamu.edu/chemical/profiles/jack_rodden.html",
+    "status": 404
+  },
+  {
+    "id": "f38d6e2caccf",
+    "name": "April G. Douglass",
+    "university": "tamu",
+    "department": "civil",
+    "profile_url": "https://engineering.tamu.edu/civil/profiles/douglass-april.html",
+    "status": 404
+  },
+  {
+    "id": "a2d669ba2a9a",
+    "name": "Shawn Lupoli",
+    "university": "tamu",
+    "department": "cse",
+    "profile_url": "https://engineering.tamu.edu/cse/profiles/lupoli-shawn.html",
+    "status": 404
+  },
+  {
+    "id": "d5ba4a9a093f",
+    "name": "Scott L. Miller",
+    "university": "tamu",
+    "department": "electrical",
+    "profile_url": "https://engineering.tamu.edu/electrical/profiles/smiller.html",
+    "status": 404
+  },
+  {
+    "id": "35fbffa14508",
+    "name": "Xiaomin Yang",
+    "university": "tamu",
+    "department": "etid",
+    "profile_url": "https://engineering.tamu.edu/etid/profiles/xiaomin-yang.html",
+    "status": 404
+  },
+  {
+    "id": "57d9866e8eb4",
+    "name": "Yen-Jen Wang",
+    "university": "tamu",
+    "department": "industrial",
+    "profile_url": "https://engineering.tamu.edu/industrial/profiles/yen-jen-wang.html",
+    "status": 404
+  },
+  {
+    "id": "e9d0c46c9522",
+    "name": "Waqar Mohiuddin",
+    "university": "tamu",
+    "department": "mechanical",
+    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/mohiuddin-waqar.html",
+    "status": 404
+  },
+  {
+    "id": "08fad669d98a",
+    "name": "Michael Walsh",
+    "university": "tamu",
+    "department": "mechanical",
+    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/walsh-michael.html",
+    "status": 404
+  },
+  {
+    "id": "7ba7db5c628f",
+    "name": "Warren \"Pete\" Miller",
+    "university": "tamu",
+    "department": "nuclear",
+    "profile_url": "https://engineering.tamu.edu/nuclear/profiles/miller-warren-pete.html",
+    "status": 404
+  }
+]

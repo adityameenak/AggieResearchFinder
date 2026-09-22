@@ -21,25 +21,49 @@ function fileToBase64(file) {
 }
 
 /* ── Upload zone ───────────────────────────────────────────── */
+const MAX_BYTES = 10 * 1024 * 1024
+const ACCEPTED  = /\.(pdf|docx?)$/i
+
 function UploadZone({ file, onFile }) {
   const inputRef = useRef(null)
   const [dragging, setDragging] = useState(false)
+  const [rejected, setRejected] = useState('')
+
+  // The zone promised "PDF or DOCX · max 10 MB" and checked neither: a drop
+  // bypasses the input's `accept`, and a 40 MB scan went straight to the parser.
+  function take(f) {
+    if (!f) return
+    if (!ACCEPTED.test(f.name)) { setRejected(`${f.name} isn’t a PDF or Word file.`); return }
+    if (f.size > MAX_BYTES) { setRejected(`${f.name} is over 10 MB.`); return }
+    setRejected('')
+    onFile(f)
+  }
 
   function handleDrop(e) {
     e.preventDefault()
     setDragging(false)
-    const f = e.dataTransfer.files[0]
-    if (f) onFile(f)
+    take(e.dataTransfer.files[0])
+  }
+
+  function browse() {
+    if (!file) inputRef.current?.click()
   }
 
   return (
+    <>
     <div
       onDragOver={e => { e.preventDefault(); setDragging(true) }}
       onDragLeave={() => setDragging(false)}
       onDrop={handleDrop}
-      onClick={() => !file && inputRef.current?.click()}
+      onClick={browse}
+      // A clickable div is invisible to the keyboard without these.
+      role={file ? undefined : 'button'}
+      tabIndex={file ? undefined : 0}
+      aria-label={file ? undefined : 'Upload your resume (PDF or DOCX, up to 10 MB)'}
+      onKeyDown={e => { if (!file && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); browse() } }}
       className={`relative rounded-2xl border-2 border-dashed transition-all duration-200
                   flex flex-col items-center justify-center text-center py-12 px-8
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-maroon-700/40
                   ${file
                     ? 'border-maroon-400 bg-maroon-50 cursor-default'
                     : dragging
@@ -52,7 +76,7 @@ function UploadZone({ file, onFile }) {
         type="file"
         accept=".pdf,.docx,.doc"
         className="sr-only"
-        onChange={e => e.target.files?.[0] && onFile(e.target.files[0])}
+        onChange={e => { take(e.target.files?.[0]); e.target.value = '' }}
       />
 
       {file ? (
@@ -89,6 +113,10 @@ function UploadZone({ file, onFile }) {
         </>
       )}
     </div>
+    {rejected && (
+      <p role="alert" className="mt-2 text-xs text-red-700">{rejected}</p>
+    )}
+    </>
   )
 }
 

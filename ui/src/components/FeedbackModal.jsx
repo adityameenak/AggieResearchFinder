@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useDialog } from '../utils/useDialog'
 
 /**
  * In-app feedback form. Posts to /api/feedback, which files a GitHub issue.
@@ -55,11 +56,7 @@ export default function FeedbackModal({ onClose }) {
   const [sent,     setSent]     = useState(false)
   const [error,    setError]    = useState(null)
 
-  useEffect(() => {
-    function onKey(e) { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
+  const panelRef = useDialog(onClose)   // Escape, focus trap, scroll lock
 
   useEffect(() => {
     const t = setTimeout(() => firstFieldRef.current?.focus(), 80)
@@ -105,11 +102,13 @@ export default function FeedbackModal({ onClose }) {
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center
                  bg-stone-950/40 backdrop-blur-sm p-0 sm:p-4"
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="feedback-title"
     >
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="feedback-title"
+        tabIndex={-1}
         className="w-full sm:max-w-lg max-h-[95dvh] bg-white rounded-t-2xl sm:rounded-2xl
                    shadow-2xl shadow-stone-900/25 flex flex-col overflow-hidden
                    animate-[modalSlideUp_0.22s_cubic-bezier(0.16,1,0.3,1)_forwards]"

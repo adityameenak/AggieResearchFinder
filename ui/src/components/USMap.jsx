@@ -110,7 +110,15 @@ export default function USMap() {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  onClick={() => navigate(`/schools/${slug}`)}
+                  // Only states with schools are links. The rest led to a
+                  // "No schools on file yet" page — a dead end one click deep.
+                  onClick={hasSchools ? () => navigate(`/schools/${slug}`) : undefined}
+                  tabIndex={hasSchools ? 0 : -1}
+                  role={hasSchools ? 'link' : undefined}
+                  aria-label={hasSchools ? `${name} — view schools` : undefined}
+                  onKeyDown={hasSchools ? (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/schools/${slug}`) }
+                  } : undefined}
                   onMouseEnter={(e) =>
                     setHover({ visible: true, name, slug, hasSchools, x: e.clientX, y: e.clientY })
                   }
@@ -126,15 +134,15 @@ export default function USMap() {
                       stroke:      '#FFFFFF',
                       strokeWidth: 0.8,
                       outline:     'none',
-                      cursor:      'pointer',
+                      cursor:      hasSchools ? 'pointer' : 'default',
                       transition:  'fill 160ms ease',
                     },
                     hover: {
-                      fill:        '#4A5568',
+                      fill:        hasSchools ? '#4A5568' : '#D5D7DC',
                       stroke:      '#FFFFFF',
                       strokeWidth: 0.8,
                       outline:     'none',
-                      cursor:      'pointer',
+                      cursor:      hasSchools ? 'pointer' : 'default',
                     },
                     pressed: {
                       fill:        '#2D3748',

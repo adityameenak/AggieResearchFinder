@@ -22,6 +22,8 @@ import argparse, json, os, sys, time
 from pathlib import Path
 import requests
 
+import quality
+
 DEFAULT_HOST = "http://localhost:11434"
 MODEL = "gemma3:4b"
 SAVE_EVERY = 25
@@ -32,9 +34,22 @@ def api_url(host):
     host = (host or DEFAULT_HOST).strip().rstrip("/")
     if not host.startswith(("http://", "https://")):
         host = f"http://{host}"
-    if ":" not in host.split("//", 1)[1]:
+    # Ollama's own port only for a plain-http host; an https ingress (a
+    # Cloudflare hostname in front of the GPU box) is on 443.
+    if host.startswith("http://") and ":" not in host.split("//", 1)[1]:
         host = f"{host}:11434"
     return f"{host}/api/generate"
+
+
+def auth_headers():
+    """Cloudflare Access service-token headers, when the host sits behind Access.
+
+    Set CF_ACCESS_CLIENT_ID / CF_ACCESS_CLIENT_SECRET in the environment (read
+    them from a secret store at the moment of use; never write them to a file).
+    Without them a protected host answers 403, which preflight() reports.
+    """
+    cid, secret = os.environ.get("CF_ACCESS_CLIENT_ID"), os.environ.get("CF_ACCESS_CLIENT_SECRET")
+    return {"CF-Access-Client-Id": cid, "CF-Access-Client-Secret": secret} if cid and secret else {}
 
 
 def preflight(host, model):
@@ -46,7 +61,7 @@ def preflight(host, model):
     """
     tags = api_url(host).replace("/api/generate", "/api/tags")
     try:
-        resp = requests.get(tags, timeout=10)
+        resp = requests.get(tags, timeout=10, headers=auth_headers())
         resp.raise_for_status()
     except Exception as exc:
         print(f"Error: no Ollama at {host} ({type(exc).__name__}: {str(exc)[:120]})")
@@ -95,21 +110,35 @@ def is_refusal(text):
     return any(r in head for r in REFUSALS)
 
 
+def source_text(rec):
+    """The summary as merge.py will publish it: footer stripped, mojibake
+    repaired. This file runs on raw crawler output, where filler still sits —
+    quality.clean() only runs on the merged dataset."""
+    return quality.fix_mojibake(quality.strip_footer(rec.get("research_summary") or "")).strip()
+
+
 def needs_review(rec):
     """Check if a record needs an AI review (re-)generated."""
     review = rec.get("ai_review", "")
-    summary = (rec.get("research_summary") or "").strip()
+    summary = source_text(rec)
 
     # Must have enough source material
     if len(summary) < 40:
         return False
 
-    # Menu text is not source material, however long it is.
-    if is_junk_summary(summary):
+    # Menu text is not source material, however long it is. quality.py knows
+    # patterns this file's JUNK_SUMMARY list never did ("Research Research
+    # Facilities and Equipment…" on 119 TAMU engineering records).
+    if is_junk_summary(summary) or quality.is_menu_text(summary):
         return False
 
     # No review at all
     if not review:
+        return True
+
+    # Too short, a refusal, or a summary of site sections rather than research
+    # — merge.py strips these, so without this they would never be redone.
+    if quality.is_junk_review(review):
         return True
 
     # Formulaic template review from enrich_local.py, which writes the exact
@@ -133,7 +162,7 @@ def needs_review(rec):
 
 def generate_review(rec, model=MODEL, url=None):
     """Call Ollama to generate a research review."""
-    cleaned = rec.get("research_summary", "").replace("|", ", ").strip()[:1000]
+    cleaned = source_text(rec).replace("|", ", ")[:1000]
     name = rec["name"]
     # Humanize the dept slug so the model doesn't echo "systems-synthetic-biology".
     dept = rec.get("department", "").replace("-", " ")
@@ -161,6 +190,7 @@ def generate_review(rec, model=MODEL, url=None):
             url or api_url(None),
             json={"model": model, "prompt": prompt, "stream": False},
             timeout=120,
+            headers=auth_headers(),
         )
         resp.raise_for_status()
         text = resp.json().get("response", "").strip()

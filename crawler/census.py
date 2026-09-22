@@ -2,10 +2,12 @@
 """
 Data-parity reporting for the faculty dataset. Read-only — writes no data.
 
-Two modes:
+Three modes:
 
   python census.py --audit          coverage + card-quality tables for what we
                                     already have (offline, instant)
+  python census.py --quality        filler values per detector per school —
+                                    the regression gate for data cleaning
   python census.py --probe          hit candidate sources for departments we're
                                     missing and estimate what each would yield
   python census.py --probe --only harvard        just one school's candidates
@@ -13,6 +15,13 @@ Two modes:
 `--audit` is the parity scoreboard: run it before and after any crawl. The goal
 is that no school is an outlier in either table — every school covers the same
 canonical STEM departments, with cards of the same completeness.
+
+The card-quality table counts only *valid* values, as defined by quality.py —
+a placeholder photo, a shared office mailbox or a navigation menu is not a
+photo, an email or a research summary. Before 2026-09-22 any non-empty value
+counted, which read UT Dallas at 100% email with 603 records on the site's
+footer address. `--quality` lists what is still being filtered, so a crawl that
+starts emitting a new kind of filler shows up as a count, not a surprise.
 
 `--probe` is the go/no-go input for crawler work. It reports, per candidate
 source, whether the roster is reachable, whether it is server-rendered or needs
@@ -23,6 +32,7 @@ import argparse, collections, json, re, sys
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
+import quality
 import taxonomy
 
 HERE = Path(__file__).parent
@@ -80,22 +90,33 @@ NOT_OFFERED = {
 # ── Card-quality checks — the "gold standard" definition ─────────────────
 # A card is only as good as these fields; `research` and `ai_review` are what
 # the card body actually renders (see splitResearch in ui/src/utils/search.js).
+# Each check takes (record, value_counts) and counts only a *valid* value, so
+# the table cannot be flattered by filler (see quality.py).
+def _research_ok(r):
+    s = (r.get("research_summary") or "").strip()
+    return len(s) >= 40 and not quality.is_menu_text(s)
+
+
 CHECKS = [
-    ("photo",     lambda r: bool(r.get("photo_url"))),
-    ("email",     lambda r: bool(r.get("email"))),
-    ("title",     lambda r: bool(r.get("title"))),
-    ("research",  lambda r: len((r.get("research_summary") or "").strip()) >= 40),
-    ("ai_review", lambda r: len((r.get("ai_review") or "").strip()) >= 40),
-    ("interests", lambda r: bool(r.get("scholar_interests"))),
-    ("lab_site",  lambda r: bool(r.get("lab_website"))),
-    ("scholar",   lambda r: bool(r.get("google_scholar"))),
+    ("photo",     lambda r, c: bool(r.get("photo_url"))
+                               and not quality.is_placeholder_photo(r["photo_url"], c)),
+    ("email",     lambda r, c: bool(r.get("email"))
+                               and not quality.is_shared_email(r["email"], c)),
+    ("title",     lambda r, c: bool(r.get("title")) and not quality.is_non_title(r["title"])),
+    ("research",  lambda r, c: _research_ok(r)),
+    ("ai_review", lambda r, c: len((r.get("ai_review") or "").strip()) >= 40
+                               and not quality.is_junk_review(r["ai_review"])),
+    ("interests", lambda r, c: bool(r.get("scholar_interests"))),
+    ("lab_site",  lambda r, c: bool(r.get("lab_website"))
+                               and not quality.is_junk_link(r["lab_website"], c)),
+    ("scholar",   lambda r, c: bool(r.get("google_scholar"))
+                               and not quality.is_bad_scholar(r["google_scholar"])),
 ]
 
 
 def is_blank(r):
     """Matches matcher.isMatchable — no research signal means never a match."""
-    return (len((r.get("research_summary") or "").strip()) < 40
-            and not r.get("scholar_interests"))
+    return not _research_ok(r) and not r.get("scholar_interests")
 
 
 # ── Audit ────────────────────────────────────────────────────────────────
@@ -108,6 +129,7 @@ def load(path):
 
 def audit(path):
     records = load(path)
+    counts = quality.value_counts(records)
     by_school = collections.defaultdict(list)
     for r in records:
         by_school[r.get("university", "?")].append(r)
@@ -160,7 +182,7 @@ def audit(path):
         rows = records if s == "ALL" else by_school[s]
         if not rows:
             continue
-        cells = "".join(f"{100.0 * sum(1 for r in rows if fn(r)) / len(rows):>9.0f}%"
+        cells = "".join(f"{100.0 * sum(1 for r in rows if fn(r, counts)) / len(rows):>9.0f}%"
                         for _, fn in CHECKS)
         blank = 100.0 * sum(1 for r in rows if is_blank(r)) / len(rows)
         sep = "-" * len(hdr) + "\n" if s == "ALL" else ""
@@ -179,6 +201,32 @@ def audit(path):
               ", ".join(f"{s} {n}" for s, n in per.most_common()))
     else:
         print("\nDUPLICATES: none")
+    print()
+
+
+def quality_report(path):
+    """Filler per detector per school. Every cell should read 0 after merge.py."""
+    records = load(path)
+    counts = quality.value_counts(records)
+    schools = [s for s in SCHOOLS if any(r.get("university") == s for r in records)]
+    print("\n" + "=" * 78)
+    print("QUALITY — records carrying filler that quality.clean() would remove")
+    print("=" * 78)
+    hdr = f"{'detector':<19}" + "".join(f"{s:>8}" for s in schools) + f"{'ALL':>8}"
+    print(hdr)
+    print("-" * len(hdr))
+    total = 0
+    for name, fn in quality.DETECTORS:
+        per = collections.Counter(r.get("university") for r in records if fn(r, counts))
+        n = sum(per.values())
+        total += n
+        print(f"{name:<19}" + "".join(f"{per[s]:>8}" for s in schools) + f"{n:>8}")
+    print("-" * len(hdr))
+    print("Non-zero cells: run `python merge.py --sync-sources`, or fix the crawler "
+          "that keeps producing it." if total else
+          "Clean: merge.py runs quality.clean() on every merge.")
+    ranks = collections.Counter(r.get("rank_type") or "?" for r in records)
+    print("rank_type: " + ", ".join(f"{k} {v}" for k, v in ranks.most_common()))
     print()
 
 
@@ -339,6 +387,8 @@ def main():
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--audit", action="store_true",
                     help="coverage + card-quality tables for existing data")
+    ap.add_argument("--quality", action="store_true",
+                    help="filler values per detector per school")
     ap.add_argument("--probe", action="store_true",
                     help="reach out to candidate sources and estimate yield")
     ap.add_argument("--only", help="limit --probe to one school code")
@@ -346,10 +396,12 @@ def main():
                     help="dataset to audit (default: ui/public/faculty.json)")
     args = ap.parse_args()
 
-    if not args.audit and not args.probe:
-        ap.error("pass --audit and/or --probe")
+    if not (args.audit or args.quality or args.probe):
+        ap.error("pass --audit, --quality and/or --probe")
     if args.audit:
         audit(args.file)
+    if args.quality:
+        quality_report(args.file)
     if args.probe:
         probe(args.only)
 

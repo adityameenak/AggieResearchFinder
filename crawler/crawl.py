@@ -474,6 +474,8 @@ _MENU_TEXT_RE = re.compile(
 
 _BIO_HEADING_RE = re.compile(r"^(biography|bio|about( me)?|profile)$", re.I)
 
+_PUBS_HEADING_RE = re.compile(r"^(selected |recent |representative )?publications$", re.I)
+
 
 def _in_chrome(el) -> bool:
     """True if *el* sits inside site navigation rather than page content.
@@ -603,6 +605,23 @@ def _extract_research_summary(soup) -> str:
                         and not _looks_like_contact(text)):
                     research_summary = text
                     break
+
+    # Strategy 3b: a "Selected Publications" list. Many engineering.tamu.edu
+    # profiles have no research section at all — only education, industry
+    # history and a publication list — and the titles are the one research
+    # signal on the page. Pipe-joined like other keyword summaries, so the
+    # matcher can use them and card keyword pills skip them (they're > 60 chars).
+    if not research_summary:
+        for heading in soup.find_all(["h2", "h3", "h4"]):
+            if not _PUBS_HEADING_RE.match(heading.get_text(strip=True)) or _in_chrome(heading):
+                continue
+            lst = heading.find_next(["ul", "ol"])
+            items = [re.sub(r"\s+", " ", li.get_text(" ", strip=True))[:220]
+                     for li in (lst.find_all("li") if lst else [])]
+            items = [t for t in items if len(t) > 30][:6]
+            if items:
+                research_summary = "Selected publications: " + " | ".join(items)
+                break
 
     # Strategy 4: longest <p> on the page (best-effort fallback)
     if not research_summary:
@@ -772,7 +791,9 @@ def _extract_ut_profile(html: str, profile_url: str) -> dict:
 
     UT departments run three different site themes (no shared structure):
       - ece.utexas.edu          → UT Drupal Kit   (`field--name-field-*`)
-      - me.utexas.edu           → ME legacy theme (`.facphoto`, `.endowtitle`)
+      - me.utexas.edu           → Cockrell WordPress since 2026; the ME legacy
+                                   theme (`.facphoto`, `.endowtitle`) only if a
+                                   page still carries it
       - everything else Cockrell → modern WordPress (`.page-header__*`,
         `.contact__*`), e.g. ae/bme/che/caee/pge
     All three return the same field shape plus `department` (from the host).
@@ -786,7 +807,11 @@ def _extract_ut_profile(html: str, profile_url: str) -> dict:
         return _extract_ut_cs_profile(html, profile_url)
     if host.startswith("ece."):
         return _extract_ut_drupalkit_profile(html, profile_url)
-    if host.startswith("me."):
+    # me. moved to the Cockrell WordPress theme during 2026. The legacy parser
+    # read its `.endowtitle` fallback text, which the new theme doesn't have,
+    # so all 65 ME faculty came out titled "Distinguished". Route by markup,
+    # keeping the legacy parser for any page still on the old theme.
+    if host.startswith("me.") and "page-header__" not in html:
         return _extract_ut_me_profile(html, profile_url)
     return _extract_ut_cockrell_profile(html, profile_url)
 

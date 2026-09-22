@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
-import { deptLabel, deptStyle } from '../utils/search'
+import { splitResearch } from '../utils/search'
 import { matchFaculty } from '../utils/matcher'
 import EmailModal from '../components/EmailModal'
+import { BookmarkIcon, ExtIcon, DeptBadge, RankBadge, Avatar } from '../components/ProfBits'
 
 /* ── Fit badge ─────────────────────────────────────────────── */
 const FIT_CONFIG = {
@@ -23,23 +24,15 @@ function FitBadge({ label }) {
   )
 }
 
-function DeptBadge({ dept }) {
-  const s = deptStyle(dept).pill
-  return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px]
-                      font-semibold ring-1 ring-inset ${s}`}>
-      {deptLabel(dept)}
-    </span>
-  )
-}
-
 /* ── Match card ────────────────────────────────────────────── */
 function MatchCard({ result, onDraftEmail }) {
   const { toggleSave, isSaved } = useApp()
   const tx = useSchoolPath()
   const { professor: prof, fit_label, explanation, rank } = result
   const saved   = isSaved(prof.id, prof)
-  const snippet = (prof.research_summary ?? '').slice(0, 200)
+  // Same preview the search cards use: ai_review prose, not the first 200
+  // characters of research_summary, which is usually a pipe-joined run-on.
+  const snippet = splitResearch(prof).summary
 
   return (
     <article className="group bg-cream-50 rounded-2xl border border-cream-300
@@ -54,25 +47,31 @@ function MatchCard({ result, onDraftEmail }) {
           </span>
           <FitBadge label={fit_label} />
           <DeptBadge dept={prof.department} />
+          <RankBadge rank={prof.rank_type} />
         </div>
-        <button onClick={() => toggleSave(prof)} title={saved ? 'Remove from saved' : 'Save'}
+        <button onClick={() => toggleSave(prof)}
+                aria-label={saved ? `Remove ${prof.name} from My List` : `Save ${prof.name} to My List`}
+                aria-pressed={saved}
+                title={saved ? 'Remove from My List' : 'Save to My List'}
                 className={`flex-shrink-0 p-1.5 rounded-lg transition-all active:scale-90 ${
                   saved ? 'text-maroon-700 bg-maroon-100 hover:bg-maroon-200'
                         : 'text-stone-300 hover:text-maroon-700 hover:bg-maroon-50'}`}>
-          {saved
-            ? <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4V4z"/></svg>
-            : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4V4z"/></svg>
-          }
+          <BookmarkIcon filled={saved} className="w-4 h-4" />
         </button>
       </div>
 
-      <div className="px-5 pb-3">
-        <Link to={tx(`/prof/${prof.id}`)}
-              className="font-display font-bold text-stone-900 text-[17px] leading-snug
-                         hover:text-maroon-700 transition-colors block mb-1">
-          {prof.name}
-        </Link>
-        {prof.title && <p className="text-[12px] text-stone-400 italic line-clamp-1">{prof.title}</p>}
+      <div className="px-5 pb-3 flex items-start gap-3">
+        <Avatar prof={prof} />
+        <div className="min-w-0">
+          <Link to={tx(`/prof/${prof.id}`)}
+                className="font-display font-bold text-stone-900 text-[17px] leading-snug
+                           hover:text-maroon-700 transition-colors block mb-1">
+            {prof.name}
+          </Link>
+          {(prof.title_short || prof.title) && (
+            <p className="text-[12px] text-stone-400 italic line-clamp-1">{prof.title_short || prof.title}</p>
+          )}
+        </div>
       </div>
 
       <div className="h-px bg-cream-300 mx-5" />
@@ -86,9 +85,7 @@ function MatchCard({ result, onDraftEmail }) {
 
       <div className="flex-1 px-5 py-3">
         {snippet
-          ? <p className="text-[12px] text-stone-500 leading-relaxed line-clamp-3">
-              {snippet}{(prof.research_summary ?? '').length > 200 && <span className="text-stone-400"> &hellip;</span>}
-            </p>
+          ? <p className="text-[12px] text-stone-500 leading-relaxed line-clamp-3">{snippet}</p>
           : <p className="text-xs text-stone-400 italic">No research summary available.</p>
         }
       </div>
@@ -109,9 +106,7 @@ function MatchCard({ result, onDraftEmail }) {
                         border border-cream-400 text-stone-600 hover:border-maroon-300
                         hover:text-maroon-700 hover:bg-maroon-50 transition-colors font-medium">
             Profile
-            <svg viewBox="0 0 12 12" fill="currentColor" className="w-2.5 h-2.5 opacity-60">
-              <path d="M3.5 3a.5.5 0 0 0 0 1H7.29L2.15 9.15a.5.5 0 1 0 .7.7L8 4.71V8.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-.5-.5h-5Z"/>
-            </svg>
+            <ExtIcon />
           </a>
         )}
         <Link to={tx(`/prof/${prof.id}`)}
@@ -176,12 +171,13 @@ function ResumeCard({ profile, interests, onReset }) {
 /* ── Page ─────────────────────────────────────────────────── */
 export default function Match() {
   const navigate = useNavigate()
-  const { faculty, loading: facultyLoading } = useApp()
+  const { faculty, loading: facultyLoading, error: facultyError } = useApp()
   const school     = useSchool()
   const tx         = useSchoolPath()
   const sessionKey = `${school.code}_session`
   const [session,   setSession]   = useState(null)
-  const [matches,   setMatches]   = useState([])
+  // null until matching has run, so "0 matches" never flashes before results.
+  const [matches,   setMatches]   = useState(null)
   const [emailProf, setEmailProf] = useState(null)
 
   useEffect(() => {
@@ -197,9 +193,10 @@ export default function Match() {
 
   // Run matching once faculty is loaded and session is ready
   useEffect(() => {
-    if (!session || facultyLoading || !faculty.length) return
-    const results = matchFaculty(faculty, session.interests, session.parsed_profile, 20)
-    setMatches(results)
+    if (!session || facultyLoading) return
+    setMatches(faculty.length
+      ? matchFaculty(faculty, session.interests, session.parsed_profile, 20)
+      : [])
   }, [session, faculty, facultyLoading])
 
   function handleReset() {
@@ -207,7 +204,7 @@ export default function Match() {
     navigate(tx('/discover'))
   }
 
-  if (facultyLoading || (session && !matches.length && faculty.length === 0)) {
+  if (facultyLoading || (!facultyError && (!session || matches === null))) {
     return (
       <div className="min-h-[calc(100vh-54px)] bg-cream-100 flex items-center
                       justify-center flex-col text-center px-4">
@@ -219,6 +216,8 @@ export default function Match() {
     )
   }
 
+  const list = matches || []
+
   return (
     <div className="min-h-[calc(100vh-54px)] bg-cream-100">
       <div className="relative bg-cream-50 border-b border-cream-300 overflow-hidden">
@@ -229,7 +228,7 @@ export default function Match() {
             <span className="text-xs font-semibold text-maroon-700 uppercase tracking-[0.16em]">Your Matches</span>
           </div>
           <h1 className="font-display font-bold text-stone-900 text-3xl sm:text-4xl tracking-tight mb-1.5">
-            {matches.length} Research Matches Found
+            {list.length} Research {list.length === 1 ? 'Match' : 'Matches'} Found
           </h1>
           <p className="text-[15px] text-stone-500">
             Ranked by alignment with your interests. Click "Draft Email" to write a personalized outreach.
@@ -246,9 +245,9 @@ export default function Match() {
           />
         )}
 
-        {matches.length > 0 ? (
+        {list.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {matches.map((result, i) => (
+            {list.map((result, i) => (
               <div key={result.professor.id} style={{
                 opacity: 0,
                 animation: `heroFadeUp 0.45s cubic-bezier(0.16,1,0.3,1) ${Math.min(i,12)*50}ms forwards`,
@@ -268,7 +267,7 @@ export default function Match() {
           </div>
         )}
 
-        {matches.length > 0 && (
+        {list.length > 0 && (
           <div className="mt-10 text-center border-t border-cream-300 pt-8">
             <p className="text-sm text-stone-500 mb-3">Want to browse all faculty without matching?</p>
             <Link to={tx('/search')}

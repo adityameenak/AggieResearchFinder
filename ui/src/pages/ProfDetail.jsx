@@ -1,9 +1,10 @@
 import { useState, useMemo, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link, useNavigate, Navigate } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
-import { deptLabel, deptStyle } from '../utils/search'
+import { deptLabel } from '../utils/search'
 import EmailModal from '../components/EmailModal'
+import { BookmarkIcon, ExtIcon, DeptBadge, RankBadge, Avatar } from '../components/ProfBits'
 import Seo from '../components/Seo'
 import { buildProfMeta } from '../lib/seo'
 
@@ -30,44 +31,47 @@ function loadPubs(id) {
   return pubsCache.get(id)
 }
 
-/* ── Dept badge ───────────────────────────────────────────── */
-function DeptBadge({ dept }) {
-  const s = deptStyle(dept).pill
+/* ── Loading skeleton ─────────────────────────────────────── */
+// Every professor page is a prerendered landing page from search, so the
+// faculty file is usually still in flight on first paint. Rendering "Profile
+// not found" until it arrived flashed a 404 at most visitors.
+function DetailSkeleton() {
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-lg text-xs
-                      font-semibold ring-1 ring-inset ${s}`}>
-      {deptLabel(dept)}
-    </span>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 animate-pulse" aria-busy="true"
+         aria-label="Loading profile">
+      <div className="h-4 w-16 bg-cream-200 rounded mb-7" />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-5">
+          <div className="bg-cream-50 rounded-2xl border border-cream-300 p-8 flex gap-5">
+            <div className="w-20 h-20 rounded-xl bg-cream-200" />
+            <div className="flex-1 space-y-3 pt-1">
+              <div className="h-7 w-2/3 bg-cream-200 rounded" />
+              <div className="h-4 w-1/2 bg-cream-200 rounded" />
+            </div>
+          </div>
+          <div className="bg-cream-50 rounded-2xl border border-cream-300 p-8 space-y-3">
+            <div className="h-3 w-full bg-cream-200 rounded" />
+            <div className="h-3 w-11/12 bg-cream-200 rounded" />
+            <div className="h-3 w-4/5 bg-cream-200 rounded" />
+          </div>
+        </div>
+        <div className="h-40 bg-cream-200 rounded-2xl" />
+      </div>
+    </div>
   )
 }
 
-function ExtIcon() {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5 opacity-50 flex-shrink-0">
-      <path d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69L6.22 8.72Z" />
-      <path d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25v-4.5Z" />
-    </svg>
-  )
-}
-
-function BookmarkIcon({ filled }) {
-  return filled ? (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-      <path d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4V4z" />
-    </svg>
-  ) : (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"
-         className="w-4 h-4">
-      <path d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4-7 4V4z" />
-    </svg>
-  )
+// The name to address them by. `name` is cleaned by merge.py (no "Dr.", no
+// degrees), so the last token is the surname.
+function surname(name) {
+  const parts = (name || '').trim().split(/\s+/)
+  return parts[parts.length - 1] || ''
 }
 
 /* ── Page ─────────────────────────────────────────────────── */
 export default function ProfDetail() {
   const { id }                           = useParams()
-  const { faculty, toggleSave, isSaved } = useApp()
+  const { faculty, loading, toggleSave, isSaved } = useApp()
   const navigate                         = useNavigate()
   const school                           = useSchool()
   const tx                               = useSchoolPath()
@@ -75,6 +79,9 @@ export default function ProfDetail() {
   const [emailOpen, setEmailOpen]        = useState(false)
 
   const prof    = faculty.find(f => f.id === id)
+  // An id that merge.py retired when it collapsed a duplicate still resolves:
+  // links shared or indexed before the merge land on the surviving record.
+  const aliasOf = prof ? null : faculty.find(f => (f.alias_ids || []).includes(id))
   const saved   = prof ? isSaved(prof.id, prof) : false
 
   // Faculty pages are the long-tail SEO surface ("<professor name> <school>
@@ -89,7 +96,8 @@ export default function ProfDetail() {
   // merge.py, so a professor with no publications never issues the request.
   const [pubs, setPubs] = useState([])
   useEffect(() => {
-    if (!prof?.pub_count) { setPubs([]); return }
+    setPubs([])   // never show the previous professor's list while this one loads
+    if (!prof?.pub_count) return
     let cancelled = false
     loadPubs(prof.id).then(p => { if (!cancelled) setPubs(Array.isArray(p) ? p : []) })
     return () => { cancelled = true }
@@ -99,6 +107,9 @@ export default function ProfDetail() {
   const session = (() => {
     try { return JSON.parse(localStorage.getItem(sessionKey) || 'null') } catch { return null }
   })()
+
+  if (aliasOf) return <Navigate to={tx(`/prof/${aliasOf.id}`)} replace />
+  if (!prof && loading) return <DetailSkeleton />
 
   if (!prof) {
     return (
@@ -139,7 +150,9 @@ export default function ProfDetail() {
 
         {/* Back */}
         <button
-          onClick={() => navigate(-1)}
+          // A visitor who landed here from a search engine has no in-app page
+          // to go back to, and navigate(-1) took them off the site.
+          onClick={() => (window.history.state?.idx > 0 ? navigate(-1) : navigate(tx('/search')))}
           className="inline-flex items-center gap-1.5 text-sm text-stone-500
                      hover:text-stone-800 transition-colors mb-7"
         >
@@ -158,9 +171,13 @@ export default function ProfDetail() {
             {/* Profile header */}
             <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
               <div className="flex items-start justify-between gap-4 mb-5">
-                <DeptBadge dept={prof.department} />
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <DeptBadge dept={prof.department} />
+                  <RankBadge rank={prof.rank_type} />
+                </div>
                 <button
                   onClick={() => toggleSave(prof)}
+                  aria-pressed={saved}
                   className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-2
                               rounded-xl border text-sm font-medium transition-colors ${
                                 saved
@@ -168,31 +185,23 @@ export default function ProfDetail() {
                                   : 'border-cream-400 text-stone-500 hover:border-maroon-300 hover:text-maroon-700'
                               }`}
                 >
-                  <BookmarkIcon filled={saved} />
+                  <BookmarkIcon filled={saved} className="w-4 h-4" />
                   {saved ? 'Saved' : 'Save'}
                 </button>
               </div>
 
               <div className="flex items-start gap-5">
-                {prof.photo_url ? (
-                  <img
-                    src={prof.photo_url}
-                    alt=""
-                    className="w-20 h-20 rounded-xl object-cover flex-shrink-0 ring-1 ring-cream-300"
-                  />
-                ) : (
-                  <div className="w-20 h-20 rounded-xl bg-cream-200 border border-cream-300
-                                  flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-bold text-stone-400">
-                      {(prof.name || '?')[0]}
-                    </span>
-                  </div>
-                )}
-                <div>
+                <Avatar prof={prof} className="w-20 h-20 rounded-xl" textClass="text-2xl" />
+                <div className="min-w-0">
                   <h1 className="font-display font-bold text-stone-900 tracking-tight
                                  leading-tight mb-2 text-3xl sm:text-4xl">
                     {prof.name}
                   </h1>
+                  {prof.credentials && (
+                    <p className="text-xs text-stone-400 font-medium tracking-wide mb-1">
+                      {prof.credentials}
+                    </p>
+                  )}
                   {prof.title && (
                     <p className="text-[15px] text-stone-500 leading-snug">{prof.title}</p>
                   )}
@@ -269,7 +278,9 @@ export default function ProfDetail() {
               </div>
             )}
 
-            {/* Research summary */}
+            {/* Research summary. The empty-state box only appears when there is
+                genuinely nothing: it used to show beneath a full Research
+                Overview whenever research_summary alone was blank. */}
             {prof.research_summary ? (
               <div className="bg-cream-50 rounded-2xl border border-cream-300 p-7 sm:p-8">
                 <div className="text-[11px] font-semibold text-stone-400 uppercase
@@ -280,7 +291,7 @@ export default function ProfDetail() {
                   {prof.research_summary}
                 </p>
               </div>
-            ) : (
+            ) : !prof.ai_review && !(prof.scholar_interests || []).length && (
               <div className="bg-cream-100 rounded-2xl border border-cream-300 p-8 text-center">
                 <p className="text-sm text-stone-400 italic">
                   No research summary available for this professor.
@@ -300,7 +311,7 @@ export default function ProfDetail() {
               </div>
               <p className="text-xs text-maroon-200 leading-relaxed mb-4">
                 Generate a personalized email draft to Prof.{' '}
-                {prof.name.split(' ').pop()} tailored to your background and interests.
+                {surname(prof.name)} tailored to your background and interests.
               </p>
               <button
                 onClick={() => setEmailOpen(true)}
@@ -356,7 +367,7 @@ export default function ProfDetail() {
                                font-medium hover:bg-maroon-600 transition-colors"
                   >
                     Faculty Profile
-                    <ExtIcon />
+                    <ExtIcon className="w-3.5 h-3.5" />
                   </a>
                 )}
                 {prof.lab_website && (
@@ -370,7 +381,7 @@ export default function ProfDetail() {
                                hover:bg-maroon-50 transition-colors"
                   >
                     Lab Website
-                    <ExtIcon />
+                    <ExtIcon className="w-3.5 h-3.5" />
                   </a>
                 )}
                 {prof.google_scholar && (
@@ -384,7 +395,7 @@ export default function ProfDetail() {
                                hover:bg-maroon-50 transition-colors"
                   >
                     Google Scholar
-                    <ExtIcon />
+                    <ExtIcon className="w-3.5 h-3.5" />
                   </a>
                 )}
                 {prof.email && (
@@ -400,6 +411,15 @@ export default function ProfDetail() {
                       <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 5.193v7.057c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.193l-5.412 3.608a1.5 1.5 0 0 1-1.676 0L1.5 5.193Zm13-1.676-6.263 4.175a.25.25 0 0 1-.274 0L1.5 3.517v-.267a.25.25 0 0 1 .25-.25h12.5a.25.25 0 0 1 .25.25v.267Z" />
                     </svg>
                   </a>
+                )}
+                {/* merge.py removes shared office mailboxes (UT Dallas's
+                    profile site put its research office on 603 records), so a
+                    missing address is common and needs saying, not hiding. */}
+                {!prof.email && (
+                  <p className="text-xs text-stone-500 leading-relaxed px-1">
+                    No direct email is published in our data.
+                    {prof.profile_url ? ' Their faculty profile or lab site usually lists one.' : ''}
+                  </p>
                 )}
               </div>
             </div>

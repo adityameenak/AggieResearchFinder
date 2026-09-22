@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
 import Reveal from '../components/Reveal'
+import { SCHOOL_SEO } from '../lib/seo'
 
 /* ── Abstract compass / academic seal decoration ─────────── */
 function CompassSVG() {
@@ -404,7 +405,7 @@ export default function Home() {
               <br />research match?
             </h2>
             <p className="text-maroon-200 text-sm mb-8 max-w-md mx-auto leading-relaxed">
-              Search {loading ? '500+' : faculty.length} {school.shortName} STEM
+              Search {(loading ? SCHOOL_SEO[school.code]?.count ?? '' : faculty.length).toLocaleString('en-US')} {school.shortName} STEM
               faculty profiles. No account. No forms. Just results.
             </p>
             <Link

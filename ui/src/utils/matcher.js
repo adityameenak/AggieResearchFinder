@@ -5,7 +5,7 @@
  */
 // Imported by plain Node (ui/api/_lib/*), so relative imports need the explicit
 // .js extension — same reason as src/lib/seo.js. See CLAUDE.md.
-import { tokenize, deptLabel } from './search.js'
+import { tokenize, deptLabel, researchText, hasResearch } from './search.js'
 
 function countHits(tokens, haystack) {
   let score = 0
@@ -25,12 +25,17 @@ function countHits(tokens, haystack) {
 // A professor is only matchable if we know what they research — otherwise
 // there's no basis for a "research fit". Blank profiles are excluded entirely.
 export function isMatchable(prof) {
-  return Boolean((prof.research_summary || '').trim() ||
-                 (prof.scholar_interests || []).length)
+  return hasResearch(prof)
 }
 
+// Appointment type from merge.py (quality.rank_type). A student matching for a
+// research position is poorly served by an emeritus professor or a lecturer
+// ranking level with an active PI, but they are still real matches — so they
+// are ranked lower, never removed. Records without the field count as research.
+export const RANK_WEIGHT = { research: 1, adjunct: 0.7, visiting: 0.7, teaching: 0.7, emeritus: 0.5 }
+
 function scoreProf(prof, interestTokens, resumeTokens) {
-  const research = `${prof.research_summary || ''} ${(prof.scholar_interests || []).join(' ')}`
+  const research = researchText(prof)
   const haystack = `${research} ${prof.name || ''} ${prof.department || ''}`
 
   let primary = countHits(interestTokens, haystack)
@@ -47,7 +52,7 @@ function scoreProf(prof, interestTokens, resumeTokens) {
   // were given and the resume is the only signal.
   let secondary = countHits(resumeTokens, research) * 0.35
   if (interestTokens.length) secondary = Math.min(secondary, primary)
-  return primary + secondary
+  return (primary + secondary) * (RANK_WEIGHT[prof.rank_type] ?? 1)
 }
 
 function fitLabel(score, maxScore) {
@@ -67,6 +72,7 @@ function buildExplanation(prof, interests) {
 
   const research = (prof.research_summary || '').slice(0, 130).replace(/\|.*$/, '').trim()
     || (prof.scholar_interests || []).slice(0, 3).join(', ')
+    || (prof.ai_review || '').split(/(?<=[.!?])\s/)[0].slice(0, 130).replace(/[.!?]$/, '')
   const iSnip = (interests || '').slice(0, 80)
   if (!research) {
     return `Prof. ${prof.name} works in ${dept} — related to your stated interest in ${iSnip}.`

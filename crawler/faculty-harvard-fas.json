@@ -254,7 +254,17 @@
     "photo_url": "https://eps.harvard.edu/app/uploads/2025/01/frank_keutsch_1-aspect-ratio-1-1-440x440-c-default.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Applied Mathematics",
+      "Applied Physics",
+      "Bioengineering",
+      "Electrical & Computer Engineering",
+      "Environmental Science and Engineering",
+      "Atmospheric Chemistry",
+      "Climate Change",
+      "Solar Geoengineering",
+      "Materials and Mechanical Engineering"
+    ],
     "publications": []
   },
   {
@@ -272,7 +282,12 @@
     "photo_url": "https://eps.harvard.edu/app/uploads/2025/05/Jim-Anderson-profile-aspect-ratio-1-1-440x440-c-default.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Environmental Science and Engineering",
+      "Atmospheric Chemistry",
+      "Climate Change",
+      "Solar Geoengineering"
+    ],
     "publications": []
   },
   {
@@ -380,7 +395,15 @@
     "photo_url": "https://eps.harvard.edu/app/uploads/2024/09/Kaighin-McColl-scaled-aspect-ratio-1-1-440x440-c-default.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Applied Mathematics",
+      "Modeling Physical/Biological Phenomena and Systems",
+      "Environmental Science and Engineering",
+      "Climate Change",
+      "Climate Dynamics",
+      "Meteorology",
+      "Water"
+    ],
     "publications": []
   },
   {
@@ -524,7 +547,13 @@
     "photo_url": "https://eps.harvard.edu/app/uploads/2024/09/Harvard_04_18_2024_Working_Edit_0002-scaled-aspect-ratio-1-1-440x440-c-default.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Environmental Science and Engineering",
+      "Climate Change",
+      "Climate Dynamics",
+      "Ice Dynamics and Sea Level",
+      "Oceanography"
+    ],
     "publications": []
   },
   {
