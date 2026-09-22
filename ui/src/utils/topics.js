@@ -49,7 +49,12 @@ const JUNK_TOPICS = new Set([
   'email address', 'email', 'phone', 'office', 'fax', 'address',
   'curriculum vitae', 'cv', 'website', 'web site', 'google scholar', 'scholar',
   'n/a', 'na', 'none', 'tba', 'professor', 'associate professor',
-  'assistant professor', 'faculty', 'lecturer', 'department',
+  'assistant professor', 'faculty', 'lecturer', 'department', 'directory',
+  // University service links, not research areas. These come from a site
+  // footer that TAMU's scraped summaries carry; see the note on CHROME_PATTERNS
+  // about why this list is exact-match.
+  'webmail', 'libraries', 'library', 'information technology', 'it services',
+  'human resources', 'employment', 'campus map', 'maps', 'giving', 'alumni',
   // Medical/health profiles bring their own heading vocabulary — without
   // these, "Clinical Interests" and "Board Certification" become top chips.
   'clinical interests', 'clinical interest', 'clinical focus', 'clinical care',
@@ -58,6 +63,37 @@ const JUNK_TOPICS = new Set([
   'clinical trials', 'specialties', 'specialty', 'conditions treated',
   'procedures', 'insurance', 'locations', 'licensure', 'credentials',
 ])
+
+/**
+ * Site chrome, matched as a substring rather than an exact string.
+ *
+ * JUNK_TOPICS only catches exact headings, so whole navigation fragments got
+ * through: UT Dallas's topic list was led by "Privacy Policy Check Our Faq or
+ * Contact Us." and "Office of Research and Innovation" (12 faculty each), which
+ * rendered as topic chips on the site and — worse — were offered to MCP callers
+ * as suggested search queries. These are page furniture in the scraped summary,
+ * never research topics, and the phrasing varies too much to enumerate exactly.
+ */
+const CHROME_PATTERNS = [
+  // 'privacy' alone is off-limits: differential privacy and privacy-preserving
+  // machine learning are real research topics.
+  'privacy policy', 'privacy practices', 'notice of privacy',
+  'notice of nondiscrimination', 'nondiscrimination',
+  // TAMU's standard university footer, which was supplying six of its top-30
+  // "research topics". Keep these specific: a bare 'policy' would reject
+  // Harvard's real "Science and Technology Policy".
+  'academic calendar', 'emergency information', 'title ix', 'clery',
+  'veterans portal', 'site policies', 'open records', 'state of texas',
+  'university system', 'misconduct hotline', 'hotline', '\u00a9', '\u00e2\u00a9',
+  'contact us', 'our faq', 'terms of use', 'sitemap',
+  'accessibility', 'all rights reserved', 'skip to', 'log in', 'sign in',
+  'apply now', 'give now', 'make a gift', 'news and events', 'upcoming events',
+  'office of research', 'request info', 'follow us', 'social media',
+  'copyright', 'cookie',
+  // Footer/nav leaks seen in the live data. Note these must stay multi-word:
+  // a bare 'icon' would reject "Post-Silicon Validation", a real topic.
+  'state link policy', 'directory icon', 'icon name',
+]
 
 /**
  * Is a string a genuinely useful research topic (vs. a heading, a stopword
@@ -69,6 +105,7 @@ export function isUsefulTopic(term) {
   if (!/[a-z]/.test(t)) return false                 // must contain a letter
   if (/^\d/.test(t) || /^[a-z]{2,4}\s?\d/i.test(t)) return false  // codes like "WEL 3.120"
   if (JUNK_TOPICS.has(t)) return false
+  if (CHROME_PATTERNS.some(pat => t.includes(pat))) return false
   if (!t.includes(' ') && GENERIC_TERMS.has(t)) return false
   if (/^(and|or|the|of|in|with|for|to|a|an)\b/.test(t)) return false  // fragment
   if (/\b(and|or|of|the)$/.test(t)) return false     // dangling-conjunction fragment

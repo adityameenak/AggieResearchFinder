@@ -2,6 +2,20 @@
 Email draft generation: produces a personalized cold-outreach email from a
 student to a professor. Uses Claude when ANTHROPIC_API_KEY is set, otherwise
 returns a polished template-based draft.
+
+NOT LIVE — DO NOT USE AS A REFERENCE.
+
+The deployed email path is ui/api/email.js; this module has diverged from it and
+is kept only for the local FastAPI companion. It has none of the work that made
+the real drafts stop reading like form letters: no ai_review, no
+scholar_interests, no publication titles, a fixed "Format exactly as" skeleton,
+one identical subject line for every professor, and no temperature.
+
+It is deliberately not being mirrored. backend/services/matcher.py is the
+cautionary example — it is a copy of the UI's scorer that silently drifted (it
+scores no scholar_interests and has no isMatchable), and keeping two
+implementations honest costs more than it saves. If you need to change email
+behaviour, change ui/api/email.js and ui/api/_lib/emailGuidance.js.
 """
 from services import llm
 

@@ -137,6 +137,56 @@ Full interactive docs at `http://localhost:8000/docs`.
 | `POST` | `/api/match` | Run matching → ranked professors with fit labels + explanations |
 | `POST` | `/api/email/draft` | Generate a draft outreach email |
 
+The table above is the local FastAPI app. The **deployed** functions are separate, in `ui/api/`:
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/api/parse` | Resume PDF/DOCX → parsed profile |
+| `POST` | `/api/email` | Draft an outreach email, grounded in the professor's own research and papers |
+| `POST` | `/api/feedback` | File a feedback GitHub issue |
+| `POST` | `/api/mcp` | MCP server (see below) |
+
+---
+
+## MCP server — use it from your chatbot
+
+Connect the dataset to Claude or any MCP-compatible assistant instead of clicking through the site:
+
+```
+https://stemresearchfinder.tech/api/mcp
+```
+
+In Claude: **Settings → Connectors → Add custom connector**, paste that URL. No key, no sign-up;
+it is public, read-only and rate-limited. Human-facing docs live at
+[`/mcp`](https://stemresearchfinder.tech/mcp).
+
+| Tool | What it does |
+|---|---|
+| `list_schools` | The universities covered, with faculty counts |
+| `list_departments` | Departments at a school, with counts |
+| `list_topics` | The research vocabulary this dataset actually uses |
+| `search_faculty` | Keyword search over faculty research |
+| `match_faculty` | Rank faculty by research fit against stated interests, with explanations |
+| `get_professor` | One professor in full, including most-cited papers |
+| `draft_email_brief` | The material needed to write a cold-outreach email |
+
+Two things worth knowing. The server **imports the site's own `search.js`/`matcher.js`**, so an MCP
+result is the same ranking a visitor would see — not a second implementation that can drift. And
+`draft_email_brief` returns *material, not prose*: your assistant writes the email, because it knows
+your voice and because an unauthenticated endpoint has no business spending model credits.
+
+Debugging, in the order that isolates fastest — the tools need no server at all:
+
+```bash
+cd ui
+node -e "import('./api/_lib/tools.js').then(async m => console.log(
+  (await m.searchFaculty({query:'protein folding',school:'tamu',limit:3},
+   {origin:'https://stemresearchfinder.tech'})).text))"
+
+vercel dev                                    # /api/* 404s under `npm run dev`
+npx @modelcontextprotocol/inspector            # catches handshake bugs curl won't
+```
+
 ---
 
 ## AI Features & Mock Mode
@@ -293,6 +343,7 @@ ResearchFinder/
 | `/prof/:id` | Professor detail — research + Draft Email button |
 | `/saved` | Bookmarked professors |
 | `/about` | About + tech stack |
+| `/mcp` | How to connect the MCP server to a chatbot |
 
 ---
 

@@ -280,6 +280,45 @@ export function buildMeta(pathname = '/') {
     }
   }
 
+  /* ── /mcp: connect the dataset to a chatbot ────────────── */
+  if (parts.length === 1 && parts[0] === 'mcp') {
+    return {
+      title: 'MCP Server — Search Faculty From Your Chatbot',
+      description:
+        `Connect ${n(TOTAL_FACULTY)} STEM faculty across six universities to Claude or any ` +
+        `MCP client. Search, match and draft outreach emails without leaving your assistant.`,
+      canonical: absUrl('/mcp'),
+      keywords: [
+        'mcp server', 'model context protocol', 'faculty search mcp',
+        'claude connector', 'research finder api', 'mcp research tools',
+        'connect claude to faculty database',
+      ],
+      image: ogImageFor(null),
+      themeColor: THEME_DEFAULT,
+      robots: 'index,follow,max-image-preview:large,max-snippet:-1',
+      school: null,
+      h1: 'MCP Server',
+      intro:
+        `Connect STEM Research Finder to Claude or any MCP-compatible assistant and search ` +
+        `${n(TOTAL_FACULTY)} research faculty by asking, instead of clicking.`,
+      links: [{ href: '/', text: 'Browse the universities instead' }],
+      jsonLd: [
+        ORGANIZATION,
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebAPI',
+          name: `${SITE_NAME} MCP Server`,
+          description:
+            'Model Context Protocol server exposing STEM faculty search, research-fit matching ' +
+            'and outreach-email material to AI assistants.',
+          url: absUrl('/mcp'),
+          documentation: absUrl('/mcp'),
+          provider: { '@id': `${SITE_URL}/#organization` },
+        },
+      ],
+    }
+  }
+
   /* ── /schools/:state ───────────────────────────────────── */
   if (parts[0] === 'schools' && parts[1]) {
     const slug  = parts[1]
@@ -518,7 +557,7 @@ export function buildProfMeta(prof, school, deptName) {
 
 /** Every route the build should prerender as a real HTML file. */
 export function prerenderRoutes() {
-  const routes = ['/']
+  const routes = ['/', '/mcp']
   for (const state of statesWithSchools()) routes.push(`/schools/${state}`)
   for (const s of SCHOOL_LIST) {
     for (const sec of SECTION_KEYS) routes.push(sec ? `/${s.code}/${sec}` : `/${s.code}`)

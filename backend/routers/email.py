@@ -18,12 +18,16 @@ class DraftRequest(BaseModel):
     school_name: Optional[str] = None
 
 
-# Map university code → display name used in email signatures. Kept in sync
-# with ui/src/schools.js. Falls back to a generic phrase if a faculty record
-# has a code that's not listed.
+# Map university code → display name used in email signatures. Must cover every
+# code in ui/src/schools.js; it listed only tamu and rice while six schools were
+# live, so four of them silently signed off as "Texas A&M University".
 SCHOOL_NAMES = {
-    "tamu": "Texas A&M University",
-    "rice": "Rice University",
+    "tamu":    "Texas A&M University",
+    "rice":    "Rice University",
+    "ut":      "The University of Texas at Austin",
+    "utd":     "The University of Texas at Dallas",
+    "mit":     "Massachusetts Institute of Technology",
+    "harvard": "Harvard University",
 }
 
 

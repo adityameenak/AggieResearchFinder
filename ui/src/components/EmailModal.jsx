@@ -12,6 +12,28 @@ const TONES = [
   { id: 'concise',      label: 'Concise' },
 ]
 
+// Length is separate from tone. It used to be tangled: "Concise" was both a
+// voice and a word budget, so there was no way to ask for a warm short email.
+const LENGTHS = [
+  { id: 'short',    label: 'Short' },
+  { id: 'standard', label: 'Standard' },
+  { id: 'detailed', label: 'Detailed' },
+]
+
+/**
+ * One line describing what material the draft was grounded in. `grounding`
+ * comes from /api/email; older cached responses may not carry it.
+ */
+function groundingLabel(g) {
+  if (!g) return ''
+  const parts = []
+  if (g.papers)        parts.push(`${g.papers} recent paper${g.papers === 1 ? '' : 's'}`)
+  if (g.has_review)    parts.push('research summary')
+  if (g.has_interests) parts.push('scholar interests')
+  if (!parts.length)   return 'Little public detail on this professor — worth personalizing by hand.'
+  return `Grounded in: ${parts.join(' · ')}`
+}
+
 const STEP_EYEBROW = {
   draft: 'Draft Outreach Email',
   send:  'Send Email',
@@ -60,6 +82,7 @@ export default function EmailModal({ prof, session, onClose }) {
   const { markEmailed, undoEmailed } = useApp()
 
   const [tone,     setTone]     = useState('professional')
+  const [length,   setLength]   = useState('standard')
   const [draft,    setDraft]    = useState(null)
   const [bodyEdit, setBodyEdit] = useState('')
   const [loading,  setLoading]  = useState(false)
@@ -72,9 +95,9 @@ export default function EmailModal({ prof, session, onClose }) {
   const [sentInfo,     setSentInfo]     = useState(null)   // { id, previousStatus, created, viaLabel, at }
   const [undoneTo,     setUndoneTo]     = useState(null)   // status set by "Still drafting"
 
-  useEffect(() => { generate('professional') }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { generate('professional', 'standard') }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function generate(selectedTone) {
+  async function generate(selectedTone, selectedLength) {
     setLoading(true)
     setError(null)
     try {
@@ -86,6 +109,7 @@ export default function EmailModal({ prof, session, onClose }) {
           parsed_profile: session?.parsed_profile ?? null,
           interests:      session?.interests ?? '',
           tone:           selectedTone,
+          length:         selectedLength,
           school_name:    school.name,
         }),
       })
@@ -103,13 +127,29 @@ export default function EmailModal({ prof, session, onClose }) {
     }
   }
 
-  function handleToneChange(t) {
-    if (t === tone) return
-    // Regenerating replaces the body — don't silently throw away edits.
+  // Regenerating replaces the body — don't silently throw away edits.
+  function confirmDiscard() {
     const edited = draft && bodyEdit.trim() && bodyEdit !== draft.body
-    if (edited && !window.confirm('Regenerating will discard your edits to the email body. Continue?')) return
+    return !edited || window.confirm('Regenerating will discard your edits to the email body. Continue?')
+  }
+
+  function handleToneChange(t) {
+    if (t === tone || !confirmDiscard()) return
     setTone(t)
-    generate(t)
+    generate(t, length)
+  }
+
+  function handleLengthChange(l) {
+    if (l === length || !confirmDiscard()) return
+    setLength(l)
+    generate(tone, l)
+  }
+
+  // Worth having only now that the draft request sets a temperature — before
+  // that, regenerating returned a near-identical email.
+  function handleRegenerate() {
+    if (!confirmDiscard()) return
+    generate(tone, length)
   }
 
   async function copy() {
@@ -177,20 +217,35 @@ export default function EmailModal({ prof, session, onClose }) {
           </button>
         </div>
 
-        {/* Tone selector — draft step only */}
+        {/* Tone + length selectors — draft step only */}
         {step === 'draft' && (
-          <div className="px-6 py-3 border-b border-cream-300 flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-stone-400 font-semibold uppercase tracking-wide mr-1">Tone:</span>
-            {TONES.map(t => (
-              <button key={t.id} onClick={() => handleToneChange(t.id)} disabled={loading}
-                      className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
-                        tone === t.id
-                          ? 'bg-maroon-700 text-cream-100 border-maroon-700'
-                          : 'border-cream-400 text-stone-600 hover:border-maroon-300 hover:text-maroon-700'
-                      } disabled:opacity-40`}>
-                {t.label}
-              </button>
-            ))}
+          <div className="px-6 py-3 border-b border-cream-300 space-y-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs text-stone-400 font-semibold uppercase tracking-wide mr-1 w-14">Tone:</span>
+              {TONES.map(t => (
+                <button key={t.id} onClick={() => handleToneChange(t.id)} disabled={loading}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+                          tone === t.id
+                            ? 'bg-maroon-700 text-cream-100 border-maroon-700'
+                            : 'border-cream-400 text-stone-600 hover:border-maroon-300 hover:text-maroon-700'
+                        } disabled:opacity-40`}>
+                  {t.label}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs text-stone-400 font-semibold uppercase tracking-wide mr-1 w-14">Length:</span>
+              {LENGTHS.map(l => (
+                <button key={l.id} onClick={() => handleLengthChange(l.id)} disabled={loading}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+                          length === l.id
+                            ? 'bg-maroon-700 text-cream-100 border-maroon-700'
+                            : 'border-cream-400 text-stone-600 hover:border-maroon-300 hover:text-maroon-700'
+                        } disabled:opacity-40`}>
+                  {l.label}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
@@ -217,6 +272,20 @@ export default function EmailModal({ prof, session, onClose }) {
                 <div className="text-sm font-medium text-stone-800 bg-cream-100
                                 border border-cream-300 rounded-xl px-4 py-2.5">
                   {draft.subject}
+                </div>
+                {/* What the draft was actually written from. This is the honest
+                    surface for a thin profile: if there was little to work with,
+                    the student can see it and personalize by hand. */}
+                <div className="mt-1.5 flex items-center justify-between gap-3 flex-wrap">
+                  <p className="text-[11px] text-stone-400">
+                    {groundingLabel(draft.grounding)}
+                    {draft.template_fallback && ' · drafted offline — personalize before sending'}
+                  </p>
+                  <button onClick={handleRegenerate} disabled={loading}
+                          className="text-[11px] font-semibold text-maroon-700 hover:text-maroon-600
+                                     disabled:opacity-40 underline decoration-dotted">
+                    Regenerate
+                  </button>
                 </div>
               </div>
               <div>

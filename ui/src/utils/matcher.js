@@ -3,7 +3,9 @@
  * Interest-driven: stated interests are the primary signal.
  * Resume provides a secondary boost (0.35 weight).
  */
-import { tokenize, deptLabel } from './search'
+// Imported by plain Node (ui/api/_lib/*), so relative imports need the explicit
+// .js extension — same reason as src/lib/seo.js. See CLAUDE.md.
+import { tokenize, deptLabel } from './search.js'
 
 function countHits(tokens, haystack) {
   let score = 0

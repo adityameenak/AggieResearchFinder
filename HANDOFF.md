@@ -181,6 +181,74 @@ the crawler** — it only knows what the title says.
 
 ---
 
+## The MCP server
+
+Live at **`https://stemresearchfinder.tech/api/mcp`**, documented for humans at `/mcp`.
+Users add it in Claude under Settings → Connectors → Add custom connector. No key, no sign-up.
+
+Architecture and the rules that must not be broken are in CLAUDE.md. What matters operationally:
+
+- **Rate limiting in code is weak by construction.** `ui/api/_lib/ratelimit.js` counts in memory,
+  so the ceiling is 60/min *per instance*. It is a guard against a runaway agent loop, not a
+  defence. It is acceptable because the endpoint is read-only over files that are already public and
+  CDN-cached, and because no paid model is reachable from it — `draft_email_brief` deliberately
+  returns material rather than calling Anthropic.
+- **The real lever is a Vercel Firewall rate-limit rule on `/api/mcp`**, set in the dashboard. Like
+  `GITHUB_TOKEN` below, that is dashboard state this repo cannot see, so it is recorded here. **It
+  has not been created yet** — do that before publicising the endpoint widely.
+- It serves faculty JSON by fetching this site's own `/faculty-<code>.json`, which is already
+  cached for an hour. So the endpoint costs bandwidth on cache hits and nothing else.
+- To debug: exercise `ui/api/_lib/tools.js` directly first (no server needed), then `vercel dev`
+  plus `npx @modelcontextprotocol/inspector`, then a preview deploy in a real client. Only a real
+  client proves the transport.
+
+## Outreach email quality
+
+Rewritten because professors could tell the drafts came from a tool. The cause was inputs, not
+phrasing: the prompt never saw `ai_review`, `scholar_interests` or the publication titles.
+
+Measured on 18 TAMU professors, template path, before → after:
+
+| | before | after |
+|---|---|---|
+| distinct subject lines | 1/18 | 14/18 |
+| pairwise shared 5-grams (mean) | 0.94 | 0.39 |
+| drafts containing a banned phrase | 18/18 | 0/18 |
+
+```bash
+cd ui && node scripts/email-variance.mjs --school tamu --n 18 --yes   # add --out to diff runs
+```
+
+**Publications are TAMU-only today**, and that is not a bug in the email code. All 601
+`ui/public/pubs/*.json` files belong to TAMU records; the other five schools have no `pub_count` on
+any record, so the "cite one recent paper" grounding tier only ever fires for TAMU and the other
+schools correctly fall through to the research-summary tier. If publications get enriched for
+another school, that tier starts working there with no code change.
+
+**The model path is not yet measured.** There is no local `ANTHROPIC_API_KEY` (it lives in the
+Vercel dashboard), so only the template fallback has been run end to end. The model path is
+verified for imports, prompt assembly and the three grounding tiers, but its variance numbers need
+one run against `vercel dev` or a preview deploy with the key present. Do that before claiming the
+complaint is fixed.
+
+## Known data bug: 23 TAMU Health records carry their site footer
+
+`list_topics` for TAMU surfaced `Risk, Fraud & Misconduct Hotline`, a mojibake copyright line, and
+`Dentistry / Medicine / Nursing / Pharmacy` all at exactly the same count — the signature of one
+nav+footer block copied into many records. 23 records (`public-health`, `dentistry`) have the TAMU
+Health site chrome inside `research_summary`; `Zhou Chen, DDS` is one.
+
+This is the same class of bug as the artsci navigation-menu leak that hit 443 records (CLAUDE.md).
+**It is not fixed** — only the symptom is contained, by `CHROME_PATTERNS` in `ui/src/utils/topics.js`
+keeping the chrome out of topic chips. The underlying summaries are still wrong, so those 23 records
+have a junk `research_summary` and any `ai_review` generated from it is suspect. Fixing it means
+repairing the parser in the tamu-health crawler and re-extracting those records — and per the
+re-crawl warning above, clearing an enriched field needs two passes.
+
+Note the counts are small and the departments are real, so do **not** just delete
+`Dentistry`/`Medicine` from the topic filter: those words are legitimate, they are only ranking
+because of the leak.
+
 ## The feedback box
 
 `ui/api/feedback.js` files each submission as a GitHub issue on

@@ -15,6 +15,10 @@ Four independent components, each with its own dependencies and lifecycle:
 - `ui/` — Vite + React 18 + Tailwind frontend, served as a multi-school SPA
 - `tools/` — internal, file-based HTML utilities (lab-review, scholar-links) for data triage; **not** deployed.
 
+`ui/api/` holds the deployed serverless functions: `parse`, `email`, `feedback`, and `mcp` (the MCP
+server), with shared server-side helpers in `ui/api/_lib/` (the `_` prefix keeps Vercel from routing
+them as endpoints).
+
 There is no top-level package manager. Treat each directory as its own project.
 
 **Live now: 6 schools, 5,260 faculty** — TAMU 1,676 · Rice 618 · UT Austin 1,147 · UT Dallas 606 · MIT 792 · Harvard 421, all `available: true`. Counts are post-curation (`merge.py` drops students, postdocs and admin staff); re-read them from `merge.py`'s output after any crawl rather than trusting this line. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
@@ -134,7 +138,74 @@ Because `seo.js` is imported by plain Node, its relative imports need explicit `
 
 **Feedback goes to GitHub Issues.** `ui/api/feedback.js` files each submission as an issue on the repo via a raw `fetch` to the REST API (no new npm dependency). It follows the same degradation contract as the other functions: with no `GITHUB_TOKEN` it logs the payload and still returns success, so the user never sees a failure. `FeedbackModal.jsx` **must not call `useSchool()`** — it renders on Landing and StatePage, which are outside `SchoolProvider`; it reads `document.documentElement.dataset.school` instead. **Issues land on a public repo**, which is why the form says so.
 
-**Mock mode is a first-class feature.** When `ANTHROPIC_API_KEY` is unset, `backend/services/llm.py` sets `MOCK_MODE=True` and the resume parser, matcher, and email drafter fall back to keyword/template implementations. The app stays fully functional. When changing AI features, preserve both code paths — check `MOCK_MODE` and provide a non-LLM fallback. `/api/health` exposes `mock_mode` so callers can tell which mode is active. The Vercel-side `ui/api/parse.js` and `ui/api/email.js` mirror this pattern (template fallback when `ANTHROPIC_API_KEY` is missing).
+**The MCP server is the second front door.** `ui/api/mcp.js` exposes the dataset to any
+MCP client (Claude Desktop/claude.ai → Settings → Connectors → Add custom connector →
+`https://stemresearchfinder.tech/api/mcp`), so a student can search from their chatbot instead of
+clicking through the SPA. `/mcp` is the human-facing docs page (`ui/src/pages/McpPage.jsx`, routed
+**before** `/:schoolCode/*` so "mcp" isn't read as a school code).
+
+- **It reuses `src/utils/search.js` and `matcher.js` directly** — that is the whole design. An MCP
+  result must equal what the site would show, so the server imports the UI's scorers rather than
+  reimplementing ranking. `backend/services/matcher.py` is the cautionary example of the
+  alternative: a copy that silently drifted (no `scholar_interests`, no `isMatchable`). This is why
+  `src/utils/matcher.js` imports `'./search.js'` with the extension — it's loaded by plain Node,
+  same as `src/lib/seo.js`.
+- **Seven tools**, in `ui/api/_lib/tools.js` as plain `(args, ctx) => {data, text}` functions kept
+  out of the transport file so they can be exercised with no MCP client at all:
+  `list_schools`, `list_departments`, `list_topics`, `search_faculty`, `match_faculty`,
+  `get_professor` (publications fold in here — no separate tool), `draft_email_brief`.
+- **`draft_email_brief` returns material, not prose.** The caller's model writes the email. The
+  endpoint is unauthenticated, so proxying to Anthropic from it would let any script spend the API
+  budget; and the calling chatbot already holds the student's real voice.
+- **Never emit the raw `research_summary`** to a caller — it's a pipe-joined run-on. `profBrief` /
+  `profFull` in `ui/api/_lib/serialize.js` go through `splitResearch()`, resolve slugs with
+  `deptLabel()`, and drop empty keys. Every tool returns a text block *and* `structuredContent`,
+  because some clients render only text.
+- **Omitting `school` searches all six, one at a time**, keeping only the running top-N
+  (`acrossSchools`) — peak heap stays at one school rather than ~10 MB of parsed JSON. That is why
+  `maxDuration: 60` is set and memory is left at the default; the two are linked. Scores are raw
+  keyword-hit counts and are **not normalized across schools**, so verbose-summary schools (TAMU)
+  rank higher for equal relevance; the tool says so in its own response rather than hiding it.
+- **Two new npm dependencies** (`@modelcontextprotocol/server`, `zod`) — a deliberate exception to
+  this repo's avoid-a-dependency habit. Remote MCP is not one wire shape (streamable HTTP *and*
+  legacy HTTP+SSE, with session/protocol negotiation), and a hand-rolled handler passes a curl test
+  then fails inside connector UIs. `registerTool` requires **Zod v4** for its JSON-schema
+  interface; Zod 3 will not work.
+- **Rate limiting is a politeness guard, not a defence** — `ui/api/_lib/ratelimit.js` is in-memory,
+  so the real ceiling is limit × instances. It's adequate only because the endpoint is read-only
+  over already-public CDN-cached files and reaches no paid model. The real lever is a Vercel
+  Firewall rule (dashboard state; see HANDOFF.md).
+
+**Outreach emails must be grounded, not templated.** `ui/api/email.js` is the live path and
+`ui/api/_lib/emailGuidance.js` is the shared definition of what a good one looks like — imported by
+both the email function and the MCP brief, which is what keeps them from drifting.
+
+The failure being prevented: the prompt used to receive only name/title/department plus
+`research_summary.slice(0, 400)`, and never `ai_review` (4,571 records), `scholar_interests` (1,057)
+or `pubs/<id>.json` (601) — so every draft read like the same form letter, and the template
+fallback emitted one identical subject line for all 5,260 professors. If you touch this file:
+
+- Pass `splitResearch()`'s summary **untruncated** (~1,200-char safety valve). The old 400-char cut
+  usually landed inside the boilerplate at the head of a run-on summary.
+- Keep the **three grounding tiers** explicit in the prompt (papers / summary / sparse). 689
+  records have no `ai_review`, and the sparse tier exists so the model stops inventing enthusiasm
+  about nothing — itself the tell. `pickShapes(id, tone, haveSpecifics)` **must** be passed
+  `false` for the sparse tier, or the prompt contradicts itself ("don't claim familiarity" +
+  "open on the specific paper").
+- Structure comes from a **deterministic per-professor pick** from `OPENING_SHAPES`/`CLOSING_SHAPES`
+  (hashed on `prof.id`), so retries are stable while neighbouring professors differ. Verified even
+  across all 1,676 TAMU records.
+- `temperature: 0.9` is load-bearing and **the 5-series models reject it** (400) — Fable 5/5.1,
+  Opus 5/4.8/4.7, Sonnet 5. Bumping `MODEL` off `claude-haiku-4-5` means dropping temperature and
+  leaning on the shape menu alone.
+- `mock_mode` stays `!apiKey` (literally true); `template_fallback` is the separate signal for
+  "key present, call failed". The old bare `catch {}` made a broken key look exactly like mock mode.
+- Measure, don't eyeball: `node scripts/email-variance.mjs --school tamu --n 18 --yes` reports
+  distinct subjects, pairwise shared 5-grams, repeated sentences, banned-phrase hits and shape
+  spread, sampling **stratified across the three tiers**. Baseline before changing anything — the
+  pre-change numbers were 1/18 distinct subjects, 0.94 shared 5-grams, 18/18 banned-phrase hits.
+
+**Mock mode is a first-class feature.** When `ANTHROPIC_API_KEY` is unset, `backend/services/llm.py` sets `MOCK_MODE=True` and the resume parser, matcher, and email drafter fall back to keyword/template implementations. The app stays fully functional. When changing AI features, preserve both code paths — check `MOCK_MODE` and provide a non-LLM fallback. The FastAPI `/api/health` exposes `mock_mode`, but there is **no** `ui/api/health.js`, so in production that check 404s — read `mock_mode` off the `/api/email` response body instead. The Vercel-side `ui/api/parse.js` and `ui/api/email.js` mirror this pattern (template fallback when `ANTHROPIC_API_KEY` is missing).
 
 **LLM access is centralized.** All Anthropic calls from the backend go through `chat()` / `chat_json()` in `backend/services/llm.py`. Don't instantiate `anthropic.Anthropic()` elsewhere. The model is pinned via `MODEL` (currently `claude-haiku-4-5-20251001`). The Vercel functions instantiate the client directly because they're separate runtimes.
 
@@ -226,7 +297,9 @@ Backend deploy entry point is `backend/Procfile` (`uvicorn main:app --host 0.0.0
 - The crawler ships a `faculty[-<code>].json` per school in-tree; don't regenerate-and-commit casually. The Rice JSON:API crawl (`crawl_rice.py`) re-runs in ~2 minutes; `ai_review` enrichment over those records via local Ollama takes much longer (tens of minutes) — run it once and reuse.
 - `ui/public/faculty.json` is the *combined* file the UI fetches and the backend imports on startup. After running per-school crawls, you must merge them into this file (see README quick-start).
 - Adding a school means adding a `taxonomy.py` mapping for its department names, a `SCHOOL_SEO` entry in `ui/src/lib/seo.js` too, or its pages inherit no brand alias, keywords, or OG card — and add the card to `ui/scripts/gen_icons.py`, then re-run it.
-- `/api/*` 404s under `npm run dev` — `vite.config.js` proxies `/api` to the FastAPI backend on :8000, so the Vercel functions (`parse`, `email`, `feedback`) aren't reachable. Use `vercel dev` or a preview deploy to exercise them.
+- `/api/*` 404s under `npm run dev` — `vite.config.js` proxies `/api` to the FastAPI backend on :8000, so the Vercel functions (`parse`, `email`, `feedback`, `mcp`) aren't reachable. Use `vercel dev` or a preview deploy to exercise them. The MCP tools alone need no server: `node -e "import('./api/_lib/tools.js').then(...)"` with a `ctx.origin` pointing at production.
+- **`zod` must stay on v4.** `registerTool` needs Standard Schema's JSON-schema interface, which Zod 3 does not implement; downgrading breaks `tools/list` at runtime, not at build time.
+- The MCP handler is web-standard (`Request` → `Response`) while Vercel Node functions are `(req, res)`, so `ui/api/mcp.js` translates at the boundary — and **streams** the response rather than buffering it, because `initialize` comes back as SSE and `arrayBuffer()` on an open stream would hang.
 - `npm run preview` always serves the SPA fallback, so sub-route `<title>`s look generic there. That's a `vite preview` behavior, not a bug — check prerendered output with `npx serve dist`, which resolves files the way Vercel does.
 - When adding new internal Links in per-school pages, always use `useSchoolPath()` — absolute paths like `to="/search"` will navigate the user out of the school namespace.
 - localStorage keys follow the pattern `<schoolCode>_<name>`. Don't write to bare `tamu_*` keys; use `${school.code}_*`.
