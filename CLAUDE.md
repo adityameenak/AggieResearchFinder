@@ -64,8 +64,9 @@ python crawl_utd.py --output faculty-utd
 python enrich_ollama.py --file faculty-rice.json --model gemma3:4b
 OLLAMA_HOST=http://<gpu-box>:11434 python enrich_ollama.py --file faculty.json
 # It preflights host + model tag, so a wrong address fails in a second rather
-# than erroring once per record for an hour. See HANDOFF-ollama-windows.md for
-# reaching a GPU box over a cloudflared tunnel behind Cloudflare Access.
+# than erroring once per record for an hour. The GPU box's Ollama is reached at
+# ollama.akvaithi.page behind Cloudflare Access (service-token headers; the Mac
+# Keychain holds them as cf-access-ollama-id / cf-access-ollama-secret).
 
 # Google Scholar enrichment for blank profiles (pydoll = real Chrome via CDP,
 # beats Scholar's CAPTCHA on profile URLs). Needs the py3.12 venv — pydoll is
