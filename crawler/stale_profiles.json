@@ -1,34 +1,10 @@
 [
   {
-    "id": "801f8a9b55d4",
-    "name": "Adjunct Faculty",
-    "university": "ut",
-    "department": "mechanical",
-    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/adjunct-faculty",
-    "status": 404
-  },
-  {
-    "id": "7db2e8d72db7",
-    "name": "Affiliated Faculty",
-    "university": "ut",
-    "department": "mechanical",
-    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/affiliated-faculty",
-    "status": 404
-  },
-  {
     "id": "5d9483df7412",
     "name": "Farshid  Alambeigi",
     "university": "ut",
     "department": "mechanical",
     "profile_url": "https://www.me.utexas.edu/people/faculty-directory/alambeigi",
-    "status": 404
-  },
-  {
-    "id": "2b02f59571e9",
-    "name": "Emeritus Faculty",
-    "university": "ut",
-    "department": "mechanical",
-    "profile_url": "https://www.me.utexas.edu/people/faculty-directory/emeritus-faculty",
     "status": 404
   },
   {
@@ -56,14 +32,6 @@
     "status": 404
   },
   {
-    "id": "18f3773d9b2a",
-    "name": "Jack Rodden",
-    "university": "tamu",
-    "department": "chemical",
-    "profile_url": "https://engineering.tamu.edu/chemical/profiles/jack_rodden.html",
-    "status": 404
-  },
-  {
     "id": "f38d6e2caccf",
     "name": "April G. Douglass",
     "university": "tamu",
@@ -88,30 +56,6 @@
     "status": 404
   },
   {
-    "id": "35fbffa14508",
-    "name": "Xiaomin Yang",
-    "university": "tamu",
-    "department": "etid",
-    "profile_url": "https://engineering.tamu.edu/etid/profiles/xiaomin-yang.html",
-    "status": 404
-  },
-  {
-    "id": "57d9866e8eb4",
-    "name": "Yen-Jen Wang",
-    "university": "tamu",
-    "department": "industrial",
-    "profile_url": "https://engineering.tamu.edu/industrial/profiles/yen-jen-wang.html",
-    "status": 404
-  },
-  {
-    "id": "e9d0c46c9522",
-    "name": "Waqar Mohiuddin",
-    "university": "tamu",
-    "department": "mechanical",
-    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/mohiuddin-waqar.html",
-    "status": 404
-  },
-  {
     "id": "08fad669d98a",
     "name": "Michael Walsh",
     "university": "tamu",
@@ -125,6 +69,614 @@
     "university": "tamu",
     "department": "nuclear",
     "profile_url": "https://engineering.tamu.edu/nuclear/profiles/miller-warren-pete.html",
+    "status": 404
+  },
+  {
+    "id": "aec0925912cd",
+    "name": "Stefanie Jegelka",
+    "university": "mit",
+    "department": "cse",
+    "profile_url": "https://www.eecs.mit.edu/people/stefanie-jegelka/",
+    "status": 404
+  },
+  {
+    "id": "9a1326af088e",
+    "name": "Alberto Pimpinelli",
+    "university": "rice",
+    "department": "materials",
+    "profile_url": "https://profiles.rice.edu/faculty/alberto-pimpinelli",
+    "status": 404
+  },
+  {
+    "id": "af51e3053b7f",
+    "name": "Harm J Van Avendonk",
+    "university": "ut",
+    "department": "earth-atmospheric",
+    "profile_url": "https://www.jsg.utexas.edu/researcher/harm_van_avendonk/",
+    "status": 404
+  },
+  {
+    "id": "3a432891c607",
+    "name": "Kristen Arredondo, M.D.",
+    "university": "ut",
+    "department": "medicine",
+    "profile_url": "https://dellmed.utexas.edu/directory/kristen-arredondo",
+    "status": 404
+  },
+  {
+    "id": "d68831b5dbea",
+    "name": "Michael Bebbington, M.D.",
+    "university": "ut",
+    "department": "medicine",
+    "profile_url": "https://dellmed.utexas.edu/directory/michael-bebbington",
+    "status": 404
+  },
+  {
+    "id": "de31d98f7e7e",
+    "name": "Audrey Brumback",
+    "university": "ut",
+    "department": "neuroscience",
+    "profile_url": "https://neuroscience.utexas.edu/directory/audrey-brumback",
+    "status": 404
+  },
+  {
+    "id": "22ffd90985e4",
+    "name": "Mackenzie Howard",
+    "university": "ut",
+    "department": "neuroscience",
+    "profile_url": "https://neuroscience.utexas.edu/directory/mackenzie-howard",
+    "status": 404
+  },
+  {
+    "id": "55cae55fc39c",
+    "name": "Felicity Muth",
+    "university": "ut",
+    "department": "biosciences",
+    "profile_url": "https://integrativebio.utexas.edu/directory/felicity-muth",
+    "status": 404
+  },
+  {
+    "id": "2abf7ec8e7c0",
+    "name": "Molly Cummings",
+    "university": "ut",
+    "department": "biosciences",
+    "profile_url": "https://integrativebio.utexas.edu/directory/molly-cummings",
+    "status": 404
+  },
+  {
+    "id": "de9afb2fcbed",
+    "name": "Byron D. Tapley",
+    "university": "ut",
+    "department": "aerospace",
+    "profile_url": "https://www.ae.utexas.edu/person/byron-d-tapley",
+    "status": 404
+  },
+  {
+    "id": "031e02f1bf84",
+    "name": "David Hull",
+    "university": "ut",
+    "department": "aerospace",
+    "profile_url": "https://www.ae.utexas.edu/person/david-hull",
+    "status": 404
+  },
+  {
+    "id": "bc8867e4dd8e",
+    "name": "Farshid Alambeigi",
+    "university": "ut",
+    "department": "biomedical",
+    "profile_url": "https://bme.utexas.edu/person/farshid-alambeigi",
+    "status": 404
+  },
+  {
+    "id": "e6cb7d3f682d",
+    "name": "Linda Noble-Haeusslein",
+    "university": "ut",
+    "department": "biomedical",
+    "profile_url": "https://bme.utexas.edu/person/linda-noble-haeusslein",
+    "status": 404
+  },
+  {
+    "id": "f3aace0f8f28",
+    "name": "David T. Dalle Molle",
+    "university": "ut",
+    "department": "chemical",
+    "profile_url": "https://che.utexas.edu/person/david-t-dalle-molle",
+    "status": 404
+  },
+  {
+    "id": "8baba5133f7a",
+    "name": "Donald Paul",
+    "university": "ut",
+    "department": "chemical",
+    "profile_url": "https://che.utexas.edu/person/donald-paul",
+    "status": 404
+  },
+  {
+    "id": "5e23fcad4741",
+    "name": "James O’Connor",
+    "university": "ut",
+    "department": "civil",
+    "profile_url": "https://www.caee.utexas.edu/person/james-oconnor",
+    "status": 404
+  },
+  {
+    "id": "d423559f46b1",
+    "name": "Eric van Oort",
+    "university": "ut",
+    "department": "petroleum",
+    "profile_url": "https://www.pge.utexas.edu/faculty-and-staff/eric-vanoort",
+    "status": 404
+  },
+  {
+    "id": "dbc34ddc6313",
+    "name": "Paul Bommer",
+    "university": "ut",
+    "department": "petroleum",
+    "profile_url": "https://www.pge.utexas.edu/faculty-and-staff/paul-bommer",
+    "status": 404
+  },
+  {
+    "id": "61a38113b046",
+    "name": "Alex Macedo",
+    "university": "ut",
+    "department": "mathematics",
+    "profile_url": "https://math.utexas.edu/directory/alex-macedo",
+    "status": 404
+  },
+  {
+    "id": "3af7ea3c11a7",
+    "name": "Amanda Hager",
+    "university": "ut",
+    "department": "mathematics",
+    "profile_url": "https://math.utexas.edu/directory/amanda-hager",
+    "status": 404
+  },
+  {
+    "id": "464479fa7491",
+    "name": "Lucas Mason-Brown",
+    "university": "ut",
+    "department": "mathematics",
+    "profile_url": "https://math.utexas.edu/directory/lucas-mason-brown",
+    "status": 404
+  },
+  {
+    "id": "0af51364e3fb",
+    "name": "Harry L Swinney",
+    "university": "ut",
+    "department": "physics-astronomy",
+    "profile_url": "https://physics.utexas.edu/directory/harry-l-swinney",
+    "status": 404
+  },
+  {
+    "id": "f3e3f5446fba",
+    "name": "James Chelikowsky",
+    "university": "ut",
+    "department": "physics-astronomy",
+    "profile_url": "https://physics.utexas.edu/directory/james-chelikowsky",
+    "status": 404
+  },
+  {
+    "id": "efd5d0263540",
+    "name": "Viranga Perera",
+    "university": "ut",
+    "department": "physics-astronomy",
+    "profile_url": "https://physics.utexas.edu/directory/viranga-perera",
+    "status": 404
+  },
+  {
+    "id": "56b1c3ddaff5",
+    "name": "Petr Munk",
+    "university": "ut",
+    "department": "chemistry",
+    "profile_url": "https://chemistry.utexas.edu/directory/petr-munk",
+    "status": 404
+  },
+  {
+    "id": "89bb6b946df8",
+    "name": "Xiuling Li",
+    "university": "ut",
+    "department": "chemistry",
+    "profile_url": "https://chemistry.utexas.edu/directory/xiuling-li",
+    "status": 404
+  },
+  {
+    "id": "f2951c04ece5",
+    "name": "Gwendolyn Stovall",
+    "university": "ut",
+    "department": "biosciences",
+    "profile_url": "https://molecularbiosci.utexas.edu/directory/gwendolyn-stovall",
+    "status": 404
+  },
+  {
+    "id": "6395e2efeaca",
+    "name": "Kristen Procko",
+    "university": "ut",
+    "department": "biosciences",
+    "profile_url": "https://molecularbiosci.utexas.edu/directory/kristen-procko",
+    "status": 404
+  },
+  {
+    "id": "31b4a4e1339a",
+    "name": "Antony Jameson",
+    "university": "tamu",
+    "department": "aerospace",
+    "profile_url": "https://engineering.tamu.edu/aerospace/profiles/jameson-antony.html",
+    "status": 404
+  },
+  {
+    "id": "6d6b05230bdf",
+    "name": "Boris Leonov",
+    "university": "tamu",
+    "department": "aerospace",
+    "profile_url": "https://engineering.tamu.edu/aerospace/profiles/leonov-boris1.html",
+    "status": 404
+  },
+  {
+    "id": "4f6342bb17a2",
+    "name": "Holly Gibbs",
+    "university": "tamu",
+    "department": "biomedical",
+    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/gibbs-holly.html",
+    "status": 404
+  },
+  {
+    "id": "f388956ecee1",
+    "name": "Annie Hedman",
+    "university": "tamu",
+    "department": "biomedical",
+    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/hedman-annie.html",
+    "status": 404
+  },
+  {
+    "id": "8810a5705923",
+    "name": "William Montgomery",
+    "university": "tamu",
+    "department": "biomedical",
+    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/montgomery-william.html",
+    "status": 404
+  },
+  {
+    "id": "bbe6a0614af0",
+    "name": "Tanjin Amin",
+    "university": "tamu",
+    "department": "chemical",
+    "profile_url": "https://engineering.tamu.edu/chemical/profiles/amin-tanjin.html",
+    "status": 404
+  },
+  {
+    "id": "3d2ba2e43cc1",
+    "name": "Turkan Aydogmus",
+    "university": "tamu",
+    "department": "chemical",
+    "profile_url": "https://engineering.tamu.edu/chemical/profiles/aydogmus.html",
+    "status": 404
+  },
+  {
+    "id": "2df6a87a86eb",
+    "name": "Mantao Huang",
+    "university": "tamu",
+    "department": "chemical",
+    "profile_url": "https://engineering.tamu.edu/chemical/profiles/huang-mantao.html",
+    "status": 404
+  },
+  {
+    "id": "f51d0ed8e0f3",
+    "name": "Richard Mercier",
+    "university": "tamu",
+    "department": "civil",
+    "profile_url": "https://engineering.tamu.edu/civil/profiles/rmercier.html",
+    "status": 404
+  },
+  {
+    "id": "1a80452a7506",
+    "name": "Wenhui Chu",
+    "university": "tamu",
+    "department": "cse",
+    "profile_url": "https://engineering.tamu.edu/cse/profiles/chu-wenhui.html",
+    "status": 404
+  },
+  {
+    "id": "2a335f41b4f8",
+    "name": "Tim Davis",
+    "university": "tamu",
+    "department": "cse",
+    "profile_url": "https://engineering.tamu.edu/cse/profiles/davis-tim.html",
+    "status": 404
+  },
+  {
+    "id": "696a53e70edd",
+    "name": "Si Liu",
+    "university": "tamu",
+    "department": "cse",
+    "profile_url": "https://engineering.tamu.edu/cse/profiles/liu-si.html",
+    "status": 404
+  },
+  {
+    "id": "a82977ae5c92",
+    "name": "Serap Savari",
+    "university": "tamu",
+    "department": "electrical",
+    "profile_url": "https://engineering.tamu.edu/electrical/profiles/ssavari.html",
+    "status": 404
+  },
+  {
+    "id": "9878e880f2f0",
+    "name": "Weiping Shi",
+    "university": "tamu",
+    "department": "electrical",
+    "profile_url": "https://engineering.tamu.edu/electrical/profiles/wshi.html",
+    "status": 404
+  },
+  {
+    "id": "8b652798e746",
+    "name": "Zixiang Xiong",
+    "university": "tamu",
+    "department": "electrical",
+    "profile_url": "https://engineering.tamu.edu/electrical/profiles/zxiong.html",
+    "status": 404
+  },
+  {
+    "id": "41a2943e7d2c",
+    "name": "Rohit Dube",
+    "university": "tamu",
+    "department": "etid",
+    "profile_url": "https://engineering.tamu.edu/etid/profiles/dube-rohit.html",
+    "status": 404
+  },
+  {
+    "id": "b5892cae5466",
+    "name": "Joe Dyson",
+    "university": "tamu",
+    "department": "etid",
+    "profile_url": "https://engineering.tamu.edu/etid/profiles/dyson-joe.html",
+    "status": 404
+  },
+  {
+    "id": "1072a75bd934",
+    "name": "Alonso Fierro",
+    "university": "tamu",
+    "department": "etid",
+    "profile_url": "https://engineering.tamu.edu/etid/profiles/fierro-alonso.html",
+    "status": 404
+  },
+  {
+    "id": "cf93652fb6c6",
+    "name": "Bin Mai",
+    "university": "tamu",
+    "department": "etid",
+    "profile_url": "https://engineering.tamu.edu/etid/profiles/mai-bin.html",
+    "status": 404
+  },
+  {
+    "id": "b8718f6777f8",
+    "name": "Amir Tofighi Zavareh",
+    "university": "tamu",
+    "department": "etid",
+    "profile_url": "https://engineering.tamu.edu/etid/profiles/zavareh-amir.html",
+    "status": 404
+  },
+  {
+    "id": "6e0bb725bfa1",
+    "name": "Madhav Erraguntla",
+    "university": "tamu",
+    "department": "industrial",
+    "profile_url": "https://engineering.tamu.edu/industrial/profiles/erraguntla-madhav.html",
+    "status": 404
+  },
+  {
+    "id": "b5e2f9ab6ff4",
+    "name": "Alfredo Garcia",
+    "university": "tamu",
+    "department": "industrial",
+    "profile_url": "https://engineering.tamu.edu/industrial/profiles/garcia-alfredo.html",
+    "status": 404
+  },
+  {
+    "id": "6e2a12b6a456",
+    "name": "G. Kemble Bennett",
+    "university": "tamu",
+    "department": "industrial",
+    "profile_url": "https://engineering.tamu.edu/industrial/profiles/gkbennett.html",
+    "status": 404
+  },
+  {
+    "id": "db29ac7496e9",
+    "name": "Guy L. Curry",
+    "university": "tamu",
+    "department": "industrial",
+    "profile_url": "https://engineering.tamu.edu/industrial/profiles/glurry.html",
+    "status": 404
+  },
+  {
+    "id": "d8be7bd80b78",
+    "name": "Tahir Cagin",
+    "university": "tamu",
+    "department": "materials",
+    "profile_url": "https://engineering.tamu.edu/materials/profiles/tcagin.html",
+    "status": 404
+  },
+  {
+    "id": "5b840aaa4e78",
+    "name": "Matt Elliott",
+    "university": "tamu",
+    "department": "mechanical",
+    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/elliott-matt.html",
+    "status": 404
+  },
+  {
+    "id": "d6245f3d4b91",
+    "name": "Heather Lewis",
+    "university": "tamu",
+    "department": "mechanical",
+    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/lewis-heather.html",
+    "status": 404
+  },
+  {
+    "id": "82aaf05d64ea",
+    "name": "Olivier Mathieu",
+    "university": "tamu",
+    "department": "mechanical",
+    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/mathieu-olivier.html",
+    "status": 404
+  },
+  {
+    "id": "42b5e9b7519f",
+    "name": "Siegfried Hecker",
+    "university": "tamu",
+    "department": "nuclear",
+    "profile_url": "https://engineering.tamu.edu/nuclear/profiles/hecker-siegfried.html",
+    "status": 404
+  },
+  {
+    "id": "ddbfa9bc333f",
+    "name": "Sean M. McDeavitt",
+    "university": "tamu",
+    "department": "nuclear",
+    "profile_url": "https://engineering.tamu.edu/nuclear/profiles/mcdeavitt-sean-m.html",
+    "status": 404
+  },
+  {
+    "id": "60540285610f",
+    "name": "Chang Xu",
+    "university": "tamu",
+    "department": "ocean",
+    "profile_url": "https://engineering.tamu.edu/ocean/profiles/xu-chang.html",
+    "status": 404
+  },
+  {
+    "id": "c26309bc9bde",
+    "name": "Deborah Kuhn",
+    "university": "tamu",
+    "department": "biology",
+    "profile_url": "https://artsci.tamu.edu/biology/contact/profiles/deborah-kuhn.html",
+    "status": 404
+  },
+  {
+    "id": "ee28347d7a9e",
+    "name": "Donna Janes",
+    "university": "tamu",
+    "department": "biology",
+    "profile_url": "https://artsci.tamu.edu/biology/contact/profiles/donna-janes.html",
+    "status": 404
+  },
+  {
+    "id": "06f0df2e2cbf",
+    "name": "Afroz Karim",
+    "university": "tamu",
+    "department": "chemistry",
+    "profile_url": "https://artsci.tamu.edu/chemistry/contact/profiles/afroz-karim.html",
+    "status": 404
+  },
+  {
+    "id": "28d30cbc054a",
+    "name": "Jack Waas",
+    "university": "tamu",
+    "department": "chemistry",
+    "profile_url": "https://artsci.tamu.edu/chemistry/contact/profiles/jack-waas.html",
+    "status": 404
+  },
+  {
+    "id": "7d3fb031da28",
+    "name": "Adrian van Kan",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/adrian-vankan.html",
+    "status": 404
+  },
+  {
+    "id": "e2cdbc7d7efb",
+    "name": "Andrea Welsh",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/andrea-welsh.html",
+    "status": 404
+  },
+  {
+    "id": "ae20ae2fa71e",
+    "name": "Angelique Morvant",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/angelique-morvant.html",
+    "status": 404
+  },
+  {
+    "id": "b22b3b65d138",
+    "name": "Audrey Fovelle",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/audrey-fovelle.html",
+    "status": 404
+  },
+  {
+    "id": "a0375bdc3107",
+    "name": "Collin Victor",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/collin-victor.html",
+    "status": 404
+  },
+  {
+    "id": "c124ccf3a81c",
+    "name": "Dan Lewis",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/dan-lewis.html",
+    "status": 404
+  },
+  {
+    "id": "18544aa99b80",
+    "name": "Elliot Cartee",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/elliot-cartee.html",
+    "status": 404
+  },
+  {
+    "id": "1550aee74f70",
+    "name": "Jesus Sanchez Jr",
+    "university": "tamu",
+    "department": "mathematics",
+    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/jesus-sanchez.html",
+    "status": 404
+  },
+  {
+    "id": "f243fdfef6ae",
+    "name": "Baishan Hu",
+    "university": "tamu",
+    "department": "physics-astronomy",
+    "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/baishan-hu.html",
+    "status": 404
+  },
+  {
+    "id": "f4dc812be512",
+    "name": "Igor Lyuksyutov",
+    "university": "tamu",
+    "department": "physics-astronomy",
+    "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/igor-lyuksyutov.html",
+    "status": 404
+  },
+  {
+    "id": "6f7b7b14587e",
+    "name": "Mudit Rai",
+    "university": "tamu",
+    "department": "physics-astronomy",
+    "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/mudit-rai.html",
+    "status": 404
+  },
+  {
+    "id": "dfd4d6e71cd7",
+    "name": "Hadi Salman",
+    "university": "tamu",
+    "department": "statistics",
+    "profile_url": "https://artsci.tamu.edu/statistics/contact/profiles/hadisalman.html",
+    "status": 404
+  },
+  {
+    "id": "4db243e4df22",
+    "name": "Nelson Pazmino Manrique",
+    "university": "tamu",
+    "department": "oceanography",
+    "profile_url": "https://artsci.tamu.edu/oceanography/contact/profiles/nelson-pazmino-manrique.html",
     "status": 404
   }
 ]

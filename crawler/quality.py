@@ -127,7 +127,8 @@ def is_bad_scholar(url):
 # only — see crawl.py _looks_like_menu for why this must stay narrow.
 _MENU_RE = re.compile(
     r"^research research\b|skip to (main|content)|toggle navigation|"
-    r"close the .{0,30}menu|faculty & research menu|^research areas seminars", re.I)
+    r"close the .{0,30}menu|faculty & research menu|^research areas seminars|"
+    r"^see here research areas", re.I)  # UT math: "See here" links out, no text
 
 # TAMU Health pages append the whole site footer, pipe-joined, to the last
 # section. Everything from the first footer cell on is chrome.

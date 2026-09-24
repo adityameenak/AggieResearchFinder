@@ -47,11 +47,24 @@ that drop was a correction, not a regression:
 
 ### Open items
 
-- **`crawler/stale_profiles.json`** lists 16 records whose profile page now 404s —
-  probably people who left. Review by hand; nothing was deleted.
-- **Harvard HSDM emails** need a CDP run (see "Akamai" below).
-- A site-wide dead-profile check has only been run on the pages re-extracted
-  this pass; `reextract.py --host <host> --all --dry-run` does it per host.
+- **`crawler/stale_profiles.json`: 85 faculty whose profile page 404s** and who
+  are not on their department's current listing. Probably left, retired or died.
+  Review by hand; nothing was deleted. Built 2026-09-24 from a check of all
+  5,802 profile URLs: 143 were dead, 42 of those had only moved (the TAMU
+  engineering/statistics slug renames, including 16 statistics records crawled
+  at the CMS placeholder `lowercase-firstname-lastnameN.html`) and were
+  re-pointed, and 15 students/staff/category pages need nothing because
+  merge.py drops them anyway.
+- **Not dead-checked**: `profiles.rice.edu` answers 406 to plain requests (628
+  pages) and the Akamai departments answer 403 (342). They need a browser.
+
+Closed 2026-09-24:
+- **Harvard HSDM emails are a source limit, not an unrun job.** A CDP session
+  passes Akamai, but the profile pages carry only `clinical_affairs@`. 2 of 10
+  sampled list an outside address (hospital, Gmail); not worth a crawl.
+- **The last erroring AI review** (Francesco Maggi, UT math) had a summary of
+  "See here" link text with no research in it. `quality._MENU_RE` now catches
+  it, so it is blanked rather than retried.
 
 ---
 
