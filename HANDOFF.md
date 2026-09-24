@@ -10,7 +10,7 @@ unfinished, and the things that will bite you.
 
 Live at **stemresearchfinder.tech** (Vercel, auto-deploys from `main`).
 
-**5,218 faculty across 6 universities.** Percentages count only *valid* values
+**5,136 faculty across 6 universities.** Percentages count only *valid* values
 (see `crawler/quality.py`), so they are lower than before 2026-09-22 in places —
 that drop was a correction, not a regression:
 
