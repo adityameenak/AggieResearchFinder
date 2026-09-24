@@ -47,14 +47,13 @@ that drop was a correction, not a regression:
 
 ### Open items
 
-- **`crawler/stale_profiles.json`: 85 faculty whose profile page 404s** and who
-  are not on their department's current listing. Probably left, retired or died.
-  Review by hand; nothing was deleted. Built 2026-09-24 from a check of all
-  5,802 profile URLs: 143 were dead, 42 of those had only moved (the TAMU
-  engineering/statistics slug renames, including 16 statistics records crawled
-  at the CMS placeholder `lowercase-firstname-lastnameN.html`) and were
-  re-pointed, and 15 students/staff/category pages need nothing because
-  merge.py drops them anyway.
+- **85 departed faculty removed 2026-09-24** (Arun's call: no use matching
+  students to people who have left). From a check of all 5,802 profile URLs:
+  143 were dead, 42 had only moved (TAMU engineering/statistics slug renames,
+  including 16 statistics records crawled at the CMS placeholder
+  `lowercase-firstname-lastnameN.html`) and were re-pointed, 15 were
+  students/staff/category pages merge.py already drops, and the other 85 were
+  on no current department listing. `stale_profiles.json` is empty again.
 - **Not dead-checked**: `profiles.rice.edu` answers 406 to plain requests (628
   pages) and the Akamai departments answer 403 (342). They need a browser.
 

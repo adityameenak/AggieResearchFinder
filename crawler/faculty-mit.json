@@ -1734,27 +1734,6 @@
     "publications": []
   },
   {
-    "id": "aec0925912cd",
-    "university": "mit",
-    "name": "Stefanie Jegelka",
-    "title": "Associate Professor, [AI+D]",
-    "department": "cse",
-    "email": "stefje@MIT.EDU",
-    "profile_url": "https://www.eecs.mit.edu/people/stefanie-jegelka/",
-    "research_summary": "This ongoing listing of awards and recognitions won by our faculty is added to all year, beginning in September. This new approach could lead to enhanced AI models for drug and materials discovery.",
-    "lab_website": "",
-    "google_scholar": "",
-    "ai_review": "Stefanie Jegelka’s research within the CSE department centers on leveraging artificial intelligence, particularly machine learning and optimization techniques, to accelerate advancements in drug discovery and materials science. Her work utilizes game theory alongside AI models to address complex problems inherent in these fields, aiming for enhanced predictive capabilities.  Specifically, her ongoing investigations are focused on developing innovative AI approaches that can significantly improve model performance for identifying promising new drugs and materials. Driven by interests in optimization and machine learning as evidenced by her Google Scholar profile, Professor Jegelka’s research represents a sophisticated application of computational methods to critical scientific challenges. Her lab’s efforts directly contribute to the development of more efficient and effective AI-driven discovery processes.",
-    "photo_url": "https://www.eecs.mit.edu/wp-content/uploads/2021/07/8x10-BW-scaled-e1778185798351.jpg",
-    "phone": "",
-    "office": "",
-    "scholar_interests": [
-      "Artificial Intelligence + Machine Learning",
-      "Optimization and Game Theory"
-    ],
-    "publications": []
-  },
-  {
     "id": "4b77bdedb80c",
     "university": "mit",
     "name": "Ericmoore Jossou",

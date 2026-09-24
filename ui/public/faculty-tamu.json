@@ -5934,30 +5934,6 @@
     "pub_count": 20
   },
   {
-    "id": "31b4a4e1339a",
-    "profile_url": "https://engineering.tamu.edu/aerospace/profiles/jameson-antony.html",
-    "department": "aerospace",
-    "name": "Antony Jameson",
-    "title": "Professor, Aerospace Engineering and Ocean Engineering",
-    "email": "antony.jameson@tamu.edu",
-    "research_summary": "Fluid Dynamics Computational mathematics Computational fluid dynamics Aircraft design Control theory | Fluid Dynamics | Computational mathematics | Computational fluid dynamics | Aircraft design | Control theory",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=74eUkXgAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/aerospace/_files/_images/_profile-images/jameson-antony-5March2019.jpg",
-    "phone": "979-845-4723",
-    "office": "HRBB 631C",
-    "ai_review": "Professor Antony Jameson is a distinguished researcher in the Department of Aerospace Engineering whose work centers on the intersection of fluid dynamics, computational mathematics, and aircraft design. His research focuses primarily on the development and application of advanced computational fluid dynamics (CFD) methods to model complex aerodynamic phenomena. By integrating sophisticated control theory with numerical analysis, he seeks to enhance the efficiency and performance of modern aircraft configurations. His lab specializes in creating robust mathematical frameworks that enable high-fidelity simulations for challenging engineering problems. Through this interdisciplinary approach, Professor Jameson aims to advance the fundamental understanding of fluid flows and translate these insights into innovative design solutions for the aerospace industry.",
-    "scholar_interests": [
-      "Computational Mechanics",
-      "Aerodynamics",
-      "Design"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Aerospace Engineering and Ocean Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "b1644e216848",
     "profile_url": "https://engineering.tamu.edu/aerospace/profiles/jblegraverend.html",
     "department": "aerospace",
@@ -6076,31 +6052,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Interim Department Head, Aerospace Engineering",
-    "pub_count": 20
-  },
-  {
-    "id": "6d6b05230bdf",
-    "profile_url": "https://engineering.tamu.edu/aerospace/profiles/leonov-boris1.html",
-    "department": "aerospace",
-    "name": "Boris Leonov",
-    "title": "Research Assistant Professor, Aerospace Engineering",
-    "email": "bleonov@tamu.edu",
-    "research_summary": "High-speed laser diagnostics Fluid dynamics and chemical kinetics of hypersonic flows Nonlinear optics Physics of plasma | High-speed laser diagnostics | Fluid dynamics and chemical kinetics of hypersonic flows | Nonlinear optics | Physics of plasma",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=j9ML1ycAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/aerospace/_files/_images/_profile-images/AERO-Boris-Leonov-28Aug24.jpg",
-    "phone": "979-845-0003",
-    "office": "ALLEMO 205",
-    "ai_review": "Professor Boris Leonov specializes in the interdisciplinary study of hypersonic flows within the department of aerospace, focusing specifically on the complex fluid dynamics and chemical kinetics inherent to high-speed environments. His laboratory employs advanced high-speed laser diagnostics as a primary method to investigate these transient phenomena. Beyond aerodynamics, his research integrates the physics of plasma to better understand flow behavior under extreme conditions. Furthermore, Professor Leonov utilizes nonlinear optics to explore fundamental physical interactions, providing critical insights that bridge the gap between experimental measurement and theoretical flow modeling.",
-    "scholar_interests": [
-      "Laser Diagnostics",
-      "High-speed Flows",
-      "Aerothermodynamics",
-      "Aerodynamic  Measurement Technology"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Research Assistant Professor, Aerospace Engineering",
     "pub_count": 20
   },
   {
@@ -6956,25 +6907,6 @@
     "pub_count": 20
   },
   {
-    "id": "77fe4c68b662",
-    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/diaz-garelli-franck.html",
-    "department": "biomedical",
-    "name": "Franck Diaz-Garelli",
-    "title": "Instructional Associate Professor, Biomedical Engineering",
-    "email": "fdg@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/biomedical/_files/_images/_profile-images/GarelliFranck-Feb2024.jpg",
-    "phone": "",
-    "office": "",
-    "ai_review": "Professor Franck Diaz-Garelli conducts research within the Department of Biomedical Engineering, focusing on the intersection of advanced clinical technologies and physiological modeling. His lab specializes in developing innovative methodologies to improve diagnostic precision and therapeutic outcomes for complex medical conditions. By utilizing a multidisciplinary approach, the research group integrates experimental design with rigorous analytical frameworks to address critical challenges in biomedical science. The lab’s work emphasizes the translation of theoretical models into practical clinical applications, fostering a deeper understanding of human health through data-driven investigations. Through these efforts, Professor Diaz-Garelli contributes to the ongoing evolution of biomedical systems and evidence-based patient care.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Associate Professor, Biomedical Engineering"
-  },
-  {
     "id": "f005629ea307",
     "profile_url": "https://engineering.tamu.edu/biomedical/profiles/gaharwar-akhilesh.html",
     "department": "biomedical",
@@ -7024,30 +6956,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Assistant Professor, Biomedical Engineering",
-    "pub_count": 20
-  },
-  {
-    "id": "4f6342bb17a2",
-    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/gibbs-holly.html",
-    "department": "biomedical",
-    "name": "Holly Gibbs",
-    "title": "Research Assistant Professor, Biomedical Engineering",
-    "email": "hgibbs@tamu.edu",
-    "research_summary": "Developmental and regenerative neurobiology Brain development, form, function and regeneration Advanced microscopy, image processing and visualization | Developmental and regenerative neurobiology Brain development, form, function and regeneration | Brain development, form, function and regeneration | Advanced microscopy, image processing and visualization",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=EJPK4XoAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/biomedical/_files/_images/_profile-images/BMEN-profile-gibbs-holly-08Sept2020.jpg",
-    "phone": "979-458-6105",
-    "office": "ILSB 1133",
-    "ai_review": "Professor Holly Gibbs specializes in the fields of developmental and regenerative neurobiology, with a primary research focus on the formation, function, and regenerative capacity of the brain. Her lab investigates the complex processes governing brain development to better understand how neural structures are formed and how they might be repaired. To support this work, her research group utilizes advanced microscopy techniques, alongside sophisticated image processing and visualization methods. These tools enable the team to capture and analyze high-resolution data regarding neural development and regenerative potential. Ultimately, Professor Gibbs’s work seeks to bridge the gap between basic developmental biology and restorative strategies for the nervous system.",
-    "scholar_interests": [
-      "developmental neurobiology",
-      "advanced microscopy",
-      "visualization"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Research Assistant Professor, Biomedical Engineering",
     "pub_count": 20
   },
   {
@@ -7119,25 +7027,6 @@
     "rank_type": "teaching",
     "title_short": "Professor of Practice, Biomedical Engineering",
     "pub_count": 20
-  },
-  {
-    "id": "f388956ecee1",
-    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/hedman-annie.html",
-    "department": "biomedical",
-    "name": "Annie Hedman",
-    "title": "Instructional Assistant Professor, Biomedical Engineering",
-    "email": "aginn@tamu.edu",
-    "research_summary": "Biomedical engineering education Biomechanics Medical device pathology Pediatrics | Biomedical engineering education | Biomechanics | Medical device pathology | Pediatrics",
-    "lab_website": "https://vetmed.tamu.edu/cvpath/",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/biomedical/_files/_images/_profile-images/BMEN-profile-Anne-Hedman-10Oct2022.jpg",
-    "phone": "979-458-4082",
-    "office": "ETB 5023",
-    "ai_review": "Professor Annie Hedman’s research program in the Department of Biomedical Engineering is centered on the intersection of biomechanics and pediatric health. Her work explores medical device pathology, investigating how various devices interact with and affect the body, particularly within pediatric populations. In addition to her technical research, she is actively involved in advancing biomedical engineering education, seeking to improve pedagogical approaches within the field. By combining clinical applications of biomechanical analysis with a commitment to instructional development, her lab aims to bridge the gap between engineering theory and patient-centered pediatric outcomes.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor, Biomedical Engineering"
   },
   {
     "id": "432c32859e51",
@@ -7473,25 +7362,6 @@
     "pub_count": 20
   },
   {
-    "id": "8810a5705923",
-    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/montgomery-william.html",
-    "department": "biomedical",
-    "name": "William Montgomery",
-    "title": "Visiting Associate Professor of Practice, Biomedical Engineering",
-    "email": "wmontgom@tamu.edu",
-    "research_summary": "Cardiovascular disease Pediatric and adult cardiac reconstruction | Cardiovascular disease | Pediatric and adult cardiac reconstruction",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/biomedical/_files/_images/_profile-images/montgomery-william-profile-pic-8April2024.jpg",
-    "phone": "",
-    "office": "",
-    "ai_review": "Professor William Montgomery specializes in the field of cardiovascular medicine with a primary research focus on both pediatric and adult cardiac reconstruction. His work is centered on developing advanced surgical and therapeutic interventions to address complex cardiovascular diseases. Through his lab’s initiatives, he investigates innovative reconstruction techniques designed to improve clinical outcomes for patients across different age groups. By bridging the gap between clinical practice and biomedical engineering, Professor Montgomery aims to enhance the structural and functional restoration of the heart. His research efforts are dedicated to advancing the standard of care for individuals suffering from significant cardiac conditions.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Associate Professor of Practice"
-  },
-  {
     "id": "5c1d80648c17",
     "profile_url": "https://engineering.tamu.edu/biomedical/profiles/patrick-charles.html",
     "department": "biomedical",
@@ -7619,25 +7489,6 @@
     "rank_type": "teaching",
     "title_short": "Professor of Practice, Biomedical Engineering",
     "pub_count": 20
-  },
-  {
-    "id": "c823f1e2eacd",
-    "profile_url": "https://engineering.tamu.edu/biomedical/profiles/southard-derek.html",
-    "department": "biomedical",
-    "name": "Derek Southard",
-    "title": "Visiting Associate Professor of Practice, Biomedical Engineering",
-    "email": "dsouthard@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/biomedical/_files/_images/_profile-images/BMEN-profile-southard-derek-08Feb2022.jpg",
-    "phone": "",
-    "office": "",
-    "ai_review": "Derek Southard’s research within the biomedical department centers on the intricate mechanisms of cellular stress responses, particularly focusing on the role of the endoplasmic reticulum (ER) in shaping cellular fate during disease. His lab employs a multidisciplinary approach, utilizing advanced techniques like CRISPR-Cas9 gene editing, mass spectrometry for proteomic analysis, and high-throughput cellular assays to investigate how disruptions to ER homeostasis contribute to conditions such as neurodegeneration and cancer. Specifically, Southard’s work examines the signaling pathways activated by ER stress and how these pathways influence inflammatory responses and ultimately, cell survival or death. Recent projects have investigated the impact of specific protein modifications on ER function and the development of novel therapeutic strategies targeting these pathways to mitigate stress-induced pathologies. Ultimately, Southard’s research strives to elucidate the fundamental biology of ER stress and translate these findings into potential treatments for human diseases.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Associate Professor of Practice"
   },
   {
     "id": "8182553ab585",
@@ -7849,29 +7700,6 @@
     "title_short": "Senior Lecturer, Chemical Engineering"
   },
   {
-    "id": "bbe6a0614af0",
-    "profile_url": "https://engineering.tamu.edu/chemical/profiles/amin-tanjin.html",
-    "department": "chemical",
-    "name": "Tanjin Amin",
-    "title": "Visiting Lecturer, Chemical Engineering",
-    "email": "mtamin@tamu.edu",
-    "research_summary": "Fault diagnosis Process monitoring Process security Safety and risk engineering Process system engineering | Fault diagnosis | Process monitoring | Process security | Safety and risk engineering | Process system engineering",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=f8CQdxwAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/news/2023/03/_news-images/CHEN-news-Tanjin-Amin-Mar.1.2023.jpg",
-    "phone": "",
-    "office": "CHEN 418",
-    "ai_review": "Professor Tanjin Amin specializes in process systems engineering, with a primary research focus on enhancing the reliability and safety of industrial operations. His lab concentrates on the development of advanced frameworks for fault diagnosis and real-time process monitoring to ensure optimal system performance. Furthermore, his work addresses critical challenges in process security, aiming to protect complex engineering systems from vulnerabilities. By integrating safety and risk engineering methodologies, Professor Amin’s research provides robust strategies for identifying, mitigating, and managing industrial hazards. Through these efforts, his team contributes to the design of more secure and resilient process environments.",
-    "scholar_interests": [
-      "Safety and Risk Engineering",
-      "Process System Engineering"
-    ],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Lecturer, Chemical Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "28e8318cfe6d",
     "profile_url": "https://engineering.tamu.edu/chemical/profiles/aristidou-aristos.html",
     "department": "chemical",
@@ -7889,25 +7717,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Professor, Chemical Engineering"
-  },
-  {
-    "id": "3d2ba2e43cc1",
-    "profile_url": "https://engineering.tamu.edu/chemical/profiles/aydogmus.html",
-    "department": "chemical",
-    "name": "Turkan Aydogmus",
-    "title": "Associate Professor of Practice, Chemical Engineering",
-    "email": "turkan.aydogmus@tamu.edu",
-    "research_summary": "Nanotech – Neuroscience interfaces Nanotechnology applied in areas of health, energy and environment Enhanced oil recovery technologies | Nanotech – Neuroscience interfaces | Nanotechnology applied in areas of health, energy and environment | Enhanced oil recovery technologies",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/chemical/_files/_images/_profile-images/CHEN-profile-turkan-aydogmus3mar20.jpg",
-    "phone": "979-862-7590",
-    "office": "CHEN 209",
-    "ai_review": "Professor Turkan Aydogmus specializes in the multidisciplinary application of nanotechnology, with a primary focus on addressing critical challenges in the fields of health, energy, and environmental sustainability. Her research laboratory explores the innovative intersection of nanotechnology and neuroscience, aiming to develop advanced tools and interfaces for complex biological systems. Additionally, her work investigates the implementation of nanotechnological solutions to improve industrial processes, specifically targeting enhanced oil recovery technologies. Through these diverse initiatives, Professor Aydogmus leverages nanoscale engineering to advance diagnostic and recovery methods across multiple technical domains.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Associate Professor of Practice, Chemical Engineering"
   },
   {
     "id": "0be945532cfd",
@@ -8131,26 +7940,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Assistant Professor"
-  },
-  {
-    "id": "2df6a87a86eb",
-    "profile_url": "https://engineering.tamu.edu/chemical/profiles/huang-mantao.html",
-    "department": "chemical",
-    "name": "Mantao Huang",
-    "title": "Assistant Professor, Chemical Engineering",
-    "email": "mantao@tamu.edu",
-    "research_summary": "Electrochemical materials Solid-state ionics Devices for neuromorphic computing Electronic, optical, and spintronic devices | Electrochemical materials | Solid-state ionics | Devices for neuromorphic computing | Electronic, optical, and spintronic devices",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=zztMLpIAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/chemical/_files/_images/_profile-images/huang-mantao-profile-pic.jpg",
-    "phone": "",
-    "office": "CHEN 206",
-    "ai_review": "Professor Mantao Huang conducts interdisciplinary research at the intersection of materials science and advanced device engineering, with a primary focus on electrochemical materials and solid-state ionics. His work explores the development of novel materials to facilitate the next generation of electronic, optical, and spintronic devices. A central pillar of his lab’s mission is the design and optimization of components specifically tailored for neuromorphic computing applications. By investigating ionic transport and electrochemical properties, his team aims to create efficient hardware architectures capable of mimicking biological neural processes. Ultimately, his research bridges fundamental material chemistry with functional device performance to address emerging challenges in high-performance computing.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Assistant Professor, Chemical Engineering",
-    "pub_count": 20
   },
   {
     "id": "18f3773d9b2a",
@@ -9302,25 +9091,6 @@
     "pub_count": 20
   },
   {
-    "id": "f38d6e2caccf",
-    "profile_url": "https://engineering.tamu.edu/civil/profiles/douglass-april.html",
-    "department": "civil",
-    "name": "April G. Douglass",
-    "title": "Instructional Assistant Professor, Civil & Environmental Engineering",
-    "email": "adouglass@tamu.edu",
-    "research_summary": "",
-    "lab_website": "https://calendly.com/adouglass-tamucven",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/civil/_files/_images/_profile-images/April-Douglass-2022.jpg",
-    "phone": "979-845-0875",
-    "office": "DLEB 303D",
-    "ai_review": "Professor April G. Douglass serves within the Department of Civil Engineering, where her research program focuses on advancing infrastructure resilience and structural analysis. Her work encompasses the investigation of material behavior and design strategies intended to improve the performance and longevity of civil systems under various environmental and operational loads. By utilizing specialized laboratory facilities and advanced computational tools, her lab conducts rigorous experimental and analytical research to address complex challenges in structural engineering. Professor Douglass is actively engaged in mentoring students, providing them with opportunities to apply engineering principles to real-world research problems. Through her scholarly contributions, she aims to develop innovative solutions that enhance the safety and sustainability of the built environment.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor"
-  },
-  {
     "id": "cff881c5052f",
     "profile_url": "https://engineering.tamu.edu/civil/profiles/dzollinger.html",
     "department": "civil",
@@ -10317,31 +10087,6 @@
     "title_short": "Instructional Professor, Civil & Environmental Engineering"
   },
   {
-    "id": "f51d0ed8e0f3",
-    "profile_url": "https://engineering.tamu.edu/civil/profiles/rmercier.html",
-    "department": "civil",
-    "name": "Richard Mercier",
-    "title": "Professor, Civil & Environmental Engineering",
-    "email": "rsmercier@tamu.edu",
-    "research_summary": "Experimental and numerical hydrodynamics Global design and analysis of offshore structures Dynamics of deepwater mooring systems Scale model testing of floating structures | Experimental and numerical hydrodynamics | Global design and analysis of offshore structures | Dynamics of deepwater mooring systems | Scale model testing of floating structures",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=3oAi2JwAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/civil/_files/_images/_profile-images/mercier.jpg",
-    "phone": "979-845-6000",
-    "office": "DLEB 310C",
-    "ai_review": "Professor Mercier's research centers on the hydrodynamics and structural analysis of offshore systems. He employs both experimental scale model testing and numerical simulations to investigate the complex behaviors of these structures. His work specifically addresses the global design and analysis of offshore platforms, with a particular focus on the dynamics of deepwater mooring systems. Through these methodologies, Professor Mercier aims to understand and predict the performance of floating structures under various oceanic conditions.",
-    "scholar_interests": [
-      "Hydrodynamics",
-      "Fluid-Structure Interaction",
-      "Scale Model Testing",
-      "Offshore Structures"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Civil & Environmental Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "b35c62394075",
     "profile_url": "https://engineering.tamu.edu/civil/profiles/rockey-arash.html",
     "department": "civil",
@@ -11240,28 +10985,6 @@
     "pub_count": 20
   },
   {
-    "id": "1a80452a7506",
-    "profile_url": "https://engineering.tamu.edu/cse/profiles/chu-wenhui.html",
-    "department": "cse",
-    "name": "Wenhui Chu",
-    "title": "Instructional Assistant Professor, Computer Science & Engineering",
-    "email": "chuw1@tamu.edu",
-    "research_summary": "Machine learning Computer vision Artificial intelligence MR-compatible robotic manipulators | Machine learning | Computer vision | Artificial intelligence | MR-compatible robotic manipulators",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=I_524IMAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/cse/_files/_images/_profile-images/chu-wenhui-profile-pic-19Jul2024.jpg",
-    "phone": "409-740-5516",
-    "office": "ECRD 309B (Galveston)",
-    "ai_review": "Working within Computer Science & Engineering, Dr. Chu conducts research in machine learning computer vision artificial intelligence mr-compatible robotic manipulators, machine learning, and computer vision. Beyond their primary focus, they investigate artificial intelligence and mr-compatible robotic manipulators. This interdisciplinary focus makes Dr. Chu's group relevant to students across multiple specializations.",
-    "scholar_interests": [
-      "Machine Learning"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor",
-    "pub_count": 7
-  },
-  {
     "id": "5106b058b07d",
     "profile_url": "https://engineering.tamu.edu/cse/profiles/crawford-victoria.html",
     "department": "cse",
@@ -11331,32 +11054,6 @@
       "Virtualization",
       "Distributed Systems",
       "Parallel Computing"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Computer Science & Engineering",
-    "pub_count": 20
-  },
-  {
-    "id": "2a335f41b4f8",
-    "profile_url": "https://engineering.tamu.edu/cse/profiles/davis-tim.html",
-    "department": "cse",
-    "name": "Tim Davis",
-    "title": "Professor, Computer Science & Engineering",
-    "email": "davis@tamu.edu",
-    "research_summary": "Research Vision: High-Performance Combinatorial Scientific Computing The coming decades of high-performance computational mathematics will be increasingly dominated by heterogeneous computing based on hybrid multiprocessors with of a mix of conventional CPU cores and high-throughput GPU cores. This trend is driven by power constraints and the need for ever-increasing performance. Although these new heterogeneous systems can deliver high performance with low energy requirements, new algorithms must be developed to exploit them. The most challenging problems for these systems require a mix of regular and irregular computation. My research into direct methods for sparse linear systems lies within this problem domain and is also a critical component for many applications in computational mathematics. My experience makes me well-poised for future research in GPU-based algorithms. As a world leader in algorithmic research for sparse matrix computations, my work combines graph-theoretic methods and numerical techniques to create algorithms for solving problems in computational science that arise across a wide range of applications. I incorporate my novel theory and algorithms into robust library-quality open-source software, which is widely used in industry, academia, and government labs. In the past decade, I have published more software in the ACM Transactions on Mathematical Software than any other author (9% of the algorithmic output of that journal). A primary thrust for my current and future work focuses on creating parallel algorithms for sparse multifrontal LU, QR, and Cholesky factorization for hybrid multicore CPU/GPU multiprocessors. The workflow in these algorithms is an irregular tree, where the nodes are the bulk of the work (regular operations on dense frontal matrices of varying sizes), and the edges are the irregular assembly of data from child to parent. The GPUs operate on many frontal matrices at a time, and data is assembled from child to parent frontal matrix without moving it to the CPU. No other sparse direct method employs these strategies for GPU computing. By creating widely-used high-performance algorithms and software that encapsulate these ideas, this research will extend the capability of heterogeneous computing to a wide domain of applications in computational science and mathematics. In recognition of my research efforts in high-performance computing via GPU-based algorithms, NVIDIA has designated Texas A&M as a CUDA Research Center. Connections to Computer Science The core of my work lies within the domain of combinatorial scientific computing, which combines combinatorial and graph-theoretic algorithms with numerical methods, and hence relies on nearly all of classical computer science. My graph and sparse matrix algorithms are important to several core areas in computer science, including social network analysis, computer vision, computer graphics, and robotics. For example, all of the robotics projects at OpenSLAM.org that rely on sparse matrix algorithms to solve Simultaneous Localization and Mapping problems use my software. One application relies on my sparse Cholesky update/downdate to process a dynamic set of images collected by a swarm of robots updating a 3D model of the region under exploration. Robotics provides a promising avenue for future research and applications of my work in applied mathematics and sparse linear algebra. Connections to Mathematics and Operations Research I have a long history of creating novel algorithms for new and challenging problems in applied mathematics and optimization techniques. Over a 16-year collaboration with Bill Hager in the Math Department at the University of Florida, I have created the only asymptotically optimal algorithms for the sparse Cholesky update/downdate problem. This problem arises in dual active set methods in optimization, where the factorization must be updated as the basis set changes. I have also developed multilevel graph partitioning algorithms based on Hager's quadratic-programming formulation. Optimization presents unique challenges for the development of sparse matrix and combinatoric algorithms, and provides a rich source of promising problems, including low-rank update/downdate of sparse factorizations, rook pivoting, rank deficient matrices, and finding well-conditioned basis sets. Connections to Industry, Open-Source Projects, and Government Labs Industry, government labs, and open source projects rely heavily on my work. My sparse solvers appear in dozens of commercial applications from The MathWorks (x=A\\b in MATLAB), Google, NVIDIA, Berkeley Design Automation, Freescale, COMSOL, MSC Software (NASTRAN), Cadence, IBM, Mathematica, ANSYS, Mentor Graphics, and many other companies. Every photo in Google Street View, Photo Tours, and 3D Earth is placed into proper position using my software via Google's Ceres non-linear least squares solver. The US Geological Survey uses my sparse solvers to process images of the Earth, Moon, Mercury, and other planetary bodies, cutting their time-to-solution from hours/days down to minutes. My open-source software has been adopted by all major Linux distributions, and is also widely used in open-source packages such as GIMP (GEGL), R, Octave, FEniCS, ROS (robotics), Boost, Julia, and scilab, to name just a few. Sandia's Xyce circuit simulation package and Berkeley's OpenSees earthquake simulator both rely on my sparse solvers. My software consistently demonstrates the speed and reliability essential for industrial-quality software. Algorithmic Artwork My algorithmic artwork has appeared on billboards all over London, as the theme artwork for the London Electronic Arts Festival. To create this art, I use Fourier Transforms, graph algorithms, sparse matrices, and MATLAB to translate music into art, via mathematical rules of my creation. For more examples, and description of how I create this art, see notesartstudio.com",
-    "lab_website": "http://faculty.cse.tamu.edu/davis",
-    "google_scholar": "https://scholar.google.com/citations?user=gNMqz_4AAAAJ",
-    "photo_url": "https://engineering.tamu.edu/cse/_files/_images/_profile-images/Image-of-Tim-Davis.jpg",
-    "phone": "979-845-4094",
-    "office": "PETR 235",
-    "ai_review": "Professor Tim Davis’s research within the CSE department centers on high-performance combinatorial scientific computing, specifically focusing on exploiting the potential of heterogeneous computing systems incorporating both CPUs and GPUs. His work investigates direct methods for solving sparse linear systems, recognizing this as a crucial area for maximizing performance on these increasingly prevalent hybrid architectures. Davis’s research leverages graph-theoretic methods and algorithmic development to address the challenges posed by irregular computations demanded by these systems. Given his expertise and interests in numerical methods, parallel computing, and sparse matrices – as evidenced by his Google Scholar profile – his lab is positioned at the forefront of developing efficient algorithms for computationally intensive mathematical applications. Ultimately, his research aims to drive advancements in mathematical software and numerical methods tailored for GPU-based computations.",
-    "scholar_interests": [
-      "mathematical software",
-      "numerical methods",
-      "sparse matrices",
-      "graph algorithms",
-      "parallel computing"
     ],
     "university": "tamu",
     "rank_type": "research",
@@ -11884,49 +11581,6 @@
     "university": "tamu",
     "rank_type": "teaching",
     "title_short": "Professor of Practice, Computer Science & Engineering"
-  },
-  {
-    "id": "696a53e70edd",
-    "profile_url": "https://engineering.tamu.edu/cse/profiles/liu-si.html",
-    "department": "cse",
-    "name": "Si Liu",
-    "title": "Assistant Professor, Computer Science & Engineering",
-    "email": "si.liu@tamu.edu",
-    "research_summary": "Formal methods Databases Distributed systems Security | Formal methods | Databases | Distributed systems | Security",
-    "lab_website": "https://siliunobi.github.io/",
-    "google_scholar": "https://scholar.google.com/citations?user=tSYgue0AAAAJ&hl",
-    "photo_url": "https://engineering.tamu.edu/cse/_files/_images/_profile-images/liu-si-profile-28aug2025.jpg",
-    "phone": "979-458-0303",
-    "office": "PETR 225",
-    "ai_review": "Based in Computer Science & Engineering at Texas A&M, Dr. Liu's research centers on formal methods databases distributed systems security, formal methods, and databases. Additional research interests include distributed systems and security. Students interested in these areas may find Dr. Liu's lab a strong fit for research opportunities.",
-    "scholar_interests": [
-      "Formal Methods",
-      "Databases",
-      "Distributed Systems"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Assistant Professor, Computer Science & Engineering",
-    "pub_count": 20
-  },
-  {
-    "id": "a2d669ba2a9a",
-    "profile_url": "https://engineering.tamu.edu/cse/profiles/lupoli-shawn.html",
-    "department": "cse",
-    "name": "Shawn Lupoli",
-    "title": "Instructional Assistant Professor, Computer Science & Engineering",
-    "email": "slupoli@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/cse/_files/_images/_profile-images/lupoli_web.jpg",
-    "phone": "410-575-4383",
-    "office": "",
-    "ai_review": "Shawn Lupoli’s research within the CSE department centers on the intersection of computational social science and algorithmic fairness, particularly investigating biases embedded within large-scale datasets and search engine results. His work utilizes a combination of quantitative methods, including network analysis and statistical modeling, to examine how search algorithms perpetuate and amplify societal inequalities. Lupoli’s lab specifically focuses on developing techniques to mitigate these biases, exploring approaches like debiasing search rankings and analyzing the spread of misinformation online. Furthermore, he actively engages students through undergraduate research opportunities and regularly hosts seminars and distinguished lectures on related topics within the field, fostering a community around algorithmic accountability and responsible technology development.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor"
   },
   {
     "id": "f598ec619dda",
@@ -14293,28 +13947,6 @@
     "title_short": "Professor, Electrical & Computer Engineering"
   },
   {
-    "id": "d5ba4a9a093f",
-    "profile_url": "https://engineering.tamu.edu/electrical/profiles/smiller.html",
-    "department": "electrical",
-    "name": "Scott L. Miller",
-    "title": "Professor, Electrical & Computer Engineering",
-    "email": "smiller@tamu.edu",
-    "research_summary": "",
-    "lab_website": "http://ece.tamu.edu/~scott-l-miller/",
-    "google_scholar": "https://scholar.google.com/citations?user=_Ka6uJMAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/electrical/_files/_images/_profile-images/miller-mug1.jpg",
-    "phone": "979-862-8744",
-    "office": "WEB 310B",
-    "ai_review": "Dr. Miller is a researcher in Electrical & Computer Engineering. Research Experiences for Undergraduates Research Highlights Research Centers Patents and Startups. Their Google Scholar profile highlights interests in Communication Theory.",
-    "scholar_interests": [
-      "Communication Theory"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Electrical & Computer Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "9a5b4608459d",
     "profile_url": "https://engineering.tamu.edu/electrical/profiles/spalermo.html",
     "department": "electrical",
@@ -14334,26 +13966,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Professor, Electrical & Computer Engineering",
-    "pub_count": 20
-  },
-  {
-    "id": "a82977ae5c92",
-    "profile_url": "https://engineering.tamu.edu/electrical/profiles/ssavari.html",
-    "department": "electrical",
-    "name": "Serap Savari",
-    "title": "Associate Professor, Electrical & Computer Engineering",
-    "email": "savari@tamu.edu",
-    "research_summary": "Information theory, data compression, network coding, computing and communication systems | Information theory, data compression, network coding, computing and communication systems",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=2guN_7YAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/electrical/_files/_images/_profile-images/savari.jpg",
-    "phone": "979-845-6824",
-    "office": "WEB 308G",
-    "ai_review": "Dr. Savari is a researcher in Electrical & Computer Engineering. Information theory, data compression, network coding, computing and communication systems.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Associate Professor, Electrical & Computer Engineering",
     "pub_count": 20
   },
   {
@@ -14474,31 +14086,6 @@
     "pub_count": 20
   },
   {
-    "id": "9878e880f2f0",
-    "profile_url": "https://engineering.tamu.edu/electrical/profiles/wshi.html",
-    "department": "electrical",
-    "name": "Weiping Shi",
-    "title": "Professor, Electrical & Computer Engineering",
-    "email": "wshi@tamu.edu",
-    "research_summary": "His research interests include computer-aided design of Very Large Scale Integration (VLSI) CAD, including physical design, parasitic extraction, fault diagnosis, variational analysis and process synthesis.",
-    "lab_website": "http://cesg.tamu.edu/faculty/weiping-shi/",
-    "google_scholar": "https://scholar.google.com/citations?user=m1x4qEkAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/electrical/_files/_images/_profile-images/shi.jpg",
-    "phone": "979-845-3820",
-    "office": "WEB 333K",
-    "ai_review": "Dr. Shi is a researcher in Electrical & Computer Engineering. His research interests include computer-aided design of Very Large Scale Integration (VLSI) CAD, including physical design, parasitic extraction, fault diagnosis, variational analysis and process synthesis. Their Google Scholar profile highlights interests in Electronic Design Automation, Integrated Circuits, Algorithms, Modeling and Simulation.",
-    "scholar_interests": [
-      "Electronic Design Automation",
-      "Integrated Circuits",
-      "Algorithms",
-      "Modeling and Simulation"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Electrical & Computer Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "ce91ffdc476f",
     "profile_url": "https://engineering.tamu.edu/electrical/profiles/xzhang.html",
     "department": "electrical",
@@ -14570,28 +14157,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Research Assistant Professor",
-    "pub_count": 20
-  },
-  {
-    "id": "8b652798e746",
-    "profile_url": "https://engineering.tamu.edu/electrical/profiles/zxiong.html",
-    "department": "electrical",
-    "name": "Zixiang Xiong",
-    "title": "Professor, Electrical & Computer Engineering",
-    "email": "zixiang-xiong@tamu.edu",
-    "research_summary": "Distributed source coding for sensor networks, data hiding, and network information theory Joint source-channel coding, networked multimedia and data compression Genomic signal processing Network traffic smoothing and modeling Biomedical engineering - medical image processing | Distributed source coding for sensor networks, data hiding, and network information theory | Joint source-channel coding, networked multimedia and data compression | Genomic signal processing | Network traffic smoothing and modeling | Biomedical engineering - medical image processing",
-    "lab_website": "http://www.ece.tamu.edu/~zixiang-xiong/",
-    "google_scholar": "https://scholar.google.com/citations?user=BCBUDMcAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/electrical/_files/_images/_profile-images/image-of-zixiang-xiong.jpg",
-    "phone": "979-862-8683",
-    "office": "WEB 334H",
-    "ai_review": "Working in Electrical & Computer Engineering at Texas A&M, Dr. Xiong's research involves the following: Distributed source coding for sensor networks, data hiding, and network information theory Joint source-channel coding, networked multimedia and data compression Genomic signal processing Network traffic smoothing and modeling Biomedical engineering - medical image processing. Distributed source coding for sensor networks, data hiding, and network information theory. Their Google Scholar profile highlights research interests in Information signal processing over networks. Prospective students with interests in these topics are encouraged to review Dr. Xiong's recent publications for more detail.",
-    "scholar_interests": [
-      "Information signal processing over networks"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Electrical & Computer Engineering",
     "pub_count": 20
   },
   {
@@ -15044,30 +14609,6 @@
     "title_short": "Visiting Senior Lecturer"
   },
   {
-    "id": "41a2943e7d2c",
-    "profile_url": "https://engineering.tamu.edu/etid/profiles/dube-rohit.html",
-    "department": "etid",
-    "name": "Rohit Dube",
-    "title": "Visiting Lecturer, Engineering Technology & Industrial Distribution",
-    "email": "dube.rohit@tamu.edu",
-    "research_summary": "Machine Learning Robust Optimization Causal Inference Simulation | Machine Learning | Robust Optimization | Causal Inference | Simulation",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=fnoX77wAAAAJ&hl=en",
-    "photo_url": "",
-    "phone": "",
-    "office": "FERM 203E",
-    "ai_review": "Dr. Dube is a researcher in the Department of Engineering Technology & Industrial Distribution with expertise in machine learning robust optimization causal inference simulation, machine learning, and robust optimization. Their work also addresses causal inference and simulation. Their Google Scholar profile highlights research interests in Power Systems and Operations Research. This interdisciplinary focus makes Dr. Dube's group relevant to students across multiple specializations.",
-    "scholar_interests": [
-      "Machine Learning",
-      "Power Systems",
-      "Operations Research"
-    ],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Lecturer",
-    "pub_count": 4
-  },
-  {
     "id": "c58d4c4040a0",
     "profile_url": "https://engineering.tamu.edu/etid/profiles/dudley-taylor.html",
     "department": "etid",
@@ -15081,25 +14622,6 @@
     "phone": "979-458-2581",
     "office": "FERM 304AB",
     "ai_review": "Dr. Dudley is a researcher in Engineering Technology & Industrial Distribution. Electronic Systems Engineering Technology Industrial Distribution Manufacturing & Mechanical Engineering Technology Multidisciplinary Engineering Technology.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Lecturer"
-  },
-  {
-    "id": "b5892cae5466",
-    "profile_url": "https://engineering.tamu.edu/etid/profiles/dyson-joe.html",
-    "department": "etid",
-    "name": "Joe Dyson",
-    "title": "Visiting Lecturer, Engineering Technology & Industrial Distribution",
-    "email": "joe.dyson@tamu.edu",
-    "research_summary": "Hydrogen Mobility, Green Energy, Carbon Capture (CCUS) Consultative Sales Processes | Hydrogen Mobility, Green Energy, Carbon Capture (CCUS) | Consultative Sales Processes",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/etid/_files/_images/_profile-images/dyson-joe-profilepic-4april2025.jpg",
-    "phone": "",
-    "office": "FERM 304A",
-    "ai_review": "Working in Engineering Technology & Industrial Distribution at Texas A&M, Dr. Dyson's research involves the following: Hydrogen Mobility, Green Energy, Carbon Capture (CCUS) Consultative Sales Processes.",
     "scholar_interests": [],
     "university": "tamu",
     "rank_type": "visiting",
@@ -15166,25 +14688,6 @@
     "university": "tamu",
     "rank_type": "teaching",
     "title_short": "Senior Lecturer"
-  },
-  {
-    "id": "1072a75bd934",
-    "profile_url": "https://engineering.tamu.edu/etid/profiles/fierro-alonso.html",
-    "department": "etid",
-    "name": "Alonso Fierro",
-    "title": "Visiting Lecturer, Engineering Technology & Industrial Distribution",
-    "email": "a.fierro@tamu.edu",
-    "research_summary": "Mergers and acquisitions/integrations Business and industrial transformation Industrial salesforce development Manufacturer distributor relations Training design, development and implementation Organization development Commercial and operation strategies optimization Profitability and performance management Business continuity | Mergers and acquisitions/integrations | Business and industrial transformation | Industrial salesforce development | Manufacturer distributor relations | Training design, development and implementation | Organization development | Commercial and operation strategies optimization | Profitability and performance management | Business continuity",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/etid/_files/_images/_profile-images/ETID-Alonso-Fierro-7Nov24.jpg",
-    "phone": "979-458-3145",
-    "office": "FERM 302A",
-    "ai_review": "As a member of the Engineering Technology & Industrial Distribution department, Dr. Fierro specializes in mergers and acquisitions/integrations, business and industrial transformation, and industrial salesforce development. Additional research interests include manufacturer distributor relations, training design, development and implementation, organization development, and commercial and operation strategies optimization. Other areas of activity include profitability and performance management and business continuity. This interdisciplinary focus makes Dr. Fierro's group relevant to students across multiple specializations.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Lecturer"
   },
   {
     "id": "31d7d9bc10fd",
@@ -15851,31 +15354,6 @@
     "university": "tamu",
     "rank_type": "teaching",
     "title_short": "Senior Lecturer"
-  },
-  {
-    "id": "cf93652fb6c6",
-    "profile_url": "https://engineering.tamu.edu/etid/profiles/mai-bin.html",
-    "department": "etid",
-    "name": "Bin Mai",
-    "title": "Assistant Professor, Engineering Technology & Industrial Distribution",
-    "email": "binmai@tamu.edu",
-    "research_summary": "Information Technology Service Management Cybersecurity decision making Economics of IT/IS Behavioral issues of IT management Cybersecurity education and workforce development | Information Technology Service Management | Cybersecurity decision making | Economics of IT/IS | Behavioral issues of IT management | Cybersecurity education and workforce development",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=yhfMr-IAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/etid/_files/_images/_profile-images/bin-mai-profile-Nov2022.jpg",
-    "phone": "979-458-7253",
-    "office": "HEAT 115C",
-    "ai_review": "Working in Engineering Technology & Industrial Distribution at Texas A&M, Dr. Mai's research involves the following: Information Technology Service Management Cybersecurity decision making Economics of IT/IS Behavioral issues of IT management Cybersecurity education and workforce development. Their Google Scholar profile highlights research interests in cybersecurity, Game Theory, behavioral economics, and economic modeling. Students interested in these areas may find Dr. Mai's lab a strong fit for research opportunities.",
-    "scholar_interests": [
-      "cybersecurity",
-      "Game Theory",
-      "behavioral economics",
-      "economic modeling"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Assistant Professor",
-    "pub_count": 20
   },
   {
     "id": "d135e7f42a2c",
@@ -16738,30 +16216,6 @@
     "title_short": "Senior Lecturer"
   },
   {
-    "id": "b8718f6777f8",
-    "profile_url": "https://engineering.tamu.edu/etid/profiles/zavareh-amir.html",
-    "department": "etid",
-    "name": "Amir Tofighi Zavareh",
-    "title": "Assistant Professor, Engineering Technology & Industrial Distribution",
-    "email": "amirtofighi@tamu.edu",
-    "research_summary": "Analog and mixed-signal bioelectronic design Signal processing Biomedical imaging Biomedical instruments | Analog and mixed-signal bioelectronic design | Signal processing | Biomedical imaging | Biomedical instruments",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=sOYDw2gAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/etid/_files/_images/_profile-images/Amir-T-Zavareh-profile-aug-2023.jpg",
-    "phone": "",
-    "office": "FERM 005B",
-    "ai_review": "As a member of the Engineering Technology & Industrial Distribution department, Dr. Zavareh specializes in analog and mixed-signal bioelectronic design signal processing biomedical imaging biomedical instruments, analog and mixed-signal bioelectronic design, and signal processing. Beyond their primary focus, they investigate biomedical imaging and biomedical instruments. Scholar profile topics include Biomedical Instrumentation, Machine Learning, and Analog/Mixed Signal Processing, reflecting the breadth of their work. This interdisciplinary focus makes Dr. Zavareh's group relevant to students across multiple specializations.",
-    "scholar_interests": [
-      "Biomedical Instrumentation",
-      "Machine Learning",
-      "Analog/Mixed Signal Processing"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Assistant Professor",
-    "pub_count": 20
-  },
-  {
     "id": "9fbae2a2d051",
     "profile_url": "https://engineering.tamu.edu/industrial/profiles/abanerjee.html",
     "department": "industrial",
@@ -17091,32 +16545,6 @@
     "pub_count": 20
   },
   {
-    "id": "6e0bb725bfa1",
-    "profile_url": "https://engineering.tamu.edu/industrial/profiles/erraguntla-madhav.html",
-    "department": "industrial",
-    "name": "Madhav Erraguntla",
-    "title": "Professor of Practice, Industrial & Systems Engineering",
-    "email": "merraguntla@tamu.edu",
-    "research_summary": "Experience Machine learning and artificial intelligence applications to health care and supply chain management. Focus areas include diabetes, maintenance planning and wearable sensor applications. Senior research scientist at Knowledge Based Systems Inc. Principal data scientist at AT&T Over 25 years experience in data mining, knowledge based systems, machine learning, optimization, simulation and scheduling Principal investigator for multiple Small Business Innovative Research (SBIR) Phase I, II and III projects from the Department of Defense, the Department of Health and Humans Services (HHS) and NASA. He hosts two national level surveillance systems for HHS on blood inventory management and donor hemovigilance. At AT&T, he worked on developing analytics to support activities of daily life in smart homes. At i2 Technologies, he developed analytics to facilitate point of sale data (POS) analysis and customer relationship management (CRM) for a major retailor. | Machine learning and artificial intelligence applications to health care and supply chain management. Focus areas include diabetes, maintenance planning and wearable sensor applications. | Senior research scientist at Knowledge Based Systems Inc. | Principal data scientist at AT&T | Over 25 years experience in data mining, knowledge based systems, machine learning, optimization, simulation and scheduling | Principal investigator for multiple Small Business Innovative Research (SBIR) Phase I, II and III projects from the Department of Defense, the Department of Health and Humans Services (HHS) and NASA. | He hosts two national level surveillance systems for HHS on blood inventory management and donor hemovigilance. | At AT&T, he worked on developing analytics to support activities of daily life in smart homes. | At i2 Technologies, he developed analytics to facilitate point of sale data (POS) analysis and customer relationship management (CRM) for a major retailor.",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=wjE2tsQAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/industrial/_files/_images/_profile-images/erraguntla_web-final.jpg",
-    "phone": "979-458-2336",
-    "office": "ETB 4021",
-    "ai_review": "Dr. Erraguntla is a researcher in Industrial & Systems Engineering. Machine learning and artificial intelligence applications to health care and supply chain management. Focus areas include diabetes, maintenance planning and wearable sensor applications. Over 25 years experience in data mining, knowledge based systems, machine learning, optimization, simulation and scheduling. On Google Scholar, their listed interests include Data mining, Machine learning, Scheduling, and Supply Chain Management. Prospective students with interests in these topics are encouraged to review Dr. Erraguntla's recent publications for more detail.",
-    "scholar_interests": [
-      "Data mining",
-      "Machine learning",
-      "Scheduling",
-      "Supply Chain Management",
-      "Logistics"
-    ],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Professor of Practice, Industrial & Systems Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "7cf37b1dcc43",
     "profile_url": "https://engineering.tamu.edu/industrial/profiles/fsasangohar.html",
     "department": "industrial",
@@ -17141,30 +16569,6 @@
     "pub_count": 20
   },
   {
-    "id": "b5e2f9ab6ff4",
-    "profile_url": "https://engineering.tamu.edu/industrial/profiles/garcia-alfredo.html",
-    "department": "industrial",
-    "name": "Alfredo Garcia",
-    "title": "Professor, Industrial & Systems Engineering",
-    "email": "alfredo.garcia@tamu.edu",
-    "research_summary": "Dr. Alfredo Garcia's research interests include game theory and dynamic optimization, with applications in electricity and communication networks.",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=eHXQr2sAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/industrial/_files/_images/_profile-images/garcia-alfredo.png",
-    "phone": "979-458-2368",
-    "office": "ETB 4072",
-    "ai_review": "Dr. Garcia is a researcher in Industrial & Systems Engineering. Dr. Alfredo Garcia's research interests include game theory and dynamic optimization, with applications in electricity and communication networks. Their Google Scholar profile highlights interests in dynamic optimization, game theory, dynamic games.",
-    "scholar_interests": [
-      "dynamic optimization",
-      "game theory",
-      "dynamic games"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Industrial & Systems Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "0f9299c00947",
     "profile_url": "https://engineering.tamu.edu/industrial/profiles/geunes-joe.html",
     "department": "industrial",
@@ -17182,44 +16586,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Associate Department Head for Graduate Affairs, Industrial…"
-  },
-  {
-    "id": "6e2a12b6a456",
-    "profile_url": "https://engineering.tamu.edu/industrial/profiles/gkbennett.html",
-    "department": "industrial",
-    "name": "G. Kemble Bennett",
-    "title": "Senior Professor, Industrial & Systems Engineering",
-    "email": "kem-bennett@tamu.edu",
-    "research_summary": "Manufacturing, maintainability, reliability, logistics and quality engineering Technical representative for maintainability, U.S. Engineering standards governing the international trade of electronic and mechanical equipment and components | Manufacturing, maintainability, reliability, logistics and quality engineering | Technical representative for maintainability, U.S. | Engineering standards governing the international trade of electronic and mechanical equipment and components",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/industrial/_files/_images/_profile-images/image-of-kemble-bennett.jpg",
-    "phone": "979-458-2364",
-    "office": "ETB 4007",
-    "ai_review": "Dr. Bennett is a researcher in Industrial & Systems Engineering. Manufacturing, maintainability, reliability, logistics and quality engineering Technical representative for maintainability, U.S. Engineering standards governing the international trade of electronic and mechanical equipment and components. Engineering standards governing the international trade of electronic and mechanical equipment and components. Students interested in these areas may find Dr. Bennett's lab a strong fit for research opportunities.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Senior Professor, Industrial & Systems Engineering"
-  },
-  {
-    "id": "db29ac7496e9",
-    "profile_url": "https://engineering.tamu.edu/industrial/profiles/glurry.html",
-    "department": "industrial",
-    "name": "Guy L. Curry",
-    "title": "Senior Professor, Industrial & Systems Engineering",
-    "email": "g-curry@tamu.edu",
-    "research_summary": "Dr. Guy Curry specializes in the application of operations research techniques to the design and analysis of manufacturing systems. Current research emphasizes the development of analytical and simulation tools for the evaluation of semiconductor manufacturing and packaging systems. He teaches courses in optimization and production systems.",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/industrial/_files/_images/_profile-images/curry_finala.jpg",
-    "phone": "979-845-5576",
-    "office": "ETB 4009",
-    "ai_review": "Dr. Guy L. Curry’s research within the industrial engineering department centers on the strategic application of operations research to optimize manufacturing processes. His work focuses specifically on the complex challenges of semiconductor manufacturing and packaging, utilizing analytical and simulation modeling techniques to evaluate system performance and identify areas for improvement. Dr. Curry’s research group develops specialized tools for assessing these systems, often employing discrete event simulation and optimization algorithms.  He leverages these techniques to address issues related to production flow, resource allocation, and ultimately, the efficiency of semiconductor fabrication.  Furthermore, his expertise is readily apparent through his instruction of courses on optimization and production systems, suggesting a hands-on approach to training future manufacturing engineers.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Senior Professor, Industrial & Systems Engineering"
   },
   {
     "id": "c3431001c281",
@@ -18386,32 +17752,6 @@
     "pub_count": 20
   },
   {
-    "id": "d8be7bd80b78",
-    "profile_url": "https://engineering.tamu.edu/materials/profiles/tcagin.html",
-    "department": "materials",
-    "name": "Tahir Cagin",
-    "title": "Professor, Materials Science & Engineering",
-    "email": "tcagin@tamu.edu",
-    "research_summary": "computational materials science and nanotechnology with emphasis on design characterization and development of multifunctional nano-structured materials for device and sensor applications fundamental studies on transport phenomena (heat, mass and momentum) at nanoscale and in confined media thermal, mechanical, electronic and magnetic properties and phase behavior of materials materials for thermal management, power generation and energy harvesting development and application of multiscale simulation methods. | computational materials science and nanotechnology with emphasis on design | characterization and development of multifunctional nano-structured materials for device and sensor applications | fundamental studies on transport phenomena (heat, mass and momentum) at nanoscale and in confined media | thermal, mechanical, electronic and magnetic properties and phase behavior of materials | materials for thermal management, power generation and energy harvesting | development and application of multiscale simulation methods.",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=dd4j9a0AAAAJ",
-    "photo_url": "https://engineering.tamu.edu/chemical/_files/_images/_profile-images/Cagin1.jpg",
-    "phone": "979-862-2416",
-    "office": "RDMC 218",
-    "ai_review": "Dr. Cagin is a researcher in Materials Science & Engineering. Characterization and development of multifunctional nano-structured materials for device and sensor applications. fundamental studies on transport phenomena (heat, mass and momentum) at nanoscale and in confined media. Scholar profile topics include Materials Science and Engineering, Nanoscience, Nanotechnology, and Computational Materials Science, reflecting the breadth of their work. Students interested in these areas may find Dr. Cagin's lab a strong fit for research opportunities.",
-    "scholar_interests": [
-      "Materials Science and Engineering",
-      "Nanoscience",
-      "Nanotechnology",
-      "Computational Materials Science",
-      "Condensed Matter Physics"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor, Materials Science & Engineering",
-    "pub_count": 20
-  },
-  {
     "id": "9fe7eed423f5",
     "profile_url": "https://engineering.tamu.edu/materials/profiles/tu-qing.html",
     "department": "materials",
@@ -18975,30 +18315,6 @@
     "pub_count": 20
   },
   {
-    "id": "5b840aaa4e78",
-    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/elliott-matt.html",
-    "department": "mechanical",
-    "name": "Matt Elliott",
-    "title": "Instructional Associate Professor, Mechanical Engineering",
-    "email": "mselliott@tamu.edu",
-    "research_summary": "Advanced control of energy systems Model-based predictive control Machine design Undergraduate engineering education | Advanced control of energy systems | Model-based predictive control | Machine design | Undergraduate engineering education",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=CTjI-l0AAAAJ",
-    "photo_url": "https://engineering.tamu.edu/mechanical/_files/_images/_profile-images/Elliott_Matt-2022.jpg",
-    "phone": "979-458-6799",
-    "office": "MEOB 530",
-    "ai_review": "Dr. Elliott's research program in Mechanical Engineering focuses on advanced control of energy systems model-based predictive control machine design undergraduate engineering education, advanced control of energy systems, and model-based predictive control. Beyond their primary focus, they investigate machine design and undergraduate engineering education. On Google Scholar, their listed interests include Controls and undergrad education. Prospective students with interests in these topics are encouraged to review Dr. Elliott's recent publications for more detail.",
-    "scholar_interests": [
-      "Controls",
-      "undergrad education",
-      "machine design"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Associate Professor, Mechanical Engineering",
-    "pub_count": 17
-  },
-  {
     "id": "c848629348ae",
     "profile_url": "https://engineering.tamu.edu/mechanical/profiles/erdemir-ali.html",
     "department": "mechanical",
@@ -19557,26 +18873,6 @@
     "pub_count": 20
   },
   {
-    "id": "d6245f3d4b91",
-    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/lewis-heather.html",
-    "department": "mechanical",
-    "name": "Heather Lewis",
-    "title": "Lecturer, Mechanical Engineering",
-    "email": "hlewis@tamu.edu",
-    "research_summary": "Course management, lecture instruction, lab instruction, and management of teaching assistants and graders. Coursework includes 3D geometric modeling and design, senior design, and mechanical measurements. | Course management, lecture instruction, lab instruction, and management of teaching assistants and graders. | Coursework includes 3D geometric modeling and design, senior design, and mechanical measurements.",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=NAWiksoAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/mechanical/_files/_images/_profile-images/lewis-heather-profile-pic-8jan2025.jpg",
-    "phone": "979-458-7973",
-    "office": "MEOB 510B",
-    "ai_review": "Dr. Lewis is a researcher in Mechanical Engineering. Course management, lecture instruction, lab instruction, and management of teaching assistants and graders. Coursework includes 3D geometric modeling and design, senior design, and mechanical measurements. Course management, lecture instruction, lab instruction, and management of teaching assistants and graders. Students interested in these areas may find Dr. Lewis's lab a strong fit for research opportunities.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Lecturer, Mechanical Engineering",
-    "pub_count": 3
-  },
-  {
     "id": "0b923e699442",
     "profile_url": "https://engineering.tamu.edu/mechanical/profiles/li-jianxiong.html",
     "department": "mechanical",
@@ -19676,31 +18972,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Associate Department Head for Graduate Programs, Mechanical…",
-    "pub_count": 20
-  },
-  {
-    "id": "82aaf05d64ea",
-    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/mathieu-olivier.html",
-    "department": "mechanical",
-    "name": "Olivier Mathieu",
-    "title": "Research Associate Professor, Mechanical Engineering",
-    "email": "olivier.mathieu@tamu.edu",
-    "research_summary": "Combustion chemistry Chemical kinetics Fire suppressants Pollutant formation | Combustion chemistry | Chemical kinetics | Fire suppressants | Pollutant formation",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=FbaKcTkAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/mechanical/_files/_images/_profile-images/Mathieu-Oliver.jpg",
-    "phone": "979-845-7429",
-    "office": "TURBO 236",
-    "ai_review": "Dr. Mathieu's research program in Mechanical Engineering focuses on combustion chemistry chemical kinetics fire suppressants pollutant formation, combustion chemistry, and chemical kinetics. Additional research interests include fire suppressants and pollutant formation. Their Google Scholar profile highlights research interests in Combustion, Shock Tubes, and Battery Electrolyte Combustion. This interdisciplinary focus makes Dr. Mathieu's group relevant to students across multiple specializations.",
-    "scholar_interests": [
-      "Combustion",
-      "Chemical Kinetics",
-      "Shock Tubes",
-      "Battery Electrolyte Combustion"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Research Associate Professor, Mechanical Engineering",
     "pub_count": 20
   },
   {
@@ -20511,25 +19782,6 @@
     "pub_count": 20
   },
   {
-    "id": "08fad669d98a",
-    "profile_url": "https://engineering.tamu.edu/mechanical/profiles/walsh-michael.html",
-    "department": "mechanical",
-    "name": "Michael Walsh",
-    "title": "Associate Professor of Practice, Mechanical Engineering and College of Architecture, Visualization Laboratory",
-    "email": "mwalsh@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/mechanical/_files/_images/_profile-images/Walsh-Michael.jpg",
-    "phone": "",
-    "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Associate Professor of Practice"
-  },
-  {
     "id": "21e1351b7d45",
     "profile_url": "https://engineering.tamu.edu/mechanical/profiles/wang-ni.html",
     "department": "mechanical",
@@ -20869,25 +20121,6 @@
     "title_short": "Department Head, Nuclear Engineering"
   },
   {
-    "id": "42b5e9b7519f",
-    "profile_url": "https://engineering.tamu.edu/nuclear/profiles/hecker-siegfried.html",
-    "department": "nuclear",
-    "name": "Siegfried Hecker",
-    "title": "Professor of Practice, Nuclear Engineering",
-    "email": "sshecker@tamu.edu",
-    "research_summary": "Nuclear security and strategic stability Nuclear nonproliferation and arms control Plutonium science Nuclear energy Countering nuclear terrorism | Nuclear security and strategic stability | Nuclear nonproliferation and arms control | Plutonium science | Nuclear energy | Countering nuclear terrorism",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/nuclear/_files/_images/_profile-images/Hecker-Siegfried.jpg",
-    "phone": "",
-    "office": "AIEN M404",
-    "ai_review": "Based in Nuclear Engineering at Texas A&M, Dr. Hecker's research centers on nuclear security and strategic stability nuclear nonproliferation and arms control plutonium science nuclear energy countering nuclear terrorism, nuclear security and strategic stability, and nuclear nonproliferation and arms control. Additional research interests include plutonium science, nuclear energy, and countering nuclear terrorism. This interdisciplinary focus makes Dr. Hecker's group relevant to students across multiple specializations.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Professor of Practice, Nuclear Engineering"
-  },
-  {
     "id": "6285930959ad",
     "profile_url": "https://engineering.tamu.edu/nuclear/profiles/kimber-mark.html",
     "department": "nuclear",
@@ -20986,49 +20219,6 @@
     "rank_type": "research",
     "title_short": "Associate Professor, Nuclear Engineering",
     "pub_count": 20
-  },
-  {
-    "id": "ddbfa9bc333f",
-    "profile_url": "https://engineering.tamu.edu/nuclear/profiles/mcdeavitt-sean-m.html",
-    "department": "nuclear",
-    "name": "Sean M. McDeavitt",
-    "title": "Director, Strategic Initiatives, Texas A&M University System",
-    "email": "mcdeavitt@tamu.edu",
-    "research_summary": "Nuclear materials science Nuclear fuel behavior and processing Materials processing in the nuclear fuel cycle High-temperature materials science | Nuclear materials science | Nuclear fuel behavior and processing | Materials processing in the nuclear fuel cycle | High-temperature materials science",
-    "lab_website": "",
-    "google_scholar": "https://scholar.google.com/citations?user=oUFBiZIAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/nuclear/_files/_images/_profile-images/mcdeavitt-sean-profile-26Jan2022.jpg",
-    "phone": "979-862-1745",
-    "office": "AIEN M205A",
-    "ai_review": "Dr. McDeavitt is a researcher in Nuclear Engineering. Nuclear materials science Nuclear fuel behavior and processing Materials processing in the nuclear fuel cycle High-temperature materials science. Their Google Scholar profile highlights research interests in Nuclear Fuel, Uranium Alloys and Compounds, and Materials Processing. Dr. McDeavitt's research group offers opportunities at the intersection of several important areas in Nuclear Engineering.",
-    "scholar_interests": [
-      "Nuclear Fuel",
-      "Uranium Alloys and Compounds",
-      "Materials Processing"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Director, Strategic Initiatives, Texas A&M University System",
-    "pub_count": 20
-  },
-  {
-    "id": "7ba7db5c628f",
-    "profile_url": "https://engineering.tamu.edu/nuclear/profiles/miller-warren-pete.html",
-    "department": "nuclear",
-    "name": "Warren \"Pete\" Miller",
-    "title": "Professor of Practice, Nuclear Engineering",
-    "email": "wmiller@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://engineering.tamu.edu/nuclear/_files/_images/_content-images/miller_new.jpg",
-    "phone": "505-362-1180",
-    "office": "AIEN 404",
-    "ai_review": "Professor Warren “Pete” Miller’s research program within the nuclear engineering department centers on a remarkably broad range of applications, demonstrating a commitment to interdisciplinary investigation. His work primarily focuses on leveraging autonomy and robotics for innovative solutions across several key areas, including energy systems and services, healthcare infrastructure, and national security & safety research. Notably, Professor Miller’s lab utilizes elements of space engineering alongside materials and manufacturing research, reflecting an interest in advanced technologies and their potential impact. Furthermore, the program actively supports undergraduate research opportunities and incorporates educational seminars to foster both technical expertise and innovative approaches within these diverse research domains.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Professor of Practice, Nuclear Engineering"
   },
   {
     "id": "cda13ad61561",
@@ -21671,32 +20861,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Instructional Associate Professor, Ocean Engineering"
-  },
-  {
-    "id": "60540285610f",
-    "profile_url": "https://engineering.tamu.edu/ocean/profiles/xu-chang.html",
-    "department": "ocean",
-    "name": "Chang Xu",
-    "title": "Instructional Assistant Professor, Ocean Engineering",
-    "email": "xuchang@tamu.edu",
-    "research_summary": "Nonlinear wave mechanics Gravity-capillary waves Experimental fluid mechanics Random vibrations | Nonlinear wave mechanics | Gravity-capillary waves | Experimental fluid mechanics | Random vibrations",
-    "lab_website": "https://sites.google.com/tamu.edu/nfml-tamu/home?authuser=0",
-    "google_scholar": "https://scholar.google.com/citations?user=o99RYhsAAAAJ",
-    "photo_url": "https://engineering.tamu.edu/ocean/_files/_images/_profile-images/ChangXuHeadshot.jpg",
-    "phone": "409-740-4596",
-    "office": "PMEC 135 (Galveston)",
-    "ai_review": "Dr. Xu's research program in Ocean Engineering focuses on nonlinear wave mechanics gravity-capillary waves experimental fluid mechanics random vibrations, nonlinear wave mechanics, and gravity-capillary waves. They also contribute to work in experimental fluid mechanics and random vibrations. Scholar profile topics include ocean engineering, water waves, cavitation, and capillary waves, reflecting the breadth of their work. This interdisciplinary focus makes Dr. Xu's group relevant to students across multiple specializations.",
-    "scholar_interests": [
-      "ocean engineering",
-      "water waves",
-      "random vibrations",
-      "cavitation",
-      "capillary waves"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor, Ocean Engineering",
-    "pub_count": 14
   },
   {
     "id": "672f158d68ec",
@@ -22977,25 +22141,6 @@
     "title_short": "Instructional Assistant Professor"
   },
   {
-    "id": "c26309bc9bde",
-    "profile_url": "https://artsci.tamu.edu/biology/contact/profiles/deborah-kuhn.html",
-    "department": "biology",
-    "name": "Deborah Kuhn",
-    "title": "Instructional Assistant Professor",
-    "email": "dkuhn@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "",
-    "phone": "",
-    "office": "116C HELD",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor"
-  },
-  {
     "id": "58b793e037e0",
     "profile_url": "https://artsci.tamu.edu/biology/contact/profiles/deborah-siegele.html",
     "department": "biology",
@@ -23013,25 +22158,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Associate Professor"
-  },
-  {
-    "id": "ee28347d7a9e",
-    "profile_url": "https://artsci.tamu.edu/biology/contact/profiles/donna-janes.html",
-    "department": "biology",
-    "name": "Donna Janes",
-    "title": "Instructional Associate Professor",
-    "email": "djanes@bio.tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/biology/_files/_images/_profile-images/donna-janes.jpg",
-    "phone": "979-458-1673",
-    "office": "",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Associate Professor"
   },
   {
     "id": "3a5cb25fb1ab",
@@ -24008,25 +23134,6 @@
     "title_short": "Instructional Assistant Professor"
   },
   {
-    "id": "06f0df2e2cbf",
-    "profile_url": "https://artsci.tamu.edu/chemistry/contact/profiles/afroz-karim.html",
-    "department": "chemistry",
-    "name": "Afroz Karim",
-    "title": "Instructional Assistant Professor",
-    "email": "afrozkarim@tamu.edu",
-    "research_summary": "Chemical Biology | Medicinal Chemistry | Polymer Chemistry | Sustainability and Green Chemistry | Chemical Education",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "",
-    "phone": "979-458-7240",
-    "office": "ILSQ W302",
-    "ai_review": "Working within Chemistry, Dr. Karim conducts research in chemical biology, medicinal chemistry, and polymer chemistry. They also contribute to work in sustainability and green chemistry and chemical education. Dr. Karim's research group offers opportunities at the intersection of several important areas in Chemistry.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor"
-  },
-  {
     "id": "d2f0976ce109",
     "profile_url": "https://artsci.tamu.edu/chemistry/contact/profiles/alicia-altemose.html",
     "department": "chemistry",
@@ -24629,25 +23736,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Professor"
-  },
-  {
-    "id": "28d30cbc054a",
-    "profile_url": "https://artsci.tamu.edu/chemistry/contact/profiles/jack-waas.html",
-    "department": "chemistry",
-    "name": "Jack Waas",
-    "title": "Senior Lecturer",
-    "email": "jack.waas@chem.tamu.edu",
-    "research_summary": "Lecturer for Organic Chemistry I and II. Research in collaboration with Dr. Daniel Singleton at Texas A&M University, 8/05 to present. Experimental and computational investigation of a Diels-Alder reaction involving a highly reactive cyclopentadienone derivative, as well as other cycloadditions involving tropone, heptafulvene, and other compounds of structural interest.",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/chemistry/_files/_images/_profile-images/jack-waas.jpg",
-    "phone": "979-862-1676",
-    "office": "CHEM 001-I",
-    "ai_review": "Jack Waas’s research focuses on exploring complex organic reactions, primarily through a collaborative effort with Dr. Daniel Singleton at Texas A&M University since 2005. His work centers on the experimental and computational investigation of cycloaddition reactions, specifically utilizing highly reactive cyclopentadienone derivatives and examining related transformations like Diels-Alder reactions involving tropone, heptafulvene, and structurally interesting compounds. Waas and Singleton’s research employs both laboratory experimentation and advanced computational techniques to analyze these reactions.  This research investigates the mechanistic details and reactivity patterns within these cycloaddition processes. Ultimately, this work contributes to a deeper understanding of organic reaction mechanisms and the synthesis of complex molecules.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Senior Lecturer"
   },
   {
     "id": "eba0cf5462a4",
@@ -25401,25 +24489,6 @@
     "title_short": "Instructional Assistant Professor"
   },
   {
-    "id": "7d3fb031da28",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/adrian-vankan.html",
-    "department": "mathematics",
-    "name": "Adrian van Kan",
-    "title": "Assistant Professor",
-    "email": "avankan@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/vankan-adrian.jpg",
-    "phone": "",
-    "office": "Blocker 505B",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Assistant Professor"
-  },
-  {
     "id": "1405e500aa73",
     "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/al-boggess.html",
     "department": "mathematics",
@@ -25572,25 +24641,6 @@
     "title_short": "Professor"
   },
   {
-    "id": "e2cdbc7d7efb",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/andrea-welsh.html",
-    "department": "mathematics",
-    "name": "Andrea Welsh",
-    "title": "Visiting Assistant Professor",
-    "email": "ajwelsh@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "",
-    "phone": "",
-    "office": "Blocker 601D",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Assistant Professor"
-  },
-  {
     "id": "c15e8e9593ce",
     "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/andrew-comech.html",
     "department": "mathematics",
@@ -25629,25 +24679,6 @@
     "title_short": "Instructional Associate Professor"
   },
   {
-    "id": "ae20ae2fa71e",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/angelique-morvant.html",
-    "department": "mathematics",
-    "name": "Angelique Morvant",
-    "title": "Lecturer",
-    "email": "mae4102@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/morvant-a-225x168.png",
-    "phone": "",
-    "office": "Blocker 326",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "teaching",
-    "title_short": "Lecturer"
-  },
-  {
     "id": "5554858e7fe0",
     "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/anne-shiu.html",
     "department": "mathematics",
@@ -25665,25 +24696,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Professor"
-  },
-  {
-    "id": "b22b3b65d138",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/audrey-fovelle.html",
-    "department": "mathematics",
-    "name": "Audrey Fovelle",
-    "title": "Visiting Assistant Professor",
-    "email": "afovelle@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/fovelle-audrey.jpg",
-    "phone": "",
-    "office": "Blocker 525C",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Assistant Professor"
   },
   {
     "id": "699ac37a46f9",
@@ -25857,25 +24869,6 @@
     "title_short": "Associate Professor"
   },
   {
-    "id": "a0375bdc3107",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/collin-victor.html",
-    "department": "mathematics",
-    "name": "Collin Victor",
-    "title": "Visiting Assistant Professor",
-    "email": "collin.victor@tamu.edu",
-    "research_summary": "Applied Mathematics & Interdisciplinary Research | Control Theory | Fluid Dynamics | Mathematical Physics | Partial Differential Equations",
-    "lab_website": "https://collinvictor.me/",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/collin-victor-math-3.jpg",
-    "phone": "",
-    "office": "Blocker 633G",
-    "ai_review": "Working within Mathematics, Dr. Victor conducts research in applied mathematics & interdisciplinary research, control theory, and fluid dynamics. They also contribute to work in mathematical physics and partial differential equations. Dr. Victor's research group offers opportunities at the intersection of several important areas in Mathematics.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Assistant Professor"
-  },
-  {
     "id": "c68dbb2ac2ca",
     "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/constantin-onica.html",
     "department": "mathematics",
@@ -25893,25 +24886,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Instructional Associate Professor"
-  },
-  {
-    "id": "c124ccf3a81c",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/dan-lewis.html",
-    "department": "mathematics",
-    "name": "Dan Lewis",
-    "title": "Professor Emeritus",
-    "email": "lewis@math.tamu.edu",
-    "research_summary": "Functional Analysis Research Interests Research Areas: Banach Spaces Educational Background Ph.D. Louisiana State University, 1970 M.S. Louisiana State University, 1968 B.S. Louisiana State University, 1966 Selected Publications (with Y. Gordon) Absolutely summing maps and local unconditional structures, Acta Math. 133 (1974), 27-48. An isomorphic characterization of the Schmidt class, Compositio Math. 30 (1975), 293-297. Ellipsoids defined by Banach ideal norms, Mathematika 26 (1979), 18-29. Finite dimensional subspaces of Lp, Studia Math. 63 (1978), 207-212. The dimensions of complemented Hilbertian subspaces of uniformly convex Banach lattices, Compositio Math. 50 (1983), 83-92. An upper bound for the projection constant, Proc. AMS 103 (1988), 1157-1160. (with Y. Gordon) Dvoretsky's theorem for quasi-normed spaces, Illinois J. Math. 35 (1991), 250-259.",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/lewis-d-225x300.png",
-    "phone": "",
-    "office": "Blocker 243E",
-    "ai_review": "Dan Lewis’s research within the Department of Mathematics centers on functional analysis, primarily focusing on Banach spaces and their associated structures. His work has historically investigated topics such as local unconditional structures, characterizing specific classes like the Schmidt class, and exploring the dimensions of finite-dimensional subspaces within Lp spaces and Hilbertian subspaces of uniformly convex Banach lattices. Utilizing mathematical rigor and often collaborating with Y. Gordon, Lewis’s publications demonstrate a sustained interest in areas including ellipsoids defined by Banach ideal norms and theoretical advancements such as Dvoretsky's theorem for quasi-normed spaces. Notably, his research from the 1970s through the 1990s contributed significantly to understanding projection constants and the properties of various functional space classes.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "emeritus",
-    "title_short": "Professor Emeritus"
   },
   {
     "id": "40d54752059d",
@@ -26026,25 +25000,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Distinguished Professor"
-  },
-  {
-    "id": "18544aa99b80",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/elliot-cartee.html",
-    "department": "mathematics",
-    "name": "Elliot Cartee",
-    "title": "Instructional Assistant Professor",
-    "email": "cartee@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/_files/_images/_profile-images/elliot-cartee_math_2024-2.jpg",
-    "phone": "",
-    "office": "Blocker 321",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor"
   },
   {
     "id": "590c5302baa6",
@@ -26657,25 +25612,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "HR Generalist III"
-  },
-  {
-    "id": "1550aee74f70",
-    "profile_url": "https://artsci.tamu.edu/mathematics/contact/profiles/jesus-sanchez.html",
-    "department": "mathematics",
-    "name": "Jesus Sanchez Jr",
-    "title": "Visiting Scholar",
-    "email": "jscohomology@gmail.com",
-    "research_summary": "Mathematical Physics | Functional Analysis | Operator Theory",
-    "lab_website": "https://sites.google.com/view/jstheory",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/mathematics/contact/profiles/jesus-sanchez.jpg",
-    "phone": "",
-    "office": "Blocker 616",
-    "ai_review": "Jesus Sanchez Jr.’s research within the Department of Mathematics centers on the intersection of mathematical physics and operator theory, focusing primarily on functional analysis techniques. His work investigates complex systems through the rigorous study of operators and their properties, specifically examining applications within mathematical physics. Dr. Sanchez Jr. leverages tools from functional analysis to analyze and model physical phenomena, often dealing with differential equations and related operator-based problems. Current research appears to concentrate on utilizing these theoretical frameworks to explore intricate mathematical models relevant to the field. Ultimately, his lab’s work contributes to a deeper understanding of physical systems by employing sophisticated mathematical methods.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "visiting",
-    "title_short": "Visiting Scholar"
   },
   {
     "id": "9c01ec1dce56",
@@ -28905,30 +27841,6 @@
     "title_short": "Instructional Assistant Professor"
   },
   {
-    "id": "f243fdfef6ae",
-    "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/baishan-hu.html",
-    "department": "physics-astronomy",
-    "name": "Baishan Hu",
-    "title": "Research Assistant Professor",
-    "email": "baishanhu4phys@gmail.com",
-    "research_summary": "Research interests: Ab initio nuclear structure and reactions, Beyond the Standard Model (BSM), Dark matter. Selected work: Ab initio predictions link the neutron skin of 208Pb to nuclear forces; White paper: from bound states to the continuum; Ab initiono-core Gamow shell-model calculations of multineutron systems; Half-lives of cluster radioactivity with a generalized liquid-drop model; Physics of exotic nuclei.",
-    "lab_website": "https://baishanhu.github.io/",
-    "google_scholar": "https://scholar.google.com/citations?user=h1UW7HwAAAAJ",
-    "photo_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/_files/profile-images/baishan-hu-headshot.jpg",
-    "phone": "979-845-1411",
-    "office": "CYCL 327",
-    "ai_review": "Baishan Hu’s research within the Physics and Astronomy department centers on utilizing *ab initio* computational methods to investigate fundamental questions in nuclear physics and cosmology. His work primarily focuses on *ab initio* nuclear structure and reactions, employing sophisticated calculations to predict properties of exotic nuclei and explore connections between nuclear forces and observables, such as the neutron skin of 208Pb. Hu’s lab utilizes both core-shell models and generalized liquid-drop models to investigate nuclear half-lives and the behavior of multineutron systems, while also exploring theoretical aspects of dark matter. Notably, his research spans beyond the Standard Model, indicating an interest in potential BSM physics related to nuclear phenomena, and contributes significantly to our understanding of the physics of cluster radioactivity.",
-    "scholar_interests": [
-      "Ab initio nuclear structure and reactions",
-      "Beyond the Standard Model (BSM)",
-      "Dark matter"
-    ],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Research Assistant Professor",
-    "pub_count": 20
-  },
-  {
     "id": "f3f2cbdca558",
     "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/bhaskar-dutta.html",
     "department": "physics-astronomy",
@@ -29497,25 +28409,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Department Head"
-  },
-  {
-    "id": "f4dc812be512",
-    "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/igor-lyuksyutov.html",
-    "department": "physics-astronomy",
-    "name": "Igor Lyuksyutov",
-    "title": "Professor",
-    "email": "lyuksyutov@tamu.edu",
-    "research_summary": "Magnetism and Superconductivity | Materials Research",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/physics-astronomy/_files/_images/_profile-images/igor-lyuksyutov-.jpg",
-    "phone": "",
-    "office": "MPHY 452 (main office) / MPHY B39 (aux. location)",
-    "ai_review": "Dr. Lyuksyutov's research program in Physics & Astronomy focuses on magnetism and superconductivity and materials research.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Professor"
   },
   {
     "id": "12eb8fbe5e5f",
@@ -30131,25 +29024,6 @@
     "university": "tamu",
     "rank_type": "research",
     "title_short": "Assistant Professor"
-  },
-  {
-    "id": "6f7b7b14587e",
-    "profile_url": "https://artsci.tamu.edu/physics-astronomy/contact/profiles/mudit-rai.html",
-    "department": "physics-astronomy",
-    "name": "Mudit Rai",
-    "title": "Post Doctoral Researcher",
-    "email": "muditrai@exchange.tamu.edu",
-    "research_summary": "Black Holes | Dark Matter | Early Universe Cosmology | Gravitational Waves",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/_files/_images/_profile-images/mudit-rai-headshot.jpg",
-    "phone": "",
-    "office": "MIST M413",
-    "ai_review": "Based in Physics & Astronomy at Texas A&M, Dr. Rai's research centers on black holes, dark matter, and early universe cosmology. They also contribute to work in gravitational waves. Dr. Rai's research group offers opportunities at the intersection of several important areas in Physics & Astronomy.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Post Doctoral Researcher"
   },
   {
     "id": "ee071231478e",
@@ -31207,25 +30081,6 @@
     "university": "tamu",
     "rank_type": "emeritus",
     "title_short": "Professor Emeritus"
-  },
-  {
-    "id": "dfd4d6e71cd7",
-    "profile_url": "https://artsci.tamu.edu/statistics/contact/profiles/hadisalman.html",
-    "department": "statistics",
-    "name": "Hadi Salman",
-    "title": "Instructional Assistant Professor and Knowledge Development Fellow for TAMIDS",
-    "email": "hadi.salman@tamu.edu",
-    "research_summary": "",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/statistics/_files/_images/_profile-images/hadi-salman.png",
-    "phone": "(979) 845-3141",
-    "office": "Blocker 224C",
-    "ai_review": "",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": "Instructional Assistant Professor and Knowledge Development Fellow for TAMIDS"
   },
   {
     "id": "59235eb55ebb",
@@ -33036,25 +31891,6 @@
     "university": "tamu",
     "rank_type": "emeritus",
     "title_short": "Regents' Professor Emerita"
-  },
-  {
-    "id": "4db243e4df22",
-    "profile_url": "https://artsci.tamu.edu/oceanography/contact/profiles/nelson-pazmino-manrique.html",
-    "department": "oceanography",
-    "name": "Nelson Pazmino Manrique",
-    "title": "",
-    "email": "andresu11@email.tamu.edu",
-    "research_summary": "Sediment distribution and depositional processes on the Carnegie Ridge. Carnegie Ridge: a natural prolongation of the galapagos platform.",
-    "lab_website": "",
-    "google_scholar": "",
-    "photo_url": "https://artsci.tamu.edu/oceanography/_files/_images/_profile-images/nelson-pazmino-manrique.jpg",
-    "phone": "",
-    "office": "Eller O&M 317B",
-    "ai_review": "Dr. Manrique is a researcher in Oceanography. Sediment distribution and depositional processes on the Carnegie Ridge. Carnegie Ridge: a natural prolongation of the galapagos platform.",
-    "scholar_interests": [],
-    "university": "tamu",
-    "rank_type": "research",
-    "title_short": ""
   },
   {
     "id": "08ad4c7800a7",
