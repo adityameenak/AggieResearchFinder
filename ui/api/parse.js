@@ -1,5 +1,6 @@
 // Vercel serverless function — resume text extraction + AI parsing
 // Runs in Node.js (not the browser). Has access to pdf-parse, mammoth, anthropic.
+import { extractText } from './_lib/extract.js'
 
 export const config = {
   api: { bodyParser: { sizeLimit: '10mb' } },
@@ -88,31 +89,12 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
 
   const { filename = '', data, interests = '' } = req.body
-  if (!data) return res.status(400).json({ error: 'No file data provided.' })
 
-  const buffer = Buffer.from(data, 'base64')
-  const ext = filename.split('.').pop().toLowerCase()
-
-  let text = ''
+  let text
   try {
-    if (ext === 'pdf') {
-      // pdf-parse is CommonJS; dynamic import wraps module.exports as default
-      const pdfParse = (await import('pdf-parse')).default
-      const result = await pdfParse(buffer)
-      text = result.text
-    } else if (ext === 'docx' || ext === 'doc') {
-      const mammoth = await import('mammoth')
-      const result = await mammoth.extractRawText({ buffer })
-      text = result.value
-    } else {
-      return res.status(422).json({ error: 'Only PDF and DOCX files are supported.' })
-    }
+    text = await extractText(filename, data)
   } catch (e) {
-    return res.status(500).json({ error: `Text extraction failed: ${e.message}` })
-  }
-
-  if (!text.trim()) {
-    return res.status(422).json({ error: 'No text could be extracted from the file.' })
+    return res.status(e.status || 500).json({ error: e.message })
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY

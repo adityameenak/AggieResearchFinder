@@ -15,7 +15,7 @@ Four independent components, each with its own dependencies and lifecycle:
 - `ui/` — Vite + React 18 + Tailwind frontend, served as a multi-school SPA
 - `tools/` — internal, file-based HTML utilities (lab-review, scholar-links) for data triage; **not** deployed.
 
-`ui/api/` holds the deployed serverless functions: `parse`, `email`, `feedback`, and `mcp` (the MCP
+`ui/api/` holds the deployed serverless functions: `parse`, `email`, `feedback`, `paper`, and `mcp` (the MCP
 server), with shared server-side helpers in `ui/api/_lib/` (the `_` prefix keeps Vercel from routing
 them as endpoints).
 
@@ -180,6 +180,8 @@ clicking through the SPA. `/mcp` is the human-facing docs page (`ui/src/pages/Mc
   so the real ceiling is limit × instances. It's adequate only because the endpoint is read-only
   over already-public CDN-cached files and reaches no paid model. The real lever is a Vercel
   Firewall rule (dashboard state; see HANDOFF.md).
+
+**The paper explainer turns a paper into a way into matching.** `/:code/paper` (`PaperPage.jsx`) sends an uploaded PDF/DOCX or pasted text to `ui/api/paper.js`, which returns a plain-language explanation (summary, findings, methods, glossary, skills, questions) at a chosen reader level and in one of an allowlisted set of output languages. Its `research_topics` are **always English** whatever the output language, because the page feeds them to `matchFaculty()` for a "faculty working on this" sidebar and hands them to Discover as router state (`state.paper`) to seed the interests field. `prepareText()` drops the reference list and caps input at 120k chars (`truncated` is reported, never silent). It runs `claude-opus-5-5` at `effort: 'low'` with structured JSON output and `fallbacks: 'default'` (bio/chem papers can trip a classifier) — no `temperature`, the model rejects it. No key / failed call / decline → `heuristicExplain()` from the paper's own abstract and keywords, with the usual `mock_mode` / `template_fallback` split. It spends tokens on every call, so it has its own, much tighter limiter (`makeLimiter` in `_lib/ratelimit.js`; 4/min, 20/hour per IP) — still only a politeness guard. PDF/DOCX extraction is shared with `parse.js` via `_lib/extract.js`; the drop zone is `components/UploadZone.jsx`.
 
 **Outreach emails must be grounded, not templated.** `ui/api/email.js` is the live path and
 `ui/api/_lib/emailGuidance.js` is the shared definition of what a good one looks like — imported by

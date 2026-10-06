@@ -16,13 +16,11 @@
  * this repo — it is recorded in HANDOFF.md.
  */
 
-const WINDOWS = [
+const MCP_WINDOWS = [
   { name: 'minute', ms: 60_000, max: 60 },
   { name: 'hour', ms: 3_600_000, max: 600 },
 ]
 
-// ip → timestamps[]. Pruned on access; also swept when it grows unbounded.
-const hits = new Map()
 const MAX_TRACKED_IPS = 5_000
 
 function clientIp(req) {
@@ -33,9 +31,22 @@ function clientIp(req) {
 }
 
 /**
- * @returns {{ok: true} | {ok: false, retryAfter: number, window: string}}
+ * Build an independent limiter with its own windows and its own counters, so a
+ * busy MCP client never eats into another endpoint's budget.
+ *
+ * @param {{name: string, ms: number, max: number}[]} windows  shortest first
+ * @returns {(req) => {ok: true} | {ok: false, retryAfter: number, window: string}}
  */
-export function check(req) {
+export function makeLimiter(windows) {
+  // ip → timestamps[]. Pruned on access; also swept when it grows unbounded.
+  const hits = new Map()
+  return req => checkWith(windows, hits, req)
+}
+
+/** The /api/mcp limiter. */
+export const check = makeLimiter(MCP_WINDOWS)
+
+function checkWith(WINDOWS, hits, req) {
   const ip = clientIp(req)
   const now = Date.now()
   const longest = WINDOWS[WINDOWS.length - 1].ms

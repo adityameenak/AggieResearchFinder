@@ -150,6 +150,12 @@ export const SCHOOL_SECTIONS = {
       `Tell us your interests and upload a resume — ${k.brand} ranks ${n(k.count)} ${s.shortName} ` +
       `professors by how well their research matches you.`,
   },
+  paper: {
+    title: (s, k) => `Research Paper Explainer — ${s.shortName}`,
+    desc: (s, k) =>
+      `Upload a research paper and get it in plain language — or your own language — with the jargon ` +
+      `defined, then see which ${s.shortName} professors work on the same topic.`,
+  },
   tracker: {
     title: (s, k) => `My List — Track ${s.shortName} Research Outreach`,
     desc: (s, k) =>

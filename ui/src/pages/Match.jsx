@@ -120,7 +120,7 @@ function MatchCard({ result, onDraftEmail }) {
 }
 
 /* ── Resume summary card ───────────────────────────────────── */
-function ResumeCard({ profile, interests, onReset }) {
+function ResumeCard({ profile, interests, paperTitle, onReset }) {
   if (!profile) return null
   const themes = (profile.inferred_themes || []).slice(0, 5)
   const skills = (profile.technical_skills || []).slice(0, 5)
@@ -163,6 +163,11 @@ function ResumeCard({ profile, interests, onReset }) {
         <span className="text-[11px] text-stone-400">
           Interests: <span className="text-stone-600">{interests}</span>
         </span>
+        {paperTitle && (
+          <span className="block text-[11px] text-stone-400 mt-1">
+            Seeded from the paper: <span className="text-stone-600">{paperTitle}</span>
+          </span>
+        )}
       </div>
     </div>
   )
@@ -241,6 +246,7 @@ export default function Match() {
           <ResumeCard
             profile={session.parsed_profile}
             interests={session.interests}
+            paperTitle={session.paper_title}
             onReset={handleReset}
           />
         )}

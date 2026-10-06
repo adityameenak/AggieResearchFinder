@@ -20,6 +20,7 @@ export default function NavBar() {
     { to: '/',              label: 'Home',   match: p => p === tx('/') },
     { to: '/search',        label: 'Search', match: p => p === tx('/search') || p.startsWith(tx('/prof')) },
     { to: '/discover',      label: 'Match',  match: p => p === tx('/discover') || p === tx('/match') },
+    { to: '/paper',         label: 'Papers', match: p => p === tx('/paper') },
     // "My List" — the page's own name. The nav said "Saved", which is only the
     // first status an entry can have.
     { to: '/tracker',       label: 'My List', badge: true,

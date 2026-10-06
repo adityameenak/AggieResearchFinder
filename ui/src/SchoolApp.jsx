@@ -14,6 +14,7 @@ import ProfDetail from './pages/ProfDetail'
 import About      from './pages/About'
 import Discover   from './pages/Discover'
 import Match      from './pages/Match'
+import PaperPage  from './pages/PaperPage'
 import Tracker    from './pages/TrackerPage'
 import International from './pages/International'
 
@@ -50,6 +51,7 @@ export default function SchoolApp() {
               <Route path="about"    element={<About />}      />
               <Route path="discover" element={<Discover />}   />
               <Route path="match"    element={<Match />}      />
+              <Route path="paper"    element={<PaperPage />}  />
               <Route path="tracker"  element={<Tracker />}    />
               <Route path="international" element={<International />} />
             </Routes>
