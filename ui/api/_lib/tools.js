@@ -15,7 +15,7 @@ import { searchAndRank, deptLabel } from '../../src/utils/search.js'
 import { matchFaculty, isMatchable } from '../../src/utils/matcher.js'
 import { extractTopicsFromFaculty } from '../../src/utils/topics.js'
 import { SCHOOLS } from '../../src/schools.js'
-import { SCHOOL_SEO } from '../../src/lib/seo.js'
+import { SCHOOL_SEO, SCHOOL_COUNT_TEXT } from '../../src/lib/seo.js'
 import { loadSchool, loadPubs, findProf, SCHOOL_CODES } from './data.js'
 import { profBrief, profFull, briefsToMarkdown } from './serialize.js'
 import {
@@ -43,7 +43,7 @@ const targetSchools = code => (code ? [code] : SCHOOL_CODES)
 /**
  * Run `fn` over each school one at a time, keeping only the running top-N.
  *
- * Sequential and incremental on purpose: holding all six schools at once is
+ * Sequential and incremental on purpose: holding every school at once is
  * ~10 MB of JSON expanded into objects, and this endpoint runs in a 1024 MB
  * function alongside the MCP SDK. Peak heap here stays at one school.
  *
@@ -146,7 +146,7 @@ export async function searchFaculty(args, { origin }) {
   const briefs = hits.map(profBrief)
   const crossSchool = !school
   const note = crossSchool
-    ? '\n_Ranked across all six universities. Scores are raw keyword-hit counts and are not normalized between schools, so schools with longer profile text rank higher for equal relevance — pass `school` for a fair per-school ranking._'
+    ? `\n_Ranked across all ${SCHOOL_COUNT_TEXT} universities. Scores are raw keyword-hit counts and are not normalized between schools, so schools with longer profile text rank higher for equal relevance — pass \`school\` for a fair per-school ranking._`
     : ''
   return {
     data: {

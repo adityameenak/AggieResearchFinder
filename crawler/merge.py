@@ -59,6 +59,8 @@ SOURCE_SCHOOL = {
     "faculty-harvard-physics":    "harvard",  # physics        (via --cdp)
     "faculty-harvard-oeb":        "harvard",  # evolutionary biology (via --cdp)
     "faculty-harvard-statistics": "harvard",  # statistics     (via --cdp)
+    "faculty-umich":   "umich",   # crawl_umich.py: Experts API + department sites
+    "faculty-ucla":    "ucla",    # crawl_ucla.py
 }
 
 # Enrichment fields. These are produced after a crawl (enrich_ollama.py writes

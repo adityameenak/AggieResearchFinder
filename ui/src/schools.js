@@ -154,6 +154,56 @@ export const SCHOOLS = {
     emailDomain:  'harvard.edu',
     available: true,
   },
+  umich: {
+    code: 'umich',
+    name: 'University of Michigan',
+    shortName: 'Michigan',
+    appName: 'Wolverine STEM Research Finder',
+    brandPrefix: 'Wolverine',
+    brandSuffix: 'StemResearchFinder',
+    accent: 'umich-blue',
+    classes: {
+      brandText:    'text-umich-blue-700',
+      brandHover:   'group-hover:text-umich-blue-600',
+      cardHover:    'hover:border-umich-blue-400',
+      pillBg:       'bg-umich-blue-700',
+      pillText:     'text-umich-blue-700',
+    },
+    officialUrl: 'https://umich.edu',
+    description: 'Discover STEM research labs across Michigan, powered by AI matching.',
+    // Ann Arbor only: engineering, LSA sciences, psychology, public health
+    // and Michigan Medicine's basic-science departments (crawl_umich.py).
+    state: 'michigan',
+    city:  'Ann Arbor',
+    mailProvider: 'google',
+    emailDomain:  'umich.edu',
+    available: true,
+  },
+  ucla: {
+    code: 'ucla',
+    name: 'University of California, Los Angeles',
+    shortName: 'UCLA',
+    appName: 'Bruin STEM Research Finder',
+    brandPrefix: 'Bruin',
+    brandSuffix: 'StemResearchFinder',
+    accent: 'ucla-blue',
+    classes: {
+      brandText:    'text-ucla-blue-700',
+      brandHover:   'group-hover:text-ucla-blue-600',
+      cardHover:    'hover:border-ucla-blue-400',
+      pillBg:       'bg-ucla-blue-700',
+      pillText:     'text-ucla-blue-700',
+    },
+    officialUrl: 'https://www.ucla.edu',
+    description: 'Discover STEM research labs across UCLA, powered by AI matching.',
+    // Samueli engineering, physical & life sciences, psychology, Fielding
+    // public health and the Geffen basic-science departments (crawl_ucla.py).
+    state: 'california',
+    city:  'Los Angeles',
+    mailProvider: 'google',
+    emailDomain:  'ucla.edu',
+    available: true,
+  },
 }
 
 export const SCHOOL_LIST = Object.values(SCHOOLS)

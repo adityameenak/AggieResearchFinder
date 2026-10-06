@@ -34,6 +34,9 @@ CANONICAL = {
     "nuclear":      "Nuclear Engineering",
     "ocean":        "Ocean Engineering",
     "petroleum":    "Petroleum Engineering",
+    # Michigan runs Robotics as a standalone department — a discipline in its
+    # own right that students search for by name, not a sub-field of ME/EE.
+    "robotics":     "Robotics",
 
     # Natural sciences
     "biology":              "Biology",
@@ -90,6 +93,25 @@ ALIASES = {
     "systems-synthetic-biology": "biomedical",
     # UTD Systems Engineering is A&M's industrial & systems (n=1).
     "systems-engineering":      "industrial",
+
+    # ── Michigan (crawl_umich.py) ──
+    # Climate & Space Sciences and Engineering is atmospheric/space science.
+    "climate-space":            "earth-atmospheric",
+    # Naval Architecture & Marine Engineering == A&M Ocean Engineering.
+    "naval-marine":             "ocean",
+    # Michigan Medicine's basic-science departments. Microbiology/immunology,
+    # human genetics and neuroscience have their own canonical homes; the
+    # rest are biomedical research departments, filed under medicine like
+    # TAMU's and Harvard's medical-school faculty.
+    "microbiology-immunology":  "immunology",
+    "human-genetics":           "genetics",
+    "physiology":               "medicine",
+    "pharmacology":             "medicine",
+    "biological-chemistry":     "medicine",
+    "computational-medicine":   "medicine",
+    # LSA Biophysics studies biological molecules physically; students reach
+    # it from biology.
+    "biophysics":               "biology",
 }
 
 # Deliberately NOT merged, despite looking similar:

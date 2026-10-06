@@ -25,9 +25,9 @@ import * as z from 'zod/v4'
 import { TOOLS } from './_lib/tools.js'
 import { originFrom, SCHOOL_CODES } from './_lib/data.js'
 import { check as rateCheck } from './_lib/ratelimit.js'
-import { TOTAL_FACULTY } from '../src/lib/seo.js'
+import { TOTAL_FACULTY, SCHOOL_NAMES_TEXT, SCHOOL_COUNT_TEXT } from '../src/lib/seo.js'
 
-// An all-schools cold search is six sequential fetches; the 10s default is too
+// An all-schools cold search is one sequential fetch per school; the 10s default is too
 // tight. Memory stays at the 1024 MB default *because* the search is
 // sequential per school (see acrossSchools in _lib/tools.js) — the two
 // decisions are linked, so don't make one without the other.
@@ -41,7 +41,7 @@ const schoolArg = z.enum(SCHOOL_CODES)
 // ---------------------------------------------------------------------------
 // Tool registration
 // ---------------------------------------------------------------------------
-const SCHOOL_HINT = `University code. Call list_schools for valid codes (${SCHOOL_CODES.join(', ')}). Omit to cover all six.`
+const SCHOOL_HINT = `University code. Call list_schools for valid codes (${SCHOOL_CODES.join(', ')}). Omit to cover all ${SCHOOL_COUNT_TEXT}.`
 
 function register(server, ctx) {
   const wrap = name => async args => {
@@ -158,7 +158,7 @@ async function buildServer(origin) {
     { name: 'stem-research-finder', version: '1.0.0' },
     {
       instructions: [
-        `Search ${TOTAL_FACULTY.toLocaleString('en-US')} STEM research faculty across six universities (Texas A&M, Rice, UT Austin, UT Dallas, MIT, Harvard)`,
+        `Search ${TOTAL_FACULTY.toLocaleString('en-US')} STEM research faculty across ${SCHOOL_COUNT_TEXT} universities (${SCHOOL_NAMES_TEXT})`,
         'to help a student find a research group and reach out to it.',
         '',
         'Typical flow: list_schools → list_topics or list_departments to learn the vocabulary →',

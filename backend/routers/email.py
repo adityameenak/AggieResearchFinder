@@ -28,6 +28,8 @@ SCHOOL_NAMES = {
     "utd":     "The University of Texas at Dallas",
     "mit":     "Massachusetts Institute of Technology",
     "harvard": "Harvard University",
+    "umich":   "University of Michigan",
+    "ucla":    "University of California, Los Angeles",
 }
 
 

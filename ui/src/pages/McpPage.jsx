@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import FeedbackModal from '../components/FeedbackModal'
-import { TOTAL_FACULTY } from '../lib/seo'
+import { TOTAL_FACULTY, SCHOOL_COUNT_TEXT } from '../lib/seo'
 import { SCHOOL_LIST } from '../schools'
 
 const ENDPOINT = 'https://stemresearchfinder.tech/api/mcp'
@@ -138,7 +138,7 @@ export default function McpPage() {
             <h2 className="font-display font-bold text-stone-900 text-xl mb-3">Worth knowing</h2>
             <ul className="space-y-2 text-[14px] text-stone-600 leading-relaxed list-disc pl-5">
               <li>
-                Coverage is six universities, not all of them. Faculty with no research text on record are
+                Coverage is {SCHOOL_COUNT_TEXT} universities, not all of them. Faculty with no research text on record are
                 excluded from <Code>match_faculty</Code>, since there is nothing to match on.
               </li>
               <li>

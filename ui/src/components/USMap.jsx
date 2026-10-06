@@ -14,6 +14,8 @@ const SCHOOL_COORDS = {
   utd:     [-96.7481, 32.9483],
   mit:     [-71.0921, 42.3601],
   harvard: [-71.1167, 42.3770],
+  umich:   [-83.7382, 42.2780],
+  ucla:    [-118.4452, 34.0689],
 }
 
 // Group available schools by state slug

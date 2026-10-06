@@ -21,7 +21,7 @@ export const OG_LOCALE  = 'en_US'
 export const THEME_DEFAULT = '#4f46e5'
 
 /** Total across every school — kept in sync by scripts/prerender.js (warns on drift). */
-export const TOTAL_FACULTY = 5136
+export const TOTAL_FACULTY = 7874
 
 const n = (x) => x.toLocaleString('en-US')
 
@@ -122,7 +122,48 @@ export const SCHOOL_SEO = {
       'harvard research advisor',
     ],
   },
+  umich: {
+    theme: '#00274C',
+    brand: 'Michigan Research Finder',
+    aka: ['Michigan Research Finder', 'Wolverine Research Finder', 'UMich Research Finder',
+          'Wolverine STEM Research Finder'],
+    count: 1606,
+    nick: 'Wolverine',
+    unit: 'Michigan',
+    keywords: [
+      'michigan research finder', 'umich research', 'university of michigan research labs',
+      'umich undergraduate research', 'umich professors', 'michigan engineering research',
+      'research opportunities at michigan', 'umich faculty directory', 'umich urop',
+      'umich stem research', 'michigan research advisor',
+    ],
+  },
+  ucla: {
+    theme: '#2774AE',
+    brand: 'UCLA Research Finder',
+    aka: ['UCLA Research Finder', 'Bruin Research Finder', 'Bruin STEM Research Finder'],
+    count: 1132,
+    nick: 'Bruin',
+    unit: 'UCLA',
+    keywords: [
+      'ucla research finder', 'ucla research labs', 'ucla undergraduate research',
+      'ucla professors', 'ucla faculty research', 'ucla samueli research',
+      'research opportunities at ucla', 'ucla faculty directory', 'ucla stem research',
+      'ucla research advisor',
+    ],
+  },
 }
+
+/** "Texas A&M, Rice, … Michigan and UCLA" — derived, so adding a school never
+ * leaves a hand-written list behind (they had drifted to "six" before). */
+export const SCHOOL_NAMES_TEXT = (() => {
+  const names = SCHOOL_LIST.filter(s => s.available).map(s => SCHOOL_SEO[s.code]?.unit || s.shortName)
+  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names.join('')
+})()
+const COUNT_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve']
+/** "eight" — spelled out for prose, numeric past twelve. */
+export const SCHOOL_COUNT_TEXT = COUNT_WORDS[SCHOOL_LIST.filter(s => s.available).length]
+  ?? String(SCHOOL_LIST.filter(s => s.available).length)
 
 /** Sections under /:code — the "subsections" that each get their own metadata. */
 export const SCHOOL_SECTIONS = {
@@ -238,8 +279,10 @@ export function buildMeta(pathname = '/') {
     return {
       title: `${SITE_NAME} — Find Research Labs & Faculty Advisors`,
       description:
-        `Search ${n(TOTAL_FACULTY)} STEM professors at Texas A&M, Rice, UT Austin, UT Dallas, ` +
-        `MIT and Harvard. Match your resume to research labs and email advisors — free.`,
+        // Budgeted to <=165 chars; with eight schools named there is no room
+        // for "research" before "labs".
+        `Search ${n(TOTAL_FACULTY)} STEM professors at ${SCHOOL_NAMES_TEXT}. ` +
+        `Match your resume to labs and email advisors — free.`,
       canonical: absUrl('/'),
       keywords: [
         'stem research finder', 'research finder', 'find research labs',
@@ -291,7 +334,7 @@ export function buildMeta(pathname = '/') {
     return {
       title: 'MCP Server — Search Faculty From Your Chatbot',
       description:
-        `Connect ${n(TOTAL_FACULTY)} STEM faculty across six universities to Claude or any ` +
+        `Connect ${n(TOTAL_FACULTY)} STEM faculty across ${SCHOOL_COUNT_TEXT} universities to Claude or any ` +
         `MCP client. Search, match and draft outreach emails without leaving your assistant.`,
       canonical: absUrl('/mcp'),
       keywords: [

@@ -10,7 +10,7 @@ unfinished, and the things that will bite you.
 
 Live at **stemresearchfinder.tech** (Vercel, auto-deploys from `main`).
 
-**5,136 faculty across 6 universities.** Percentages count only *valid* values
+**7,874 faculty across 8 universities** (Michigan and UCLA added 2026-10-06). Percentages count only *valid* values
 (see `crawler/quality.py`), so they are lower than before 2026-09-22 in places —
 that drop was a correction, not a regression:
 
@@ -22,6 +22,8 @@ that drop was a correction, not a regression:
 | Rice | 618 | 97% | 95% | 85% | 86% | 1% | 15% |
 | UT Dallas | 606 | 86% | 98% | 68% | 68% | 2% | 32% |
 | Harvard | 413 | 71% | 83% | 95% | 95% | 27% | 5% |
+| Michigan | 1,606 | 97% | 94% | 96% | 0% | 53% | 4% |
+| UCLA | 1,132 | 93% | 91% | 85% | 0% | 0% | 15% |
 
 `python census.py --audit --quality` for the live figures. `--quality` must read
 0 in every cell; `merge.py` runs `quality.clean()` on every merge.
@@ -44,6 +46,32 @@ that drop was a correction, not a regression:
   (research/teaching/emeritus/adjunct/visiting — badged in the UI, down-weighted
   in matching, filterable).
 - 71 AI reviews regenerated; 1 still errors (`needs_review` reports it).
+
+### Michigan and UCLA (added 2026-10-06)
+
+Scope (agreed): engineering, natural sciences, psychology, public health and the
+medical schools' basic-science departments. Clinical departments, nursing,
+dentistry and pharmacy are out — `census.OUT_OF_SCOPE` shows them as `skip`, not
+as gaps. Both schools read 0 gaps and 0 filler in `census.py --audit --quality`.
+
+Unfinished, each with its reason:
+- **No `ai_review` for either school.** The GPU box's Cloudflare Access token
+  is not in this Mac's Keychain (`cf-access-ollama-id`), so `enrich_ollama.py`
+  got a 403. Run it per file once the token is available:
+  `python enrich_ollama.py --file faculty-umich.json` (and `faculty-ucla.json`),
+  then `python merge.py`. Cards fall back to the crawled research text meanwhile.
+- **UCLA interests 0%, ~15% thin research.** `enrich_openalex.py --file
+  faculty-ucla.json --all-interests` fills both, but OpenAlex now allows only
+  ~100 author searches a day without a key; the first run used the day's
+  budget. Set `OPENALEX_API_KEY` (free at openalex.org) and re-run — it resumes
+  where it stopped. The thin ones are EPSS, Physics and some Geffen pages, which
+  publish no research text at all.
+- **Michigan crawl needs the browser stage.** `crawl_umich.py` (default `--stage
+  all`) drives headless Chromium through Cloudflare; ~1,500 page loads. Run the
+  browser stage as several processes with `--units` and combine with
+  `--api-json/--site-json` (see the file header) — one process took hours.
+- Michigan Mechanical Engineering profile pages hide emails; ME emails come only
+  from Michigan Experts (60% of ME).
 
 ### Open items
 

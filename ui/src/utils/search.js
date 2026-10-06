@@ -247,6 +247,7 @@ const DEPT_DISPLAY = {
   nuclear:                          'Nuclear Engineering',
   ocean:                            'Ocean Engineering',
   petroleum:                        'Petroleum Engineering',
+  robotics:                         'Robotics',
 
   // Natural sciences
   biology:                          'Biology',
@@ -296,6 +297,7 @@ export const DEPT_STYLES = {
   nuclear:                          { dot: 'bg-red-500', pill: 'bg-red-50 text-red-800 ring-red-200' },
   ocean:                            { dot: 'bg-sky-500', pill: 'bg-sky-50 text-sky-800 ring-sky-200' },
   petroleum:                        { dot: 'bg-yellow-500', pill: 'bg-yellow-50 text-yellow-800 ring-yellow-200' },
+  robotics:                         { dot: 'bg-indigo-500', pill: 'bg-indigo-50 text-indigo-800 ring-indigo-200' },
   biology:                          { dot: 'bg-green-500', pill: 'bg-green-50 text-green-800 ring-green-200' },
   chemistry:                        { dot: 'bg-cyan-500', pill: 'bg-cyan-50 text-cyan-800 ring-cyan-200' },
   mathematics:                      { dot: 'bg-purple-500', pill: 'bg-purple-50 text-purple-800 ring-purple-200' },

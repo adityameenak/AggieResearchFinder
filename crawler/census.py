@@ -41,7 +41,7 @@ UI_JSON = HERE.parent / "ui" / "public" / "faculty.json"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 ResearchFinderBot/1.0")
 
-SCHOOLS = ["tamu", "rice", "ut", "utd", "mit", "harvard"]
+SCHOOLS = ["tamu", "rice", "ut", "utd", "mit", "harvard", "umich", "ucla"]
 
 # Departments a school genuinely does not have, so the gap count means
 # "we failed to crawl this" rather than "this university doesn't teach it".
@@ -85,6 +85,29 @@ NOT_OFFERED = {
     "harvard": {"chemical", "industrial", "mechanical",
                 "etid", "ocean", "oceanography", "petroleum", "aerospace",
                 "nuclear", "veterinary", "speech-hearing", "kinesiology"},
+    # Michigan has no petroleum, engineering-technology or applied-physics
+    # department (Applied Physics is an interdepartmental PhD program), no
+    # veterinary or speech/hearing school, and no oceanography department.
+    # Neuroscience is an institute (MNI) whose faculty hold home appointments
+    # in physiology, psychology, MCDB etc.
+    "umich":   {"etid", "petroleum", "applied-physics", "oceanography",
+                "veterinary", "speech-hearing", "neuroscience"},
+    # UCLA Samueli has no aerospace, industrial or nuclear department
+    # (aerospace is half of Mechanical & Aerospace, mapped to mechanical), and
+    # UCLA has no veterinary, petroleum, ocean-engineering or kinesiology unit.
+    "ucla":    {"aerospace", "industrial", "nuclear", "etid", "ocean", "petroleum",
+                "applied-physics", "oceanography", "veterinary", "kinesiology",
+                "robotics"},
+}
+
+# Departments a school DOES have but that were deliberately left out of the
+# crawl — distinct from NOT_OFFERED, so the audit never claims a school lacks
+# something it has. Michigan and UCLA were scoped (2026-10) to engineering,
+# natural sciences, psychology, public health and the medical schools'
+# basic-science departments; their clinical schools are out.
+OUT_OF_SCOPE = {
+    "umich":   {"nursing", "pharmacy", "dentistry", "kinesiology", "nutrition"},
+    "ucla":    {"nursing", "dentistry", "speech-hearing", "nutrition", "pharmacy"},
 }
 
 # ── Card-quality checks — the "gold standard" definition ─────────────────
@@ -156,6 +179,8 @@ def audit(path):
                 cells.append(f"{dept_of[s][d]:>8}")
             elif d in NOT_OFFERED.get(s, ()):
                 cells.append(f"{'n/a':>8}")      # school has no such department
+            elif d in OUT_OF_SCOPE.get(s, ()):
+                cells.append(f"{'skip':>8}")     # has it; deliberately not crawled
             else:
                 cells.append(f"{'-':>8}")        # real gap: we should crawl it
                 gaps[s] += 1
@@ -165,6 +190,7 @@ def audit(path):
           "".join(f"{gaps[s]:>8}" for s in schools))
     print("  '-' = we have no records and the school does have the department.")
     print("  'n/a' = the university does not offer it (census.NOT_OFFERED).")
+    print("  'skip' = the university has it but it is out of crawl scope (census.OUT_OF_SCOPE).")
 
     unknown = taxonomy.audit_slugs(d for c in dept_of.values() for d in c)
     if unknown:

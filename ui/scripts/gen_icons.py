@@ -36,6 +36,8 @@ SCHOOLS = {
     'utd':     ('#154734', 'UT Dallas Research Finder', 'UT Dallas',             '542'),
     'mit':     ('#A31F34', 'MIT Research Finder',       'MIT',                   '857'),
     'harvard': ('#A51C30', 'Harvard Research Finder',   'Harvard University',    '147'),
+    'umich':   ('#00274C', 'Michigan Research Finder',  'University of Michigan', '1,606'),
+    'ucla':    ('#2774AE', 'UCLA Research Finder',      'UCLA',                  '1,132'),
 }
 
 FONT_DISPLAY = '/System/Library/Fonts/Supplemental/Georgia Bold.ttf'
@@ -152,9 +154,31 @@ def og_card(path, accent, title, subtitle, count, label):
     return path
 
 
+# Shown on the platform-wide card; keep in step with SCHOOLS above.
+DEFAULT_TOTAL = '7,874'
+SHORT_NAMES = ['Texas A&M', 'Rice', 'UT Austin', 'UT Dallas', 'MIT', 'Harvard', 'Michigan', 'UCLA']
+
+
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--cards', default='',
+                    help='Comma-separated school codes (and/or "default"): render only these OG '
+                         'cards and skip the icon set, so a new school does not rewrite every PNG.')
+    only = {c for c in ap.parse_args().cards.split(',') if c}
     os.makedirs(os.path.join(PUBLIC, 'og'), exist_ok=True)
     out = []
+    if only:
+        if 'default' in only:
+            out.append(default_card())
+        for code in only - {'default'}:
+            hexv, brand, uni, count = SCHOOLS[code]
+            out.append(og_card(os.path.join(PUBLIC, 'og', f'{code}.png'), hexrgb(hexv),
+                               brand, f'Research labs and faculty advisors at {uni}',
+                               count, 'STEM professors and research labs'))
+        for p in out:
+            print(f'  {os.path.relpath(p, PUBLIC):32} {os.path.getsize(p) / 1024:7.1f} KB')
+        return
 
     # ── Favicons (platform indigo) ───────────────────────────
     ico = [draw_mark(s, INDIGO, CREAM, nodes=(s >= 48)) for s in (16, 32, 48)]
@@ -185,10 +209,7 @@ def main():
     out.append(p)
 
     # ── Social cards ─────────────────────────────────────────
-    out.append(og_card(os.path.join(PUBLIC, 'og', 'default.png'), INDIGO,
-                       'Find research labs and faculty advisors',
-                       'Texas A&M · Rice · UT Austin · UT Dallas · MIT · Harvard',
-                       '4,838', 'STEM professors across 6 universities'))
+    out.append(default_card())
 
     for code, (hexv, brand, uni, count) in SCHOOLS.items():
         out.append(og_card(os.path.join(PUBLIC, 'og', f'{code}.png'), hexrgb(hexv),
@@ -197,6 +218,13 @@ def main():
 
     for p in out:
         print(f'  {os.path.relpath(p, PUBLIC):32} {os.path.getsize(p) / 1024:7.1f} KB')
+
+
+def default_card():
+    return og_card(os.path.join(PUBLIC, 'og', 'default.png'), INDIGO,
+                   'Find research labs and faculty advisors',
+                   ' · '.join(SHORT_NAMES),
+                   DEFAULT_TOTAL, f'STEM professors across {len(SHORT_NAMES)} universities')
 
 
 if __name__ == '__main__':

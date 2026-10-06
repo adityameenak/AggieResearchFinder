@@ -29,7 +29,7 @@ sys.path.insert(0, str(CRAWLER))
 import taxonomy  # noqa: E402
 import census    # noqa: E402  (module-level data only; no network at import)
 
-SCHOOLS = ("tamu", "rice", "ut", "utd", "mit", "harvard")
+SCHOOLS = ("tamu", "rice", "ut", "utd", "mit", "harvard", "umich", "ucla")
 
 # The trailing metadata block feedback.js appends to every issue body.
 FIELD = re.compile(r"^\*\*(?P<key>[\w ]+):\*\*\s*`?(?P<val>[^`\n]*)`?\s*$", re.M)
