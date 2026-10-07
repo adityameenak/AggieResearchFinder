@@ -4,7 +4,8 @@ import { useApp } from '../AppContext'
 import { useSchool, useSchoolPath } from '../SchoolContext'
 import { matchFaculty } from '../utils/matcher'
 import { splitResearch } from '../utils/search'
-import UploadZone, { fileToBase64 } from '../components/UploadZone'
+import UploadZone from '../components/UploadZone'
+import { extractText } from '../utils/extractText'
 import { DeptBadge, Avatar } from '../components/ProfBits'
 
 // Keep in step with LEVELS / LANGUAGES in api/paper.js — the server ignores
@@ -126,16 +127,24 @@ export default function PaperPage() {
     setError(null)
     setLoading(true)
     try {
-      const body = mode === 'upload'
-        ? { filename: file.name, data: await fileToBase64(file), level, language }
-        : { text: pasted, level, language }
+      // Uploaded files are read here and only their text is sent — see
+      // utils/extractText.js for why (Vercel's 4.5 MB request-body cap).
+      // The cap below keeps even a book-length file well under that; the
+      // server keeps the first 120k characters after dropping references.
+      const text = mode === 'upload' ? await extractText(file) : pasted
+      const body = { text: text.slice(0, 400_000), level, language,
+                     ...(mode === 'upload' ? { filename: file.name } : {}) }
       const res = await fetch('/api/paper', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
       const json = await res.json().catch(() => ({}))
-      if (!res.ok) throw new Error(json.error || `Server error ${res.status}`)
+      if (!res.ok) {
+        throw new Error(json.error || (res.status === 413
+          ? 'That was too large to send. Try pasting the abstract, introduction and results instead.'
+          : `Server error ${res.status}`))
+      }
       setResult(json)
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
@@ -309,7 +318,8 @@ export default function PaperPage() {
               </div>
             </div>
             {mode === 'upload' ? (
-              <UploadZone file={file} onFile={setFile} prompt="Drop a research paper here" what="a research paper" />
+              <UploadZone file={file} onFile={setFile} prompt="Drop a research paper here" what="a research paper"
+                          maxMB={50} exts={['pdf', 'docx']} />
             ) : (
               <textarea value={pasted} onChange={e => setPasted(e.target.value)} rows={9}
                         aria-label="Paper text"

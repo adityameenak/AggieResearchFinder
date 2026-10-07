@@ -11,10 +11,16 @@ export function fileToBase64(file) {
 }
 
 /* ── Upload zone ───────────────────────────────────────────── */
-const MAX_BYTES = 10 * 1024 * 1024
-const ACCEPTED  = /\.(pdf|docx?)$/i
+// Each caller sets a limit it can honour. A file sent to a Vercel function
+// travels base64-encoded inside a body capped at 4.5 MB, so uploads must stay
+// under ~3 MB; a file read in the browser (the paper explainer) can be far
+// larger, since only its text is sent.
 
-export default function UploadZone({ file, onFile, prompt = 'Drop your resume here', what = 'your resume' }) {
+export default function UploadZone({ file, onFile, prompt = 'Drop your resume here', what = 'your resume',
+                                     maxMB = 3, exts = ['pdf', 'docx', 'doc'] }) {
+  const accepted = new RegExp(`\\.(${exts.join('|')})$`, 'i')
+  const kinds = exts.includes('pdf') ? 'PDF or Word' : 'Word'
+  const hint = `${exts.filter(e => e !== 'doc').map(e => e.toUpperCase()).join(' or ')} · max ${maxMB} MB`
   const inputRef = useRef(null)
   const [dragging, setDragging] = useState(false)
   const [rejected, setRejected] = useState('')
@@ -23,8 +29,8 @@ export default function UploadZone({ file, onFile, prompt = 'Drop your resume he
   // bypasses the input's `accept`, and a 40 MB scan went straight to the parser.
   function take(f) {
     if (!f) return
-    if (!ACCEPTED.test(f.name)) { setRejected(`${f.name} isn’t a PDF or Word file.`); return }
-    if (f.size > MAX_BYTES) { setRejected(`${f.name} is over 10 MB.`); return }
+    if (!accepted.test(f.name)) { setRejected(`${f.name} isn’t a ${kinds} file.`); return }
+    if (f.size > maxMB * 1024 * 1024) { setRejected(`${f.name} is over ${maxMB} MB.`); return }
     setRejected('')
     onFile(f)
   }
@@ -49,7 +55,7 @@ export default function UploadZone({ file, onFile, prompt = 'Drop your resume he
       // A clickable div is invisible to the keyboard without these.
       role={file ? undefined : 'button'}
       tabIndex={file ? undefined : 0}
-      aria-label={file ? undefined : `Upload ${what} (PDF or DOCX, up to 10 MB)`}
+      aria-label={file ? undefined : `Upload ${what} (${hint})`}
       onKeyDown={e => { if (!file && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); browse() } }}
       className={`relative rounded-2xl border-2 border-dashed transition-all duration-200
                   flex flex-col items-center justify-center text-center py-12 px-8
@@ -64,7 +70,7 @@ export default function UploadZone({ file, onFile, prompt = 'Drop your resume he
       <input
         ref={inputRef}
         type="file"
-        accept=".pdf,.docx,.doc"
+        accept={exts.map(e => `.${e}`).join(',')}
         className="sr-only"
         onChange={e => { take(e.target.files?.[0]); e.target.value = '' }}
       />
@@ -99,7 +105,7 @@ export default function UploadZone({ file, onFile, prompt = 'Drop your resume he
           </div>
           <p className="font-semibold text-stone-800 text-sm mb-1">{prompt}</p>
           <p className="text-xs text-stone-500 mb-2">or click to browse</p>
-          <p className="text-[11px] text-stone-400">PDF or DOCX · max 10 MB</p>
+          <p className="text-[11px] text-stone-400">{hint}</p>
         </>
       )}
     </div>
