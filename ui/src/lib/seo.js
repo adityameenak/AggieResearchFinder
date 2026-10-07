@@ -21,7 +21,7 @@ export const OG_LOCALE  = 'en_US'
 export const THEME_DEFAULT = '#4f46e5'
 
 /** Total across every school — kept in sync by scripts/prerender.js (warns on drift). */
-export const TOTAL_FACULTY = 7874
+export const TOTAL_FACULTY = 7864
 
 const n = (x) => x.toLocaleString('en-US')
 
@@ -55,7 +55,7 @@ export const SCHOOL_SEO = {
     brand: 'Rice Research Finder',
     aka: ['Rice Research Finder', 'Owl Research Finder', 'Rice University Research Finder',
           'Owl STEM Research Finder'],
-    count: 617,
+    count: 608,
     nick: 'Owl',
     unit: 'Rice',
     keywords: [
@@ -112,7 +112,7 @@ export const SCHOOL_SEO = {
     theme: '#A51C30',
     brand: 'Harvard Research Finder',
     aka: ['Harvard Research Finder', 'Harvard Lab Finder', 'Harvard STEM Research Finder'],
-    count: 413,
+    count: 412,
     nick: 'Harvard',
     unit: 'Harvard',
     keywords: [

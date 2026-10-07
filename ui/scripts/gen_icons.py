@@ -155,7 +155,7 @@ def og_card(path, accent, title, subtitle, count, label):
 
 
 # Shown on the platform-wide card; keep in step with SCHOOLS above.
-DEFAULT_TOTAL = '7,874'
+DEFAULT_TOTAL = '7,864'
 SHORT_NAMES = ['Texas A&M', 'Rice', 'UT Austin', 'UT Dallas', 'MIT', 'Harvard', 'Michigan', 'UCLA']
 
 

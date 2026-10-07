@@ -10,20 +10,20 @@ unfinished, and the things that will bite you.
 
 Live at **stemresearchfinder.tech** (Vercel, auto-deploys from `main`).
 
-**7,874 faculty across 8 universities** (Michigan and UCLA added 2026-10-06). Percentages count only *valid* values
+**7,864 faculty across 8 universities** (Michigan and UCLA added 2026-10-06). Percentages count only *valid* values
 (see `crawler/quality.py`), so they are lower than before 2026-09-22 in places —
 that drop was a correction, not a regression:
 
 | school | records | photo | email | research | ai_review | interests | blank |
 |---|---|---|---|---|---|---|---|
-| TAMU | 1,674 | 96% | 98% | 82% | 87% | 34% | 17% |
-| UT Austin | 1,134 | 88% | 95% | 89% | 89% | 3% | 11% |
-| MIT | 773 | 78% | 100% | 97% | 97% | 41% | 3% |
-| Rice | 618 | 97% | 95% | 85% | 86% | 1% | 15% |
+| TAMU | 1,619 | 96% | 98% | 82% | 87% | 34% | 17% |
+| Michigan | 1,606 | 97% | 94% | 96% | 96% | 53% | 4% |
+| UCLA | 1,132 | 94% | 91% | 86% | 86% | 10% | 14% |
+| UT Austin | 1,109 | 89% | 95% | 89% | 89% | 3% | 11% |
+| MIT | 772 | 78% | 100% | 97% | 97% | 41% | 3% |
+| Rice | 608 | 97% | 96% | 85% | 86% | 1% | 14% |
 | UT Dallas | 606 | 86% | 98% | 68% | 68% | 2% | 32% |
-| Harvard | 413 | 71% | 83% | 95% | 95% | 27% | 5% |
-| Michigan | 1,606 | 97% | 94% | 96% | 0% | 53% | 4% |
-| UCLA | 1,132 | 93% | 91% | 85% | 0% | 0% | 15% |
+| Harvard | 412 | 71% | 83% | 95% | 95% | 27% | 5% |
 
 `python census.py --audit --quality` for the live figures. `--quality` must read
 0 in every cell; `merge.py` runs `quality.clean()` on every merge.
@@ -55,17 +55,24 @@ dentistry and pharmacy are out — `census.OUT_OF_SCOPE` shows them as `skip`, n
 as gaps. Both schools read 0 gaps and 0 filler in `census.py --audit --quality`.
 
 Unfinished, each with its reason:
-- **No `ai_review` for either school.** The GPU box's Cloudflare Access token
-  is not in this Mac's Keychain (`cf-access-ollama-id`), so `enrich_ollama.py`
-  got a 403. Run it per file once the token is available:
-  `python enrich_ollama.py --file faculty-umich.json` (and `faculty-ucla.json`),
-  then `python merge.py`. Cards fall back to the crawled research text meanwhile.
-- **UCLA interests 0%, ~15% thin research.** `enrich_openalex.py --file
-  faculty-ucla.json --all-interests` fills both, but OpenAlex now allows only
-  ~100 author searches a day without a key; the first run used the day's
-  budget. Set `OPENALEX_API_KEY` (free at openalex.org) and re-run — it resumes
-  where it stopped. The thin ones are EPSS, Physics and some Geffen pages, which
-  publish no research text at all.
+- **AI reviews done 2026-10-06** on the win box's Ollama over the tailnet
+  (`OLLAMA_HOST=http://100.105.122.87:11434`, gemma3:4b — no Cloudflare token
+  needed on that path). Synth's `page.akvaithi.synth.v2` worker had to be
+  paused for the run: it keeps the 36B `qwen3.6` resident and the 8 GB card
+  cannot hold both models, so every gemma request timed out at 120s. The only
+  records without a review are those with under 40 chars of research text, plus
+  Pamina Gorbach (UCLA), whose "summary" is just a heading.
+- **UCLA interests 10%, ~14% thin research.** `enrich_openalex.py --file
+  faculty-ucla.json --all-interests` resumes where it stopped (128 of ~1,270
+  done); the keyless budget is ~70 people a day, so set `OPENALEX_API_KEY`
+  (free at openalex.org) and it finishes in one run. **Review its matches by
+  eye afterwards**: of the first 128, 9 were a namesake whose topics still fit
+  the department (a zeolite chemist for a biosynthesis Yi Tang, an orthodontist
+  for a robotics Yuchen Cui). `plausible()` cannot catch those, and a
+  topic-vs-summary word-overlap check was tried and rejected — it flagged correct
+  matches and passed wrong ones. Wrong matches go in
+  `crawler/openalex_rejects.json` (id -> reason), which the script skips; revert
+  the record's fields from git and clear its `ai_review` if the summary changed.
 - **Michigan crawl needs the browser stage.** `crawl_umich.py` (default `--stage
   all`) drives headless Chromium through Cloudflare; ~1,500 page loads. Run the
   browser stage as several processes with `--units` and combine with
@@ -82,8 +89,13 @@ Unfinished, each with its reason:
   `lowercase-firstname-lastnameN.html`) and were re-pointed, 15 were
   students/staff/category pages merge.py already drops, and the other 85 were
   on no current department listing. `stale_profiles.json` is empty again.
-- **Not dead-checked**: `profiles.rice.edu` answers 406 to plain requests (628
-  pages) and the Akamai departments answer 403 (342). They need a browser.
+- **Rice + Harvard dead-checked 2026-10-06.** Rice: compared against the live
+  JSON:API (all 4,630 profiles, no browser needed): 3 moved (Olmos, Siebach,
+  Morgan — re-pointed), 9 on no listing (Atkinson, Sisco, Dobelman, Kowal,
+  Womack, Wallach, Chi, Gao, Haotian Wang — removed per the 2026-09-24 rule).
+  Harvard: all 307 Akamai-protected profiles fetched from inside a real browser
+  page on each origin (passes Akamai; same-origin `fetch()`); all live except
+  Herman Chernoff (emeritus, 404 — removed).
 
 Closed 2026-09-24:
 - **Harvard HSDM emails are a source limit, not an unrun job.** A CDP session

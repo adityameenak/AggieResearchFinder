@@ -184,7 +184,16 @@ class OpenAlex:
         return out
 
 
+# Records a human found matched to the wrong person (a namesake whose topics
+# still fit the department, so plausible() let it through). id -> reason.
+# Listed ids are never enriched again; revert their fields from git by hand.
+REJECTS_PATH = Path(__file__).parent / "openalex_rejects.json"
+REJECTS = json.loads(REJECTS_PATH.read_text()) if REJECTS_PATH.exists() else {}
+
+
 def needs(rec: dict, all_interests: bool) -> bool:
+    if rec.get("id") in REJECTS:
+        return False
     thin = len((rec.get("research_summary") or "").strip()) < THIN
     return thin or (all_interests and not rec.get("scholar_interests"))
 

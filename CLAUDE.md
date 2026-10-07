@@ -21,7 +21,7 @@ them as endpoints).
 
 There is no top-level package manager. Treat each directory as its own project.
 
-**Live now: 8 schools, 7,874 faculty** — TAMU 1,619 · Michigan 1,606 · UCLA 1,132 · UT Austin 1,109 · MIT 772 · Rice 617 · UT Dallas 606 · Harvard 413, all `available: true`. Counts are post-curation (`merge.py` drops students, postdocs and admin staff); re-read them from `merge.py`'s output after any crawl rather than trusting this line. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
+**Live now: 8 schools, 7,864 faculty** — TAMU 1,619 · Michigan 1,606 · UCLA 1,132 · UT Austin 1,109 · MIT 772 · Rice 608 · UT Dallas 606 · Harvard 412, all `available: true`. Counts are post-curation (`merge.py` drops students, postdocs and admin staff); re-read them from `merge.py`'s output after any crawl rather than trusting this line. The remaining TX R1s have no clean source (see the roadmap memory): UH is fragmented per-dept; UT Arlington Mentis + Texas Tech experts are closed SPAs.
 
 The site is live at **stemresearchfinder.tech** (domain registered elsewhere, DNS pointed at Vercel). Push to `main` → Vercel builds `ui/` and deploys.
 
