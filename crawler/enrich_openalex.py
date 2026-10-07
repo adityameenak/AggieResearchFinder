@@ -190,6 +190,10 @@ class OpenAlex:
 REJECTS_PATH = Path(__file__).parent / "openalex_rejects.json"
 REJECTS = json.loads(REJECTS_PATH.read_text()) if REJECTS_PATH.exists() else {}
 
+# Ids that found no confident match, so a daily-budgeted run doesn't spend its
+# searches on the same misses every day. --retry-misses ignores it.
+MISSES_PATH = Path(__file__).parent / "openalex_misses.json"
+
 
 def needs(rec: dict, all_interests: bool) -> bool:
     if rec.get("id") in REJECTS:
@@ -205,17 +209,22 @@ def main() -> None:
     ap.add_argument("--all-interests", action="store_true",
                     help="also fill scholar_interests for records whose research text is fine")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--retry-misses", action="store_true",
+                    help=f"search again for records listed in {MISSES_PATH.name}")
     args = ap.parse_args()
 
     path = Path(args.file)
     recs = json.loads(path.read_text(encoding="utf-8"))
-    todo = [r for r in recs if needs(r, args.all_interests)]
+    misses = json.loads(MISSES_PATH.read_text()) if MISSES_PATH.exists() else []
+    skip = set() if args.retry_misses else set(misses)
+    todo = [r for r in recs if needs(r, args.all_interests) and r.get("id") not in skip]
     print(f"{len(todo)} of {len(recs)} records need enrichment")
     oa = OpenAlex()
     hit = miss = 0
     def save():
         if not args.dry_run:
             path.write_text(json.dumps(recs, indent=2, ensure_ascii=False), encoding="utf-8")
+            MISSES_PATH.write_text(json.dumps(sorted(set(misses)), indent=0) + "\n")
 
     for i, r in enumerate(todo, 1):
         if args.limit and i > args.limit:
@@ -231,6 +240,7 @@ def main() -> None:
             return 2
         if not author:
             miss += 1
+            misses.append(r["id"])
             print(f"  [{i}/{len(todo)}] - {r['name']}: no confident OpenAlex match")
             continue
         topics = [t["display_name"] for t in (author.get("topics") or [])[:6]]

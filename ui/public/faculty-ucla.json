@@ -790,7 +790,7 @@
     "university": "ucla",
     "name": "Jacob Rosen",
     "title": "Professor",
-    "department": "biomedical",
+    "department": "mechanical",
     "email": "jacobrosen@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/jacob-rosen/",
     "research_summary": "Biorobotics; Human centered robotics, medical robotics (surgery and rehabilitation), wearable robotics (exoskeleton), teleoperation, haptics and virtual reality, biomechanics, neuromuscular control, and human-machine interfaces.",
@@ -807,9 +807,8 @@
       "Teleoperation and Haptic Systems",
       "Motor Control and Adaptation"
     ],
-    "openalex_id": "https://openalex.org/A5085568916",
     "also_departments": [
-      "mechanical"
+      "biomedical"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
@@ -2474,7 +2473,7 @@
     "university": "ucla",
     "name": "Ali Mosleh",
     "title": "Distinguished Professor",
-    "department": "civil",
+    "department": "materials",
     "email": "mosleh@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/ali-mosleh/",
     "research_summary": "Simulation-Based Methods for Reliability and Probabilistic Risk Assessment of Complex Systems Hybrid Systems Risk and Reliability Analysis Methods (Identification of Failure Mechanisms and Reliability prediction of Hybrid Systems of Hardware, Software, and Human) Bayesian Methods for System Health Monitoring and Sensor Placement (Solution Algorithms for Hybrid Dynamic Bayesian Belief Networks) Bayesian Methods for Inference with Uncertain Evidence, Use of Expert Opinion, and Causal Modeling with Bayesian Belief Networks Common Cause Failure Analysis (Reliability Models, Data Classification and Analysis) Risk-based oversight and inspection of Infrastructure Systems (e.g. Civil Aviation Safety, Oil and Gas Pipeline Integrity Management) Methods for the Impact of Organizational Factors on Socio-technical Systems Risk Human Reliability Analysis (Cognitive Modeling, Simulation, Experimental Validation) Methods for Assessing Model Uncertainty and Model Validation (Framework and Application to Complex Computational Codes) Risk-Informed Healthcare System Management System Reliability Growth Tracking and Prediction Methods Software Reliability Assessment Methodology Information Systems Secu",
@@ -2491,10 +2490,9 @@
       "Nuclear Engineering Thermal-Hydraulics",
       "Software Reliability and Analysis Research"
     ],
-    "openalex_id": "https://openalex.org/A5084581830",
     "also_departments": [
+      "civil",
       "electrical",
-      "materials",
       "mechanical"
     ],
     "also_profile_urls": [],
@@ -2629,7 +2627,7 @@
     "university": "ucla",
     "name": "Omid Abari",
     "title": "Associate Professor",
-    "department": "cse",
+    "department": "electrical",
     "email": "omid@cs.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/omid-abari/",
     "research_summary": "Internet-of-Things (IoT) Wireless Networks Mobile Systems Software-Hardware Systems Human-computer interaction (HCI)",
@@ -2646,9 +2644,8 @@
       "Indoor and Outdoor Localization Technologies",
       "Radar Systems and Signal Processing"
     ],
-    "openalex_id": "https://openalex.org/A5065134796",
     "also_departments": [
-      "electrical"
+      "cse"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
@@ -3697,32 +3694,40 @@
     "title_short": "Distinguished Professor"
   },
   {
-    "id": "16105ba77075",
+    "id": "dd650a26e7eb",
     "university": "ucla",
     "name": "Bolei Zhou",
     "title": "Associate Professor",
-    "department": "medicine",
+    "department": "cse",
     "email": "bolei@cs.ucla.edu",
-    "profile_url": "https://compmed.ucla.edu/profile/zhou-bolei",
+    "profile_url": "https://samueli.ucla.edu/people/bolei-zhou/",
     "research_summary": "Profile Bolei Zhou , Ph.D. Associate Professor bolei@cs.ucla.edu Classifications Faculty Biography Bolei Zhou is an Associate Professor in the Computer Science Department and an adjunct faculty at the Computational Medicine Department at the University of California, Los Angeles (UCLA). He earned his Ph.D. from MIT in 2018. His research interest lies at the intersection of computer vision and machine autonomy, focusing on enabling interpretable and trustworthy human-AI interaction. Webpage: https://boleizhou.github.io/ Share to",
-    "lab_website": "https://urldefense.com/v3/__https://boleizhou.github.io/__;!!F9wkZZsI-LA!H44Spg24tgHrUcYDV8OuLo5hXmr4Sl1tkPlda32dkL2VA2CzHEEiB9PMT0kmddjn1OncSKhJdHnLtPifRq9cI5s$",
+    "lab_website": "https://boleizhou.github.io/",
     "google_scholar": "https://scholar.google.com/citations?user=9D4aG8AAAAAJ",
     "ai_review": "Bolei Zhou, a Professor in the Department of Computer Science and Engineering, conducts research at the intersection of computer vision, machine learning, and artificial intelligence, primarily focusing on developing novel deep learning methods for image understanding. His work centers around addressing challenges in visual representation learning, particularly through techniques like contrastive learning and self-supervised learning, often employing large-scale datasets to train robust models. Zhou’s lab investigates methods for improving the efficiency and effectiveness of visual representations, with a notable emphasis on developing techniques that reduce reliance on extensive labeled data. Specifically, his research has explored architectures and training strategies for tasks such as image classification, object detection, and visual representation learning, leveraging convolutional neural networks and transformer-based models. Ultimately, Zhou’s research aims to advance the capabilities of AI systems to better perceive and interpret visual information from the real world.",
-    "photo_url": "https://compmed.ucla.edu/sites/default/files/styles/img_fluid/public/2023-07/Bolei%20Zhou%20%281%29.jpeg?itok=zaktZ7t9",
+    "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Untitled-design-19-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Advanced Neural Network Applications",
+      "Generative Adversarial Networks and Image Synthesis",
+      "Autonomous Vehicle Technology and Safety",
+      "Domain Adaptation and Few-Shot Learning",
+      "Reinforcement Learning in Robotics"
+    ],
+    "openalex_id": "https://openalex.org/A5033444412",
     "also_departments": [
-      "cse"
+      "medicine"
     ],
     "also_profile_urls": [
-      "https://samueli.ucla.edu/people/bolei-zhou/"
+      "https://compmed.ucla.edu/profile/zhou-bolei"
     ],
     "alias_ids": [
-      "dd650a26e7eb"
+      "16105ba77075"
     ],
     "rank_type": "research",
-    "title_short": "Associate Professor"
+    "title_short": "Associate Professor",
+    "pub_count": 8
   },
   {
     "id": "f9dc614a0617",
@@ -3763,7 +3768,13 @@
     "photo_url": "https://ph.ucla.edu/sites/default/files/styles/large/public/2026-01/guang.png?itok=OWbTvM1S",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Statistical Methods and Inference",
+      "Advanced Statistical Methods and Models",
+      "Stochastic Gradient Optimization Techniques",
+      "Privacy-Preserving Technologies in Data",
+      "Probability and Statistical Research"
+    ],
     "also_departments": [
       "cse",
       "statistics"
@@ -3777,7 +3788,8 @@
       "334c21791d87"
     ],
     "rank_type": "research",
-    "title_short": "Professor & Graduate Vice Chair"
+    "title_short": "Professor & Graduate Vice Chair",
+    "pub_count": 8
   },
   {
     "id": "d772d1c3fc8d",
@@ -3824,14 +3836,22 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Achuta-Kadambi-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Advanced Vision and Imaging",
+      "Computer Graphics and Visualization Techniques",
+      "Advanced Optical Sensing Technologies",
+      "3D Shape Modeling and Analysis",
+      "Generative Adversarial Networks and Image Synthesis"
+    ],
+    "openalex_id": "https://openalex.org/A5039720020",
     "also_departments": [
       "cse"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Associate Professor"
+    "title_short": "Associate Professor",
+    "pub_count": 8
   },
   {
     "id": "3720221798d7",
@@ -3877,9 +3897,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Screenshot-2026-03-05-at-3.10.55-PM.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Multimodal Machine Learning Applications",
+      "Image Retrieval and Classification Techniques",
+      "Natural Language Processing Techniques",
+      "Topic Modeling",
+      "Categorization, perception, and language"
+    ],
+    "openalex_id": "https://openalex.org/A5073949341",
     "rank_type": "research",
-    "title_short": "Assistant Professor"
+    "title_short": "Assistant Professor",
+    "pub_count": 8
   },
   {
     "id": "35d4c0674607",
@@ -3927,38 +3955,54 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/srivastava111.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Energy Efficient Wireless Sensor Networks",
+      "Security in Wireless Sensor Networks",
+      "Wireless Sensor Networks for Data Analysis",
+      "Context-Aware Activity Recognition Systems",
+      "Mobile Ad Hoc Networks"
+    ],
+    "openalex_id": "https://openalex.org/A5074563122",
     "also_departments": [
       "cse"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 7
   },
   {
     "id": "763a7a3e7112",
     "university": "ucla",
     "name": "Yuan Tian",
     "title": "Associate Professor",
-    "department": "electrical",
+    "department": "cse",
     "email": "yuant@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/yuan-tian/",
-    "research_summary": "Security and Privacy Machine Learning Human-Computer Interactions",
+    "research_summary": "Security and Privacy Machine Learning Human-Computer Interactions. Recent publications: Location-Enhanced Information Flow for Home Automations; Body mass index and risk of post-induction hypotension in older adults undergoing non-cardiac surgery: a retrospective cohort study; AIBench: Towards trustworthy evaluation under the 45°law; Tight Privacy Audit in One Run; From Alerts to Intelligence: A Novel LLM-Aided Framework for Host-based Intrusion Detection.",
     "lab_website": "",
     "google_scholar": "",
     "ai_review": "Professor Yuan Tian’s research within the Electrical Engineering department centers on the intersection of security, privacy, and machine learning, specifically examining how these fields interact with human-computer interactions. His work investigates the design and evaluation of machine learning models that prioritize user privacy while simultaneously addressing security vulnerabilities, particularly within interactive systems.  Professor Tian’s lab employs a mixed-methods approach, combining quantitative analysis of machine learning algorithms with qualitative research exploring user behavior and perceptions of security and privacy in human-computer interaction scenarios.  Current projects appear to focus on developing novel techniques for differential privacy in recommender systems and assessing the impact of explainable AI on user trust and security awareness.  Ultimately, his research aims to create more robust and trustworthy interactive technologies that protect user data and mitigate potential security risks.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Yuan-Tian-f.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Security and Verification in Computing",
+      "Privacy, Security, and Data Protection",
+      "User Authentication and Security Systems",
+      "Privacy-Preserving Technologies in Data",
+      "Web Application Security Vulnerabilities"
+    ],
+    "openalex_id": "https://openalex.org/A5100716458",
     "also_departments": [
-      "cse"
+      "electrical"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Associate Professor"
+    "title_short": "Associate Professor",
+    "pub_count": 8
   },
   {
     "id": "79b39a813f74",
@@ -3975,14 +4019,21 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/lin-yang-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Reinforcement Learning in Robotics",
+      "Advanced Bandit Algorithms Research",
+      "Machine Learning and Algorithms",
+      "Complexity and Algorithms in Graphs",
+      "Stochastic Gradient Optimization Techniques"
+    ],
     "also_departments": [
       "cse"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Associate Professor"
+    "title_short": "Associate Professor",
+    "pub_count": 8
   },
   {
     "id": "086a2a225656",
@@ -3999,7 +4050,13 @@
     "photo_url": "https://compmed.ucla.edu/sites/default/files/styles/img_fluid/public/2024-12/Yuzhe_Yang.jpg?itok=dUStuxbJ",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Domain Adaptation and Few-Shot Learning",
+      "Advanced Neural Network Applications",
+      "Machine Learning and Data Classification",
+      "Non-Invasive Vital Sign Monitoring",
+      "UAV Applications and Optimization"
+    ],
     "also_departments": [
       "cse"
     ],
@@ -4010,7 +4067,8 @@
       "417fa29eb872"
     ],
     "rank_type": "research",
-    "title_short": "Assistant Professor"
+    "title_short": "Assistant Professor",
+    "pub_count": 8
   },
   {
     "id": "db83ee08d432",
@@ -4027,9 +4085,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Benjamin_Williams.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Spectroscopy and Laser Applications",
+      "Terahertz technology and applications",
+      "Semiconductor Lasers and Optical Devices",
+      "Laser Design and Applications",
+      "Metamaterials and Metasurfaces Applications"
+    ],
+    "openalex_id": "https://openalex.org/A5017136249",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "2bf89c78d7c1",
@@ -4046,9 +4112,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Danijela_Cabric.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Cognitive Radio Networks and Spectrum Sensing",
+      "Radar Systems and Signal Processing",
+      "Wireless Signal Modulation Classification",
+      "Millimeter-Wave Propagation and Modeling",
+      "Advanced Wireless Communication Techniques"
+    ],
+    "openalex_id": "https://openalex.org/A5008128583",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "4ff5e8870086",
@@ -4058,16 +4132,24 @@
     "department": "electrical",
     "email": "spamarti@ee.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/sudhakar-pamarti/",
-    "research_summary": "Analog, mixed signal and RF IC design, signal processing",
+    "research_summary": "Analog, mixed signal and RF IC design, signal processing. Recent publications: MXFormer: A Microscaling Floating-Point Charge-Trap Transistor Compute-in-Memory Transformer Accelerator; On-Chip Charge-Trap-Transistor-Based Mismatch Calibration of an 8-Bit Thermometer Current-Source DAC; PERCEL: A Rewritable NVM CIM Incorporating a CTT-Based Per-Cell DAC; A 180-nm Voltage-Controlled Magneto-Electric RAM With Sub-1-ns Switching Time; A 65-nm Digital Stochastic Compute-in-Memory CNN Processor With 8-bit Precision.",
     "lab_website": "http://www.ee.ucla.edu/~spgroup",
     "google_scholar": "",
     "ai_review": "Professor Sudhakar Pamarti’s research within the Electrical Engineering Department centers on the design and development of analog, mixed-signal, and RF integrated circuits, with a particular emphasis on advanced signal processing techniques. His work involves the creation of innovative IC solutions often targeting applications in areas like wireless communication and high-speed data transmission. Utilizing sophisticated simulation and modeling tools, such as Cadence and MATLAB, Dr. Pamarti’s lab investigates circuit architectures and novel designs to optimize performance characteristics like bandwidth and power efficiency. Current research appears to be focused on exploring advanced techniques within these domains, though specific project details are not readily available from the provided information. Ultimately, his research contributes to the advancement of efficient and reliable integrated circuits for demanding electronic systems.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/pamarti_sudhakar_thumbnail.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Analog and Mixed-Signal Circuit Design",
+      "Radio Frequency Integrated Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Low-power high-performance VLSI design",
+      "Advanced Power Amplifier Design"
+    ],
+    "openalex_id": "https://openalex.org/A5025807083",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "b49f3fda8193",
@@ -4084,9 +4166,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/sergio_carbajo-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Laser-Matter Interactions and Applications",
+      "Particle Accelerators and Free-Electron Lasers",
+      "Advanced X-ray Imaging Techniques",
+      "Enzyme Structure and Function",
+      "Particle accelerators and beam dynamics"
+    ],
+    "openalex_id": "https://openalex.org/A5001587799",
     "rank_type": "research",
-    "title_short": "Associate Professor / Inclusive Excellence Officer"
+    "title_short": "Associate Professor / Inclusive Excellence Officer",
+    "pub_count": 8
   },
   {
     "id": "a6297edf4d3b",
@@ -4096,16 +4186,24 @@
     "department": "electrical",
     "email": "abidi@ee.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/asad-a-abidi/",
-    "research_summary": "Analog and RF integrated circuit design; design-oriented theory of circuits",
+    "research_summary": "Analog and RF integrated circuit design; design-oriented theory of circuits. Recent publications: How to Design a Differential LC Oscillator; How to Design a Differential LC Oscillator; How to Design a Differential LC Oscillator; The T-Coil Circuit Demystified; How to Design a Differential CMOS LC Oscillator.",
     "lab_website": "",
     "google_scholar": "",
     "ai_review": "Asad A. Abidi’s research within the Electrical Engineering department centers on the design and theoretical understanding of analog and RF integrated circuits. His work predominantly focuses on developing design-oriented theories to improve the performance and predictability of circuit behavior, particularly at high frequencies. Professor Abidi’s investigations often involve the creation of novel circuit topologies and the analysis of complex electromagnetic interactions within integrated circuits. Utilizing simulation tools and potentially experimental validation, his lab explores techniques for optimizing signal integrity and minimizing distortion in advanced RF designs. Ultimately, his research aims to bridge the gap between theoretical understanding and practical implementation in the field of integrated circuit design.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Asad_Abidi.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Analog and Mixed-Signal Circuit Design",
+      "Radio Frequency Integrated Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Advanced Power Amplifier Design",
+      "Low-power high-performance VLSI design"
+    ],
+    "openalex_id": "https://openalex.org/A5028638391",
     "rank_type": "research",
-    "title_short": "Distinguished Chancellor’s Professor"
+    "title_short": "Distinguished Chancellor’s Professor",
+    "pub_count": 8
   },
   {
     "id": "1e8a88c15580",
@@ -4122,9 +4220,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Alwan_Abeer.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Speech and Audio Processing",
+      "Speech Recognition and Synthesis",
+      "Phonetics and Phonology Research",
+      "Voice and Speech Disorders",
+      "Music and Audio Processing"
+    ],
+    "openalex_id": "https://openalex.org/A5112421995",
     "rank_type": "research",
-    "title_short": "Distinguished Professor"
+    "title_short": "Distinguished Professor",
+    "pub_count": 8
   },
   {
     "id": "dbdd1091bba0",
@@ -4141,9 +4247,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Aydin_Babakhani.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Terahertz technology and applications",
+      "Advancements in PLL and VCO Technologies",
+      "Wireless Body Area Networks",
+      "Analog and Mixed-Signal Circuit Design"
+    ],
+    "openalex_id": "https://openalex.org/A5023297510",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "cae95be20f87",
@@ -4160,14 +4274,22 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Rob_Candler.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Advanced MEMS and NEMS Technologies",
+      "Acoustic Wave Resonator Technologies",
+      "Mechanical and Optical Resonators",
+      "Multiferroics and related materials",
+      "Magnetic properties of thin films"
+    ],
+    "openalex_id": "https://openalex.org/A5087560422",
     "also_departments": [
       "mechanical"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "9ee8fbcaf72a",
@@ -4184,9 +4306,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/frank-chang-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Advancements in Semiconductor Devices and Circuit Design",
+      "Semiconductor materials and devices"
+    ],
+    "openalex_id": "https://openalex.org/A5051454330",
     "rank_type": "research",
-    "title_short": "Distinguished Professor"
+    "title_short": "Distinguished Professor",
+    "pub_count": 8
   },
   {
     "id": "4a41dbc84edc",
@@ -4222,9 +4352,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Xiaofan-Lanscape-300x200-1.jpeg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Advanced DC-DC Converters",
+      "Advanced Battery Technologies Research",
+      "Power Systems and Renewable Energy",
+      "Advancements in Battery Materials",
+      "Multilevel Inverters and Converters"
+    ],
+    "openalex_id": "https://openalex.org/A5028767853",
     "rank_type": "research",
-    "title_short": "Assistant Professor"
+    "title_short": "Assistant Professor",
+    "pub_count": 8
   },
   {
     "id": "5f35aa2dfa08",
@@ -4234,16 +4372,24 @@
     "department": "electrical",
     "email": "hooman@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/hooman-darabi/",
-    "research_summary": "RF, analog, mixed-mode and digital electronics",
+    "research_summary": "RF, analog, mixed-mode and digital electronics. Recent publications: Design Considerations of High- Frequency-Reference Fractional- N PLL: Architecture and Nonidealities; A Calibration-Free Fractional- N Analog PLL With Negligible DSM Quantization Noise; Second-Order Transimpedance Amplifiers in Mixer-First Receivers: Design for Optimum Blocker Tolerance; A Harmonic-Mixing PLL Architecture for Millimeter-Wave Application; Design and Analysis of an Electrical Balance Duplexer With Independent and Concurrent Dual-Band TX-RX Isolation.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=LGSleTsAAAAJ&hl=en",
     "ai_review": "Hooman Darabi’s research within the Electrical Engineering department centers on the design and development of advanced electronic systems, primarily focusing on Radio Frequency (RF), analog, mixed-mode, and digital electronics. His work leverages a combination of circuit design techniques and digital signal processing to investigate solutions in areas such as wireless communication and sensing. Specifically, Professor Darabi’s lab explores novel architectures for efficient and robust RF transceivers, alongside developing mixed-signal systems for applications requiring both analog and digital processing capabilities. Utilizing simulation tools and potentially hardware prototyping, his research aims to push the boundaries of performance and functionality in modern electronic devices. Ultimately, his lab contributes to advancements in areas where precise control and signal manipulation are critical.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Hooman-Darabi-new-300-200.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Advanced Power Amplifier Design",
+      "Advancements in PLL and VCO Technologies",
+      "Microwave Engineering and Waveguides"
+    ],
+    "openalex_id": "https://openalex.org/A5059338634",
     "rank_type": "research",
-    "title_short": "Teaching Professor"
+    "title_short": "Teaching Professor",
+    "pub_count": 8
   },
   {
     "id": "c4556b219cb0",
@@ -4260,9 +4406,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Suhas_Diggavi.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Cooperative Communication and Network Coding",
+      "Error Correcting Code Techniques",
+      "Advanced Wireless Communication Techniques",
+      "Wireless Communication Security Techniques",
+      "Advanced Data Compression Techniques"
+    ],
+    "openalex_id": "https://openalex.org/A5083980887",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "7b8d26ec179f",
@@ -4279,7 +4433,14 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/lara-dolecek.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Coding theory and cryptography",
+      "Error Correcting Code Techniques",
+      "Advanced Data Storage Technologies",
+      "Quantum Computing Algorithms and Architecture",
+      "Algorithms and Data Compression"
+    ],
+    "openalex_id": "https://openalex.org/A5075795132",
     "also_departments": [
       "mathematics"
     ],
@@ -4290,7 +4451,8 @@
       "a4bfc7d99a04"
     ],
     "rank_type": "research",
-    "title_short": "Professor, Electrical Engineering/Math"
+    "title_short": "Professor, Electrical Engineering/Math",
+    "pub_count": 8
   },
   {
     "id": "702125bfa646",
@@ -4307,9 +4469,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Sam-Emaminejad-profile.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Advanced Sensor and Energy Harvesting Materials",
+      "Microfluidic and Capillary Electrophoresis Applications",
+      "Electrochemical sensors and biosensors",
+      "Microfluidic and Bio-sensing Technologies",
+      "Advanced biosensing and bioanalysis techniques"
+    ],
+    "openalex_id": "https://openalex.org/A5041834364",
     "rank_type": "research",
-    "title_short": "Associate Professor"
+    "title_short": "Associate Professor",
+    "pub_count": 8
   },
   {
     "id": "c5ea078e06fe",
@@ -4326,9 +4496,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/christina-fragouli-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Cooperative Communication and Network Coding",
+      "Error Correcting Code Techniques",
+      "Wireless Communication Security Techniques",
+      "Complexity and Algorithms in Graphs",
+      "Coding theory and cryptography"
+    ],
+    "openalex_id": "https://openalex.org/A5056591688",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "de223c13e1c6",
@@ -4345,16 +4523,24 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Puneet_Gupta.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Low-power high-performance VLSI design",
+      "VLSI and FPGA Design Techniques",
+      "Advancements in Photolithography Techniques",
+      "Parallel Computing and Optimization Techniques",
+      "Advanced Memory and Neural Computing"
+    ],
+    "openalex_id": "https://openalex.org/A5084229134",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "bcb381098e2f",
     "university": "ucla",
     "name": "Subramanian Iyer",
     "title": "Distinguished Professor",
-    "department": "materials",
+    "department": "electrical",
     "email": "s.s.iyer@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/subramanian-iyer/",
     "research_summary": "System Scaling Technology, advanced packaging and 3D integration, technologies and techniques for the memory subsystem integration and neuromorphic computing",
@@ -4364,14 +4550,22 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/iyer_subramanian_s_thumbnail.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "3D IC and TSV technologies",
+      "Semiconductor materials and devices",
+      "Semiconductor materials and interfaces",
+      "Advancements in Semiconductor Devices and Circuit Design",
+      "Interconnection Networks and Systems"
+    ],
+    "openalex_id": "https://openalex.org/A5091022757",
     "also_departments": [
-      "electrical"
+      "materials"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Distinguished Professor"
+    "title_short": "Distinguished Professor",
+    "pub_count": 8
   },
   {
     "id": "5fde9dbc17c2",
@@ -4388,9 +4582,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Liz-Izhikevich-scaled.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Network Traffic and Congestion Control",
+      "Network Security and Intrusion Detection",
+      "Internet Traffic Analysis and Secure E-voting",
+      "Satellite Communication Systems",
+      "Web Application Security Vulnerabilities"
+    ],
+    "openalex_id": "https://openalex.org/A5045773507",
     "rank_type": "research",
-    "title_short": "Assistant Professor / Area Director for Signals and Systems"
+    "title_short": "Assistant Professor / Area Director for Signals and Systems",
+    "pub_count": 8
   },
   {
     "id": "861827487848",
@@ -4407,9 +4609,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/mona-jarrahi-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Terahertz technology and applications",
+      "Superconducting and THz Device Technology",
+      "Metamaterials and Metasurfaces Applications",
+      "Plasmonic and Surface Plasmon Research",
+      "Neural Networks and Reservoir Computing"
+    ],
+    "openalex_id": "https://openalex.org/A5003547576",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "179cb9e7707e",
@@ -4426,9 +4636,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Joshi_Chandrashekhar.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Laser-Plasma Interactions and Diagnostics",
+      "Particle accelerators and beam dynamics",
+      "Particle Accelerators and Free-Electron Lasers",
+      "Laser-Matter Interactions and Applications",
+      "Dust and Plasma Wave Phenomena"
+    ],
+    "openalex_id": "https://openalex.org/A5016664197",
     "rank_type": "research",
-    "title_short": "Distinguished Professor"
+    "title_short": "Distinguished Professor",
+    "pub_count": 8
   },
   {
     "id": "ad0d511967d0",
@@ -4464,9 +4682,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Dejan_Markovic.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Low-power high-performance VLSI design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Embedded Systems Design Techniques",
+      "VLSI and FPGA Design Techniques",
+      "Radio Frequency Integrated Circuit Design"
+    ],
+    "openalex_id": "https://openalex.org/A5003700236",
     "rank_type": "research",
-    "title_short": "Professor / Area Director for Circuits and Embedded Systems"
+    "title_short": "Professor / Area Director for Circuits and Embedded Systems",
+    "pub_count": 8
   },
   {
     "id": "0432dd837d82",
@@ -4483,14 +4709,22 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Ankur_Mehta.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Soft Robotics and Applications",
+      "Target Tracking and Data Fusion in Sensor Networks",
+      "Modular Robots and Swarm Intelligence",
+      "Robotics and Sensor-Based Localization",
+      "Advanced Materials and Mechanics"
+    ],
+    "openalex_id": "https://openalex.org/A5112712086",
     "also_departments": [
       "mechanical"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
     "rank_type": "research",
-    "title_short": "Associate Professor"
+    "title_short": "Associate Professor",
+    "pub_count": 8
   },
   {
     "id": "d30234b55f69",
@@ -4500,16 +4734,24 @@
     "department": "electrical",
     "email": "mori@physics.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/warren-mori/",
-    "research_summary": "Plasma physics, high energy density plasma science, high performance computing",
+    "research_summary": "Plasma physics, high energy density plasma science, high performance computing. Recent publications: An explicit algorithm in the quasi-static approximate PIC program QPAD; On the relationship between the gain of Stimulated Raman Backscatter of a short-pulse laser in a plasma and the Pierce parameter for XFELs; GPU-MPI parallelisation for QuickPIC, a three-dimensional quasi-static particle-in-cell algorithm; Multi-GeV Electron Combs from a Plasma Wakefield Accelerator; An explicit algorithm for the three-dimensional quasi-static particle-in-cell code: QuickPIC.",
     "lab_website": "",
     "google_scholar": "",
     "ai_review": "Warren Mori’s research within the Electrical Engineering department centers on the dynamic field of plasma physics, specifically focusing on high energy density plasmas and their applications. His work leverages high performance computing to model and simulate complex plasma phenomena, often investigating the behavior of plasmas under extreme conditions. Professor Mori’s lab employs computational techniques – primarily utilizing advanced simulation software – to study instabilities, transport processes, and energy dissipation within these high-density plasmas. This research contributes to a deeper understanding of fundamental plasma processes and their relevance to areas such as fusion energy and advanced materials science. Ultimately, Mori’s investigations aim to refine our predictive capabilities regarding plasma behavior in demanding environments.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/warren-mori-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Laser-Plasma Interactions and Diagnostics",
+      "Particle accelerators and beam dynamics",
+      "Particle Accelerators and Free-Electron Lasers",
+      "Laser-Matter Interactions and Applications",
+      "Pulsed Power Technology Applications"
+    ],
+    "openalex_id": "https://openalex.org/A5013491977",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "a050f8e9f45c",
@@ -4526,9 +4768,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/yahya-rahmat-samii-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Electromagnetic Scattering and Analysis",
+      "Advanced Antenna and Metasurface Technologies",
+      "Antenna Design and Analysis",
+      "Metamaterials and Metasurfaces Applications",
+      "Microwave Engineering and Waveguides"
+    ],
+    "openalex_id": "https://openalex.org/A5029305069",
     "rank_type": "research",
-    "title_short": "Distinguished Professor"
+    "title_short": "Distinguished Professor",
+    "pub_count": 1
   },
   {
     "id": "342bda4756db",
@@ -4545,9 +4795,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/behza-razavi-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Low-power high-performance VLSI design",
+      "Advanced Power Amplifier Design"
+    ],
+    "openalex_id": "https://openalex.org/A5049567991",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "782cfbe04e9d",
@@ -4564,9 +4822,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Ian-Roberts-300-200.jpeg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Millimeter-Wave Propagation and Modeling",
+      "Full-Duplex Wireless Communications",
+      "Advanced Wireless Communication Technologies",
+      "Satellite Communication Systems",
+      "Wireless Communication Security Techniques"
+    ],
+    "openalex_id": "https://openalex.org/A5020213560",
     "rank_type": "research",
-    "title_short": "Assistant Professor"
+    "title_short": "Assistant Professor",
+    "pub_count": 8
   },
   {
     "id": "8cd637851604",
@@ -4583,9 +4849,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/vwani-roychowdhury-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Quantum Information and Cryptography",
+      "Quantum Computing Algorithms and Architecture",
+      "Complex Network Analysis Techniques",
+      "Neural Networks and Applications",
+      "Complexity and Algorithms in Graphs"
+    ],
+    "openalex_id": "https://openalex.org/A5043479061",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "0747c869c512",
@@ -4602,9 +4876,17 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/TPC4903-henry-samueli-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
+    "scholar_interests": [
+      "Analog and Mixed-Signal Circuit Design",
+      "Radio Frequency Integrated Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Digital Filter Design and Implementation",
+      "Advanced Adaptive Filtering Techniques"
+    ],
+    "openalex_id": "https://openalex.org/A5023877407",
     "rank_type": "research",
-    "title_short": "Professor"
+    "title_short": "Professor",
+    "pub_count": 8
   },
   {
     "id": "e46bbeb87b69",

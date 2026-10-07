@@ -67,6 +67,20 @@ export default function NavBar() {
       <div className="absolute inset-x-0 top-0 h-[2.5px] bg-maroon-700 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[54px] flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 min-w-0">
+        {/* Back to the multi-school map. Deliberately absolute: it leaves the
+            school's namespace, so it must not go through useSchoolPath(). */}
+        <Link to="/" title="All schools" aria-label="Back to all schools"
+              className="shrink-0 inline-flex items-center gap-1 rounded-lg px-1.5 py-1
+                         text-stone-500 hover:text-stone-900 hover:bg-cream-200
+                         text-xs font-medium transition-colors">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2"
+               className="w-4 h-4" aria-hidden="true">
+            <path d="M12.5 4.5 7 10l5.5 5.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className="hidden sm:inline">All schools</span>
+        </Link>
+        <span className="h-5 w-px bg-cream-300 shrink-0" aria-hidden="true" />
         {/* Brand */}
         <Link to={tx('/')} className="flex items-baseline gap-0.5 select-none group min-w-0">
           <span className="font-display italic text-maroon-700 text-[20px] font-bold
@@ -78,6 +92,8 @@ export default function NavBar() {
             {school.brandSuffix}
           </span>
         </Link>
+
+        </div>
 
         {/* Links — inline from md up. Six links plus the brand overflowed a
             375px phone, so below md they move into a menu. */}

@@ -18,7 +18,7 @@ that drop was a correction, not a regression:
 |---|---|---|---|---|---|---|---|
 | TAMU | 1,619 | 96% | 98% | 82% | 87% | 34% | 17% |
 | Michigan | 1,606 | 97% | 94% | 96% | 96% | 53% | 4% |
-| UCLA | 1,132 | 94% | 91% | 86% | 86% | 10% | 14% |
+| UCLA | 1,132 | 94% | 91% | 86% | 86% | 14% | 14% |
 | UT Austin | 1,109 | 89% | 95% | 89% | 89% | 3% | 11% |
 | MIT | 772 | 78% | 100% | 97% | 97% | 41% | 3% |
 | Rice | 608 | 97% | 96% | 85% | 86% | 1% | 14% |
@@ -62,11 +62,14 @@ Unfinished, each with its reason:
   cannot hold both models, so every gemma request timed out at 120s. The only
   records without a review are those with under 40 chars of research text, plus
   Pamina Gorbach (UCLA), whose "summary" is just a heading.
-- **UCLA interests 10%, ~14% thin research.** `enrich_openalex.py --file
-  faculty-ucla.json --all-interests` resumes where it stopped (128 of ~1,270
-  done); the keyless budget is ~70 people a day, so set `OPENALEX_API_KEY`
+- **UCLA interests 14%, ~14% thin research.** `enrich_openalex.py --file
+  faculty-ucla.json --all-interests` resumes where it stopped (~170 of ~1,270
+  done by 2026-10-07); people with no confident match are remembered in
+  `crawler/openalex_misses.json` and skipped next time (`--retry-misses` to
+  search them again), so each day's budget goes to new people. The keyless
+  budget is ~45-70 people a day, so set `OPENALEX_API_KEY`
   (free at openalex.org) and it finishes in one run. **Review its matches by
-  eye afterwards**: of the first 128, 9 were a namesake whose topics still fit
+  eye afterwards**: of the first ~170, 11 were a namesake whose topics still fit
   the department (a zeolite chemist for a biosynthesis Yi Tang, an orthodontist
   for a robotics Yuchen Cui). `plausible()` cannot catch those, and a
   topic-vs-summary word-overlap check was tried and rejected — it flagged correct

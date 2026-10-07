@@ -30,14 +30,14 @@ INK    = (28, 25, 23)
 CREAM  = (253, 252, 249)
 
 SCHOOLS = {
-    'tamu':    ('#500000', 'Aggie Research Finder',     'Texas A&M University',  '1,772'),
-    'rice':    ('#00205B', 'Rice Research Finder',      'Rice University',       '607'),
-    'ut':      ('#BF5700', 'UT Austin Research Finder', 'UT Austin',             '913'),
-    'utd':     ('#154734', 'UT Dallas Research Finder', 'UT Dallas',             '542'),
-    'mit':     ('#A31F34', 'MIT Research Finder',       'MIT',                   '857'),
-    'harvard': ('#A51C30', 'Harvard Research Finder',   'Harvard University',    '147'),
-    'umich':   ('#00274C', 'Michigan Research Finder',  'University of Michigan', '1,606'),
-    'ucla':    ('#2774AE', 'UCLA Research Finder',      'UCLA',                  '1,132'),
+    'tamu':    ('#500000', 'Aggie Research Finder',     'Texas A&M University'),
+    'rice':    ('#00205B', 'Rice Research Finder',      'Rice University'),
+    'ut':      ('#BF5700', 'UT Austin Research Finder', 'UT Austin'),
+    'utd':     ('#154734', 'UT Dallas Research Finder', 'UT Dallas'),
+    'mit':     ('#A31F34', 'MIT Research Finder',       'MIT'),
+    'harvard': ('#A51C30', 'Harvard Research Finder',   'Harvard University'),
+    'umich':   ('#00274C', 'Michigan Research Finder',  'University of Michigan'),
+    'ucla':    ('#2774AE', 'UCLA Research Finder',      'UCLA'),
 }
 
 FONT_DISPLAY = '/System/Library/Fonts/Supplemental/Georgia Bold.ttf'
@@ -155,7 +155,18 @@ def og_card(path, accent, title, subtitle, count, label):
 
 
 # Shown on the platform-wide card; keep in step with SCHOOLS above.
-DEFAULT_TOTAL = '7,864'
+def faculty_count(code):
+    """Read the count from merge.py's per-school output, so a re-crawl can't
+    leave the cards stale (they once said 147 for Harvard's 413)."""
+    import json
+    with open(os.path.join(PUBLIC, f'faculty-{code}.json')) as f:
+        return f'{len(json.load(f)):,}'
+
+
+def default_total():
+    import json
+    with open(os.path.join(PUBLIC, 'faculty.json')) as f:
+        return f'{len(json.load(f)):,}'
 SHORT_NAMES = ['Texas A&M', 'Rice', 'UT Austin', 'UT Dallas', 'MIT', 'Harvard', 'Michigan', 'UCLA']
 
 
@@ -172,7 +183,8 @@ def main():
         if 'default' in only:
             out.append(default_card())
         for code in only - {'default'}:
-            hexv, brand, uni, count = SCHOOLS[code]
+            hexv, brand, uni = SCHOOLS[code]
+            count = faculty_count(code)
             out.append(og_card(os.path.join(PUBLIC, 'og', f'{code}.png'), hexrgb(hexv),
                                brand, f'Research labs and faculty advisors at {uni}',
                                count, 'STEM professors and research labs'))
@@ -211,7 +223,8 @@ def main():
     # ── Social cards ─────────────────────────────────────────
     out.append(default_card())
 
-    for code, (hexv, brand, uni, count) in SCHOOLS.items():
+    for code, (hexv, brand, uni) in SCHOOLS.items():
+        count = faculty_count(code)
         out.append(og_card(os.path.join(PUBLIC, 'og', f'{code}.png'), hexrgb(hexv),
                            brand, f'Research labs and faculty advisors at {uni}',
                            count, 'STEM professors and research labs'))
@@ -224,7 +237,7 @@ def default_card():
     return og_card(os.path.join(PUBLIC, 'og', 'default.png'), INDIGO,
                    'Find research labs and faculty advisors',
                    ' · '.join(SHORT_NAMES),
-                   DEFAULT_TOTAL, f'STEM professors across {len(SHORT_NAMES)} universities')
+                   default_total(), f'STEM professors across {len(SHORT_NAMES)} universities')
 
 
 if __name__ == '__main__':

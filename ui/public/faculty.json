@@ -45980,7 +45980,7 @@
     "university": "ucla",
     "name": "Jacob Rosen",
     "title": "Professor",
-    "department": "biomedical",
+    "department": "mechanical",
     "email": "jacobrosen@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/jacob-rosen/",
     "research_summary": "Biorobotics; Human centered robotics, medical robotics (surgery and rehabilitation), wearable robotics (exoskeleton), teleoperation, haptics and virtual reality, biomechanics, neuromuscular control, and human-machine interfaces.",
@@ -46039,9 +46039,8 @@
         "cited_by": 4
       }
     ],
-    "openalex_id": "https://openalex.org/A5085568916",
     "also_departments": [
-      "mechanical"
+      "biomedical"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
@@ -49797,7 +49796,7 @@
     "university": "ucla",
     "name": "Ali Mosleh",
     "title": "Distinguished Professor",
-    "department": "civil",
+    "department": "materials",
     "email": "mosleh@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/ali-mosleh/",
     "research_summary": "Simulation-Based Methods for Reliability and Probabilistic Risk Assessment of Complex Systems Hybrid Systems Risk and Reliability Analysis Methods (Identification of Failure Mechanisms and Reliability prediction of Hybrid Systems of Hardware, Software, and Human) Bayesian Methods for System Health Monitoring and Sensor Placement (Solution Algorithms for Hybrid Dynamic Bayesian Belief Networks) Bayesian Methods for Inference with Uncertain Evidence, Use of Expert Opinion, and Causal Modeling with Bayesian Belief Networks Common Cause Failure Analysis (Reliability Models, Data Classification and Analysis) Risk-based oversight and inspection of Infrastructure Systems (e.g. Civil Aviation Safety, Oil and Gas Pipeline Integrity Management) Methods for the Impact of Organizational Factors on Socio-technical Systems Risk Human Reliability Analysis (Cognitive Modeling, Simulation, Experimental Validation) Methods for Assessing Model Uncertainty and Model Validation (Framework and Application to Complex Computational Codes) Risk-Informed Healthcare System Management System Reliability Growth Tracking and Prediction Methods Software Reliability Assessment Methodology Information Systems Secu",
@@ -49856,10 +49855,9 @@
         "cited_by": 5
       }
     ],
-    "openalex_id": "https://openalex.org/A5084581830",
     "also_departments": [
+      "civil",
       "electrical",
-      "materials",
       "mechanical"
     ],
     "also_profile_urls": [],
@@ -50157,7 +50155,7 @@
     "university": "ucla",
     "name": "Omid Abari",
     "title": "Associate Professor",
-    "department": "cse",
+    "department": "electrical",
     "email": "omid@cs.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/omid-abari/",
     "research_summary": "Internet-of-Things (IoT) Wireless Networks Mobile Systems Software-Hardware Systems Human-computer interaction (HCI)",
@@ -50206,9 +50204,8 @@
         "cited_by": 2
       }
     ],
-    "openalex_id": "https://openalex.org/A5065134796",
     "also_departments": [
-      "electrical"
+      "cse"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
@@ -52396,30 +52393,78 @@
     "title_short": "Distinguished Professor"
   },
   {
-    "id": "16105ba77075",
+    "id": "dd650a26e7eb",
     "university": "ucla",
     "name": "Bolei Zhou",
     "title": "Associate Professor",
-    "department": "medicine",
+    "department": "cse",
     "email": "bolei@cs.ucla.edu",
-    "profile_url": "https://compmed.ucla.edu/profile/zhou-bolei",
+    "profile_url": "https://samueli.ucla.edu/people/bolei-zhou/",
     "research_summary": "Profile Bolei Zhou , Ph.D. Associate Professor bolei@cs.ucla.edu Classifications Faculty Biography Bolei Zhou is an Associate Professor in the Computer Science Department and an adjunct faculty at the Computational Medicine Department at the University of California, Los Angeles (UCLA). He earned his Ph.D. from MIT in 2018. His research interest lies at the intersection of computer vision and machine autonomy, focusing on enabling interpretable and trustworthy human-AI interaction. Webpage: https://boleizhou.github.io/ Share to",
-    "lab_website": "https://urldefense.com/v3/__https://boleizhou.github.io/__;!!F9wkZZsI-LA!H44Spg24tgHrUcYDV8OuLo5hXmr4Sl1tkPlda32dkL2VA2CzHEEiB9PMT0kmddjn1OncSKhJdHnLtPifRq9cI5s$",
+    "lab_website": "https://boleizhou.github.io/",
     "google_scholar": "https://scholar.google.com/citations?user=9D4aG8AAAAAJ",
     "ai_review": "Bolei Zhou, a Professor in the Department of Computer Science and Engineering, conducts research at the intersection of computer vision, machine learning, and artificial intelligence, primarily focusing on developing novel deep learning methods for image understanding. His work centers around addressing challenges in visual representation learning, particularly through techniques like contrastive learning and self-supervised learning, often employing large-scale datasets to train robust models. Zhou’s lab investigates methods for improving the efficiency and effectiveness of visual representations, with a notable emphasis on developing techniques that reduce reliance on extensive labeled data. Specifically, his research has explored architectures and training strategies for tasks such as image classification, object detection, and visual representation learning, leveraging convolutional neural networks and transformer-based models. Ultimately, Zhou’s research aims to advance the capabilities of AI systems to better perceive and interpret visual information from the real world.",
-    "photo_url": "https://compmed.ucla.edu/sites/default/files/styles/img_fluid/public/2023-07/Bolei%20Zhou%20%281%29.jpeg?itok=zaktZ7t9",
+    "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Untitled-design-19-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Advanced Neural Network Applications",
+      "Generative Adversarial Networks and Image Synthesis",
+      "Autonomous Vehicle Technology and Safety",
+      "Domain Adaptation and Few-Shot Learning",
+      "Reinforcement Learning in Robotics"
+    ],
+    "publications": [
+      {
+        "title": "Experiment-free learning of exoskeleton assistance is not an unsolved problem",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "AnimaMimic: Imitating 3D Animation from Video Priors",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Group Diffusion: Enhancing Image Generation by Unlocking Cross-Sample Collaboration",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "UrbanVerse: Scaling Urban Simulation by Watching City-Tour Videos",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "SceneStreamer: Continuous Scenario Generation as Next Token Group Prediction",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Robot-Gated Interactive Imitation Learning with Adaptive Intervention Mechanism",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "BEVCon: Advancing Bird's Eye View Perception With Contrastive Learning",
+        "year": "2025",
+        "cited_by": 4
+      },
+      {
+        "title": "Learning from Active Human Involvement through Proxy Value Propagation",
+        "year": "2025",
+        "cited_by": 1
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5033444412",
     "also_departments": [
-      "cse"
+      "medicine"
     ],
     "also_profile_urls": [
-      "https://samueli.ucla.edu/people/bolei-zhou/"
+      "https://compmed.ucla.edu/profile/zhou-bolei"
     ],
     "alias_ids": [
-      "dd650a26e7eb"
+      "16105ba77075"
     ],
     "rank_type": "research",
     "title_short": "Associate Professor"
@@ -52464,8 +52509,55 @@
     "photo_url": "https://ph.ucla.edu/sites/default/files/styles/large/public/2026-01/guang.png?itok=OWbTvM1S",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Statistical Methods and Inference",
+      "Advanced Statistical Methods and Models",
+      "Stochastic Gradient Optimization Techniques",
+      "Privacy-Preserving Technologies in Data",
+      "Probability and Statistical Research"
+    ],
+    "publications": [
+      {
+        "title": "Trajectory-Derived Confidence for Reliable, Resource-Aware Clinical Text-to-SQL Agents",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "CyberClear: A Benchmark for LLM Agent Systems on APT Attack Chain Provenance",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Let the Target Select for Itself: Data Selection via Target-Aligned Paths",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Synth-MIA: A Testbed for Auditing Privacy Leakage in Tabular Data Synthesis",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Exploring Reasoning-Infused Text Embedding with Large Language Models for Zero-Shot Dense Retrieval",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Privacy Auditing Synthetic Data Release through Local Likelihood Attacks",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "A Probabilistic Perspective on Model Collapse",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Rate-Optimal Rank Aggregation with Private Pairwise Rankings",
+        "year": "2025",
+        "cited_by": 3
+      }
+    ],
     "also_departments": [
       "cse",
       "statistics"
@@ -52527,8 +52619,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Achuta-Kadambi-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Advanced Vision and Imaging",
+      "Computer Graphics and Visualization Techniques",
+      "Advanced Optical Sensing Technologies",
+      "3D Shape Modeling and Analysis",
+      "Generative Adversarial Networks and Image Synthesis"
+    ],
+    "publications": [
+      {
+        "title": "Cloak of Invisibility: Real-Time Privacy-Preserving Volumetric Video Streaming",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Battery smart sensing via a virtual reference electrode",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Clinician Perspectives on Ambient AI Scribes in the Intensive Care Unit: Qualitative Interview Study",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Exploring Ambient Artificial Intelligence to Enhance Learning and Feedback During Operating Room-to-Intensive Care Unit Handoffs: Co-Design and Simulation Study",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "SpatialStack: Layered Geometry-Language Fusion for 3D VLM Spatial Reasoning",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "WorldBench: Benchmarking Physical Understanding of World Models by Isolating Physics Concepts",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "MorphoSim: An Interactive, Controllable, and Editable Language-guided 4D World Simulator",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Modern Approaches for Thoracic Image Registration and Respiratory Motion Management in Oncology",
+        "year": "2025",
+        "cited_by": 2
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5039720020",
     "also_departments": [
       "cse"
     ],
@@ -52582,8 +52722,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Screenshot-2026-03-05-at-3.10.55-PM.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Multimodal Machine Learning Applications",
+      "Image Retrieval and Classification Techniques",
+      "Natural Language Processing Techniques",
+      "Topic Modeling",
+      "Categorization, perception, and language"
+    ],
+    "publications": [
+      {
+        "title": "How Humans and LLMs Read Gender into \"Gender-Neutral\" Physical Descriptions",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "TABQAWORLD: Optimizing Multimodal Reasoning for Multi-Turn Table Question Answering",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "When More Words Say Less: Decoupling Length and Specificity in Image Description Evaluation",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "When More Words Say Less: Decoupling Length and Specificity in Image Description Evaluation",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Meaningless Tokens, Meaningful Gains: How Activation Shifts Enhance LLM Reasoning",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Communicative Innovation",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Updating CLIP to Prefer Descriptions Over Captions",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "CommVQA: Situating Visual Question Answering in Communicative Contexts",
+        "year": "2024",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5073949341",
     "rank_type": "research",
     "title_short": "Assistant Professor"
   },
@@ -52634,8 +52822,51 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/srivastava111.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Energy Efficient Wireless Sensor Networks",
+      "Security in Wireless Sensor Networks",
+      "Wireless Sensor Networks for Data Analysis",
+      "Context-Aware Activity Recognition Systems",
+      "Mobile Ad Hoc Networks"
+    ],
+    "publications": [
+      {
+        "title": "Dynamical Parameters: An Interpretability Framework for Time-Series Foundation Models",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "CoRF: Cross-Scene RF Synthesis by Learning Propagation and Preserving Array Physics",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "FMplex: Model Virtualization for Serving Extensible Foundation Models",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "The Internet of Collaborating Things: Agentic Edge AI for Autonomous Cross-Domain Collaboration",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "TS-Skill: A Benchmark for Evaluating Analytical Skills in Time-Series Question Answering",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "RxGS: Receiver-Generalizable 3D Gaussian Splatting for Radio-Frequency Data Synthesis",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "FM-CAC: Carbon-Aware Control for Battery-Buffered Edge AI via Time-Series Foundation Models",
+        "year": "2026",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5074563122",
     "also_departments": [
       "cse"
     ],
@@ -52649,20 +52880,68 @@
     "university": "ucla",
     "name": "Yuan Tian",
     "title": "Associate Professor",
-    "department": "electrical",
+    "department": "cse",
     "email": "yuant@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/yuan-tian/",
-    "research_summary": "Security and Privacy Machine Learning Human-Computer Interactions",
+    "research_summary": "Security and Privacy Machine Learning Human-Computer Interactions. Recent publications: Location-Enhanced Information Flow for Home Automations; Body mass index and risk of post-induction hypotension in older adults undergoing non-cardiac surgery: a retrospective cohort study; AIBench: Towards trustworthy evaluation under the 45°law; Tight Privacy Audit in One Run; From Alerts to Intelligence: A Novel LLM-Aided Framework for Host-based Intrusion Detection.",
     "lab_website": "",
     "google_scholar": "",
     "ai_review": "Professor Yuan Tian’s research within the Electrical Engineering department centers on the intersection of security, privacy, and machine learning, specifically examining how these fields interact with human-computer interactions. His work investigates the design and evaluation of machine learning models that prioritize user privacy while simultaneously addressing security vulnerabilities, particularly within interactive systems.  Professor Tian’s lab employs a mixed-methods approach, combining quantitative analysis of machine learning algorithms with qualitative research exploring user behavior and perceptions of security and privacy in human-computer interaction scenarios.  Current projects appear to focus on developing novel techniques for differential privacy in recommender systems and assessing the impact of explainable AI on user trust and security awareness.  Ultimately, his research aims to create more robust and trustworthy interactive technologies that protect user data and mitigate potential security risks.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Yuan-Tian-f.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Security and Verification in Computing",
+      "Privacy, Security, and Data Protection",
+      "User Authentication and Security Systems",
+      "Privacy-Preserving Technologies in Data",
+      "Web Application Security Vulnerabilities"
+    ],
+    "publications": [
+      {
+        "title": "Location-Enhanced Information Flow for Home Automations",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Body mass index and risk of post-induction hypotension in older adults undergoing non-cardiac surgery: a retrospective cohort study",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "AIBench: Towards trustworthy evaluation under the 45°law",
+        "year": "2025",
+        "cited_by": 5
+      },
+      {
+        "title": "Tight Privacy Audit in One Run",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "From Alerts to Intelligence: A Novel LLM-Aided Framework for Host-based Intrusion Detection",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "VulBinLLM: LLM-powered Vulnerability Detection for Stripped Binaries",
+        "year": "2025",
+        "cited_by": 1
+      },
+      {
+        "title": "\"Free WiFi is not ultimately free\": Privacy Perceptions of Users in the US regarding City-wide WiFi Services",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "SoK: Towards Effective Automated Vulnerability Repair",
+        "year": "2025",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5100716458",
     "also_departments": [
-      "cse"
+      "electrical"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
@@ -52684,8 +52963,55 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/lin-yang-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Reinforcement Learning in Robotics",
+      "Advanced Bandit Algorithms Research",
+      "Machine Learning and Algorithms",
+      "Complexity and Algorithms in Graphs",
+      "Stochastic Gradient Optimization Techniques"
+    ],
+    "publications": [
+      {
+        "title": "Fundamental Limits of Learning Under Erasure-Constrained Communication Channels",
+        "year": "2026",
+        "cited_by": 1
+      },
+      {
+        "title": "A Saddle Point Remedy: Power of Variable Elimination in Non-convex Optimization",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Offline-to-online reinforcement learning with policy ensemble and policy-extended value",
+        "year": "2025",
+        "cited_by": 1
+      },
+      {
+        "title": "ARMOR: High-Performance Semi-Structured Pruning via Adaptive Matrix Factorization",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Near-Optimal Sample Complexity Bounds for Constrained Average-Reward MDPs",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Research on the influencing factors of generative artificial intelligence usage intent in post-secondary education: an empirical analysis based on the AIDUA extended model",
+        "year": "2025",
+        "cited_by": 22
+      },
+      {
+        "title": "Two episodes of orogenic gold mineralization at Chaihulanzi, NE China, in response to superimposed orogeny associated with subduction of the Paleo-Asian and Paleo-Pacific Ocean plates",
+        "year": "2025",
+        "cited_by": 6
+      },
+      {
+        "title": "The genesis of pegmatite and rare metal mineralization of the Longgu deposit, western Sichuan, China",
+        "year": "2025",
+        "cited_by": 2
+      }
+    ],
     "also_departments": [
       "cse"
     ],
@@ -52709,8 +53035,55 @@
     "photo_url": "https://compmed.ucla.edu/sites/default/files/styles/img_fluid/public/2024-12/Yuzhe_Yang.jpg?itok=dUStuxbJ",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Domain Adaptation and Few-Shot Learning",
+      "Advanced Neural Network Applications",
+      "Machine Learning and Data Classification",
+      "Non-Invasive Vital Sign Monitoring",
+      "UAV Applications and Optimization"
+    ],
+    "publications": [
+      {
+        "title": "PPG-LM: A Photoplethysmography-Language Model with Multi-Level Clinical Alignment",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Locating Hidden Failures Makes Long-Horizon Agents More Reliable",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Insulin resistance prediction from wearables and routine blood biomarkers",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Capable language models can outgrow the benefits of collaboration",
+        "year": "2026",
+        "cited_by": 2
+      },
+      {
+        "title": "Passive heart-rate monitoring during smartphone use in everyday life",
+        "year": "2026",
+        "cited_by": 2
+      },
+      {
+        "title": "GlucoFM: A Dual-Stream Foundation Model for Continuous Glucose Monitoring",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "SleepLM: Natural-Language Intelligence for Human Sleep",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "ELF: A Family of Encoder-Free ECG-Language Models",
+        "year": "2026",
+        "cited_by": 0
+      }
+    ],
     "also_departments": [
       "cse"
     ],
@@ -52738,8 +53111,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Benjamin_Williams.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Spectroscopy and Laser Applications",
+      "Terahertz technology and applications",
+      "Semiconductor Lasers and Optical Devices",
+      "Laser Design and Applications",
+      "Metamaterials and Metasurfaces Applications"
+    ],
+    "publications": [
+      {
+        "title": "Terahertz quantum-cascade vertical-external-cavity surface-emitting laser with high-contrast grating output coupler",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Introduction to photonics and quantum technologies celebrating the 30 th anniversary of the quantum cascade laser",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Tunable Metasurface External-Cavity Quantum Cascade Lasers up to 5.74 THz",
+        "year": "2025",
+        "cited_by": 2
+      },
+      {
+        "title": "Quantum cascade laser: 30 years of discoveries",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Multi-mode THz quantum-cascade VECSELs based on disordered metasurfaces",
+        "year": "2025",
+        "cited_by": 2
+      },
+      {
+        "title": "Harmonic and Subharmonic RF Injection Locking of THz Metasurface Quantum-Cascade VECSEL",
+        "year": "2024",
+        "cited_by": 4
+      },
+      {
+        "title": "Multi-bounce self-mixing in terahertz metasurface external-cavity lasers",
+        "year": "2024",
+        "cited_by": 2
+      },
+      {
+        "title": "Continuous‐wave GaAs/AlGaAs quantum cascade laser at 5.7 THz",
+        "year": "2024",
+        "cited_by": 29
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5017136249",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -52758,8 +53179,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Danijela_Cabric.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Cognitive Radio Networks and Spectrum Sensing",
+      "Radar Systems and Signal Processing",
+      "Wireless Signal Modulation Classification",
+      "Millimeter-Wave Propagation and Modeling",
+      "Advanced Wireless Communication Techniques"
+    ],
+    "publications": [
+      {
+        "title": "Atomic-Norm Beamspace Parameter Estimation for Single-BS MIMO–OFDM Positioning",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Homomorphic Directional Beamforming with Analog True Time Delay Arrays",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "The Radon Transform, True Time Delay Beamforming, and Ultra-Wideband Antenna Arrays (Invited Paper)",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Sparse Bayesian Learning Algorithms Revisited: From Learning Majorizers to Structured Algorithmic Learning using Neural Networks",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Sparse Bayesian Learning Algorithms Revisited: From Learning Majorizers to Structured Algorithmic Learning using Neural Networks",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Dictionary Learning for Phase-Less Beam Alignment Codebook Design in Multipath Channels",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Satellite-Cellular Coexistence in FR3 via Hybrid True-Time-Delay Array-Based Nulling",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Sparse Bayesian Learning Algorithms Revisited: From Learning Majorizers to Structured Algorithmic Learning Using Neural Networks",
+        "year": "2026",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5008128583",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -52771,15 +53240,63 @@
     "department": "electrical",
     "email": "spamarti@ee.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/sudhakar-pamarti/",
-    "research_summary": "Analog, mixed signal and RF IC design, signal processing",
+    "research_summary": "Analog, mixed signal and RF IC design, signal processing. Recent publications: MXFormer: A Microscaling Floating-Point Charge-Trap Transistor Compute-in-Memory Transformer Accelerator; On-Chip Charge-Trap-Transistor-Based Mismatch Calibration of an 8-Bit Thermometer Current-Source DAC; PERCEL: A Rewritable NVM CIM Incorporating a CTT-Based Per-Cell DAC; A 180-nm Voltage-Controlled Magneto-Electric RAM With Sub-1-ns Switching Time; A 65-nm Digital Stochastic Compute-in-Memory CNN Processor With 8-bit Precision.",
     "lab_website": "http://www.ee.ucla.edu/~spgroup",
     "google_scholar": "",
     "ai_review": "Professor Sudhakar Pamarti’s research within the Electrical Engineering Department centers on the design and development of analog, mixed-signal, and RF integrated circuits, with a particular emphasis on advanced signal processing techniques. His work involves the creation of innovative IC solutions often targeting applications in areas like wireless communication and high-speed data transmission. Utilizing sophisticated simulation and modeling tools, such as Cadence and MATLAB, Dr. Pamarti’s lab investigates circuit architectures and novel designs to optimize performance characteristics like bandwidth and power efficiency. Current research appears to be focused on exploring advanced techniques within these domains, though specific project details are not readily available from the provided information. Ultimately, his research contributes to the advancement of efficient and reliable integrated circuits for demanding electronic systems.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/pamarti_sudhakar_thumbnail.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Analog and Mixed-Signal Circuit Design",
+      "Radio Frequency Integrated Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Low-power high-performance VLSI design",
+      "Advanced Power Amplifier Design"
+    ],
+    "publications": [
+      {
+        "title": "MXFormer: A Microscaling Floating-Point Charge-Trap Transistor Compute-in-Memory Transformer Accelerator",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "On-Chip Charge-Trap-Transistor-Based Mismatch Calibration of an 8-Bit Thermometer Current-Source DAC",
+        "year": "2026",
+        "cited_by": 1
+      },
+      {
+        "title": "PERCEL: A Rewritable NVM CIM Incorporating a CTT-Based Per-Cell DAC",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A 180-nm Voltage-Controlled Magneto-Electric RAM With Sub-1-ns Switching Time",
+        "year": "2025",
+        "cited_by": 5
+      },
+      {
+        "title": "A 65-nm Digital Stochastic Compute-in-Memory CNN Processor With 8-bit Precision",
+        "year": "2025",
+        "cited_by": 7
+      },
+      {
+        "title": "Secure artificial intelligence at the edge",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "A Comparative Analysis of Low Temperature and Room Temperature Circuit Operation",
+        "year": "2024",
+        "cited_by": 2
+      },
+      {
+        "title": "SCIMITAR: Stochastic Computing In-Memory In-Situ Tracking ARchitecture for Event-Based Cameras",
+        "year": "2024",
+        "cited_by": 3
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5025807083",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -52798,8 +53315,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/sergio_carbajo-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Laser-Matter Interactions and Applications",
+      "Particle Accelerators and Free-Electron Lasers",
+      "Advanced X-ray Imaging Techniques",
+      "Enzyme Structure and Function",
+      "Particle accelerators and beam dynamics"
+    ],
+    "publications": [
+      {
+        "title": "Tunable phase-coherent FWM for quantum wavelength interconnects",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Structured light at the extreme: harnessing spatiotemporal control for high-field laser–matter interactions",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Hybrid deep reconstruction for vignetting-free upconversion imaging through scattering in epsilon-near-zero materials",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Ultrafast X-Rays Capture Retinal Traversing Conical Intersection in Rhodopsin",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Conformational flexibility of soybean lipoxygenase is coupled to crystal solvent content in serial crystallography",
+        "year": "2026",
+        "cited_by": 1
+      },
+      {
+        "title": "A Self-referenced Laser Frequency Comb Using Analog Feed-forward Carrier-envelope Phase Stabilization",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Deep learning-assisted modeling for χ(2) nonlinear optics",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Optical superradiance from single-digit-femtosecond electron beam structure",
+        "year": "2026",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5001587799",
     "rank_type": "research",
     "title_short": "Associate Professor / Inclusive Excellence Officer"
   },
@@ -52811,15 +53376,63 @@
     "department": "electrical",
     "email": "abidi@ee.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/asad-a-abidi/",
-    "research_summary": "Analog and RF integrated circuit design; design-oriented theory of circuits",
+    "research_summary": "Analog and RF integrated circuit design; design-oriented theory of circuits. Recent publications: How to Design a Differential LC Oscillator; How to Design a Differential LC Oscillator; How to Design a Differential LC Oscillator; The T-Coil Circuit Demystified; How to Design a Differential CMOS LC Oscillator.",
     "lab_website": "",
     "google_scholar": "",
     "ai_review": "Asad A. Abidi’s research within the Electrical Engineering department centers on the design and theoretical understanding of analog and RF integrated circuits. His work predominantly focuses on developing design-oriented theories to improve the performance and predictability of circuit behavior, particularly at high frequencies. Professor Abidi’s investigations often involve the creation of novel circuit topologies and the analysis of complex electromagnetic interactions within integrated circuits. Utilizing simulation tools and potentially experimental validation, his lab explores techniques for optimizing signal integrity and minimizing distortion in advanced RF designs. Ultimately, his research aims to bridge the gap between theoretical understanding and practical implementation in the field of integrated circuit design.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Asad_Abidi.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Analog and Mixed-Signal Circuit Design",
+      "Radio Frequency Integrated Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Advanced Power Amplifier Design",
+      "Low-power high-performance VLSI design"
+    ],
+    "publications": [
+      {
+        "title": "How to Design a Differential LC Oscillator",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "How to Design a Differential LC Oscillator",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "How to Design a Differential LC Oscillator",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "The T-Coil Circuit Demystified",
+        "year": "2025",
+        "cited_by": 6
+      },
+      {
+        "title": "How to Design a Differential CMOS LC Oscillator",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Systematic Equation-Based Design of a 10-Bit, 500-MS/s Single-Channel SAR A/D Converter With 2-GHz Resolution Bandwidth",
+        "year": "2024",
+        "cited_by": 6
+      },
+      {
+        "title": "Second-Order Transimpedance Amplifiers in Mixer-First Receivers: Design for Optimum Blocker Tolerance",
+        "year": "2023",
+        "cited_by": 13
+      },
+      {
+        "title": "A Harmonic-Mixing PLL Architecture for Millimeter-Wave Application",
+        "year": "2022",
+        "cited_by": 43
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5028638391",
     "rank_type": "research",
     "title_short": "Distinguished Chancellor’s Professor"
   },
@@ -52838,8 +53451,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Alwan_Abeer.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Speech and Audio Processing",
+      "Speech Recognition and Synthesis",
+      "Phonetics and Phonology Research",
+      "Voice and Speech Disorders",
+      "Music and Audio Processing"
+    ],
+    "publications": [
+      {
+        "title": "AURA: Uncertainty-Routed Activation Editing for Acoustic Grounding in Speech Foundation Models",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Encoder Awakening via Adapters: Effective Domain-Adaptive Fine-tuning of Speech-LLMs",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Hearing the Whispers: Black-Box Membership Inference Attacks on Finetuned TTS Models",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "GC-LoRA: Gated Convolutional LoRA for Parameter-Efficient Acoustic Adaptation",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Entropy-Aware Domain-Routed Mixture-of-Experts Speech-LLM Framework: A Case Study of Multi-Domain Child-Adult ASR",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Gumbel-BEARD: Automatic Layer Selection for Self-Supervised Adaptation of Whisper in Low-Resource Domains",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Compositional domain adaptation for automatic speech recognition with headwise selective attention merging",
+        "year": "2026",
+        "cited_by": 1
+      },
+      {
+        "title": "Improving zero-shot style transfer text-to-speech by disentangled fine-grained style modeling",
+        "year": "2026",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5112421995",
     "rank_type": "research",
     "title_short": "Distinguished Professor"
   },
@@ -52858,8 +53519,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Aydin_Babakhani.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Terahertz technology and applications",
+      "Advancements in PLL and VCO Technologies",
+      "Wireless Body Area Networks",
+      "Analog and Mixed-Signal Circuit Design"
+    ],
+    "publications": [
+      {
+        "title": "ID# 2201096 RECORDING OBJECTIVE BIOSIGNALS FROM PERIPHERAL NERVES IN PORCINE MODELS: THERAPY OPTIMIZATION FOR CHRONIC PAIN",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "ID# 2199964 A PROSPECTIVE, FIRST-IN-HUMAN STUDY USING A NOVEL MICRO, BATTERY-FREE PERIPHERAL NERVE",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "ID# 2201114 FIRST DEMONSTRATION RECORDING EVOKED BIOSIGNALS FROM CONCORDANT STIMULATING ELECTRODES USING CYLINDRICAL LEADS NEAR PERIPHERAL NERVES",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "ID# 2201028 A NOVEL, BATTERY-FREE PERIPHERAL NERVE STIMULATION DEVICE WITH ROBUST CONNECTIVITY TO ACCOMMODATE DEEP IMPLANT DEPTH AND MOTION",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A Complementary Self-Injection-Locked Radar for Low-Power Micrometer-Level THz Sensing and Imaging",
+        "year": "2026",
+        "cited_by": 2
+      },
+      {
+        "title": "A W-Band High-Power ×8 Injection-Locked Frequency Multiplier in SiGe BiCMOS",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "ID# 1904124 Peripheral Nerve Stimulation in the Treatment of Chronic Pain: A Historical and Technical Review",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "ID# 1897562 A Novel Micro, Wireless, Battery-Free, Peripheral Nerve Stimulator for the Treatment of Chronic Pain",
+        "year": "2025",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5023297510",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -52878,8 +53587,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Rob_Candler.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Advanced MEMS and NEMS Technologies",
+      "Acoustic Wave Resonator Technologies",
+      "Mechanical and Optical Resonators",
+      "Multiferroics and related materials",
+      "Magnetic properties of thin films"
+    ],
+    "publications": [
+      {
+        "title": "Modeling of Multiferroic Antennas in the Akhiezer Regime: Effects of Acoustic Resonator Excitation and Topology on Radiation",
+        "year": "2024",
+        "cited_by": 3
+      },
+      {
+        "title": "High speed vibration compensation using magnetic fiducials via NIMBLE",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "An energy efficient way for quantitative magnetization switching",
+        "year": "2024",
+        "cited_by": 1
+      },
+      {
+        "title": "Two-dimensional Closed-Form Analytical Model of Laterally-Excited Film Bulk Acoustic Wave Resonator Multiferroic Antennas",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "An energy efficient way for quantitative magnetization switching",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Imaging of voltage-controlled switching of magnetization in highly magnetostrictive epitaxial Fe–Ga microstructures",
+        "year": "2024",
+        "cited_by": 4
+      },
+      {
+        "title": "Flexible in-cavity MRI receiving coil for ultra–high-resolution imaging of the pituitary gland",
+        "year": "2023",
+        "cited_by": 2
+      },
+      {
+        "title": "Experimental validation of multiferroic antennas in GHz frequency range",
+        "year": "2023",
+        "cited_by": 11
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5087560422",
     "also_departments": [
       "mechanical"
     ],
@@ -52903,8 +53660,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/frank-chang-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Advancements in Semiconductor Devices and Circuit Design",
+      "Semiconductor materials and devices"
+    ],
+    "publications": [
+      {
+        "title": "Impact of Measurement Setup on Cryogenic CMOS FET Characterization",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A D-Band 3-D-Integrated Dual-Port Circularly Polarized Metasurface Antenna atop FinFET Radar Circuits",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "An Energy‐Reused Event‐Driven Integrate‐and‐Fire Neuron for Spike Neural Networks",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A 129–146-GHz Direct-Digital Modulation FinFET Transmitter With On-Chip Mismatch Calibrations for Beyond-5G Wireless Communications",
+        "year": "2025",
+        "cited_by": 2
+      },
+      {
+        "title": "Water Hunting Advanced Terahertz Spectrometer on an Ultra-Small Platform (WHATSUP)",
+        "year": "2025",
+        "cited_by": 2
+      },
+      {
+        "title": "Design of a D-Band Multiply-by-9 Frequency Multiplier Chain in 16 nm p-FinFET Technology With Waveform Modeling",
+        "year": "2025",
+        "cited_by": 1
+      },
+      {
+        "title": "Strained-channel Si n-MOSFET with GaN-drain via dual-step selective epitaxy for mobility enhancement on Si(100) substrate",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Optimization of NoN-melt-back-etching and selectivity for selective area growth of GaN drain on Si (100) substrate",
+        "year": "2025",
+        "cited_by": 1
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5051454330",
     "rank_type": "research",
     "title_short": "Distinguished Professor"
   },
@@ -52943,8 +53748,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Xiaofan-Lanscape-300x200-1.jpeg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Advanced DC-DC Converters",
+      "Advanced Battery Technologies Research",
+      "Power Systems and Renewable Energy",
+      "Advancements in Battery Materials",
+      "Multilevel Inverters and Converters"
+    ],
+    "publications": [
+      {
+        "title": "Knowledge and data co-driven Bayesian network for personalized user experience evaluation of smart product service system",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Hierarchical Partial Power Processing of Second-Life Battery-Integrated Grid-Connected Multilevel Inverters via Statistical Design",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Control-Oriented Modeling of Comparator Overdrive Delay for Stabilizing High-Frequency Current-Mode DC–DC Converters",
+        "year": "2026",
+        "cited_by": 1
+      },
+      {
+        "title": "Control Conditioning for High-Frequency Current-Mode DC-DC Converters",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Long-Term Calendar Aging Across Commercial Lithium-Ion Cell Chemistries—Modeling and Early Prediction",
+        "year": "2025",
+        "cited_by": 5
+      },
+      {
+        "title": "Toward a BMS 2 Design Framework: Adaptive Data-Driven State-of-Health Estimation for Second-Life Batteries With BIBO Stability Guarantees",
+        "year": "2025",
+        "cited_by": 19
+      },
+      {
+        "title": "Data-Driven Quantification of Battery Degradation Modes Via Critical Features from Charging",
+        "year": "2025",
+        "cited_by": 1
+      },
+      {
+        "title": "A decade of insights: Delving into calendar aging trends and implications",
+        "year": "2024",
+        "cited_by": 66
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5028767853",
     "rank_type": "research",
     "title_short": "Assistant Professor"
   },
@@ -52956,15 +53809,63 @@
     "department": "electrical",
     "email": "hooman@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/hooman-darabi/",
-    "research_summary": "RF, analog, mixed-mode and digital electronics",
+    "research_summary": "RF, analog, mixed-mode and digital electronics. Recent publications: Design Considerations of High- Frequency-Reference Fractional- N PLL: Architecture and Nonidealities; A Calibration-Free Fractional- N Analog PLL With Negligible DSM Quantization Noise; Second-Order Transimpedance Amplifiers in Mixer-First Receivers: Design for Optimum Blocker Tolerance; A Harmonic-Mixing PLL Architecture for Millimeter-Wave Application; Design and Analysis of an Electrical Balance Duplexer With Independent and Concurrent Dual-Band TX-RX Isolation.",
     "lab_website": "",
     "google_scholar": "https://scholar.google.com/citations?user=LGSleTsAAAAJ&hl=en",
     "ai_review": "Hooman Darabi’s research within the Electrical Engineering department centers on the design and development of advanced electronic systems, primarily focusing on Radio Frequency (RF), analog, mixed-mode, and digital electronics. His work leverages a combination of circuit design techniques and digital signal processing to investigate solutions in areas such as wireless communication and sensing. Specifically, Professor Darabi’s lab explores novel architectures for efficient and robust RF transceivers, alongside developing mixed-signal systems for applications requiring both analog and digital processing capabilities. Utilizing simulation tools and potentially hardware prototyping, his research aims to push the boundaries of performance and functionality in modern electronic devices. Ultimately, his lab contributes to advancements in areas where precise control and signal manipulation are critical.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Hooman-Darabi-new-300-200.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Advanced Power Amplifier Design",
+      "Advancements in PLL and VCO Technologies",
+      "Microwave Engineering and Waveguides"
+    ],
+    "publications": [
+      {
+        "title": "Design Considerations of High- Frequency-Reference Fractional- N PLL: Architecture and Nonidealities",
+        "year": "2025",
+        "cited_by": 4
+      },
+      {
+        "title": "A Calibration-Free Fractional- N Analog PLL With Negligible DSM Quantization Noise",
+        "year": "2023",
+        "cited_by": 20
+      },
+      {
+        "title": "Second-Order Transimpedance Amplifiers in Mixer-First Receivers: Design for Optimum Blocker Tolerance",
+        "year": "2023",
+        "cited_by": 13
+      },
+      {
+        "title": "A Harmonic-Mixing PLL Architecture for Millimeter-Wave Application",
+        "year": "2022",
+        "cited_by": 43
+      },
+      {
+        "title": "Design and Analysis of an Electrical Balance Duplexer With Independent and Concurrent Dual-Band TX-RX Isolation",
+        "year": "2022",
+        "cited_by": 22
+      },
+      {
+        "title": "Envelope Tracking Supply Modulator with Trellis-Search-Based Switching and 160-MHz Capability",
+        "year": "2021",
+        "cited_by": 13
+      },
+      {
+        "title": "PLLs and Synthesizers",
+        "year": "2020",
+        "cited_by": 0
+      },
+      {
+        "title": "RF Components",
+        "year": "2020",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5059338634",
     "rank_type": "research",
     "title_short": "Teaching Professor"
   },
@@ -52983,8 +53884,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Suhas_Diggavi.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Cooperative Communication and Network Coding",
+      "Error Correcting Code Techniques",
+      "Advanced Wireless Communication Techniques",
+      "Wireless Communication Security Techniques",
+      "Advanced Data Compression Techniques"
+    ],
+    "publications": [
+      {
+        "title": "Decocted Experience Improves Test-Time Inference in LLM Agents",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Tracking without Seeing: Geospatial Inference using Encrypted Traffic from Distributed Nodes",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "CafeQ: Calibration-free Quantization via Learned Transformations and Adaptive Rounding",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "MEL: Multi-level Ensemble Learning for Resource-Constrained Environments",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "SPIRE: Conditional Personalization for Federated Diffusion Generative Models",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "ICQuant: Index Coding enables Low-bit LLM Quantization",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Robust Federated Personalised Mean Estimation for the Gaussian Mixture Model",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Common Information Dimension",
+        "year": "2025",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5083980887",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53003,8 +53952,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/lara-dolecek.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Coding theory and cryptography",
+      "Error Correcting Code Techniques",
+      "Advanced Data Storage Technologies",
+      "Quantum Computing Algorithms and Architecture",
+      "Algorithms and Data Compression"
+    ],
+    "publications": [
+      {
+        "title": "Efficient information reconciliation in quantum key distribution systems using informed design of non-binary LDPC codes",
+        "year": "2024",
+        "cited_by": 4
+      },
+      {
+        "title": "Block-MDS QC-LDPC Codes for Information Reconciliation in Key Distribution",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Efficient Information Reconciliation in Quantum Key Distribution Systems Using Informed Design of Non-Binary LDPC Codes",
+        "year": "2023",
+        "cited_by": 0
+      },
+      {
+        "title": "Turning to Information Theory to Bring in-Memory Computing into Practice",
+        "year": "2023",
+        "cited_by": 6
+      },
+      {
+        "title": "Harnessing Degrees of Freedom of Spatially Coupled Graph Codes for Agile Data Storage",
+        "year": "2023",
+        "cited_by": 0
+      },
+      {
+        "title": "Special Issue: “Approximation at the Edge”",
+        "year": "2023",
+        "cited_by": 1
+      },
+      {
+        "title": "Fully Private Grouped Matrix Multiplication with Colluding Workers",
+        "year": "2023",
+        "cited_by": 0
+      },
+      {
+        "title": "Non-Binary LDPC Code Design for Energy-Time Entanglement Quantum Key Distribution",
+        "year": "2023",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5075795132",
     "also_departments": [
       "mathematics"
     ],
@@ -53032,8 +54029,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Sam-Emaminejad-profile.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Advanced Sensor and Energy Harvesting Materials",
+      "Microfluidic and Capillary Electrophoresis Applications",
+      "Electrochemical sensors and biosensors",
+      "Microfluidic and Bio-sensing Technologies",
+      "Advanced biosensing and bioanalysis techniques"
+    ],
+    "publications": [
+      {
+        "title": "Resilient nanostructured bioanalytic microneedle longitudinally monitors preclinical renal and hepatic drug clearance and dysfunction",
+        "year": "2026",
+        "cited_by": 8
+      },
+      {
+        "title": "A D-Band 3-D-Integrated Dual-Port Circularly Polarized Metasurface Antenna atop FinFET Radar Circuits",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "An Ultra-Robust, Highly Compressible Silk/Silver Nanowire Sponge-Based Wearable Pressure Sensor for Health Monitoring",
+        "year": "2025",
+        "cited_by": 3
+      },
+      {
+        "title": "Tandem metabolic reaction–based sensors unlock in vivo metabolomics",
+        "year": "2025",
+        "cited_by": 4
+      },
+      {
+        "title": "Rapidly self-healing electronic skin for machine learning–assisted physiological and movement evaluation",
+        "year": "2025",
+        "cited_by": 52
+      },
+      {
+        "title": "Non‐Invasive Touch‐Based Lithium Monitoring Using an Organohydrogel‐Based Sensing Interface (Adv. Mater. Technol. 14/2023)",
+        "year": "2023",
+        "cited_by": 0
+      },
+      {
+        "title": "Non‐Invasive Touch‐Based Lithium Monitoring Using an Organohydrogel‐Based Sensing Interface",
+        "year": "2023",
+        "cited_by": 6
+      },
+      {
+        "title": "Skin-interfaced electronics: A promising and intelligent paradigm for personalized healthcare",
+        "year": "2023",
+        "cited_by": 60
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5041834364",
     "rank_type": "research",
     "title_short": "Associate Professor"
   },
@@ -53052,8 +54097,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/christina-fragouli-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Cooperative Communication and Network Coding",
+      "Error Correcting Code Techniques",
+      "Wireless Communication Security Techniques",
+      "Complexity and Algorithms in Graphs",
+      "Coding theory and cryptography"
+    ],
+    "publications": [
+      {
+        "title": "A Recommendation System Approach for Interference-Robust Sensor Subset Selection",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Mixing Makes Markovian Contexts Cheap for Linear Bandits",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "ScaleBITS: Scalable Bitwidth Search for Hardware-Aligned Mixed-Precision LLMs",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Fundamental Limits of Learning Under Erasure-Constrained Communication Channels",
+        "year": "2026",
+        "cited_by": 1
+      },
+      {
+        "title": "Free-space terabit/s coherent optical links via platicon frequency microcombs",
+        "year": "2025",
+        "cited_by": 6
+      },
+      {
+        "title": "ICQuant: Index Coding enables Low-bit LLM Quantization",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Enhancing Binary Search via Overlapping Partitions",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Common Information Dimension",
+        "year": "2025",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5056591688",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53072,8 +54165,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Puneet_Gupta.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Low-power high-performance VLSI design",
+      "VLSI and FPGA Design Techniques",
+      "Advancements in Photolithography Techniques",
+      "Parallel Computing and Optimization Techniques",
+      "Advanced Memory and Neural Computing"
+    ],
+    "publications": [
+      {
+        "title": "An Open-Source Benchmark Suite of 3D-IC Testcases",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Flexible Error Modeling and Analysis of SiPho JTC Accelerators for CNNs",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "PERCEL: A Rewritable NVM CIM Incorporating a CTT-Based Per-Cell DAC",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "YAP+: Pad-Layout-Aware Yield Modeling and Simulation for Hybrid Bonding",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Elevating adversarial robustness by contrastive multitasking defence in medical image segmentation",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Near-energy-free photonic Fourier transformation for convolution operation acceleration",
+        "year": "2025",
+        "cited_by": 6
+      },
+      {
+        "title": "CATCH: A Cost Analysis Tool for Co-Optimization of Chiplet-Based Heterogeneous Systems",
+        "year": "2025",
+        "cited_by": 5
+      },
+      {
+        "title": "Optimizing Thermal Performance in 2.5D Systems Using Embedded Isolators",
+        "year": "2025",
+        "cited_by": 6
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5084229134",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53082,7 +54223,7 @@
     "university": "ucla",
     "name": "Subramanian Iyer",
     "title": "Distinguished Professor",
-    "department": "materials",
+    "department": "electrical",
     "email": "s.s.iyer@ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/subramanian-iyer/",
     "research_summary": "System Scaling Technology, advanced packaging and 3D integration, technologies and techniques for the memory subsystem integration and neuromorphic computing",
@@ -53092,10 +54233,58 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/iyer_subramanian_s_thumbnail.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "3D IC and TSV technologies",
+      "Semiconductor materials and devices",
+      "Semiconductor materials and interfaces",
+      "Advancements in Semiconductor Devices and Circuit Design",
+      "Interconnection Networks and Systems"
+    ],
+    "publications": [
+      {
+        "title": "Copper–Copper Thermal Compression Bonding Scheme for Heterogeneous Wafer-Scale Integration",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "PERCEL: A Rewritable NVM CIM Incorporating a CTT-Based Per-Cell DAC",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "The “Crisis” in Higher Engineering Education in the United States [Speaker’s Corner]",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Secure artificial intelligence at the edge",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "A Review of Die-to-Die, Die-to-Substrate and Die-to-Wafer Heterogeneous Integration",
+        "year": "2024",
+        "cited_by": 25
+      },
+      {
+        "title": "Integrated Micro-Capacitors and Micro-Inductors for Next Generation Electronics",
+        "year": "2024",
+        "cited_by": 2
+      },
+      {
+        "title": "AI computing reaches for the edge",
+        "year": "2023",
+        "cited_by": 16
+      },
+      {
+        "title": "Low-Frequency and Random Telegraph Noise in 14-nm Bulk Si Charge-Trap Transistors",
+        "year": "2023",
+        "cited_by": 6
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5091022757",
     "also_departments": [
-      "electrical"
+      "materials"
     ],
     "also_profile_urls": [],
     "alias_ids": [],
@@ -53117,8 +54306,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Liz-Izhikevich-scaled.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Network Traffic and Congestion Control",
+      "Network Security and Intrusion Detection",
+      "Internet Traffic Analysis and Secure E-voting",
+      "Satellite Communication Systems",
+      "Web Application Security Vulnerabilities"
+    ],
+    "publications": [
+      {
+        "title": "Expanding Access, Exposing Risk: A Short Study of Exposed Starlink Hosts",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Proximity Risks and Policy Gaps in the LEO Constellation Era",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A Global Perspective on the Past, Present, and Future of Video Streaming over Starlink",
+        "year": "2025",
+        "cited_by": 1
+      },
+      {
+        "title": "A Global Perspective on the Past, Present, and Future of Video Streaming over Starlink",
+        "year": "2024",
+        "cited_by": 20
+      },
+      {
+        "title": "A Global Perspective on the Past, Present, and Future of Video Streaming over Starlink",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Democratizing LEO Satellite Network Measurement",
+        "year": "2024",
+        "cited_by": 8
+      },
+      {
+        "title": "Democratizing LEO Satellite Network Measurement",
+        "year": "2024",
+        "cited_by": 51
+      },
+      {
+        "title": "Using Honeybuckets to Characterize Cloud Storage Scanning in the Wild",
+        "year": "2023",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5045773507",
     "rank_type": "research",
     "title_short": "Assistant Professor / Area Director for Signals and Systems"
   },
@@ -53137,8 +54374,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/mona-jarrahi-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Terahertz technology and applications",
+      "Superconducting and THz Device Technology",
+      "Metamaterials and Metasurfaces Applications",
+      "Plasmonic and Surface Plasmon Research",
+      "Neural Networks and Reservoir Computing"
+    ],
+    "publications": [
+      {
+        "title": "Spectral Lock-in Detection for High-Sensitivity Spectroscopy",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Wavelength‐Multiplexed 2D Beam Steering via a Passive Diffractive Network",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Wavelength-multiplexed diffractive optical information storage and image projection",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Absence of a Superradiant Phase Transition in Dirac Landau Polaritons",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Super-resolution image projection over an extended depth of field using a diffractive decoder",
+        "year": "2026",
+        "cited_by": 2
+      },
+      {
+        "title": "Terahertz generation and detection through gain-enhanced interband photomixing in quantum well structures",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Gate-Tunable Single Terahertz Meta-Atom Ultrastrong Light-Matter Coupling",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Gate-Tunable Single Terahertz Meta-Atom Ultrastrong Light-Matter Coupling",
+        "year": "2026",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5003547576",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53157,8 +54442,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Joshi_Chandrashekhar.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Laser-Plasma Interactions and Diagnostics",
+      "Particle accelerators and beam dynamics",
+      "Particle Accelerators and Free-Electron Lasers",
+      "Laser-Matter Interactions and Applications",
+      "Dust and Plasma Wave Phenomena"
+    ],
+    "publications": [
+      {
+        "title": "Plasma-wakefield accelerator simultaneously boosts electron beam energy and brightness",
+        "year": "2025",
+        "cited_by": 5
+      },
+      {
+        "title": "High-energy ion beams generated with high efficiency using laser-driven 3D microstructures",
+        "year": "2025",
+        "cited_by": 4
+      },
+      {
+        "title": "Beam Realignment with Emittance Preservation in a Plasma Wakefield-Accelerator Stage",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Generating 10 GW-class isolated zeptosecond x-ray bursts through bootstrapping two plasma-based accelerator stages",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "The positron arm of a plasma-based linear collider",
+        "year": "2025",
+        "cited_by": 4
+      },
+      {
+        "title": "Positron Beam Loading and Acceleration in the Blowout Regime of a Plasma Wakefield Accelerator",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Pulse length effects in the nonresonant long-wave infrared nonlinear optical response of n-Ge, GaAs, and ZnSe",
+        "year": "2024",
+        "cited_by": 3
+      },
+      {
+        "title": "Bidirectional Cascaded Superfluorescent Lasing in Air Enabled by Resonant Third Harmonic Photon Exchange from Nitrogen to Argon",
+        "year": "2024",
+        "cited_by": 13
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5016664197",
     "rank_type": "research",
     "title_short": "Distinguished Professor"
   },
@@ -53197,8 +54530,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Dejan_Markovic.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Low-power high-performance VLSI design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Embedded Systems Design Techniques",
+      "VLSI and FPGA Design Techniques",
+      "Radio Frequency Integrated Circuit Design"
+    ],
+    "publications": [
+      {
+        "title": "A Runtime Reconfigurable Array (RTRA) for Multiprogram ML and DSP Acceleration With Hierarchical Partitioning and On-Chip Multilevel Scheduling",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Remembering Bob Brodersen: Professor, Mentor, and Pioneer [Society News]",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Future directions in psychiatric neurosurgery: Proceedings of the 2022 American Society for Stereotactic and Functional Neurosurgery meeting on surgical neuromodulation for psychiatric disorders",
+        "year": "2023",
+        "cited_by": 21
+      },
+      {
+        "title": "A wearable platform for closed-loop stimulation and recording of single-neuron and local field potential activity in freely moving humans",
+        "year": "2023",
+        "cited_by": 72
+      },
+      {
+        "title": "A 16-nm 784-Core Digital Signal Processor Array, Assembled as a 2 × 2 Dielet With 10-μm Pitch Interdielet I/O for Runtime Multiprogram Reconfiguration",
+        "year": "2022",
+        "cited_by": 14
+      },
+      {
+        "title": "A 6.78-MHz Burst-Mode Controlled Inductive Wireless Power Transfer System for Biomedical Implants With Back-Channel Communication Eliminated Using Transmitter Q -Factor Detection",
+        "year": "2022",
+        "cited_by": 19
+      },
+      {
+        "title": "A wearable platform for closed-loop stimulation and recording of single-neuron and local field potential activity in freely-moving humans",
+        "year": "2022",
+        "cited_by": 37
+      },
+      {
+        "title": "In Vivo Intravascular Pacing Using a Wireless Microscale Stimulator",
+        "year": "2021",
+        "cited_by": 10
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5003700236",
     "rank_type": "research",
     "title_short": "Professor / Area Director for Circuits and Embedded Systems"
   },
@@ -53217,8 +54598,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Ankur_Mehta.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Soft Robotics and Applications",
+      "Target Tracking and Data Fusion in Sensor Networks",
+      "Modular Robots and Swarm Intelligence",
+      "Robotics and Sensor-Based Localization",
+      "Advanced Materials and Mechanics"
+    ],
+    "publications": [
+      {
+        "title": "Quadrature Oscillation System for Coordinated Motion in Crawling Origami Robot",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Self‐Sustained, Continuous Jumping of a Light‐Driven Electronics‐Free Insect‐Scale Soft Robot",
+        "year": "2025",
+        "cited_by": 6
+      },
+      {
+        "title": "Population-aware Online Mirror Descent for Mean-Field Games with Common Noise by Deep Reinforcement Learning",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Decentralized Satellite Constellation Replanning for Event Observation",
+        "year": "2025",
+        "cited_by": 4
+      },
+      {
+        "title": "A self-regenerative heat pump based on a dual-functional relaxor ferroelectric polymer",
+        "year": "2024",
+        "cited_by": 55
+      },
+      {
+        "title": "Mechanisms and Computational Design of Multi-Modal End-Effector with Force Sensing using Gated Networks",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Self-Deployable, Adaptive Soft Robots Based on Contracting-Cord Particle Jamming",
+        "year": "2024",
+        "cited_by": 0
+      },
+      {
+        "title": "Decentralized Input and State Estimation for Multi-agent System with Dynamic Topology and Heterogeneous Sensor Network",
+        "year": "2024",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5112712086",
     "also_departments": [
       "mechanical"
     ],
@@ -53235,15 +54664,63 @@
     "department": "electrical",
     "email": "mori@physics.ucla.edu",
     "profile_url": "https://samueli.ucla.edu/people/warren-mori/",
-    "research_summary": "Plasma physics, high energy density plasma science, high performance computing",
+    "research_summary": "Plasma physics, high energy density plasma science, high performance computing. Recent publications: An explicit algorithm in the quasi-static approximate PIC program QPAD; On the relationship between the gain of Stimulated Raman Backscatter of a short-pulse laser in a plasma and the Pierce parameter for XFELs; GPU-MPI parallelisation for QuickPIC, a three-dimensional quasi-static particle-in-cell algorithm; Multi-GeV Electron Combs from a Plasma Wakefield Accelerator; An explicit algorithm for the three-dimensional quasi-static particle-in-cell code: QuickPIC.",
     "lab_website": "",
     "google_scholar": "",
     "ai_review": "Warren Mori’s research within the Electrical Engineering department centers on the dynamic field of plasma physics, specifically focusing on high energy density plasmas and their applications. His work leverages high performance computing to model and simulate complex plasma phenomena, often investigating the behavior of plasmas under extreme conditions. Professor Mori’s lab employs computational techniques – primarily utilizing advanced simulation software – to study instabilities, transport processes, and energy dissipation within these high-density plasmas. This research contributes to a deeper understanding of fundamental plasma processes and their relevance to areas such as fusion energy and advanced materials science. Ultimately, Mori’s investigations aim to refine our predictive capabilities regarding plasma behavior in demanding environments.",
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/warren-mori-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Laser-Plasma Interactions and Diagnostics",
+      "Particle accelerators and beam dynamics",
+      "Particle Accelerators and Free-Electron Lasers",
+      "Laser-Matter Interactions and Applications",
+      "Pulsed Power Technology Applications"
+    ],
+    "publications": [
+      {
+        "title": "An explicit algorithm in the quasi-static approximate PIC program QPAD",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "On the relationship between the gain of Stimulated Raman Backscatter of a short-pulse laser in a plasma and the Pierce parameter for XFELs",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "GPU-MPI parallelisation for QuickPIC, a three-dimensional quasi-static particle-in-cell algorithm",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Multi-GeV Electron Combs from a Plasma Wakefield Accelerator",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "An explicit algorithm for the three-dimensional quasi-static particle-in-cell code: QuickPIC",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Learning collision operators from plasma phase space data using differentiable simulators",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Generating intense attosecond pulses and vectorizing polarization states from laser–plasma interactions",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Collider-quality electron bunches from an all-optical plasma photoinjector",
+        "year": "2026",
+        "cited_by": 1
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5013491977",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53262,8 +54739,21 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/yahya-rahmat-samii-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Electromagnetic Scattering and Analysis",
+      "Advanced Antenna and Metasurface Technologies",
+      "Antenna Design and Analysis",
+      "Metamaterials and Metasurfaces Applications",
+      "Microwave Engineering and Waveguides"
+    ],
+    "publications": [
+      {
+        "title": "WIRE ANTENNA ON AN EBG GROUND PLANE VS. PATCH ANTENNA: A COMPARATIVE STUDY ON LOW PROFILE ANTENNAS",
+        "year": "2007",
+        "cited_by": 9
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5029305069",
     "rank_type": "research",
     "title_short": "Distinguished Professor"
   },
@@ -53282,8 +54772,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/behza-razavi-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Radio Frequency Integrated Circuit Design",
+      "Analog and Mixed-Signal Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Low-power high-performance VLSI design",
+      "Advanced Power Amplifier Design"
+    ],
+    "publications": [
+      {
+        "title": "A Compact Low-Power D-Band Receiver With Integrated LO Generation and Phase Shifting for Beamforming Applications",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Will AI Replace Analog Designers? Slides",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Analog Design Experiments With AI—Part 2 [The Analog Mind]",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A 64-Gb/s/pin 0.25-pJ/b Single-Ended Short-Reach PAM4 Transceiver in 28-nm CMOS",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "The Design of a Clock and Data Recovery Circuit [The Analog Mind]",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A Low-Power 28-GHz Beamforming Receiver With On-Chip LO Synthesis",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "A Predictive SAR ADC Architecture",
+        "year": "2025",
+        "cited_by": 10
+      },
+      {
+        "title": "Fifty Applications of the CMOS Inverter—Part 3 [The Analog Mind]",
+        "year": "2025",
+        "cited_by": 4
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5049567991",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53302,8 +54840,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/Ian-Roberts-300-200.jpeg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Millimeter-Wave Propagation and Modeling",
+      "Full-Duplex Wireless Communications",
+      "Advanced Wireless Communication Technologies",
+      "Satellite Communication Systems",
+      "Wireless Communication Security Techniques"
+    ],
+    "publications": [
+      {
+        "title": "Spectrum Sharing Among Broadband LEO Mega-Constellations: Interference Regulations and Coexistence Mechanisms",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "A Deep Iterative Refinement Receiver for OTFS Symbol Detection in Doubly-Dispersive Channels",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Rainbow Beamforming for Wideband LEO Satellite Communications: Principles, Applications, and Technical Challenges",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "RemoteRF: An Open-Source Platform to Democratize Access to Software-Defined Radios in Wireless Research and Education",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Site-Specific Beamforming for Full-Duplex Massive MIMO Systems via Implicit Channel Estimation",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Beyond Beam Sweeping: One-Shot Satellite Acquisition With Doppler-Aware Rainbow Beamforming",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Can TDD Be Employed in LEO SatCom Systems? Challenges and Potential Approaches",
+        "year": "2026",
+        "cited_by": 2
+      },
+      {
+        "title": "Satellite Selection for In-Band Coexistence of Dense LEO Networks",
+        "year": "2026",
+        "cited_by": 3
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5020213560",
     "rank_type": "research",
     "title_short": "Assistant Professor"
   },
@@ -53322,8 +54908,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/vwani-roychowdhury-profile-featured.jpg",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Quantum Information and Cryptography",
+      "Quantum Computing Algorithms and Architecture",
+      "Complex Network Analysis Techniques",
+      "Neural Networks and Applications",
+      "Complexity and Algorithms in Graphs"
+    ],
+    "publications": [
+      {
+        "title": "PHASE: A Physiology-Guided Hierarchical Foundation Model for Intracranial EEG",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Sub-Riemannian lift advantage in quantum control",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Seizure-Semiology-Suite (S3): A Clinically Multimodal Dataset, Benchmark, and Models for Seizure Semiology Understanding",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Phase transition on a context-sensitive random language model with short range interactions",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Time-Resolved Neuronal Network Dynamics Distinguish Pathological States in Organoid Models",
+        "year": "2026",
+        "cited_by": 0
+      },
+      {
+        "title": "Berezinskii-Kosterlitz-Thouless transition in a context-sensitive random language model",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Beyond Fact Retrieval: Episodic Memory for RAG with Generative Semantic Workspaces",
+        "year": "2025",
+        "cited_by": 0
+      },
+      {
+        "title": "Short-Term Modulation of Epileptic Network with Low-Frequency Thalamic Stimulation",
+        "year": "2025",
+        "cited_by": 0
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5043479061",
     "rank_type": "research",
     "title_short": "Professor"
   },
@@ -53342,8 +54976,56 @@
     "photo_url": "https://samueli.ucla.edu/wp-content/uploads/samueli/TPC4903-henry-samueli-1.png",
     "phone": "",
     "office": "",
-    "scholar_interests": [],
-    "publications": [],
+    "scholar_interests": [
+      "Analog and Mixed-Signal Circuit Design",
+      "Radio Frequency Integrated Circuit Design",
+      "Advancements in PLL and VCO Technologies",
+      "Digital Filter Design and Implementation",
+      "Advanced Adaptive Filtering Techniques"
+    ],
+    "publications": [
+      {
+        "title": "Recognizing the Remarkable Achievements of Klaas Bult: Memories of an Analog Magician's Early Days at UCLA and Broadcom",
+        "year": "2020",
+        "cited_by": 1
+      },
+      {
+        "title": "The Nai Fellow Profile: An Interview With Dr. Henry Samueli",
+        "year": "2019",
+        "cited_by": 1
+      },
+      {
+        "title": "Last Mile HFC Access",
+        "year": "2005",
+        "cited_by": 0
+      },
+      {
+        "title": "DESIGN OF STABILIZING AND LOCALLY-ROBUST NONLINEAR CONTROLLERS FOR A CLASS OF NONLINEAR SYSTEMS",
+        "year": "2002",
+        "cited_by": 0
+      },
+      {
+        "title": "A frequency-agile single-chip QAM modulator with beamforming diversity",
+        "year": "2001",
+        "cited_by": 10
+      },
+      {
+        "title": "The broadband revolution",
+        "year": "2000",
+        "cited_by": 14
+      },
+      {
+        "title": "Field trial results for high-speed wireless indoor data communications",
+        "year": "2000",
+        "cited_by": 7
+      },
+      {
+        "title": "Analysis and design of a frequency-hopped spread-spectrum transceiver for wireless personal communications",
+        "year": "2000",
+        "cited_by": 49
+      }
+    ],
+    "openalex_id": "https://openalex.org/A5023877407",
     "rank_type": "research",
     "title_short": "Professor"
   },
